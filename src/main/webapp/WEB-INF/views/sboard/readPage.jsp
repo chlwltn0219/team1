@@ -4,10 +4,9 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>   
 <html>
 <head>
-<title>list.jsp</title>
+<title>readPage.jsp</title>
 	<script type="text/javascript" src="/resources/js/upload.js"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 	<!-- Main content -->
 	<style type="text/css">
 	.popup {
@@ -41,7 +40,7 @@
 <body>
     <div class='popup back' style="display:none;"></div>
     <div id="popup_front" class='popup front' style="display:none;">
-     <img id="popup_img">
+    	<img id="popup_img">
     </div>
 
 	<div class="row">
@@ -194,40 +193,36 @@
 
 
 	<script id="templateAttach" type="text/x-handlebars-template">
-<li data-src='{{fullName}}'>
-  <span class="mailbox-attachment-icon has-img"><img src="{{imgsrc}}" alt="Attachment"></span>
-  <div class="mailbox-attachment-info">
-	<a href="{{getLink}}" class="mailbox-attachment-name">{{fileName}}</a>
-	</span>
-  </div>
-</li>                
-</script>  
+		<li data-src='{{fullName}}'>
+			<span class="mailbox-attachment-icon has-img"><img src="{{imgsrc}}" alt="Attachment"></span>
+			<div class="mailbox-attachment-info">
+				<a href="{{getLink}}" class="mailbox-attachment-name">{{fileName}}</a>
+				</span>
+  			</div>
+		</li>                
+	</script>  
 
-
-          
-<script id="template" type="text/x-handlebars-template">
-				{{#each .}}
-	         <li class="replyLi" data-rno={{rno}}>
-             <i class="fa fa-comments bg-blue"></i>
-             <div class="timeline-item" >
-                <span class="time">
-                  <i class="fa fa-clock-o"></i>{{prettifyDate regdate}}
-                </span>
-                <h3 class="timeline-header"><strong>{{rno}}</strong> -{{replyer}}</h3>
-                <div class="timeline-body">{{replytext}} </div>
-								<div class="timeline-footer">
-								{{#eqReplyer replyer }}
-                  <a class="btn btn-primary btn-xs" 
-									data-toggle="modal" data-target="#modifyModal">Modify</a>
-								{{/eqReplyer}}
-							  </div>
-	            </div>			
-           </li>
-        {{/each}}
-</script>  
+	<script id="template" type="text/x-handlebars-template">
+		{{#each .}}
+			<li class="replyLi" data-rno={{rno}}>
+				<i class="fa fa-forward bg-blue"></i>
+				<div class="timeline-item" >
+					<span class="time">
+						<i class="fa fa-clock-o"></i>{{prettifyDate regdate}}
+					</span>
+					<h3 class="timeline-header"><strong>{{rno}}</strong> -{{replyer}}</h3>
+					<div class="timeline-body">{{replytext}} </div>
+					<div class="timeline-footer">
+						{{#eqReplyer replyer }}
+							<a class="btn btn-primary btn-xs" data-toggle="modal" data-target="#modifyModal">Modify</a>
+						{{/eqReplyer}}
+					</div>
+				</div>			
+			</li>
+		{{/each}}
+	</script>  
 
 <script>
-
 	
 	Handlebars.registerHelper("eqReplyer", function(replyer, block) {
 		var accum = '';
@@ -294,7 +289,9 @@
 	};
 
 	$("#repliesDiv").on("click", function() {
-
+		
+		alert("#repliesDiv clicked...");
+		
 		if ($(".timeline li").size() > 1) {
 			return;
 		}
@@ -304,6 +301,8 @@
 
 	$(".pagination").on("click", "li a", function(event) {
 
+		alert(".pagenation clicked... page : " + replyPage);
+		
 		event.preventDefault();
 
 		replyPage = $(this).attr("href");
@@ -313,6 +312,8 @@
 	});
 
 	$("#replyAddBtn").on("click", function() {
+		
+		alert("replyAddBtn clicked...");
 
 		var replyerObj = $("#newReplyWriter");
 		var replytextObj = $("#newReplyText");
@@ -356,6 +357,8 @@
 
 	$("#replyModBtn").on("click", function() {
 
+		alert("replyModBtn clicked...");
+		
 		var rno = $(".modal-title").html();
 		var replytext = $("#replytext").val();
 
