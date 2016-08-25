@@ -313,7 +313,7 @@
 
 	$("#replyAddBtn").on("click", function() {
 		
-		alert("replyAddBtn clicked...");
+// 		alert("replyAddBtn clicked...");
 
 		var replyerObj = $("#newReplyWriter");
 		var replytextObj = $("#newReplyText");
