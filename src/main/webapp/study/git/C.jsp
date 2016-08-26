@@ -15,7 +15,9 @@
 <h1>C.jsp</h1>
 
 <ul>
-	<li>w3school</li>
+	<li>java</li>
+	<li>html</li>
+	<li>css</li>
 	<li>spring</li>
 	<li>w3school</li>
 	<li>mybatis</li>
