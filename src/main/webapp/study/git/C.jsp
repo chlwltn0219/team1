@@ -15,9 +15,13 @@
 <h1>C.jsp</h1>
 
 <ul>
+	<li>w3school</li>
 	<li>spring</li>
+	<li>w3school</li>
 	<li>mybatis</li>
+	<li>w3school</li>
 	<li>jquery</li>
+	<li>w3school</li>
 	<li>bootstrap</li>
 </ul>
 
