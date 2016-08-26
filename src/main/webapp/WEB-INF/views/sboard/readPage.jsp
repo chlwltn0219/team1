@@ -3,6 +3,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>   
 <html>
+<!-- Bootstrap 3.3.4 -->
+<link href="/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<!-- Font Awesome Icons -->
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
 <head>
 <title>readPage.jsp</title>
 	<script type="text/javascript" src="/resources/js/upload.js"></script>
@@ -45,7 +49,7 @@
 
 	<div class="row">
 		<!-- left column -->
-		<div class="col-md-12">
+		<div class="col-md-6">
 			<!-- general form elements -->
 			<div class="box box-primary">
 				<div class="box-header">
@@ -102,31 +106,28 @@
 			<!-- /.box -->
 		</div>
 		<!--/.col (left) -->
-
+		<div class="col-md-6">
+			<img class="img-responsive img-circle" style="width: 100%" alt="xxx" src="http://www.loremflickr.com/200/200/dog">
+		</div>
 	</div>
 	<!-- /.row -->
 
-
 	<div class="row">
 		<div class="col-md-12">
-
 
 			<div class="box box-success">
 				<div class="box-header">
 					<h3 class="box-title">ADD NEW REPLY</h3>
 				</div>
-
-
-
-
+				
+				<!-- 로그인 상태 -->
 				<c:if test="${not empty login}">
 					<div class="box-body">
-						<label for="exampleInputEmail1">Writer</label> <input
-							class="form-control" type="text" placeholder="USER ID"
-							id="newReplyWriter" value="${login.uid }" readonly="readonly">
-						<label for="exampleInputEmail1">Reply Text</label> <input
-							class="form-control" type="text" placeholder="REPLY TEXT"
-							id="newReplyText">
+						<label for="exampleInputEmail1">Writer</label> 
+							<input class="form-control" type="text" placeholder="USER ID"
+								   id="newReplyWriter" value="${login.uid }" readonly="readonly">
+						<label for="exampleInputEmail1">Reply Text</label>
+							<input class="form-control" type="text" placeholder="REPLY TEXT" id="newReplyText">
 					</div>
 
 					<div class="box-footer">
@@ -134,7 +135,8 @@
 							REPLY</button>
 					</div>
 				</c:if>
-
+				
+				<!-- 로그아웃 상태 -->
 				<c:if test="${empty login}">
 					<div class="box-body">
 						<div>
@@ -174,7 +176,7 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title"></h4>
+					<h4 class="modal-title">댓글 수정 및 삭제</h4>
 				</div>
 				<div class="modal-body" data-rno>
 					<p>
@@ -191,10 +193,11 @@
 	</div>
 
 
-
 	<script id="templateAttach" type="text/x-handlebars-template">
 		<li data-src='{{fullName}}'>
-			<span class="mailbox-attachment-icon has-img"><img src="{{imgsrc}}" alt="Attachment"></span>
+			<span class="mailbox-attachment-icon has-img">
+				<img src="{{imgsrc}}" alt="Attachment">
+			</span>
 			<div class="mailbox-attachment-info">
 				<a href="{{getLink}}" class="mailbox-attachment-name">{{fileName}}</a>
 				</span>

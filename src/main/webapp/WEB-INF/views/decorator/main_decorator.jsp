@@ -449,17 +449,19 @@
 
 		<!-- Content Wrapper. Contains page content -->
 		<div class="content-wrapper" style="border: 2px solid red;">
+		
 			<section class="content" style="border: 2px solid blue;">
-
 				<!-- ################## -->
 				<!-- START Main Content -->
 				<!-- ################## -->
-				<sitemesh:write property="body" />
+				<div class="container-fluid">
+					<sitemesh:write property="body" />
+				</div>
 				<!-- ################## -->
 				<!-- END   Main Content -->
 				<!-- ################## -->
-
 			</section>
+			
 		</div>
 
 		<footer class="main-footer">

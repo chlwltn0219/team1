@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>listReply.jsp</title>
+<title>modifyReply.jsp</title>
 <!-- Bootstrap 3.3.4 -->
 <link href="/resources/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css" />
 <!-- Font Awesome Icons -->
@@ -51,13 +51,18 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
+				<span class="close" data-dismiss="modal">&times;</span>
 				<h2 class="modal-title">댓글 수정 & 삭제</h2>
 			</div>
 			<div class="modal-body">
-				
+				<input id="replyprompt" class="form-control"/>
 			</div>
 			<div class="modal-footer">
-			
+				<div class="btn-group">
+					<button id="modify" class="btn btn-primary">수정</button>
+					<button id="delete" class="btn btn-warning">삭제</button>
+					<button class="btn btn-info" data-dismiss="modal">취소</button>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -74,7 +79,7 @@
 										 data-replytext="{{replytext}}"
 										 data-toggle="modal"
 										 data-target="#myModal"
-			>
+										 >
 				Modify
 			</button>
 		</li>
@@ -96,23 +101,12 @@
 		$('#reply .panel-body').html(str);
 		
 		$('.modify').on('click', function() {
-			var str  = "rno = " + $(this).attr("data-rno") + "\n";
-			    str += "bno = " + $(this).attr("data-bno") + "\n";
-			    str += "replytext = " + $(this).attr("data-replytext") + "\n";
+			var rno = $(this).attr("data-rno");
+			var replytext = $(this).attr("data-replytext");
 			
-// 			alert(str);
-
-// 			if(confirm(str))
-// 				alert("확인 클릭");
-// 			else
-// 				alert("취소 클릭");
-			
-// 			var text = prompt("댓글 수정 & 삭제", str);
-// 			if(text != null)
-// 				alert(text);
-
-			
-
+			$('#replyprompt').val(replytext)
+							 .attr('data-rno', rno);
+			    
 		});
 	};
 	
@@ -127,9 +121,8 @@
 		if(pageMaker.prev)
 			str += '<li><a href=#>' + (pageMaker.startPage - 1) + "prev</a></li>";
 		
-		for(var i=pageMaker.startPage; i<=10; i++) {
-// 		for(var i=pageMaker.startPage; i<=pageMaker.endPage; i++) {
-			str += '<li><a href="#">' + i + "</a></li>";
+		for(var i=pageMaker.startPage; i<=pageMaker.endPage; i++) {
+			str += '<li><a href="#" data-num="' + i + '">' + i + "</a></li>";
 		}
 		
 		pageMaker.next = true;
@@ -137,6 +130,17 @@
 			str += '<li><a href=#>' + (pageMaker.endPage + 1) + "next</a></li>";
 		
 		$('#reply .panel-footer .pagination').html(str);
+		
+		$('.pagination li>a') .on('click', function(event) {
+			event.preventDefault();
+			
+			var num = $(this).attr('data-num');
+			console.log("num = " + num);
+
+			page = num;
+			getPage(page);
+		});
+		
 	};
 	
 	function getPage(page) {
@@ -187,10 +191,56 @@
 	});
 	
 	$('#replylist').on('click', function() {
-		alert("replylist clicked...");
+// 		alert("replylist clicked...");
 		getPage(page);
 	});
+	
+	$('#myModal #modify').on('click', function() {
+		var rno = $('#replyprompt').attr('data-rno');
+		var replytext = $('#replyprompt').val();
+		console.log("rno = " + rno + ", replytext = " + replytext);		
+		
+		$.ajax({
+			type : "PUT",
+			url : "/replies/" + rno,
+			headers : {
+				"Content-Type" : "application/json"
+			},
+			processData : false,
+			data : JSON.stringify({
+				replytext : replytext				
+			}),
+			success : function(result) {
+				if(result == "SUCCESS")
+					getPage(page);
+				
+				alert(result);
+			}
+		});
+		
+		$('#myModal').modal('hide');
+	});
 
+	$('#myModal #delete').on('click', function() {
+		var rno = $('#replyprompt').attr('data-rno');
+		console.log("rno = " + rno);
+		
+		$.ajax({
+			type : "DELETE",
+			url : "/replies/" + rno,
+			headers : {
+				"Content-Type" : "application/json"
+			},
+			success : function(result) {
+				if(result == "SUCCESS")
+					getPage(page);
+				
+				alert(result);
+			}
+		});
+		
+		$('#myModal').modal('hide');
+	});
 </script>
 
 </body>
