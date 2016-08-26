@@ -15,6 +15,9 @@
 <h1>C.jsp</h1>
 
 <ul>
+	<li>java</li>
+	<li>html</li>
+	<li>css</li>
 	<li>spring</li>
 	<li>mybatis</li>
 	<li>jquery</li>
