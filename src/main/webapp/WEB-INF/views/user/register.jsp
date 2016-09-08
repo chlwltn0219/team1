@@ -3,15 +3,6 @@
 <html>
 <head>
 <title>register.jsp</title>
-<style>
-.fileDrop {
-	width: 80%;
-	height: 100px;
-	border: 1px dotted gray;
-	background-color: rgb(253, 200, 100);
-	margin: auto;
-}
-</style>
 </head>
 <body>
 
@@ -29,12 +20,12 @@
 					<div class="box-body">
 						<div class="form-group">
 							<label for="exampleInputEmail1">Email</label> <input type="text"
-								name='uid' class="form-control" placeholder="Enter Title">
+								name='uid' class="form-control" placeholder="Enter Email">
 						</div>
 						<div class="form-group">
 							<label for="exampleInputPassword1">Password</label>
-							<textarea class="form-control" name="upw" rows="3"
-								placeholder="Enter ..."></textarea>
+							<input type="password"
+								name='upw' class="form-control" placeholder="Enter Password">
 						</div>
 
 						<div class="form-group">
@@ -81,12 +72,6 @@
 					var that = $(this);
 
 					var str = "";
-					$(".uploadedList .delbtn").each(
-							function(index) {
-								str += "<input type='hidden' name='files["
-										+ index + "]' value='"
-										+ $(this).attr("href") + "'> ";
-							});
 
 					that.append(str);
 
