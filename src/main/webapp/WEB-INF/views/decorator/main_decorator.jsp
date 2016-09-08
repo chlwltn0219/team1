@@ -17,6 +17,10 @@
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
 <!-- Ionicons -->
 <link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css" />
+<!-- Theme style -->
+<link href="/resources/dist/css/AdminLTE.min.css" rel="stylesheet" type="text/css" />
+<!-- AdminLTE Skins. Choose a skin from the css/skins folder instead of downloading all of them to reduce the load. -->
+<link href="/resources/dist/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css" />
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -34,8 +38,23 @@
 <style type="text/css">
 
 div.container {
-	margin-top: 70px;
-	margin-bottom: 70px;
+	margin-top: 65px;
+ 	margin-bottom: 15px;
+}
+
+/* Remove the navbar's default margin-bottom and rounded borders */
+.navbar {
+	margin-bottom: 0;
+	border-radius: 0;
+}
+
+/* Add a gray background color and some padding to the footer */
+.footer {
+	width: 100%;
+	background-color: #f2f2f2;
+	padding: 25px;
+	bottom: 0;
+	position: relative;
 }
 
 </style>
@@ -82,7 +101,7 @@ div.container {
 		</header>
 		
 		<!-- Content Wrapper. Contains page content -->
-		<div class="container">
+		<div class="container well well-lg">
 			<section>
 				<!-- ################## -->
 				<!-- START Main Content -->
@@ -96,12 +115,13 @@ div.container {
 			</section>
 		</div>
 
-		<footer class="">
+		
+		<footer class="container-fluid text-center footer">
 			<div class="pull-right hidden-xs">
-				<b>Version</b> 2.0
+				<b>Version</b> 0.1
 			</div>
-			<strong>Copyright &copy; 2014-2015 <a
-				href="http://almsaeedstudio.com">Almsaeed Studio</a>.
+			<strong>Copyright &copy; 2016 <a
+				href="#">Team1 2nd Project</a>.
 			</strong> All rights reserved.
 		</footer>
 
