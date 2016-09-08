@@ -9,11 +9,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import org.zerock.openapi.Body;
-import org.zerock.openapi.Items;
 import org.zerock.openapi.Result;
 import org.zerock.util.DateUtil;
 
@@ -49,6 +47,7 @@ public class WeatherProxyController {
 		logger.info(restTemplate.getForObject(uri, String.class));
 		
 		Body body = result.getResponse().getBody();
+		logger.info(body.getItems().getItem().toString());
 		
 		return new ResponseEntity<Body>(body, HttpStatus.OK);
 		
@@ -80,7 +79,7 @@ public class WeatherProxyController {
 		logger.info(result.toString());
 		
 		body = result.getResponse().getBody();
-		logger.info(body.toString());
+		logger.info(body.getItems().getItem().toString());
 		
 		return new ResponseEntity<Body>(body, HttpStatus.OK);
 		
