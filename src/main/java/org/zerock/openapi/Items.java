@@ -1,16 +1,17 @@
 package org.zerock.openapi;
 
+import java.util.List;
 import java.util.Map;
 
 public class Items {
 	
-	private Map<String, Object> item;
+	private List<Map<String, Object>> item;
 
-	public Map<String, Object> getItem() {
+	public List<Map<String,Object>> getItem() {
 		return item;
 	}
 
-	public void setItem(Map<String, Object> item) {
+	public void setItem(List<Map<String,Object>> item) {
 		this.item = item;
 	}
 

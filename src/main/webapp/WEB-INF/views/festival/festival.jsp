@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
 <title>festival.jsp</title>
@@ -36,7 +37,6 @@
 	</table>
 </div>
 
-
 <script id="codeTemp" type="text/xxx-mytemplate">
 	<tr>
 		<td><img src="{{firstimage}}" style="width:300px; height:300px;"></td>
@@ -51,27 +51,24 @@
 
 <script type="text/javascript">
 
-	var serviceKey = "oMYSCkfnU%2BrM%2F6ad8zAICkGBj0eUCOxJc9bR%2F8MHuzhfo62P6cGA1YVZ7iY5QnDedVyfk5tMhc0Wu42fjDJ%2BcA%3D%3D";
 	
 	$('#json').on('click', function() {
-		$.getJSON("http://api.visitkorea.or.kr/openapi/service/rest/KorService/searchFestival?ServiceKey=" + serviceKey + "&numOfRows=10&pageNo=1&MobileOS=ETC&MobileApp=TestApp&_type=json", function(areaCode) {
+		$.getJSON("/festival/list", function(data) {
 			// json 객체 내부 접근하기
-			console.dir(areaCode);
-			console.log(areaCode);
-			console.log(areaCode.response);
-			console.log(areaCode.response.body);
-			console.log(areaCode.response.body.items);
-			console.log(areaCode.response.body.items.item);
+			console.dir(data);
 			
-			var items = areaCode.response.body.items.item;
+			var items = data.items.item;
 			
 			var temp2 = $('#codeTemp').html();
 			var template = Handlebars.compile(temp2);
 			
-			var html = template(items);
-			console.log(html);
+			$('#result').html("");
 			
-			$('#result').html(html);
+			for(var i=0; i<items.length; i++) {
+				var html = template(items[i]);
+				console.log(html);
+				$('#result').append(html);
+			}
 			
 		});
 	});
