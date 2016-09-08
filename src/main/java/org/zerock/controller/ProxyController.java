@@ -1,6 +1,7 @@
 package org.zerock.controller;
 
 import java.net.URI;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,7 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
-import org.zerock.domain.ItemsVO;
+import org.zerock.openapi.Body;
+import org.zerock.openapi.Items;
 import org.zerock.openapi.Result;
 import org.zerock.util.DateUtil;
 
@@ -23,7 +25,7 @@ public class ProxyController {
 	private static final String SERVICE_KEY = "oMYSCkfnU%2BrM%2F6ad8zAICkGBj0eUCOxJc9bR%2F8MHuzhfo62P6cGA1YVZ7iY5QnDedVyfk5tMhc0Wu42fjDJ%2BcA%3D%3D";
 	
 	@RequestMapping(value="/middleFrcst", method = RequestMethod.GET )
-	public ResponseEntity<Result> MiddleFrcstInfo() {
+	public ResponseEntity<Body> MiddleFrcstInfo() {
 		
 		Result result = null;
 		
@@ -46,16 +48,27 @@ public class ProxyController {
 		result = restTemplate.getForObject(uri, Result.class);
 		logger.info(restTemplate.getForObject(uri, String.class));
 		
-		return new ResponseEntity<Result>(result, HttpStatus.OK);
+		Body body = result.getResponse().getBody();
+		Map<String, Object> map = body.getItems().getItem();
+		
+		System.out.println("items = " + map);
+
+		map.put("wf8", "8일 뒤 입니다.");
+		map.put("wf9", "9일 뒤 입니다.");
+		map.put("wf10", "10일 뒤 입니다.");
+		
+		System.out.println("items = " + map);
+		
+		return new ResponseEntity<Body>(body, HttpStatus.OK);
 		
 	}
 	
 	@RequestMapping(value="/festivalList", method = RequestMethod.GET )
-	public ResponseEntity<ItemsVO> getFestivalList(
+	public ResponseEntity<Items> getFestivalList(
 			@RequestParam String eventStartDate, @RequestParam String eventEndDate) {
 		
 		RestTemplate restTemplate = new RestTemplate();
-		ItemsVO items = null;
+		Items items = null;
 
 		String serviceKey = "oMYSCkfnU%2BrM%2F6ad8zAICkGBj0eUCOxJc9bR%2F8MHuzhfo62P6cGA1YVZ7iY5QnDedVyfk5tMhc0Wu42fjDJ%2BcA%3D%3D";
 		String baseURI = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/searchFestival"
@@ -77,10 +90,10 @@ public class ProxyController {
 		String str = restTemplate.getForObject(uri, String.class);
 		logger.info("return "+ str);
 		
-		items = restTemplate.getForObject(uri, ItemsVO.class);
+		items = restTemplate.getForObject(uri, Items.class);
 		logger.info("return "+ items);
 		
-		return new ResponseEntity<ItemsVO>(items, HttpStatus.OK);
+		return new ResponseEntity<Items>(items, HttpStatus.OK);
 	}
 	
 	@RequestMapping(value="/json", method = RequestMethod.GET )
