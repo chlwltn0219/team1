@@ -1,19 +1,17 @@
-package org.zerock.domain;
+package org.zerock.openapi;
 
-import java.util.List;
-
-public class ItemsVO {
-
-	private List<String> item;
+public class Body {
+	
+	private Items items;
 	private Integer numOfRows;
 	private Integer pageNo;
 	private Integer totalCount;
-
-	public List<String> getItem() {
-		return item;
+	
+	public Items getItems() {
+		return items;
 	}
-	public void setItem(List<String> item) {
-		this.item = item;
+	public void setItems(Items items) {
+		this.items = items;
 	}
 	public Integer getNumOfRows() {
 		return numOfRows;
@@ -33,11 +31,5 @@ public class ItemsVO {
 	public void setTotalCount(Integer totalCount) {
 		this.totalCount = totalCount;
 	}
-
-	@Override
-	public String toString() {
-		return "FestivalListVO [item=" + item + ", numOfRows=" + numOfRows + ", pageNo=" + pageNo + ", totalCount="
-				+ totalCount + "]";
-	}
-
+	
 }
