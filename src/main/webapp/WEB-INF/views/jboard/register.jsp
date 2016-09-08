@@ -62,17 +62,14 @@ footer {
 					placeholder="Enter ..."></textarea>
 				<div class="container-fluid text-center">
 				<div  style="border: 1px solid red">
-					<input type="text" name>
+					<h3>Find  Festival</h3>
+					<input type="text" class="col-sm-8" id="searchFestival" >
+					<button class="btn btn-primary col-sm-4" type="submit" >Find</button>
 				</div>
 				
 				
 					<div class="row content">
-						<div class="col-sm-5 text-left" style="border: 1px solid red">
-							<p>Lorem ipsum dolor sit amet, consectetur</p>
-							<p>Lorem ipsum...</p>
-						</div>
-						<div class="col-sm-5 text-left" style="border: 1px solid red">
-							<p>Lorem ipsum dolor sit amet, consectetur</p>
+						<div class="col-sm-12 text-left" style="border: 1px solid red">
 							<p>Lorem ipsum...</p>
 						</div>
 					</div>
