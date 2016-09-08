@@ -7,6 +7,7 @@ DROP TABLE tbl_user;
 DROP TABLE tbl_attach;
 DROP TABLE tbl_reply;
 DROP TABLE tbl_board;
+DROP TABLE tbl_jboard;
 
 --
 -- tbl_member
@@ -56,6 +57,22 @@ INSERT INTO tbl_user(UID, upw, uname)
 -- tbl_board
 --
 CREATE TABLE tbl_board
+(
+   bno        int NOT NULL AUTO_INCREMENT,
+   title      varchar(200) NOT NULL,
+   content    text NULL,
+   writer     varchar(50) NOT NULL,
+   regdate    timestamp NOT NULL DEFAULT now(),
+   viewcnt    int DEFAULT 0,
+   replycnt   int DEFAULT 0,
+   PRIMARY KEY(bno)
+);
+
+
+--
+-- tbl_jboard
+--
+CREATE TABLE tbl_jboard
 (
    bno        int NOT NULL AUTO_INCREMENT,
    title      varchar(200) NOT NULL,

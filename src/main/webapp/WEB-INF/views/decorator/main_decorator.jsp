@@ -83,7 +83,7 @@ div.container {
 								<a class="dropdown-toggle" data-toggle="dropdown" href="#">공연 <span class="caret"></span></a>
 								<ul class="dropdown-menu">
 									<li><a href="#">Place</a></li>
-									<li><a href="#">Festival</a></li>
+									<li><a href="/festival/festival">Festival</a></li>
 								</ul>
 							</li>
 							<li class="dropdown">
@@ -99,7 +99,7 @@ div.container {
 						<!-- Log in -->
 						<ul class="nav navbar-nav navbar-right">
 							<li>
-								<a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a>
+								<a href="/user/login"><span class="glyphicon glyphicon-log-in"></span> Login</a>
 							</li>
 						</ul>
 					</div>
