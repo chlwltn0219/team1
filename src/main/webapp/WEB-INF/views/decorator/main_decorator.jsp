@@ -78,7 +78,7 @@ div.container {
 					<div class="collapse navbar-collapse" id="myNavbar">
 						<!-- Menu -->
 						<ul class="nav navbar-nav">
-							<li class="active"><a href="#">Notice</a></li>
+							<li class="active"><a href="/notice/board">Notice</a></li>
 							<li class="dropdown">
 								<a class="dropdown-toggle" data-toggle="dropdown" href="#">Content <span class="caret"></span></a>
 								<ul class="dropdown-menu">

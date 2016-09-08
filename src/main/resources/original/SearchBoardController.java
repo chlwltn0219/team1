@@ -22,9 +22,9 @@ import org.zerock.service.BoardService;
 
 @Controller
 @RequestMapping("/sboard/*")
-public class SearchBoardController {
+public class SearchBoardController_mod {
 
-  private static final Logger logger = LoggerFactory.getLogger(SearchBoardController.class);
+  private static final Logger logger = LoggerFactory.getLogger(SearchBoardController_mod.class);
 
   @Inject
   private BoardService service;
@@ -65,7 +65,7 @@ public class SearchBoardController {
 
     rttr.addFlashAttribute("msg", "SUCCESS");
 
-    return "redirect:/notice/board";
+    return "redirect:/sboard/list";
   }
 
   @RequestMapping(value = "/modifyPage", method = RequestMethod.GET)
@@ -89,7 +89,7 @@ public class SearchBoardController {
 
     logger.info(rttr.toString());
 
-    return "redirect:/notice/board";
+    return "redirect:/sboard/list";
   }
 
   @RequestMapping(value = "/register", method = RequestMethod.GET)
@@ -108,7 +108,7 @@ public class SearchBoardController {
 
     rttr.addFlashAttribute("msg", "SUCCESS");
 
-    return "redirect:/notice/board";
+    return "redirect:/sboard/list";
   }
   
   
