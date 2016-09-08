@@ -45,7 +45,7 @@ public class SearchBoardController {
 
     model.addAttribute("pageMaker", pageMaker);
   }
-
+  
   @RequestMapping(value = "/readPage", method = RequestMethod.GET)
   public void read(@RequestParam("bno") int bno, @ModelAttribute("cri") SearchCriteria cri, Model model)
       throws Exception {
