@@ -80,11 +80,12 @@ div.container {
 						<ul class="nav navbar-nav">
 							<li class="active"><a href="#">Notice</a></li>
 							<li class="dropdown">
-								<a class="dropdown-toggle" data-toggle="dropdown" href="#">공연 <span class="caret"></span></a>
-								<ul class="dropdown-menu">
-									<li><a href="#">Place</a></li>
-									<li><a href="/festival/festival">Festival</a></li>
-								</ul>
+								<a href="/festival/festival">행사</a>
+<!-- 								<ul class="dropdown-menu"> -->
+<!-- 									<li><a href="#">행사</a></li> -->
+<!-- 									<li><a href="/festival/festival">축제</a></li> -->
+<!-- 									<li><a href="#">공연</a> -->
+<!-- 								</ul> -->
 							</li>
 							<li class="dropdown">
 								<a class="dropdown-toggle" data-toggle="dropdown" href="#">관광 <span class="caret"></span></a>

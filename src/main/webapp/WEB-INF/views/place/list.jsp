@@ -5,6 +5,8 @@
 <%@ page session="false"%>
 <html>
 <head>
+<!-- CSS -->
+<link href="/resources/css/place.css" rel="stylesheet" type="text/css" />
 <!-- Bootstrap 3.3.4 -->
 <link href="/resources/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css" />
 <!-- Font Awesome Icons -->
@@ -63,33 +65,33 @@
 <div style="width: 100%; height: 600px;">
 
 	<div>
-		<div class="img_hover"></div>
-		<div class="table_img margin_right margin_bottom">
-			<img class="table_imgbox fade_in" alt="xx" src="http://tong.visitkorea.or.kr/cms/resource/39/1939139_image2_1.jpg">
+		<div>
+			<div class="table_img">
+				<img class="table_imgbox fade_in" alt="xx" src="http://tong.visitkorea.or.kr/cms/resource/39/1939139_image2_1.jpg">
+				<div class="img_hover">
+					<p>[관광]test</p>
+				</div>
+			</div>
 		</div>
-		<div class="table_img margin_right margin_bottom">
+		<div class="table_img">
 			<img class="table_imgbox" alt="xx" src="http://tong.visitkorea.or.kr/cms/resource/39/1939139_image2_1.jpg">
 		</div>
-		<div class="table_img margin_bottom">
+		<div class="table_img">
 			<img class="table_imgbox" alt="xx" src="http://tong.visitkorea.or.kr/cms/resource/39/1939139_image2_1.jpg">
 		</div>
 	</div>
 	<div>
-		<div class="table_img margin_right margin_bottom">
+		<div class="table_img">
 			<img class="table_imgbox" alt="xx" src="http://tong.visitkorea.or.kr/cms/resource/39/1939139_image2_1.jpg">
 		</div>
-		<div class="table_img margin_right margin_bottom">
+		<div class="table_img">
 			<img class="table_imgbox" alt="xx" src="http://tong.visitkorea.or.kr/cms/resource/39/1939139_image2_1.jpg">
 		</div>
-		<div class="table_img margin_bottom">
+		<div class="table_img">
 			<img class="table_imgbox" alt="xx" src="http://tong.visitkorea.or.kr/cms/resource/39/1939139_image2_1.jpg">
 		</div>
 	</div>
 </div>
-
-<h1>호출 결과 보기</h1>
-<button id="db" class="btn btn-primary">getJSON form Open API</button>
-<button id="clear" class="btn btn-info">clear</button>
 
 <div class="table-responsive">
    <table class="table table-hover">
@@ -97,13 +99,16 @@
    </table>
 </div>
 
-<c:if test="">
 
-</c:if>
 <script id="codeTemp" type="text/xxx-mytemplate">
    {{#each .}}
-	<div class="table_img margin_right margin_bottom">
-			<img class="table_imgbox" alt="이미지첨부없음" src="{{firstimage}}">
+	<div>
+		<div class="table_img">
+				<img class="table_imgbox fade_in" alt="" src="{{firstimage}}">
+				<div class="img_hover">
+					<p>[관광] {{title}}</p>
+				</div>
+		</div>
 	</div>
    {{/each}}
 </script>
@@ -124,61 +129,65 @@
          
          $('#result').html(html);
       });
+      
+      for(var i=0; i<30; i++){
+//			alert(i);
+			$('img').eq(i).attr("src", function(i, originValue) {
+				if(originValue=="")
+					return "http://placehold.it/350x250?text=" + item[i].title;
+			});
+		}
+      
    $('#db').on('click', function() {
    });	   
-      
-   $('#clear').on('click', function() {
-	   $('#result').html("");	   		   
-   });
-   
-   $( ".fade_in" ).click(function() {
-	   $( ".img_hover" ).fadeIn( "slow", function() {
-	     	console.log("aa");
-		   // Animation complete
-		   $(".img_hover").show;
-	   });
-	 });
-
 </script>
 
+<script type="text/javascript">
+// $(document).ready(
+// 		function() {
+// 		   $( ".fade_in" ).mouseenter(function() {
+// 			   console.log("cc");
+// 			   $( ".img_hover" ).fadeIn( "slow", function() {
+// 			     	console.log("aa");
+// 			   });
+// 			 });
+// 		   $( ".fade_in" ).mouseleave(function() {
+// 			   $( ".img_hover" ).fadeOut( "slow", function() {
+// 			     	console.log("bb");
+// 			   });
+// 			 });
+// 		});
+</script>
 
-	</div>
-	<!-- /.row -->
+<script>
+	var result = '${msg}';
 
-	<script>
-		var result = '${msg}';
+	if (result == 'SUCCESS') {
+		alert("처리가 완료되었습니다.");
+		location.replace(self.location);
+	}
+</script>
 
-		if (result == 'SUCCESS') {
-			alert("처리가 완료되었습니다.");
-			location.replace(self.location);
-		}
-	</script>
+<script>
+	$(document).ready(
+			function() {
 
-	<script>
-		$(document).ready(
-				function() {
+				$('#searchBtn').on(
+						"click",
+						function(event) {
+							self.location = "list"
+									+ '${pageMaker.makeQuery(1)}'
+									+ "&searchType="
+									+ $("select option:selected").val()
+									+ "&keyword="
+									+ $('#keywordInput').val();
+						});
 
-					$('#searchBtn').on(
-							"click",
-							function(event) {
-
-								self.location = "list"
-										+ '${pageMaker.makeQuery(1)}'
-										+ "&searchType="
-										+ $("select option:selected").val()
-										+ "&keyword="
-										+ $('#keywordInput').val();
-
-							});
-
-					$('#newBtn').on("click", function(evt) {
-
-						self.location = "register";
-
-					});
-
+				$('#newBtn').on("click", function(evt) {
+					self.location = "register";
 				});
-	</script>
+			});
+</script>
 
 </body>
 </html>
