@@ -22,19 +22,10 @@
 			<!-- Hot Festival List -->
 			<div class="box">
 				<div class="box-header with-border">
-					<h3 class="box-title">Near Festivals</h3>
+					<h3 class="box-title">Hot Festivals in This Month</h3>
 				</div>
 				<div class="box-body container-fluid">
 					<div id="hotFestival" class="row">
-						<div class="col-md-4">
-							<img alt="1st" src="http://placehold.it/300x200?text=1st" width="100%">
-						</div>
-						<div class="col-md-4">
-							<img alt="2nd" src="http://placehold.it/300x200?text=2nd" width="100%">
-						</div>
-						<div class="col-md-4">
-							<img alt="3rd" src="http://placehold.it/300x200?text=3rd" width="100%">
-						</div>
 					</div>
 				</div>
 			</div>
@@ -73,7 +64,6 @@
 <!-- 					<button id='newBtn'>New Board</button> -->
 <!-- 				</div> -->
 <!-- 			</div> -->
-			
 
 			<div class="box">
 				<div class="box-header with-border">
@@ -145,8 +135,6 @@
 	</div>
 	<!-- /.row -->
 	
-				
-
 	<script id="temp" type="text/xxx-mytemplate">
 		{{#each .}}
 			<div class="col-md-4">
@@ -156,7 +144,7 @@
 	</script>
 	
 	<script type="text/javascript">
-		$.getJSON("/near/festival", function(data){
+		$.getJSON("/jboard/nearFestival", function(data){
 			console.dir(data);
 			
 			var item = data.items.item;
@@ -170,9 +158,8 @@
 			
 			$('#hotFestival').html(html);
 			
-			for(var i=0; i<3; i++){
-// 				alert(i);
-				$('img').eq(i).attr("src", function(i, originValue) {
+			for(var i=0; i<data.numOfRows; i++){
+				$('img').eq(i).attr("src", function(j, originValue) {
 					if(originValue=="")
 						return "http://placehold.it/350x250?text=" + item[i].title;
 				});
@@ -191,27 +178,22 @@
 	</script>
 
 	<script>
-		$(document).ready(
-				function() {
+		$(document).ready( function() {
 
-					$('#searchBtn').on("click",	function(event) {
+			$('#searchBtn').on("click",	function(event) {
+				self.location = "list"
+						+ '${pageMaker.makeQuery(1)}'
+						+ "&searchType="
+						+ $("select option:selected").val()
+						+ "&keyword="
+						+ $('#keywordInput').val();
+			});
 
-						self.location = "list"
-								+ '${pageMaker.makeQuery(1)}'
-								+ "&searchType="
-								+ $("select option:selected").val()
-								+ "&keyword="
-								+ $('#keywordInput').val();
+			$('#newBtn').on("click", function(evt) {
+				self.location = "register";
+			});
 
-					});
-
-					$('#newBtn').on("click", function(evt) {
-
-						self.location = "register";
-
-					});
-
-				});
+		});
 	</script>
 
 </body>

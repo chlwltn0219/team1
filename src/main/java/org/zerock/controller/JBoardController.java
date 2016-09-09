@@ -21,7 +21,7 @@ import org.zerock.domain.SearchCriteria;
 import org.zerock.service.JBoardService;
 
 @Controller
-@RequestMapping("/JBoard/*")
+@RequestMapping("/jboard/*")
 public class JBoardController {
 
 	private static final Logger logger = LoggerFactory.getLogger(JBoardController.class);
