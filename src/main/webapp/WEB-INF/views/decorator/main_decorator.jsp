@@ -123,7 +123,6 @@ div.container {
 			</section>
 		</div>
 
-		
 		<footer class="container-fluid text-center footer">
 			<div class="pull-right hidden-xs">
 				<b>Version</b> 0.1

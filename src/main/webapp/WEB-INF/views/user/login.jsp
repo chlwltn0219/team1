@@ -25,7 +25,7 @@
   <body class="login-page">
     <div class="login-box">
       <div class="login-logo">
-        <a href="/resources/index2.html"><b>Team1 2nd</b>Project</a>
+        <a href="/"><b>Team1 2nd</b>Project</a>
       </div><!-- /.login-logo -->
       <div class="login-box-body">
         <p class="login-box-msg">Sign in to start your session</p>
@@ -47,12 +47,12 @@
       </div>                        
     </div><!-- /.col -->
     <div class="col-xs-4">
-      <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+      <button type="submit" class="btn btn-success btn-block btn-flat">Sign In</button>
     </div><!-- /.col -->
   </div>
 </form>
 
-	<!-- <a href="#">I forgot my password</a><br> -->
+	<a href="#">I forgot my password</a><br>
         <a href="/user/register" class="text-center">Register a new membership</a>
 
       </div><!-- /.login-box-body -->
