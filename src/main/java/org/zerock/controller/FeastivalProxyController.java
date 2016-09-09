@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import org.zerock.openapi.Body;
 import org.zerock.openapi.Items;
-import org.zerock.openapi.Result;
+import org.zerock.openapi.Results;
 import org.zerock.util.DateUtil;
 
 @RestController
@@ -27,7 +27,7 @@ public class FeastivalProxyController {
 	@RequestMapping(value="/list", method = RequestMethod.GET )
 	public ResponseEntity<Body> test() {
 		
-		Result result = null;
+		Results result = null;
 		
 		DateUtil date = new DateUtil();
 		String tmFc = date.gettmFc();
@@ -46,7 +46,7 @@ public class FeastivalProxyController {
 		URI uri = URI.create(baseURI);
 		logger.info("request uri : " + uri);
 		
-		result = restTemplate.getForObject(uri, Result.class);
+		result = restTemplate.getForObject(uri, Results.class);
 		logger.info(restTemplate.getForObject(uri, String.class));
 		
 		Body body = result.getResponse().getBody();

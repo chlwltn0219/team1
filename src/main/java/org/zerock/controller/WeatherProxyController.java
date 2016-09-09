@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import org.zerock.openapi.Body;
-import org.zerock.openapi.Result;
+import org.zerock.openapi.Results;
 import org.zerock.util.DateUtil;
 
 @RestController
@@ -25,7 +25,7 @@ public class WeatherProxyController {
 	@RequestMapping(value="/test", method = RequestMethod.GET )
 	public ResponseEntity<Body> test() {
 		
-		Result result = null;
+		Results result = null;
 		
 		DateUtil date = new DateUtil();
 		String tmFc = date.gettmFc();
@@ -43,7 +43,7 @@ public class WeatherProxyController {
 		URI uri = URI.create(baseURI);
 		logger.info("request uri : " + uri);
 		
-		result = restTemplate.getForObject(uri, Result.class);
+		result = restTemplate.getForObject(uri, Results.class);
 		logger.info(restTemplate.getForObject(uri, String.class));
 		
 		Body body = result.getResponse().getBody();
@@ -56,7 +56,7 @@ public class WeatherProxyController {
 	@RequestMapping(value="/middleFrcst", method = RequestMethod.GET )
 	public ResponseEntity<Body> MiddleFrcstInfo() {
 		
-		Result result = null;
+		Results result = null;
 		Body body = null;
 		
 		DateUtil date = new DateUtil();
@@ -75,7 +75,7 @@ public class WeatherProxyController {
 		URI uri = URI.create(baseURI);
 		logger.info("request uri : " + uri);
 		
-		result = restTemplate.getForObject(uri, Result.class);
+		result = restTemplate.getForObject(uri, Results.class);
 		logger.info(result.toString());
 		
 		body = result.getResponse().getBody();
