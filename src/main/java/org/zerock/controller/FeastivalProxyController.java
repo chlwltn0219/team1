@@ -36,6 +36,7 @@ public class FeastivalProxyController {
 		String baseURI = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/searchFestival"
 							+ "?ServiceKey=" + SERVICE_KEY
 							+ "&numOfRows=10"
+							+ "&areaCode=1"
 							+ "&eventstartdate=20160908"
 							+ "&pageNo=1"
 							+ "&MobileOS=ETC"
