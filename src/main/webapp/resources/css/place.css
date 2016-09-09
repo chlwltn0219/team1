@@ -1,0 +1,33 @@
+@CHARSET "UTF-8";
+
+/* Byung Wook */
+.imgbox_border{
+	width: 300px;
+	height: 300px;
+	border: 2px solid gray;
+}
+
+.table_img {
+	width: 340px;
+	height: 240px;
+	margin: 11px;
+	float: left;
+	border: 1px solid gray;
+	position: relative;
+}
+
+.table_imgbox {
+	width: 338px; 
+	height: 238px;
+}
+
+.img_hover {
+	top: 148px;
+	width: 338px;
+	height: 90px;
+	background-color: white;
+	border-top: 1px solid gray;
+	display: block;
+	position: absolute;
+	line-height: 6;
+}
