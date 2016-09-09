@@ -69,7 +69,7 @@
 			<div class="table_img">
 				<img class="table_imgbox fade_in" alt="xx" src="http://tong.visitkorea.or.kr/cms/resource/39/1939139_image2_1.jpg">
 				<div class="img_hover">
-				[관광]test
+					<p>[관광]test</p>
 				</div>
 			</div>
 		</div>
@@ -106,7 +106,7 @@
 		<div class="table_img">
 				<img class="table_imgbox fade_in" alt="" src="{{firstimage}}">
 				<div class="img_hover">
-					[관광] {{title}}
+					<p>[관광] {{title}}</p>
 				</div>
 		</div>
 	</div>
