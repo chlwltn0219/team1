@@ -15,6 +15,7 @@ import org.springframework.web.client.RestTemplate;
 import org.zerock.openapi.Body;
 import org.zerock.openapi.Items;
 import org.zerock.openapi.Result;
+import org.zerock.util.AreaUtil;
 import org.zerock.util.DateUtil;
 
 @RestController
@@ -23,9 +24,9 @@ public class FeastivalProxyController {
 	
 	static Logger logger = LoggerFactory.getLogger(FeastivalProxyController.class);
 	private static final String SERVICE_KEY = "oMYSCkfnU%2BrM%2F6ad8zAICkGBj0eUCOxJc9bR%2F8MHuzhfo62P6cGA1YVZ7iY5QnDedVyfk5tMhc0Wu42fjDJ%2BcA%3D%3D";
-	
+			
 	@RequestMapping(value="/list", method = RequestMethod.GET )
-	public ResponseEntity<Body> test() {
+	public ResponseEntity<Body> test(@RequestParam Integer sigunguCode) {
 		
 		Result result = null;
 		
@@ -37,7 +38,9 @@ public class FeastivalProxyController {
 							+ "?ServiceKey=" + SERVICE_KEY
 							+ "&numOfRows=10"
 							+ "&areaCode=1"
-							+ "&eventstartdate=20160908"
+							+ "&sigunguCode=" + sigunguCode
+//							+ "&eventstartdate=" + startDate
+//							+ "&eventenddate=" + endDate
 							+ "&pageNo=1"
 							+ "&MobileOS=ETC"
 							+ "&MobileApp=TestApp"
