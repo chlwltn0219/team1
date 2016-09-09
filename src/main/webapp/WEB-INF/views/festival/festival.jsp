@@ -14,8 +14,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 </head>
 <body>
-<button id="json" class="btn btn-primary">getJSON form Open API</button>
-<button id="clear" class="btn btn-info">clear</button>
+<!-- <button id="json" class="btn btn-primary">getJSON form Open API</button> -->
+<!-- <button id="clear" class="btn btn-info">clear</button> -->
 <input type="text" id="find">
 <button id="findbtn" class="btn btn-info">find</button>
 
@@ -23,7 +23,6 @@
 	<table class="table table-hover">
 	<thead>
 		<tr>
-			<th>원본</th>
 			<th>썸네일</th>
 			<th>타이틀</th>
 			<th>주소</th>
@@ -39,7 +38,6 @@
 
 <script id="codeTemp" type="text/xxx-mytemplate">
 	<tr>
-		<td><img src="{{firstimage}}" style="width:300px; height:300px;"></td>
 		<td><img src="{{firstimage2}}" style="width:300px; height:300px;"></td>
 		<td>{{title}}</td>
 		<td>{{addr1}}</td>
@@ -50,9 +48,6 @@
 </script>
 
 <script type="text/javascript">
-
-	
-	$('#json').on('click', function() {
 		$.getJSON("/festival/list", function(data) {
 			// json 객체 내부 접근하기
 			console.dir(data);
@@ -71,12 +66,6 @@
 			}
 			
 		});
-	});
-	
-	$('#clear').on('click', function() {
-		$('#result').html("");
-	});
-
 </script>
 </body>
 </html>

@@ -30,7 +30,6 @@ public class FeastivalProxyController {
 		Result result = null;
 		
 		DateUtil date = new DateUtil();
-		String tmFc = date.gettmFc();
 		logger.info("tmFc = " + date.gettmFc());
 		
 		RestTemplate restTemplate = new RestTemplate();
