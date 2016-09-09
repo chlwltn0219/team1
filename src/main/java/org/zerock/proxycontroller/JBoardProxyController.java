@@ -1,4 +1,4 @@
-package org.zerock.controller;
+package org.zerock.proxycontroller;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URI;

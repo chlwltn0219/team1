@@ -1,4 +1,4 @@
-package org.zerock.controller;
+package org.zerock.proxycontroller;
 
 import java.net.URI;
 
