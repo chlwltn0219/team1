@@ -52,7 +52,11 @@ public class SearchBoardController {
 
     model.addAttribute(service.read(bno));
   }
+  @RequestMapping(value = "/festival", method = RequestMethod.GET)
+  public void festival(@ModelAttribute("cri") SearchCriteria cri, Model model)
+      throws Exception {
 
+  }
   @RequestMapping(value = "/removePage", method = RequestMethod.POST)
   public String remove(@RequestParam("bno") int bno, SearchCriteria cri, RedirectAttributes rttr) throws Exception {
 
