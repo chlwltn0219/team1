@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import org.zerock.openapi.Body;
@@ -17,9 +18,9 @@ import org.zerock.util.DateUtil;
 
 @RestController
 @RequestMapping("/festival")
-public class FeastivalProxyController {
+public class FestivalProxyController {
 	
-	static Logger logger = LoggerFactory.getLogger(FeastivalProxyController.class);
+	static Logger logger = LoggerFactory.getLogger(FestivalProxyController.class);
 	private static final String SERVICE_KEY = "oMYSCkfnU%2BrM%2F6ad8zAICkGBj0eUCOxJc9bR%2F8MHuzhfo62P6cGA1YVZ7iY5QnDedVyfk5tMhc0Wu42fjDJ%2BcA%3D%3D";
 			
 	@RequestMapping(value="/list", method = RequestMethod.GET )
