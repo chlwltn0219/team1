@@ -88,7 +88,7 @@
 
 <script id="temp2" type="text/xxx-mytemplate">
 	{{#each .}}
-	<li class="list-group-item list-group-item-warning"> {{deptno}}, {{dname}}, {{loc}} </li>
+		<li class="list-group-item list-group-item-warning"> {{deptno}}, {{dname}}, {{loc}} </li>
 	{{/each}}
 </script>
 

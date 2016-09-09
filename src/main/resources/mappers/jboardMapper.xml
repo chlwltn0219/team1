@@ -3,51 +3,50 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="org.zerock.mapper.BoardMapper">
+<mapper namespace="org.zerock.mapper.JBoardMapper">
 
 	<insert id="create">
-		insert into tbl_board (title, content, writer)
+		insert into tbl_JBoard (title, content, writer)
 		values(#{title},#{content}, #{writer})
 	</insert>
 
-	<select id="read" resultType="org.zerock.domain.BoardVO">
+	<select id="read" resultType="org.zerock.domain.JBoardVO">
 		select
-		bno, title, content, writer,
-		regdate, viewcnt , replycnt
+		bno, title, content, writer, regdate, viewcnt , replycnt
 		from
-		tbl_board
+		tbl_JBoard
 		where bno = #{bno}
 	</select>
 
-	<select id="listAll" resultType="org.zerock.domain.BoardVO">
+	<select id="listAll" resultType="org.zerock.domain.JBoardVO">
  <![CDATA[
  select 
    bno, title, content, writer, regdate, viewcnt 
  from 
-   tbl_board 
+   tbl_JBoard 
  where bno > 0 
  order by bno desc, regdate desc
  ]]>
 	</select>
 
-	<select id="listPage" resultType="BoardVO">
+	<select id="listPage" resultType="JBoardVO">
  <![CDATA[
  select 
    bno, title, content, writer, regdate, viewcnt , replycnt
  from 
-   tbl_board 
+   tbl_JBoard 
  where bno > 0 
  order by bno desc, regdate desc
  limit #{page}, 10
  ]]>
 	</select>
 
-	<select id="listCriteria" resultType="BoardVO">
+	<select id="listCriteria" resultType="JBoardVO">
  <![CDATA[
  select 
    bno, title, content, writer, regdate, viewcnt , replycnt
  from 
-   tbl_board 
+   tbl_JBoard 
  where bno > 0 
  order by bno desc, regdate desc
  limit #{pageStart}, #{perPageNum}
@@ -56,13 +55,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 
 	<update id="update">
-		update tbl_board set title =#{title}, content
-		=#{content}
+		update tbl_JBoard set title =#{title}, content =#{content}
 		where bno = #{bno}
 	</update>
 
 	<delete id="delete">
-		delete from tbl_board where bno = #{bno}
+		delete from tbl_JBoard where bno = #{bno}
 	</delete>
 
 
@@ -72,7 +70,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  select 
    count(bno) 
  from 
-   tbl_board 
+   tbl_JBoard 
  where 
    bno > 0 
  ]]>
@@ -92,31 +90,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				and writer like CONCAT('%', #{keyword}, '%')
 			</if>
 			<if test="searchType == 'tc'.toString()">
-				and ( title like CONCAT('%', #{keyword}, '%') OR content
-				like
+				and ( title like CONCAT('%', #{keyword}, '%') OR content like
 				CONCAT('%', #{keyword}, '%'))
 			</if>
 			<if test="searchType == 'cw'.toString()">
-				and ( content like CONCAT('%', #{keyword}, '%') OR writer
-				like
+				and ( content like CONCAT('%', #{keyword}, '%') OR writer like
 				CONCAT('%', #{keyword}, '%'))
 			</if>
 			<if test="searchType == 'tcw'.toString()">
 				and ( title like CONCAT('%', #{keyword}, '%')
 				OR
-				content
-				like CONCAT('%', #{keyword}, '%')
+				content like CONCAT('%', #{keyword}, '%')
 				OR
-				writer like CONCAT('%',
-				#{keyword}, '%'))
+				writer like CONCAT('%', #{keyword}, '%'))
 			</if>
 		</if>
 	</sql>
 
-	<select id="listSearch" resultType="BoardVO">
+	<select id="listSearch" resultType="JBoardVO">
 <![CDATA[  
   select * 
-  from tbl_board 
+  from tbl_JBoard 
   where bno > 0 
 ]]>
 
@@ -131,7 +125,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="listSearchCount" resultType="int">
 <![CDATA[  
   select count(bno) 
-  from tbl_board 
+  from tbl_JBoard 
   where bno > 0 
 ]]>
 		<include refid="search"></include>
@@ -139,35 +133,35 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 
-
-	<update id="updateReplyCnt">
-		update tbl_board set replycnt = replycnt + #{amount} where bno = #{bno}
-	</update>
-
-
-	<update id="updateViewCnt">
-		update tbl_board set viewcnt = viewcnt +1 where bno = #{bno}
-	</update>
+ 
+<update id="updateReplyCnt">
+  update tbl_JBoard set replycnt = replycnt + #{amount} where bno = #{bno}
+</update>
 
 
-
-	<insert id="addAttach">
-		insert into tbl_attach(fullname, bno) values (#{fullName}, LAST_INSERT_ID())
-	</insert>
-
-
-	<select id="getAttach" resultType="string">
-		select fullname from tbl_attach where bno = #{bno} order by regdate
-	</select>
+<update id="updateViewCnt">
+  update tbl_JBoard set viewcnt = viewcnt +1 where bno = #{bno}
+</update>
 
 
-	<delete id="deleteAttach">
-		delete from tbl_attach where bno = #{bno}
-	</delete>
-
-	<insert id="replaceAttach">
-		insert into tbl_attach(fullname, bno) values (#{fullName}, #{bno})
-	</insert>
+ 
+<insert id="addAttach">
+insert into tbl_attach(fullname, bno) values (#{fullName}, LAST_INSERT_ID())
+</insert> 
 
 
+<select id="getAttach" resultType="string">
+select fullname from tbl_attach where bno = #{bno} order by regdate
+</select> 
+
+ 
+<delete id="deleteAttach">
+delete from tbl_attach where bno = #{bno}
+</delete>
+
+<insert id="replaceAttach">
+insert into tbl_attach(fullname, bno) values (#{fullName}, #{bno})
+</insert>
+  
+ 
 </mapper>

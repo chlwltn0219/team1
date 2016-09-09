@@ -21,10 +21,10 @@ import org.zerock.domain.SearchCriteria;
 import org.zerock.service.BoardService;
 
 @Controller
-@RequestMapping("/sboard/*")
-public class SearchBoardController {
+@RequestMapping("/place/*")
+public class PlaceController {
 
-  private static final Logger logger = LoggerFactory.getLogger(SearchBoardController.class);
+  private static final Logger logger = LoggerFactory.getLogger(PlaceController.class);
 
   @Inject
   private BoardService service;
@@ -45,18 +45,14 @@ public class SearchBoardController {
 
     model.addAttribute("pageMaker", pageMaker);
   }
-  
+
   @RequestMapping(value = "/readPage", method = RequestMethod.GET)
   public void read(@RequestParam("bno") int bno, @ModelAttribute("cri") SearchCriteria cri, Model model)
       throws Exception {
 
     model.addAttribute(service.read(bno));
   }
-  @RequestMapping(value = "/festival", method = RequestMethod.GET)
-  public void festival(@ModelAttribute("cri") SearchCriteria cri, Model model)
-      throws Exception {
 
-  }
   @RequestMapping(value = "/removePage", method = RequestMethod.POST)
   public String remove(@RequestParam("bno") int bno, SearchCriteria cri, RedirectAttributes rttr) throws Exception {
 
@@ -69,7 +65,7 @@ public class SearchBoardController {
 
     rttr.addFlashAttribute("msg", "SUCCESS");
 
-    return "redirect:/sboard/list";
+    return "redirect:/place/list";
   }
 
   @RequestMapping(value = "/modifyPage", method = RequestMethod.GET)
@@ -93,7 +89,7 @@ public class SearchBoardController {
 
     logger.info(rttr.toString());
 
-    return "redirect:/sboard/list";
+    return "redirect:/place/list";
   }
 
   @RequestMapping(value = "/register", method = RequestMethod.GET)
@@ -112,7 +108,7 @@ public class SearchBoardController {
 
     rttr.addFlashAttribute("msg", "SUCCESS");
 
-    return "redirect:/sboard/list";
+    return "redirect:/place/list";
   }
   
   
