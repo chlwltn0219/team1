@@ -80,10 +80,17 @@ div.container {
 						<ul class="nav navbar-nav">
 							<li class="active"><a href="#">Notice</a></li>
 							<li class="dropdown">
-								<a class="dropdown-toggle" data-toggle="dropdown" href="#">Content <span class="caret"></span></a>
+								<a class="dropdown-toggle" data-toggle="dropdown" href="#">공연 <span class="caret"></span></a>
 								<ul class="dropdown-menu">
 									<li><a href="#">Place</a></li>
 									<li><a href="/festival/festival">Festival</a></li>
+								</ul>
+							</li>
+							<li class="dropdown">
+								<a class="dropdown-toggle" data-toggle="dropdown" href="#">관광 <span class="caret"></span></a>
+								<ul class="dropdown-menu">
+									<li><a href="/place/list">관광지</a></li>
+									<li><a href="/place/list">문화시설</a></li>
 								</ul>
 							</li>
 							<li><a href="#">Gallery</a></li>
@@ -92,7 +99,7 @@ div.container {
 						<!-- Log in -->
 						<ul class="nav navbar-nav navbar-right">
 							<li>
-								<a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a>
+								<a href="/user/login"><span class="glyphicon glyphicon-log-in"></span> Login</a>
 							</li>
 						</ul>
 					</div>

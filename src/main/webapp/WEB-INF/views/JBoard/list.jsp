@@ -9,7 +9,9 @@
 <!-- Font Awesome Icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
 <head>
-<title>list.jsp</title>
+<title>jboard/list.jsp</title>
+<!-- HandleBars -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 </head>
 <body>
 
@@ -20,10 +22,10 @@
 			<!-- Hot Festival List -->
 			<div class="box">
 				<div class="box-header with-border">
-					<h3 class="box-title">Hot Festivals</h3>
+					<h3 class="box-title">Near Festivals</h3>
 				</div>
 				<div class="box-body container-fluid">
-					<div class="row">
+					<div id="hotFestival" class="row">
 						<div class="col-md-4">
 							<img alt="1st" src="http://placehold.it/300x200?text=1st" width="100%">
 						</div>
@@ -38,39 +40,39 @@
 			</div>
 			
 			<!-- general form elements -->
-			<div class='box'>
-				<div class="box-header with-border">
-					<h3 class="box-title">List Search</h3>
-				</div>
-				<div class='box-body'>
-					<select name="searchType">
-						<option value="n"
-							<c:out value="${cri.searchType == null?'selected':''}"/>>
-							---</option>
-						<option value="t"
-							<c:out value="${cri.searchType eq 't'?'selected':''}"/>>
-							Title</option>
-						<option value="c"
-							<c:out value="${cri.searchType eq 'c'?'selected':''}"/>>
-							Content</option>
-						<option value="w"
-							<c:out value="${cri.searchType eq 'w'?'selected':''}"/>>
-							Writer</option>
-						<option value="tc"
-							<c:out value="${cri.searchType eq 'tc'?'selected':''}"/>>
-							Title OR Content</option>
-						<option value="cw"
-							<c:out value="${cri.searchType eq 'cw'?'selected':''}"/>>
-							Content OR Writer</option>
-						<option value="tcw"
-							<c:out value="${cri.searchType eq 'tcw'?'selected':''}"/>>
-							Title OR Content OR Writer</option>
-					</select> <input type="text" name='keyword' id="keywordInput"
-						value='${cri.keyword }'>
-					<button id='searchBtn'>Search</button>
-					<button id='newBtn'>New Board</button>
-				</div>
-			</div>
+<!-- 			<div class='box'> -->
+<!-- 				<div class="box-header with-border"> -->
+<!-- 					<h3 class="box-title">Search</h3> -->
+<!-- 				</div> -->
+<!-- 				<div class='box-body'> -->
+<!-- 					<select name="searchType"> -->
+<!-- 						<option value="n" -->
+<%-- 							<c:out value="${cri.searchType == null?'selected':''}"/>> --%>
+<!-- 							---</option> -->
+<!-- 						<option value="t" -->
+<%-- 							<c:out value="${cri.searchType eq 't'?'selected':''}"/>> --%>
+<!-- 							Title</option> -->
+<!-- 						<option value="c" -->
+<%-- 							<c:out value="${cri.searchType eq 'c'?'selected':''}"/>> --%>
+<!-- 							Content</option> -->
+<!-- 						<option value="w" -->
+<%-- 							<c:out value="${cri.searchType eq 'w'?'selected':''}"/>> --%>
+<!-- 							Writer</option> -->
+<!-- 						<option value="tc" -->
+<%-- 							<c:out value="${cri.searchType eq 'tc'?'selected':''}"/>> --%>
+<!-- 							Title OR Content</option> -->
+<!-- 						<option value="cw" -->
+<%-- 							<c:out value="${cri.searchType eq 'cw'?'selected':''}"/>> --%>
+<!-- 							Content OR Writer</option> -->
+<!-- 						<option value="tcw" -->
+<%-- 							<c:out value="${cri.searchType eq 'tcw'?'selected':''}"/>> --%>
+<!-- 							Title OR Content OR Writer</option> -->
+<!-- 					</select> <input type="text" name='keyword' id="keywordInput" -->
+<%-- 						value='${cri.keyword }'> --%>
+<!-- 					<button id='searchBtn'>Search</button> -->
+<!-- 					<button id='newBtn'>New Board</button> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
 			
 
 			<div class="box">
@@ -142,6 +144,42 @@
 
 	</div>
 	<!-- /.row -->
+	
+				
+
+	<script id="temp" type="text/xxx-mytemplate">
+		{{#each .}}
+			<div class="col-md-4">
+				<img alt="{{title}}" src="{{firstimage}}" width="100%" height="200">
+			</div>
+		{{/each}}
+	</script>
+	
+	<script type="text/javascript">
+		$.getJSON("/near/festival", function(data){
+			console.dir(data);
+			
+			var item = data.items.item;
+			console.dir(item);
+			
+			var temp = $('#temp').html();
+			var template = Handlebars.compile(temp);
+			
+			var html = template(item);
+			console.log(html);
+			
+			$('#hotFestival').html(html);
+			
+			for(var i=0; i<3; i++){
+// 				alert(i);
+				$('img').eq(i).attr("src", function(i, originValue) {
+					if(originValue=="")
+						return "http://placehold.it/350x250?text=" + item[i].title;
+				});
+			}
+			
+		});		
+	</script>
 
 	<script>
 		var result = '${msg}';

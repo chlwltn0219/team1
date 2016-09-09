@@ -5,6 +5,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="org.zerock.mapper.UserMapper">
 
+  	<insert id="create">
+		insert into tbl_user (uid, upw, uname)
+		values(#{uid}, #{upw}, #{uname})
+	</insert>
+
   <select id="login" resultType="UserVO">
   
   select uid, upw, uname from tbl_user where uid = #{uid} and upw = #{upw}
