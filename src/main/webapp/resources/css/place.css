@@ -31,3 +31,7 @@
 	position: absolute;
 	line-height: 6;
 }
+
+.selectBox {
+	float: right;
+}
