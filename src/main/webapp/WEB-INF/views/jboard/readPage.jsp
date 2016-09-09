@@ -226,7 +226,11 @@
 				</div>			
 			</li>
 		{{/each}}
-	</script>  
+	</script> 
+	
+	<script id="info" type="text/x-handlebars-template">
+		
+	</script>
 
 <script>
 	

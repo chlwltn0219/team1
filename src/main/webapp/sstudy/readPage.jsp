@@ -101,6 +101,8 @@
 			<!-- /.box -->
 		</div>
 		<!--/.col (left) -->
+		
+		<!-- festival info -->
 		<div class="col-md-6">
 			<div class="box box-warning">
 				<div class="box-header">
@@ -110,8 +112,18 @@
 					<div>
 						<img alt="picture" src="">
 					</div>
-					<div>
-						
+					<hr>
+					<div class="row">
+						<div class="col-xs-3"><label>Title : </label></div>
+						<div class="col-xs-9">aa</div>
+					</div>
+					<div class="row">
+						<div class="col-xs-3"><label>Address : </label></div>
+						<div class="col-xs-9">aa</div>
+					</div>
+					<div class="row">
+						<div class="col-xs-3"><label>PlayTime : </label></div>
+						<div class="col-xs-9">aa</div>
 					</div>
 				</div>
 				
