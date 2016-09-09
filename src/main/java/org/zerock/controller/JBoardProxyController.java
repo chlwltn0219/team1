@@ -15,21 +15,23 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import org.zerock.openapi.Body;
-import org.zerock.openapi.Results;
+import org.zerock.openapi.Result;
+import org.zerock.openapi.SingleBody;
+import org.zerock.openapi.SingleResult;
 import org.zerock.util.DateUtil;
 
 @RestController
 @RequestMapping("/jboard")
-public class JBoardListProxyController {
+public class JBoardProxyController {
 	
-	static Logger logger = LoggerFactory.getLogger(JBoardListProxyController.class);
+	static Logger logger = LoggerFactory.getLogger(JBoardProxyController.class);
 	private static final String SERVICE_KEY = "oMYSCkfnU%2BrM%2F6ad8zAICkGBj0eUCOxJc9bR%2F8MHuzhfo62P6cGA1YVZ7iY5QnDedVyfk5tMhc0Wu42fjDJ%2BcA%3D%3D";
 	DateUtil date = new DateUtil();
 	
 	@RequestMapping(value="/nearFestival", method = RequestMethod.GET )
 	public ResponseEntity<Body> nearFestival() {
 		
-		Results result = null;
+		Result result = null;
 		Map<String, String> eventDate = date.getFestivalDate();
 		logger.info("eventStartDate = " + eventDate.get("eventStartDate"));
 		logger.info("eventEndDate = " + eventDate.get("eventEndDate"));
@@ -37,7 +39,7 @@ public class JBoardListProxyController {
 		RestTemplate restTemplate = new RestTemplate();
 		String baseURI = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/searchFestival"
 							+ "?ServiceKey=" + SERVICE_KEY
-							+ "&numOfRows=3"
+							+ "&numOfRows=6"
 							+ "&pageNo=1"
 							+ "&arrange=B"
 							+ "&MobileOS=ETC"
@@ -52,7 +54,7 @@ public class JBoardListProxyController {
 		URI uri = URI.create(baseURI);
 		logger.info("request uri : " + uri);
 		
-		result = restTemplate.getForObject(uri, Results.class);
+		result = restTemplate.getForObject(uri, Result.class);
 		logger.info(restTemplate.getForObject(uri, String.class));
 		
 		Body body = result.getResponse().getBody();
@@ -63,9 +65,9 @@ public class JBoardListProxyController {
 	}	
 	
 	@RequestMapping(value="/keywordFestival", method = RequestMethod.GET )
-	public ResponseEntity<Body> keywordFestival(@RequestParam String keyword) throws UnsupportedEncodingException {
+	public ResponseEntity<Body> keywordFestival(@RequestParam String keyword, @RequestParam Integer pageNo) throws UnsupportedEncodingException {
 		
-		Results result = null;
+		Result result = null;
 		
 		String encordedKeyword = URLEncoder.encode(keyword, "UTF-8");
 		
@@ -77,7 +79,7 @@ public class JBoardListProxyController {
 							+ "&contentTypeId=15"
 							+ "&arrange=B"
 							+ "&listYN=Y"
-							+ "&pageNo=1"
+							+ "&pageNo=" + pageNo
 							+ "&numOfRows=10"
 							+ "&MobileOS=ETC"
 							+ "&MobileApp=AppTesting"
@@ -87,7 +89,7 @@ public class JBoardListProxyController {
 		URI uri = URI.create(baseURI);
 		logger.info("request uri : " + uri);
 		
-		result = restTemplate.getForObject(uri, Results.class);
+		result = restTemplate.getForObject(uri, Result.class);
 		logger.info(restTemplate.getForObject(uri, String.class));
 		
 		Body body = result.getResponse().getBody();

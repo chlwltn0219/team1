@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.client.RestTemplate;
 import org.zerock.domain.SearchCriteria;
 import org.zerock.openapi.Body;
-import org.zerock.openapi.Results;
+import org.zerock.openapi.Result;
 import org.zerock.util.DateUtil;
 
 @Controller

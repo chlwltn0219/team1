@@ -1,6 +1,6 @@
 package org.zerock.openapi;
 
-public class Results {
+public class Result {
 
 	private Response response;
 

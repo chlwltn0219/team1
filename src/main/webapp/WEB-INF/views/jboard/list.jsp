@@ -144,7 +144,7 @@
 	</script>
 	
 	<script type="text/javascript">
-		$.getJSON("/near/festival", function(data){
+		$.getJSON("/jboard/nearFestival", function(data){
 			console.dir(data);
 			
 			var item = data.items.item;
@@ -158,8 +158,7 @@
 			
 			$('#hotFestival').html(html);
 			
-			for(var i=0; i<6; i++){
-// 				alert(i);
+			for(var i=0; i<data.numOfRows; i++){
 				$('img').eq(i).attr("src", function(j, originValue) {
 					if(originValue=="")
 						return "http://placehold.it/350x250?text=" + item[i].title;
