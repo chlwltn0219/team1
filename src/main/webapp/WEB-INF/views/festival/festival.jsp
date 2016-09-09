@@ -18,6 +18,10 @@
 <!-- <button id="clear" class="btn btn-info">clear</button> -->
 <input type="text" id="find">
 <button id="findbtn" class="btn btn-info">find</button>
+<select id="startdate">
+	<option value=""></option>
+</select>
+<select id="enddate"></select>
 
 <div class="table-responsive">
 	<table class="table table-hover">
