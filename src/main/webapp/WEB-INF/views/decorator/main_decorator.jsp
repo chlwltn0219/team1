@@ -97,12 +97,24 @@ div.container {
 							<li><a href="#">Gallery</a></li>
 							<li><a href="#">Statistics</a></li>
 						</ul>
-						<!-- Log in -->
+						<!-- Before Log in -->
+						<c:if test="${empty login}">
 						<ul class="nav navbar-nav navbar-right">
 							<li>
 								<a href="/user/login"><span class="glyphicon glyphicon-log-in"></span> Login</a>
 							</li>
 						</ul>
+						</c:if>
+						<!-- After Log in -->
+						<c:if test="${not empty login}">
+						<ul class="nav navbar-nav navbar-right">
+							<li>
+								<a href="/user/logout">
+								<input type=text style="width:50%; text-align: center; background-color: #101010;" value="${login.uname }"/>
+								<span class="glyphicon glyphicon-log-out"></span> Logout</a>
+							</li>
+						</ul>
+						</c:if>
 					</div>
 				</div>
 			</nav>
