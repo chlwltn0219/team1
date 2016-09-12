@@ -47,6 +47,7 @@
 							<label for="exampleInputEmail1">File DROP Here</label>
 							<div class="fileDrop"></div>
 						</div>
+						
 					</div>
 
 					<!-- /.box-body -->
@@ -64,6 +65,10 @@
 					</div>
 				</form>
 
+						<div>
+							<button>xxx</button>
+						</div>
+						
 
 			</div>
 			<!-- /.box -->
@@ -91,6 +96,8 @@
 	<script>
 		var template = Handlebars.compile($("#template").html());
 
+		
+		
 		$(".fileDrop").on("dragenter dragover", function(event) {
 			event.preventDefault();
 		});

@@ -1,6 +1,8 @@
 package org.zerock.controller;
 
+import java.io.UnsupportedEncodingException;
 import java.net.URI;
+import java.net.URLEncoder;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -18,61 +20,35 @@ import org.zerock.openapi.Result;
 import org.zerock.util.DateUtil;
 
 @RestController
-@RequestMapping("/content")
+@RequestMapping("/keyword")
 public class KeywordProxyController {
 	
 	static Logger logger = LoggerFactory.getLogger(KeywordProxyController.class);
 	private static final String SERVICE_KEY = "oMYSCkfnU%2BrM%2F6ad8zAICkGBj0eUCOxJc9bR%2F8MHuzhfo62P6cGA1YVZ7iY5QnDedVyfk5tMhc0Wu42fjDJ%2BcA%3D%3D";
 	
-	@RequestMapping(value="/test", method = RequestMethod.GET )
-	public ResponseEntity<Body> test(@RequestParam String keyword) {
+	@RequestMapping(value="/test2", method = RequestMethod.GET )
+	public ResponseEntity<Body> test() throws UnsupportedEncodingException {
 		
 		Result result = null;
 		
 		DateUtil date = new DateUtil();
 		String tmFc = date.gettmFc();
 		logger.info("tmFc = " + date.gettmFc());
+		String encordedKeyword = URLEncoder.encode("축제", "UTF-8");
+		logger.info("tmFc = " + encordedKeyword);
 		
 		RestTemplate restTemplate = new RestTemplate();
-		String baseURI = "http://newsky2.kma.go.kr/service/MiddleFrcstInfoService/searchKeyword"
+		String baseURI = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/searchKeyword"
 							+ "?ServiceKey=" + SERVICE_KEY
-							+ "&regId=11B00000"				/* 서울,경기도,인천 */
-							+ "&arrange=d"
-							+ "&numOfRows=1"
+							+ "&arrange=c"
+							+ "&contentTypeId=15"
+							+ "&areaCode=1"
+							+ "&keyword=" + encordedKeyword
+							+ "&numOfRows=10"
 							+ "&MobileOS=ETC"
+							+ "&MobileApp=testApp"
 							+ "&listYN=Y"
-							+ "&pageNo=1"
-							+ "&_type=json";
-
-		URI uri = URI.create(baseURI);
-		logger.info("request uri : " + uri);
-		
-		result = restTemplate.getForObject(uri, Result.class);
-		logger.info(restTemplate.getForObject(uri, String.class));
-		
-		Body body = result.getResponse().getBody();
-		
-		return new ResponseEntity<Body>(body, HttpStatus.OK);
-		
-	}
-	
-	@RequestMapping(value="/middleFrcst", method = RequestMethod.GET )
-	public ResponseEntity<Body> MiddleFrcstInfo() {
-		
-		Result result = null;
-		Body body = null;
-		
-		DateUtil date = new DateUtil();
-		String tmFc = date.gettmFc();
-		logger.info("tmFc = " + date.gettmFc());
-		
-		RestTemplate restTemplate = new RestTemplate();
-		String baseURI = "http://newsky2.kma.go.kr/service/MiddleFrcstInfoService/getMiddleLandWeather"
-							+ "?ServiceKey=" + SERVICE_KEY
-							+ "&regId=11B00000"				/* 서울,경기도,인천 */
-							+ "&tmFc=" + tmFc				/* 예보 발표 시각 */
-							+ "&numOfRows=1"
-							+ "&pageNo=1"
+							+ "&pageNo=2"
 							+ "&_type=json";
 
 		URI uri = URI.create(baseURI);
@@ -81,11 +57,12 @@ public class KeywordProxyController {
 		result = restTemplate.getForObject(uri, Result.class);
 		logger.info(result.toString());
 		
-		body = result.getResponse().getBody();
-		logger.info(body.toString());
+		Body body = result.getResponse().getBody();
+		logger.info(body.getItems().getItem().toString());
 		
 		return new ResponseEntity<Body>(body, HttpStatus.OK);
 		
 	}
+	
 	
 }

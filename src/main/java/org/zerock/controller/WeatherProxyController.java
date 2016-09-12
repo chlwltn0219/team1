@@ -38,7 +38,7 @@ public class WeatherProxyController {
 							+ "?ServiceKey=" + SERVICE_KEY
 							+ "&regId=11B00000"				/* 서울,경기도,인천 */
 							+ "&tmFc=" + tmFc				/* 예보 발표 시각 */
-							+ "&numOfRows=1"
+							+ "&numOfRows=10"
 							+ "&pageNo=1"
 							+ "&_type=json";
 

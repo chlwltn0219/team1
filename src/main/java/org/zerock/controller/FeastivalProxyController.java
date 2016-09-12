@@ -51,7 +51,8 @@ public class FeastivalProxyController {
 		
 		Body body = result.getResponse().getBody();
 		System.out.println("items = " + body.getItems().getItem());
-
+		
+		
 		return new ResponseEntity<Body>(body, HttpStatus.OK);
 		
 	}	
