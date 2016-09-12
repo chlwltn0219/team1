@@ -16,12 +16,42 @@
 <body>
 <!-- <button id="json" class="btn btn-primary">getJSON form Open API</button> -->
 <!-- <button id="clear" class="btn btn-info">clear</button> -->
-<input type="text" id="find">
-<button id="findbtn" class="btn btn-info">find</button>
-<select id="startdate">
-	<option value=""></option>
+<!-- <input type="text" id="find"> -->
+
+<label>지역: </label>
+<select id="sigungu">
+	<option value="1">강남구</option>
+    <option value="2">강동구</option>
+    <option value="3">강북구</option>
+    <option value="4">강서구</option>
+    <option value="5">관악구</option>
+    <option value="6">광진구</option>
+    <option value="7">구로구</option>
+    <option value="8">금천구</option>
+    <option value="9">노원구</option>
+    <option value="10">도봉구</option>
+    <option value="11">동대문구</option>
+    <option value="12">동작구</option>
+    <option value="13">마포구</option>
+    <option value="14">서대문구</option>
+    <option value="15">서초구</option>
+    <option value="16">성동구</option>
+    <option value="17">성북구</option>
+    <option value="18">송파구</option>
+    <option value="19">양천구</option>
+    <option value="20">영등포구</option>
+    <option value="21">용산구</option>
+    <option value="22">은평구</option>
+    <option value="23">종로구</option>
+    <option value="24">중구</option>
+    <option value="25">중랑구</option>
 </select>
-<select id="enddate"></select>
+<br>
+<label>기간: </label>
+<input style="height:25px;" type="date" id="startDate">
+<label>~</label>
+<input style="height:25px;" type="date" id="endDate">
+<button id="findbtn" class="btn btn-info">find</button>
 
 <div class="table-responsive">
 	<table class="table table-hover">
@@ -52,24 +82,73 @@
 </script>
 
 <script type="text/javascript">
-		$.getJSON("/festival/list", function(data) {
-			// json 객체 내부 접근하기
-			console.dir(data);
+		$('#sigungu').on('change', function() {
 			
-			var items = data.items.item;
+			var areaCode = $('#sigungu option:selected').val();
 			
-			var temp2 = $('#codeTemp').html();
-			var template = Handlebars.compile(temp2);
-			
-			$('#result').html("");
-			
-			for(var i=0; i<items.length; i++) {
-				var html = template(items[i]);
-				console.log(html);
-				$('#result').append(html);
-			}
-			
+			$.getJSON("/festival/list?sigunguCode=" + areaCode, function(data) {
+				// json 객체 내부 접근하기
+				console.dir(data);
+				
+				var items = data.items.item;
+				
+				var temp2 = $('#codeTemp').html();
+				var template = Handlebars.compile(temp2);
+				
+				$('#result').html("");
+				
+				for(var i=0; i<items.length; i++) {
+					var html = template(items[i]);
+					console.log(html);
+					$('#result').append(html);
+				}
+			});
 		});
+		
+// 		$('#findbtn').on('click', function(){
+// 			var date1 = $('#startDate option:selected').val();
+// 			var date2 = $('#endDate option:selected').val();
+// 			var areaCode = $('#sigungu option:selected').val();
+			
+// 			$.getJSON("/festival/list?sigunguCode=" + areaCode, function(data) {
+// 				// json 객체 내부 접근하기
+// 				console.dir(data);
+				
+// 				var items = data.items.item;
+				
+// 				var temp2 = $('#codeTemp').html();
+// 				var template = Handlebars.compile(temp2);
+				
+// 				$('#result').html("");
+				
+// 				for(var i=0; i<items.length; i++) {
+// 					var html = template(items[i]);
+// 					console.log(html);
+// 					$('#result').append(html);
+// 				}
+// 		});
+</script>
+<script>
+	var areaCode = 1;
+	
+	$.getJSON("/festival/list?sigunguCode=" + areaCode, function(data) {
+		// json 객체 내부 접근하기
+		console.dir(data);
+		
+		var items = data.items.item;
+		
+		var temp2 = $('#codeTemp').html();
+		var template = Handlebars.compile(temp2);
+		
+		$('#result').html("");
+		
+		for(var i=0; i<items.length; i++) {
+			var html = template(items[i]);
+			console.log(html);
+			$('#result').append(html);
+		}
+		
+	});
 </script>
 </body>
 </html>
