@@ -1,7 +1,6 @@
-package org.zerock.controller;
+package org.zerock.proxycontroller;
 
 import java.net.URI;
-import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,31 +12,33 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import org.zerock.openapi.Body;
-import org.zerock.openapi.Items;
 import org.zerock.openapi.Result;
+import org.zerock.util.AreaUtil;
 import org.zerock.util.DateUtil;
 
 @RestController
 @RequestMapping("/festival")
-public class FeastivalProxyController {
+public class FestivalProxyController {
 	
-	static Logger logger = LoggerFactory.getLogger(FeastivalProxyController.class);
+	static Logger logger = LoggerFactory.getLogger(FestivalProxyController.class);
 	private static final String SERVICE_KEY = "oMYSCkfnU%2BrM%2F6ad8zAICkGBj0eUCOxJc9bR%2F8MHuzhfo62P6cGA1YVZ7iY5QnDedVyfk5tMhc0Wu42fjDJ%2BcA%3D%3D";
-	
+			
 	@RequestMapping(value="/list", method = RequestMethod.GET )
-	public ResponseEntity<Body> test() {
+	public ResponseEntity<Body> test(@RequestParam Integer sigunguCode) {
 		
 		Result result = null;
 		
 		DateUtil date = new DateUtil();
-		String tmFc = date.gettmFc();
 		logger.info("tmFc = " + date.gettmFc());
 		
 		RestTemplate restTemplate = new RestTemplate();
 		String baseURI = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/searchFestival"
 							+ "?ServiceKey=" + SERVICE_KEY
 							+ "&numOfRows=10"
-							+ "&eventstartdate=20160908"
+							+ "&areaCode=1"
+							+ "&sigunguCode=" + sigunguCode
+//							+ "&eventstartdate=" + startDate
+//							+ "&eventenddate=" + endDate
 							+ "&pageNo=1"
 							+ "&MobileOS=ETC"
 							+ "&MobileApp=TestApp"

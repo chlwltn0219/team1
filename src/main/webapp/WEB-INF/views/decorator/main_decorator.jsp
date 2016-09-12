@@ -80,10 +80,18 @@ div.container {
 						<ul class="nav navbar-nav">
 							<li class="active"><a href="/notice/board">Notice</a></li>
 							<li class="dropdown">
-								<a class="dropdown-toggle" data-toggle="dropdown" href="#">Content <span class="caret"></span></a>
+								<a href="/festival/festival">행사</a>
+<!-- 								<ul class="dropdown-menu"> -->
+<!-- 									<li><a href="#">행사</a></li> -->
+<!-- 									<li><a href="/festival/festival">축제</a></li> -->
+<!-- 									<li><a href="#">공연</a> -->
+<!-- 								</ul> -->
+							</li>
+							<li class="dropdown">
+								<a class="dropdown-toggle" data-toggle="dropdown" href="#">관광 <span class="caret"></span></a>
 								<ul class="dropdown-menu">
-									<li><a href="#">Place</a></li>
-									<li><a href="/festival/festival">Festival</a></li>
+									<li><a href="/place/list">관광지</a></li>
+									<li><a href="/place/list">문화시설</a></li>
 								</ul>
 							</li>
 							<li><a href="#">Gallery</a></li>
@@ -92,7 +100,7 @@ div.container {
 						<!-- Log in -->
 						<ul class="nav navbar-nav navbar-right">
 							<li>
-								<a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a>
+								<a href="/user/login"><span class="glyphicon glyphicon-log-in"></span> Login</a>
 							</li>
 						</ul>
 					</div>
@@ -115,7 +123,6 @@ div.container {
 			</section>
 		</div>
 
-		
 		<footer class="container-fluid text-center footer">
 			<div class="pull-right hidden-xs">
 				<b>Version</b> 0.1

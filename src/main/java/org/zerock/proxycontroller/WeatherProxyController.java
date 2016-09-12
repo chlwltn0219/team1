@@ -1,7 +1,6 @@
-package org.zerock.controller;
+package org.zerock.proxycontroller;
 
 import java.net.URI;
-import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,16 +8,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import org.zerock.openapi.Body;
-import org.zerock.openapi.Items;
 import org.zerock.openapi.Result;
 import org.zerock.util.DateUtil;
 
 @RestController
-@RequestMapping("/content")
+@RequestMapping("/weather")
 public class WeatherProxyController {
 	
 	static Logger logger = LoggerFactory.getLogger(WeatherProxyController.class);
@@ -53,7 +50,7 @@ public class WeatherProxyController {
 		return new ResponseEntity<Body>(body, HttpStatus.OK);
 		
 	}
-	
+
 	@RequestMapping(value="/middleFrcst", method = RequestMethod.GET )
 	public ResponseEntity<Body> MiddleFrcstInfo() {
 		
@@ -80,7 +77,7 @@ public class WeatherProxyController {
 		logger.info(result.toString());
 		
 		body = result.getResponse().getBody();
-		logger.info(body.toString());
+		logger.info(body.getItems().getItem().toString());
 		
 		return new ResponseEntity<Body>(body, HttpStatus.OK);
 		
