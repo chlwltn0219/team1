@@ -12,27 +12,25 @@
 <script src="/resources/plugins/jQuery/jQuery-2.1.4.min.js"></script>
 <!-- HandleBars -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+
 </head>
 <body>
 <!-- <button id="json" class="btn btn-primary">getJSON form Open API</button> -->
 <!-- <button id="clear" class="btn btn-info">clear</button> -->
 <input type="text" id="find">
 <button id="findbtn" class="btn btn-info">find</button>
-<select id="startdate">
-	<option value=""></option>
-</select>
-<select id="enddate"></select>
-
+<label><input type="date" id="start"></label>
+<label><input type="date" id="stop"></label>
 <div class="table-responsive">
 	<table class="table table-hover">
 	<thead>
 		<tr>
-			<th>썸네일</th>
-			<th>타이틀</th>
-			<th>주소</th>
-			<th>전화번호</th>
-			<th>행사 시작일</th>
-			<th>행사 종료일</th>
+<!-- 			<th>썸네일</th> -->
+<!-- 			<th>타이틀</th> -->
+<!-- 			<th>주소</th> -->
+<!-- 			<th>전화번호</th> -->
+<!-- 			<th>행사 시작일</th> -->
+<!-- 			<th>행사 종료일</th> -->
 			
 		</tr>
 	</thead>
@@ -41,14 +39,11 @@
 </div>
 
 <script id="codeTemp" type="text/xxx-mytemplate">
-	<tr>
-		<td><img src="{{firstimage2}}" style="width:300px; height:300px;"></td>
-		<td>{{title}}</td>
-		<td>{{addr1}}</td>
-		<td>{{tel}}</td>
-		<td>{{eventstartdate}}</td>
-		<td>{{eventenddate}}</td>
-	</tr>
+
+<div>
+<img src="{{firstimage2}}" style="width:300px; height:350px; float:left; margin:2%;">
+</div>
+
 </script>
 
 <script type="text/javascript">
