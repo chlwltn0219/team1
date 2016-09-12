@@ -88,6 +88,8 @@
 	   {{#each .}}
 			<li class="list-group-item">
 				{{title}}
+				<hr>
+				<span class="badge">{{eventstartdate}}~{{eventenddate}}</span>
 			</li>
 	   {{/each}}
 	</script>
@@ -117,29 +119,16 @@
 				var items = data.items.item;
 				console.dir(items);
 				
-				for(var i=0; i<items.length; i++) {
-					var contentId = items[i].contentid;
-// 					eventDetailInfo(contentId);
-				}
 				
-//  				var temp = $('#eventTemplate').html();
-//  				var template = Handlebars.compile(temp);
+ 				var temp = $('#eventTemplate').html();
+ 				var template = Handlebars.compile(temp);
 
-//  				var html = template(items);
+ 				var html = template(items);
 
-//  				$('#eventList').html(html);
+ 				$('#eventList').html(html);
 			});
 		};
 		
-		function eventDetailInfo(contentId) {
-			
-			$.getJSON('/detail/intro?contentId=' + contentId + '&contentTypeId=15', function(data) {
-				var items = data.items.item;
-				console.dir(items);
-				alert("xxx");
-			});
-			
-		};
 		
 	</script>
 
