@@ -42,25 +42,17 @@
 <!-- 				<form id='registerForm' role="form" method="post"> -->
 				
 					<div class="box-body">
-						<div>
-							<input id="keyword" class="form-control" type="search" value="" placeholder="Searsh Keyword...">
-						</div>
-						<hr>
+<!-- 						<div> -->
+<!-- 							<input id="keyword" class="form-control" type="search" value="" placeholder="Searsh Keyword..."> -->
+<!-- 						</div> -->
 						<div>
 							<input id="selectedEvent" class="form-control" type="text" value="" readonly="readonly" placeholder="Selected Event...">
 						</div>
-						<br>
-						<ul id="eventList" class="list-group"></ul>
+						<hr>
 						<div>
-							<ul class="pager">
-								<li><a href="#">Prev</a></li>
-								<li><a href="#">1</a></li>
-								<li><a href="#">2</a></li>
-								<li><a href="#">3</a></li>
-								<li><a href="#">4</a></li>
-								<li><a href="#">5</a></li>
-								<li><a href="#">Next</a></li>
-							</ul>
+							<ul id="eventList" class="list-group"></ul>
+						</div>
+						<div id="pager">
 						</div>
 					</div>
 
@@ -87,30 +79,85 @@
 	<script id="eventTemplate" type="text/x-handlebars-template">
 	   {{#each .}}
 			<li class="list-group-item">
-				{{title}}
+				<div>{{title}}</div>
 				<hr>
-				<span class="badge">{{eventstartdate}}~{{eventenddate}}</span>
+				<div>
+					<h4><span class="label {{onTime today eventstartdate eventenddate}}">{{eventstartdate}}-{{eventenddate}}</span></h4>
+				</div>
 			</li>
 	   {{/each}}
 	</script>
-<!-- 			<hr>{{playtime}} -->
+
+	<script id="pageTemplate" type="text/x-handlebars-template">
+		<button class="btn btn-default" style="visibility: {{visiblility pageMaker.prev}}">Prev</button>
+			<div class="btn-group">
+			</div>
+		<button class="btn btn-default" style="visibility: {{visiblility pageMaker.prev}}">Next</button>
+	</script>
 
 	<script type="text/javascript">
-		$('#keyword').on('keypress', function(key) {
-			if(key.keyCode==13) {
-				var keyword = $('#keyword').val(); 
-				searshEvent(keyword);
+		
+// 		$('document').on('ready', function() {
+			$.getJSON('/jboard/threeMonth?pageNo='+'1', function(data) {
+				console.dir(data);
 				
-// 				$(document).ready(function(){
-// 				    $(".list-group .list-group-item").hover(function(){
-// 				    	$(this).css("background-color", "#cccccc");
-// 				    },
-// 				    function(){
-// 				    	$(this).css("background-color", "#ffffff");
-// 				    });
-// 				});
-			}
-		});
+				var item = data.items.item;
+				console.dir(item);
+				
+				var pageNo = 1;
+				
+				Handlebars.registerHelper('onTime' , function(today, eventstartdate, eventenddate) {
+					if(today > eventenddate){
+						return 'label-default';
+					} else if(today < eventstartdate){
+						return 'label-warning';
+					} else {
+						return 'label-success';
+					}
+				});
+				
+				Handlebars.registerHelper('visiblility' , function(visible) {
+					if(visible)
+						return 'visible'; 
+					else 
+						return 'hidden';
+				});
+				
+				Handlebars.registerHelper('printPage' , function(pageNo, startPage, endPage) {
+					
+					var str = "";
+					
+					for(var i=startPage; i<=endPage; i++) {
+						str += '<li '
+						if(i==pageNo) {
+							str += 'class="active">';
+						} else {
+							str += '>';
+						}
+						str += '<a href="/jboard/threeMonth?pageNo=' + i + '">' + i + '</a></li>'
+					}
+					
+					return str;
+				});
+				
+				var temp = $('#eventTemplate').html();
+				var template = Handlebars.compile(temp);
+				
+				var html = template(item);
+				$('#eventList').html(html);
+				
+				
+				var page = $('#pageTemplate').html();
+				var pageTemplate = Handlebars.compile(page);
+				
+				var pagehtml = pageTemplate(data);
+				$('#pager').html(pagehtml);
+				
+			});
+
+			
+			
+// 		})
 		
 		function searshEvent(keyword) {
 			$.getJSON('/jboard/keywordFestival?keyword=' + keyword + '&pageNo=1', function(data) {
@@ -119,10 +166,6 @@
 				var items = data.items.item;
 				console.dir(items);
 				
-<<<<<<< HEAD
-=======
-				
->>>>>>> c32f1c21ce3c383249c98d95ef38903c22def398
  				var temp = $('#eventTemplate').html();
  				var template = Handlebars.compile(temp);
 

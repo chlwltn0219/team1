@@ -3,6 +3,7 @@ package org.zerock.proxycontroller;
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URLEncoder;
+import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
+import org.zerock.domain.Criteria;
+import org.zerock.domain.PageMaker;
 import org.zerock.openapi.Body;
 import org.zerock.openapi.Result;
 import org.zerock.openapi.SingleBody;
@@ -98,5 +101,55 @@ public class JBoardProxyController {
 		return new ResponseEntity<Body>(body, HttpStatus.OK);
 		
 	}	
+	
+	@RequestMapping(value="/threeMonth", method = RequestMethod.GET )
+	public ResponseEntity<Body> threeMonth(@RequestParam Integer pageNo) {
+		
+		Result result = null;
+		Map<String, Integer> eventDate = date.getThreeMonth();
+		logger.info("eventStartDate = " + eventDate.get("eventStartDate"));
+		logger.info("eventEndDate = " + eventDate.get("eventEndDate"));
+		
+		RestTemplate restTemplate = new RestTemplate();
+		String baseURI = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/searchFestival"
+							+ "?ServiceKey=" + SERVICE_KEY
+							+ "&numOfRows=" + "10"
+							+ "&pageNo=" + pageNo
+							+ "&arrange=" + "B"
+							+ "&MobileOS=ETC"
+							+ "&MobileApp=TestApp"
+							+ "&_type=json"
+							+ "&eventStartDate=" + eventDate.get("eventStartDate")
+							+ "&eventEndDate=" + eventDate.get("eventEndDate")
+							+ "&listYN=Y"
+							+ "&areaCode=" + "1";
+					
+
+		URI uri = URI.create(baseURI);
+		logger.info("request uri : " + uri);
+		
+		result = restTemplate.getForObject(uri, Result.class);
+		logger.info(result.toString());
+		
+		Body body = result.getResponse().getBody();
+		System.out.println("items = " + body.getItems().getItem());
+		
+		List<Map<String, Object>> item = body.getItems().getItem(); 
+		
+		for(int i=0; i<item.size(); i++) {
+			item.get(i).put("today", date.getToday());
+		}
+		
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(new Criteria());
+		pageMaker.setDisplayPageNum(5);
+		pageMaker.setTotalCount(body.getTotalCount());
+		
+		body.setPageMaker(pageMaker);
+		
+		return new ResponseEntity<Body>(body, HttpStatus.OK);
+		
+	}
+	
 	
 }

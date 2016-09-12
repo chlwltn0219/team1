@@ -68,6 +68,10 @@ public class PageMaker {
 	public int getDisplayPageNum() {
 		return displayPageNum;
 	}
+	
+	public void setDisplayPageNum(int displayPageNum) {
+		this.displayPageNum = displayPageNum;
+	}
 
 	public Criteria getCri() {
 		return cri;

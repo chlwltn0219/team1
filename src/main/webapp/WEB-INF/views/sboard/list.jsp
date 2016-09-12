@@ -44,8 +44,8 @@
 						<option value="tcw"
 							<c:out value="${cri.searchType eq 'tcw'?'selected':''}"/>>
 							Title OR Content OR Writer</option>
-					</select> <input type="text" name='keyword' id="keywordInput"
-						value='${cri.keyword }'>
+					</select> 
+					<input type="text" name='keyword' id="keywordInput"	value='${cri.keyword }'>
 					<button id='searchBtn'>Search</button>
 					<button id='newBtn'>New Board</button>
 
@@ -71,14 +71,17 @@
 
 							<tr>
 								<td>${boardVO.bno}</td>
-								<td><a
+								<td>
+								<a
 									href='/sboard/readPage${pageMaker.makeSearch(pageMaker.cri.page) }&bno=${boardVO.bno}'>
 										${boardVO.title} <strong>[ ${boardVO.replycnt} ]</strong>
-								</a></td>
+								</a>
+								</td>
 								<td>${boardVO.writer}</td>
 								<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm"
 										value="${boardVO.regdate}" /></td>
-								<td><span class="badge bg-red">${boardVO.viewcnt }</span></td>
+								<td><span class="badge bg-red">${boardVO.viewcnt }</span>
+								</td>
 							</tr>
 
 						</c:forEach>
