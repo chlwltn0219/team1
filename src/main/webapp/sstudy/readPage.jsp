@@ -115,15 +115,15 @@
 					<hr>
 					<div class="row">
 						<div class="col-xs-3"><label>Title : </label></div>
-						<div class="col-xs-9">aa</div>
+						<div id="title" class="col-xs-9"></div>
 					</div>
 					<div class="row">
-						<div class="col-xs-3"><label>Address : </label></div>
-						<div class="col-xs-9">aa</div>
+						<div class="col-xs-3"><label>Event Place : </label></div>
+						<div id="eventPlace" class="col-xs-9"></div>
 					</div>
 					<div class="row">
-						<div class="col-xs-3"><label>PlayTime : </label></div>
-						<div class="col-xs-9">aa</div>
+						<div class="col-xs-3"><label>Play Time : </label></div>
+						<div id="playTime" class="col-xs-9"></div>
 					</div>
 				</div>
 				

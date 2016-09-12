@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import org.zerock.openapi.Body;
@@ -25,14 +26,14 @@ public class DetailProxyController {
 	DateUtil date = new DateUtil();
 	
 	@RequestMapping(value="/common", method = RequestMethod.GET )
-	public ResponseEntity<SingleBody> common() {
+	public ResponseEntity<SingleBody> common(@RequestParam Integer contnetId) {
 		
 		SingleResult result = null;
 		
 		RestTemplate restTemplate = new RestTemplate();
 		String baseURI = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailCommon"
 							+ "?ServiceKey=" + SERVICE_KEY
-							+ "&contentId=" + "126508"
+							+ "&contentId=" + contnetId
 							+ "&defaultYN=Y"
 							+ "&firstImageYN=Y"
 							+ "&addrinfoYN=Y"
@@ -56,15 +57,15 @@ public class DetailProxyController {
 	}
 
 	@RequestMapping(value="/intro", method = RequestMethod.GET )
-	public ResponseEntity<SingleBody> intro() {
+	public ResponseEntity<SingleBody> intro(@RequestParam Integer contentId, @RequestParam Integer contentTypeId) {
 		
 		SingleResult result = null;
 		
 		RestTemplate restTemplate = new RestTemplate();
 		String baseURI = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailIntro"
 							+ "?ServiceKey=" + SERVICE_KEY
-							+ "&contentId=" + "1118680"
-							+ "&contentTypeId=" + "15"
+							+ "&contentId=" + contentId
+							+ "&contentTypeId=" + contentTypeId
 							+ "&MobileOS=ETC"
 							+ "&MobileApp=AppTesting"
 							+ "&_type=json";
@@ -83,14 +84,14 @@ public class DetailProxyController {
 	}
 	
 	@RequestMapping(value="/image", method = RequestMethod.GET )
-	public ResponseEntity<Body> image() {
+	public ResponseEntity<Body> image(@RequestParam Integer contnetId) {
 		
 		Result result = null;
 		
 		RestTemplate restTemplate = new RestTemplate();
 		String baseURI = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailImage"
 							+ "?ServiceKey=" + SERVICE_KEY
-							+ "&contentId=" + "126508"
+							+ "&contentId=" + contnetId
 							+ "&imageYN=Y"
 							+ "&MobileOS=ETC"
 							+ "&MobileApp=AppTesting"
@@ -108,4 +109,5 @@ public class DetailProxyController {
 		return new ResponseEntity<Body>(body, HttpStatus.OK);
 		
 	}
+	
 }

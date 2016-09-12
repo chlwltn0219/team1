@@ -101,13 +101,30 @@
 			<!-- /.box -->
 		</div>
 		<!--/.col (left) -->
+		
+		<!-- festival info -->
 		<div class="col-md-6">
-			<div class="box">
+			<div class="box box-warning">
 				<div class="box-header">
 					<h3 class="box-title">Event Info</h3>
 				</div>
 				<div class="box-body">
-					<img alt="picture" src="">
+					<div>
+						<img alt="picture" src="">
+					</div>
+					<hr>
+					<div class="row">
+						<div class="col-xs-3"><label>Title : </label></div>
+						<div class="col-xs-9">aa</div>
+					</div>
+					<div class="row">
+						<div class="col-xs-3"><label>Address : </label></div>
+						<div class="col-xs-9">aa</div>
+					</div>
+					<div class="row">
+						<div class="col-xs-3"><label>PlayTime : </label></div>
+						<div class="col-xs-9">aa</div>
+					</div>
 				</div>
 				
 			</div>
@@ -226,11 +243,7 @@
 				</div>			
 			</li>
 		{{/each}}
-	</script> 
-	
-	<script id="info" type="text/x-handlebars-template">
-		
-	</script>
+	</script>  
 
 <script>
 	
