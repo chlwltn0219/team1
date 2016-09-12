@@ -88,6 +88,8 @@
 	   {{#each .}}
 			<li class="list-group-item">
 				{{title}}
+				<hr>
+				<span class="badge">{{eventstartdate}}~{{eventenddate}}</span>
 			</li>
 	   {{/each}}
 	</script>
@@ -117,6 +119,10 @@
 				var items = data.items.item;
 				console.dir(items);
 				
+<<<<<<< HEAD
+=======
+				
+>>>>>>> c32f1c21ce3c383249c98d95ef38903c22def398
  				var temp = $('#eventTemplate').html();
  				var template = Handlebars.compile(temp);
 

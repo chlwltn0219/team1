@@ -142,6 +142,10 @@ public class JBoardProxyController {
 		
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(new Criteria());
+		pageMaker.setDisplayPageNum(5);
+		pageMaker.setTotalCount(body.getTotalCount());
+		
+		body.setPageMaker(pageMaker);
 		
 		return new ResponseEntity<Body>(body, HttpStatus.OK);
 		

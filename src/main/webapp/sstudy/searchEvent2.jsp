@@ -52,16 +52,7 @@
 						<div>
 							<ul id="eventList" class="list-group"></ul>
 						</div>
-						<div>
-							<ul class="pager">
-								<li><a href="#">Prev</a></li>
-								<li><a href="#">1</a></li>
-								<li><a href="#">2</a></li>
-								<li><a href="#">3</a></li>
-								<li><a href="#">4</a></li>
-								<li><a href="#">5</a></li>
-								<li><a href="#">Next</a></li>
-							</ul>
+						<div id="pager">
 						</div>
 					</div>
 
@@ -98,11 +89,10 @@
 	</script>
 
 	<script id="pageTemplate" type="text/x-handlebars-template">
-		<li><a href="#">Prev</a></li>
-	   		{{#each .}}
-				<li class="{{active}}"><a href="#">{{page}}</a></li>
-	   		{{/each}}
-		<li><a href="#">Next</a></li>
+		<button class="btn btn-default" style="visibility: {{visiblility pageMaker.prev}}">Prev</button>
+			<div class="btn-group">
+			</div>
+		<button class="btn btn-default" style="visibility: {{visiblility pageMaker.prev}}">Next</button>
 	</script>
 
 	<script type="text/javascript">
@@ -114,6 +104,8 @@
 				var item = data.items.item;
 				console.dir(item);
 				
+				var pageNo = 1;
+				
 				Handlebars.registerHelper('onTime' , function(today, eventstartdate, eventenddate) {
 					if(today > eventenddate){
 						return 'label-default';
@@ -124,13 +116,42 @@
 					}
 				});
 				
+				Handlebars.registerHelper('visiblility' , function(visible) {
+					if(visible)
+						return 'visible'; 
+					else 
+						return 'hidden';
+				});
+				
+				Handlebars.registerHelper('printPage' , function(pageNo, startPage, endPage) {
+					
+					var str = "";
+					
+					for(var i=startPage; i<=endPage; i++) {
+						str += '<li '
+						if(i==pageNo) {
+							str += 'class="active">';
+						} else {
+							str += '>';
+						}
+						str += '<a href="/jboard/threeMonth?pageNo=' + i + '">' + i + '</a></li>'
+					}
+					
+					return str;
+				});
+				
 				var temp = $('#eventTemplate').html();
 				var template = Handlebars.compile(temp);
 				
 				var html = template(item);
-				
 				$('#eventList').html(html);
 				
+				
+				var page = $('#pageTemplate').html();
+				var pageTemplate = Handlebars.compile(page);
+				
+				var pagehtml = pageTemplate(data);
+				$('#pager').html(pagehtml);
 				
 			});
 
