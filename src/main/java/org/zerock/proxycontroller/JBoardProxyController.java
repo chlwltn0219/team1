@@ -19,8 +19,6 @@ import org.zerock.domain.Criteria;
 import org.zerock.domain.PageMaker;
 import org.zerock.openapi.Body;
 import org.zerock.openapi.Result;
-import org.zerock.openapi.SingleBody;
-import org.zerock.openapi.SingleResult;
 import org.zerock.util.DateUtil;
 
 @RestController
@@ -87,7 +85,6 @@ public class JBoardProxyController {
 							+ "&MobileOS=ETC"
 							+ "&MobileApp=AppTesting"
 							+ "&areaCode=1";
-					
 
 		URI uri = URI.create(baseURI);
 		logger.info("request uri : " + uri);
@@ -141,11 +138,15 @@ public class JBoardProxyController {
 		}
 		
 		PageMaker pageMaker = new PageMaker();
-		pageMaker.setCri(new Criteria());
+		pageMaker.setCri(new Criteria(body.getPageNo(), body.getNumOfRows()));
 		pageMaker.setDisplayPageNum(5);
 		pageMaker.setTotalCount(body.getTotalCount());
 		
+		
 		body.setPageMaker(pageMaker);
+
+		System.out.println(body.getPageNo());
+		System.out.println(pageMaker);
 		
 		return new ResponseEntity<Body>(body, HttpStatus.OK);
 		

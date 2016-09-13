@@ -52,8 +52,7 @@
 						<div>
 							<ul id="eventList" class="list-group"></ul>
 						</div>
-						<div id="pager">
-						</div>
+						<div id="pager" style="text-align: center;"></div>
 					</div>
 
 					<!-- /.box-body -->
@@ -79,9 +78,9 @@
 	<script id="eventTemplate" type="text/x-handlebars-template">
 	   {{#each .}}
 			<li class="list-group-item">
-				<div>{{title}}</div>
+				<div><h4>{{title}}<h4></div>
 				<hr>
-				<div>
+				<div style="text-align: right;">
 					<h4><span class="label {{onTime today eventstartdate eventenddate}}">{{eventstartdate}}-{{eventenddate}}</span></h4>
 				</div>
 			</li>
@@ -89,92 +88,75 @@
 	</script>
 
 	<script id="pageTemplate" type="text/x-handlebars-template">
-		<button class="btn btn-default" style="visibility: {{visiblility pageMaker.prev}}">Prev</button>
+		<button id="prev" type="button" class="btn btn-default" style="visibility: {{visiblility pageMaker.prev}}">Prev</button>
 			<div class="btn-group">
+				{{#for pageMaker.startPage pageMaker.endPage 1}}
+					<button type="button" class="btn btn-default page" value={{this}}>{{this}}</button>
+				{{/for}}
 			</div>
-		<button class="btn btn-default" style="visibility: {{visiblility pageMaker.prev}}">Next</button>
+		<button id="next" type="button" class="btn btn-default" style="visibility: {{visiblility pageMaker.next}}">Next</button>
 	</script>
 
 	<script type="text/javascript">
 		
-// 		$('document').on('ready', function() {
-			$.getJSON('/jboard/threeMonth?pageNo='+'1', function(data) {
+		getList(1);
+	
+		function getList(pageNo) {
+			$.getJSON('/jboard/threeMonth?pageNo='+ pageNo, function(data) {
 				console.dir(data);
 				
 				var item = data.items.item;
 				console.dir(item);
 				
-				var pageNo = 1;
-				
-				Handlebars.registerHelper('onTime' , function(today, eventstartdate, eventenddate) {
-					if(today > eventenddate){
-						return 'label-default';
-					} else if(today < eventstartdate){
-						return 'label-warning';
-					} else {
-						return 'label-success';
-					}
-				});
-				
-				Handlebars.registerHelper('visiblility' , function(visible) {
-					if(visible)
-						return 'visible'; 
-					else 
-						return 'hidden';
-				});
-				
-				Handlebars.registerHelper('printPage' , function(pageNo, startPage, endPage) {
-					
-					var str = "";
-					
-					for(var i=startPage; i<=endPage; i++) {
-						str += '<li '
-						if(i==pageNo) {
-							str += 'class="active">';
-						} else {
-							str += '>';
-						}
-						str += '<a href="/jboard/threeMonth?pageNo=' + i + '">' + i + '</a></li>'
-					}
-					
-					return str;
-				});
-				
+	// 			Print List
 				var temp = $('#eventTemplate').html();
 				var template = Handlebars.compile(temp);
-				
 				var html = template(item);
 				$('#eventList').html(html);
 				
-				
+	// 			Print Pager
 				var page = $('#pageTemplate').html();
 				var pageTemplate = Handlebars.compile(page);
-				
 				var pagehtml = pageTemplate(data);
 				$('#pager').html(pagehtml);
 				
-			});
-
-			
-			
-// 		})
-		
-		function searshEvent(keyword) {
-			$.getJSON('/jboard/keywordFestival?keyword=' + keyword + '&pageNo=1', function(data) {
-				console.dir(data);
+				$('button.page').on('click', function() {
+					getList(this.value);
+				});
 				
-				var items = data.items.item;
-				console.dir(items);
+				$('#prev').on('click', function() {
+					getList(data.pageMaker.startPage-1);					
+				});
 				
- 				var temp = $('#eventTemplate').html();
- 				var template = Handlebars.compile(temp);
-
- 				var html = template(items);
-
- 				$('#eventList').html(html);
+				$('#next').on('click', function() {
+					getList(data.pageMaker.endPage+1);
+				});
 			});
-		};
+		}
 		
+		Handlebars.registerHelper('onTime' , function(today, eventstartdate, eventenddate) {
+			if(today > eventenddate){
+				return 'label-default';
+			} else if(today < eventstartdate){
+				return 'label-warning';
+			} else {
+				return 'label-success';
+			}
+		});
+		
+		Handlebars.registerHelper('visiblility' , function(visible) {
+			if(visible)
+				return 'visible'; 
+			else 
+				return 'hidden';
+		});
+
+		Handlebars.registerHelper('for', function(from, to, incr, block) {
+		    var accum = '';
+		    for(var i = from; i <= to; i += incr)
+		        accum += block.fn(i);
+		    return accum;
+		});
 		
 	</script>
 
