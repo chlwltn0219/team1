@@ -112,7 +112,7 @@ public class JBoardProxyController {
 							+ "?ServiceKey=" + SERVICE_KEY
 							+ "&numOfRows=" + "10"
 							+ "&pageNo=" + pageNo
-							+ "&arrange=" + "B"
+							+ "&arrange=" + "A"
 							+ "&MobileOS=ETC"
 							+ "&MobileApp=TestApp"
 							+ "&_type=json"

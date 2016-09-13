@@ -88,13 +88,13 @@
 	</script>
 
 	<script id="pageTemplate" type="text/x-handlebars-template">
-		<button id="prev" type="button" class="btn btn-default" style="visibility: {{visiblility pageMaker.prev}}">Prev</button>
+		<button id="prev" type="button" class="btn btn-default" style="visibility: {{visiblility prev}}">Prev</button>
 			<div class="btn-group">
-				{{#for pageMaker.startPage pageMaker.endPage 1}}
-					<button type="button" class="btn btn-default page" value={{this}}>{{this}}</button>
-				{{/for}}
+				{{#pageMaker startPage endPage 1}}
+					<button type="button" class="btn btn-default page {{this.active}}" value={{this.pageNo}}>{{this.pageNo}}</button>
+				{{/pageMaker}}
 			</div>
-		<button id="next" type="button" class="btn btn-default" style="visibility: {{visiblility pageMaker.next}}">Next</button>
+		<button id="next" type="button" class="btn btn-default" style="visibility: {{visiblility next}}">Next</button>
 	</script>
 
 	<script type="text/javascript">
@@ -106,7 +106,9 @@
 				console.dir(data);
 				
 				var item = data.items.item;
+				var pageMaker = data.pageMaker;
 				console.dir(item);
+				console.dir(pageMaker);
 				
 	// 			Print List
 				var temp = $('#eventTemplate').html();
@@ -117,7 +119,7 @@
 	// 			Print Pager
 				var page = $('#pageTemplate').html();
 				var pageTemplate = Handlebars.compile(page);
-				var pagehtml = pageTemplate(data);
+				var pagehtml = pageTemplate(pageMaker);
 				$('#pager').html(pagehtml);
 				
 				$('button.page').on('click', function() {
@@ -131,6 +133,7 @@
 				$('#next').on('click', function() {
 					getList(data.pageMaker.endPage+1);
 				});
+				
 			});
 		}
 		
@@ -151,12 +154,30 @@
 				return 'hidden';
 		});
 
-		Handlebars.registerHelper('for', function(from, to, incr, block) {
+
+		Handlebars.registerHelper('pageMaker', function(from, to, incr, block) {
+			console.dir(block);
+			
 		    var accum = '';
-		    for(var i = from; i <= to; i += incr)
-		        accum += block.fn(i);
+		    var nowPage = block.data.root.cri.page;
+			var active = '';
+		    
+		    for(var i = from; i <= to; i += incr){
+			    if(nowPage==i)
+		    		active = 'active';
+		    	
+		    	var custom = {
+		    		pageNo : i,
+		    		active : active
+		    	};
+		        accum += block.fn(custom);
+		        active = '';
+		    }
+		    console.dir(accum);
+		    
 		    return accum;
 		});
+		
 		
 	</script>
 
