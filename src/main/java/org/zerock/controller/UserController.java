@@ -69,7 +69,7 @@ public class UserController {
   }
 
   @RequestMapping(value = "/logout", method = RequestMethod.GET)
-  public void logout(HttpServletRequest request, 
+  public String logout(HttpServletRequest request, 
       HttpServletResponse response, HttpSession session) throws Exception {
 
     Object obj = session.getAttribute("login");
@@ -89,6 +89,8 @@ public class UserController {
         service.keepLogin(vo.getUid(), session.getId(), new Date());
       }
     }
+    
+    return "redirect:/";
   }
   
   @RequestMapping(value = "/register", method = RequestMethod.GET)
@@ -106,5 +108,6 @@ public class UserController {
 
     return "redirect:/";
   }
+  
 
 }

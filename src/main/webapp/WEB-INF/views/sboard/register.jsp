@@ -47,6 +47,7 @@
 							<label for="exampleInputEmail1">File DROP Here</label>
 							<div class="fileDrop"></div>
 						</div>
+						
 					</div>
 
 					<!-- /.box-body -->
@@ -64,6 +65,10 @@
 					</div>
 				</form>
 
+						<div>
+							<button>xxx</button>
+						</div>
+						
 
 			</div>
 			<!-- /.box -->
@@ -74,8 +79,7 @@
 	<!-- /.row -->
 
 	<script type="text/javascript" src="/resources/js/upload.js"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+	<script	src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 
 	<script id="template" type="text/x-handlebars-template">
 <li>
@@ -92,6 +96,8 @@
 	<script>
 		var template = Handlebars.compile($("#template").html());
 
+		
+		
 		$(".fileDrop").on("dragenter dragover", function(event) {
 			event.preventDefault();
 		});

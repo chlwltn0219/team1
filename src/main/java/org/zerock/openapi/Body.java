@@ -1,12 +1,22 @@
 package org.zerock.openapi;
 
+import org.zerock.domain.PageMaker;
+
 public class Body {
 	
 	private Items items;
 	private Integer numOfRows;
 	private Integer pageNo;
 	private Integer totalCount;
+	private PageMaker pageMaker;
 	
+	
+	public PageMaker getPageMaker() {
+		return pageMaker;
+	}
+	public void setPageMaker(PageMaker pageMaker) {
+		this.pageMaker = pageMaker;
+	}
 	public Items getItems() {
 		return items;
 	}
