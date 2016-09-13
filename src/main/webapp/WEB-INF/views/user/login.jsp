@@ -52,7 +52,7 @@
   </div>
 </form>
 
-	<a href="#">I forgot my password</a><br>
+<!-- 	<a href="/user/forgot">I forgot my password</a><br> -->
         <a href="/user/register" class="text-center">Register a new membership</a>
 
       </div><!-- /.login-box-body -->

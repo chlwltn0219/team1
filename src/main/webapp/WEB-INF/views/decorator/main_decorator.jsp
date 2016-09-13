@@ -109,9 +109,12 @@ div.container {
 						<c:if test="${not empty login}">
 						<ul class="nav navbar-nav navbar-right">
 							<li>
-								<a href="/user/logout">
-								<input type=text style="width:50%; text-align: center; background-color: #101010;" value="${login.uname }"/>
-								<span class="glyphicon glyphicon-log-out"></span> Logout</a>
+								<a href="/user/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a>
+							</li>
+						</ul>
+						<ul class="nav navbar-nav navbar-right">
+							<li>
+								<a href="/user/logout"> ${login.uname }</a>
 							</li>
 						</ul>
 						</c:if>
