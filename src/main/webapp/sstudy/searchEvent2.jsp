@@ -134,14 +134,13 @@
 					
 // 				});
 				
-// 				Set Event
-				setBtnEvent();
+				setBtnEvent(data);
 				setListEvent();
 				
 			});
 		}
 
-		function setBtnEvent() {
+		function setBtnEvent(data) {
 			$('button.page').on('click', function() {
 				getList(this.value);
 			});
