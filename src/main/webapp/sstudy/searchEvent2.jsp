@@ -42,9 +42,6 @@
 <!-- 				<form id='registerForm' role="form" method="post"> -->
 				
 					<div class="box-body">
-<!-- 						<div> -->
-<!-- 							<input id="keyword" class="form-control" type="search" value="" placeholder="Searsh Keyword..."> -->
-<!-- 						</div> -->
 						<div>
 							<input id="selectedEvent" class="form-control" type="text" value="" readonly="readonly" placeholder="Selected Event...">
 						</div>
@@ -74,11 +71,17 @@
 
 	<script type="text/javascript" src="/resources/js/upload.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+	
+	<script id="selectTemplate" type="text/x-handlebars-template">
+		
+
+
+	</script>
 
 	<script id="eventTemplate" type="text/x-handlebars-template">
 	   {{#each .}}
 			<li class="list-group-item">
-				<div><h4>{{title}}<h4></div>
+				<div class="title"><h4>{{title}}</h4></div>
 				<hr>
 				<div style="text-align: right;">
 					<h4><span class="label {{onTime today eventstartdate eventenddate}}">{{eventstartdate}}-{{eventenddate}}</span></h4>
@@ -116,24 +119,54 @@
 				var html = template(item);
 				$('#eventList').html(html);
 				
+				
+				
 	// 			Print Pager
 				var page = $('#pageTemplate').html();
 				var pageTemplate = Handlebars.compile(page);
 				var pagehtml = pageTemplate(pageMaker);
 				$('#pager').html(pagehtml);
 				
-				$('button.page').on('click', function() {
-					getList(this.value);
-				});
+
+// 				$("li.list-group-item").on("click", function() {
+// 					alert(" clicked...");
+					
+					
+// 				});
 				
-				$('#prev').on('click', function() {
-					getList(data.pageMaker.startPage-1);					
-				});
+// 				Set Event
+				setBtnEvent();
+				setListEvent();
 				
-				$('#next').on('click', function() {
-					getList(data.pageMaker.endPage+1);
-				});
-				
+			});
+		}
+
+		function setBtnEvent() {
+			$('button.page').on('click', function() {
+				getList(this.value);
+			});
+			$('#prev').on('click', function() {
+				getList(data.pageMaker.startPage-1);					
+			});
+			$('#next').on('click', function() {
+				getList(data.pageMaker.endPage+1);
+			});
+		}
+		
+		function setListEvent() {
+			$('li.list-group-item').on({
+			    mouseenter: function(){
+			        $(this).css("background-color", "#FAFAFA");
+			    }, 
+			    mouseleave: function(){
+			        $(this).css("background-color", "#FFFFFF");
+			    }, 
+			    click: function(){
+			    	$(this).css("background-color", "#F0F0F0");
+			        var index = $('li.list-group-item').index(this);
+			        var selectTitle = $('li.list-group-item div.title h4').eq(index).html();
+			    	$('#selectedEvent').val(selectTitle);
+			    } 
 			});
 		}
 		
@@ -177,7 +210,6 @@
 		    
 		    return accum;
 		});
-		
 		
 	</script>
 
