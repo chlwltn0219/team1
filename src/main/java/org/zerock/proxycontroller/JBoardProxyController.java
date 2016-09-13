@@ -110,7 +110,7 @@ public class JBoardProxyController {
 		RestTemplate restTemplate = new RestTemplate();
 		String baseURI = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/searchFestival"
 							+ "?ServiceKey=" + SERVICE_KEY
-							+ "&numOfRows=" + "10"
+							+ "&numOfRows=" + "5"
 							+ "&pageNo=" + pageNo
 							+ "&arrange=" + "A"
 							+ "&MobileOS=ETC"
