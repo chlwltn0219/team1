@@ -81,6 +81,7 @@ CREATE TABLE tbl_jboard
    regdate    timestamp NOT NULL DEFAULT now(),
    viewcnt    int DEFAULT 0,
    replycnt   int DEFAULT 0,
+   contentid  varchar(20) NOT NULL,
    PRIMARY KEY(bno)
 );
 

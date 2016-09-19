@@ -51,22 +51,21 @@
 						</div>
 
 						<div class="form-group">
+							<input id="contentId" type="hidden" name=contentId value="">
+						</div>
+						
+						<div class="form-group">
 							<label for="exampleInputEmail1">Writer</label> <input type="text"
 								name="writer" class="form-control" value='${login.uid }'
 								readonly>
 						</div>
-
+						
 					</div>
 
 					<!-- /.box-body -->
 
 					<div class="box-footer">
-
-						<ul class="mailbox-attachments clearfix uploadedList">
-						</ul>
-
 						<button type="submit" class="btn btn-primary">Submit</button>
-
 					</div>
 				</form>
 
@@ -128,6 +127,7 @@
 	   {{#each .}}
 			<li class="list-group-item">
 				<div class="title"><h4>{{title}}</h4></div>
+				<input type="hidden" name="contentId" value="{{contentid}}">
 				<hr>
 				<div style="text-align: right;">
 					<h4><span class="label {{onTime today eventstartdate eventenddate}}">{{eventstartdate}}-{{eventenddate}}</span></h4>
@@ -135,6 +135,7 @@
 			</li>
 	   {{/each}}
 	</script>
+
 
 	<script id="pageTemplate" type="text/x-handlebars-template">
 		<button id="prev" type="button" class="btn btn-default" style="visibility: {{visiblility prev}}">Prev</button>
@@ -165,28 +166,19 @@
 				var html = template(item);
 				$('#eventList').html(html);
 				
-				
-				
 	// 			Print Pager
 				var page = $('#pageTemplate').html();
 				var pageTemplate = Handlebars.compile(page);
 				var pagehtml = pageTemplate(pageMaker);
 				$('#pager').html(pagehtml);
-				
 
-// 				$("li.list-group-item").on("click", function() {
-// 					alert(" clicked...");
-					
-					
-// 				});
-				
-				setBtnEvent(data);
+				setPaginationEvent(data);
 				setListEvent();
 				
 			});
 		}
 
-		function setBtnEvent(data) {
+		function setPaginationEvent(data) {
 			$('button.page').on('click', function() {
 				getList(this.value);
 			});
@@ -210,7 +202,9 @@
 			    	$(this).css("background-color", "#F0F0F0");
 			        var index = $('li.list-group-item').index(this);
 			        var selectTitle = $('li.list-group-item div.title h4').eq(index).html();
+			        var contentId = $('li.list-group-item input').eq(index).val();
 			    	$('#selectedEvent').val(selectTitle);
+			    	$('#contentId').val(contentId);
 			    } 
 			});
 		}
