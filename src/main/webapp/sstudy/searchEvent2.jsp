@@ -33,6 +33,51 @@
 		<!-- left column -->
 		<div class="col-md-6">
 			<!-- general form elements -->
+			<div class="box box-primary">
+				<div class="box-header">
+					<h3 class="box-title">REGISTER BOARD</h3>
+				</div>
+				<!-- /.box-header -->
+
+				<form id='registerForm' role="form" method="post">
+					<div class="box-body">
+						<div class="form-group">
+							<label for="exampleInputEmail1">Title</label>
+							<input type="text" name='title' class="form-control" placeholder="Enter Title">
+						</div>
+						<div class="form-group">
+							<label for="exampleInputPassword1">Content</label>
+							<textarea class="form-control" name="content" rows="25" placeholder="Enter ..."></textarea>
+						</div>
+
+						<div class="form-group">
+							<input id="contentId" type="hidden" name=contentId value="">
+						</div>
+						
+						<div class="form-group">
+							<label for="exampleInputEmail1">Writer</label> <input type="text"
+								name="writer" class="form-control" value='${login.uid }'
+								readonly>
+						</div>
+						
+					</div>
+
+					<!-- /.box-body -->
+
+					<div class="box-footer">
+						<button type="submit" class="btn btn-primary">Submit</button>
+					</div>
+				</form>
+
+
+			</div>
+			<!-- /.box -->
+		</div>
+		<!--/.col (left) -->
+
+		<!-- right column -->
+		<div class="col-md-6">
+			<!-- general form elements -->
 			<div class="box box-warning">
 				<div class="box-header">
 					<h3 class="box-title">Search Event</h3>
@@ -82,6 +127,7 @@
 	   {{#each .}}
 			<li class="list-group-item">
 				<div class="title"><h4>{{title}}</h4></div>
+				<input type="hidden" name="contentId" value="{{contentid}}">
 				<hr>
 				<div style="text-align: right;">
 					<h4><span class="label {{onTime today eventstartdate eventenddate}}">{{eventstartdate}}-{{eventenddate}}</span></h4>
@@ -89,6 +135,7 @@
 			</li>
 	   {{/each}}
 	</script>
+
 
 	<script id="pageTemplate" type="text/x-handlebars-template">
 		<button id="prev" type="button" class="btn btn-default" style="visibility: {{visiblility prev}}">Prev</button>
@@ -119,29 +166,19 @@
 				var html = template(item);
 				$('#eventList').html(html);
 				
-				
-				
 	// 			Print Pager
 				var page = $('#pageTemplate').html();
 				var pageTemplate = Handlebars.compile(page);
 				var pagehtml = pageTemplate(pageMaker);
 				$('#pager').html(pagehtml);
-				
 
-// 				$("li.list-group-item").on("click", function() {
-// 					alert(" clicked...");
-					
-					
-// 				});
-				
-// 				Set Event
-				setBtnEvent();
+				setPaginationEvent(data);
 				setListEvent();
 				
 			});
 		}
 
-		function setBtnEvent() {
+		function setPaginationEvent(data) {
 			$('button.page').on('click', function() {
 				getList(this.value);
 			});
@@ -165,7 +202,9 @@
 			    	$(this).css("background-color", "#F0F0F0");
 			        var index = $('li.list-group-item').index(this);
 			        var selectTitle = $('li.list-group-item div.title h4').eq(index).html();
+			        var contentId = $('li.list-group-item input').eq(index).val();
 			    	$('#selectedEvent').val(selectTitle);
+			    	$('#contentId').val(contentId);
 			    } 
 			});
 		}

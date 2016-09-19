@@ -12,10 +12,17 @@ public class JBoardVO {
 	private Date regdate;
 	private int viewcnt;
 	private int replycnt;
+	private int contentid;
 	
 	private String[] files;
 	
-		
+	
+	public int getContentid() {
+		return contentid;
+	}
+	public void setContentid(int contentid) {
+		this.contentid = contentid;
+	}
 	public String[] getFiles() {
 		return files;
 	}

@@ -25,13 +25,6 @@ public class JBoardServiceImpl implements JBoardService {
   
     dao.create(board);
     
-    String[] files = board.getFiles();
-    
-    if(files == null) { return; } 
-    
-    for (String fileName : files) {
-      dao.addAttach(fileName);
-    }   
   }
   
   //
