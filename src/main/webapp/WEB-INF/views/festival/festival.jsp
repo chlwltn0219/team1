@@ -13,16 +13,47 @@
 <!-- HandleBars -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 
+<style type="text/css">
+
+.temp{
+	float: left;
+	position: relative;
+	margin:2%;
+}
+
+.img, .info{
+	width: 300px;
+	height:300px;
+	float:left; 
+}
+
+.img{
+	z-index: 50;
+}
+
+.info{
+	position: absolute;
+	display: none;
+	z-index: 100;
+}
+
+.info * {
+	padding: 1px 5px;
+}
+
+ .title { 
+ 	text-align: center; 
+ } 
+
+</style>
 </head>
 <body>
 <!-- <button id="json" class="btn btn-primary">getJSON form Open API</button> -->
 <!-- <button id="clear" class="btn btn-info">clear</button> -->
-<<<<<<< HEAD
-<input type="text" id="find">
-<button id="findbtn" class="btn btn-info">find</button>
-<label><input type="date" id="start"></label>
-<label><input type="date" id="stop"></label>
-=======
+<!-- <input type="text" id="find"> -->
+<!-- <button id="findbtn" class="btn btn-info">find</button> -->
+<!-- <label><input type="date" id="start"></label> -->
+<!-- <label><input type="date" id="stop"></label> -->
 <!-- <input type="text" id="find"> -->
 
 <label>지역: </label>
@@ -54,13 +85,7 @@
     <option value="25">중랑구</option>
 </select>
 <br>
-<label>기간: </label>
-<input style="height:25px;" type="date" id="startDate">
-<label>~</label>
-<input style="height:25px;" type="date" id="endDate">
-<button id="findbtn" class="btn btn-info">find</button>
 
-<!-- >>>>>>> a33e0782ee5c096553146943ddb264cb956b89d7 -->
 <div class="table-responsive">
 	<table class="table table-hover">
 	<thead>
@@ -71,67 +96,54 @@
 <!-- 			<th>전화번호</th> -->
 <!-- 			<th>행사 시작일</th> -->
 <!-- 			<th>행사 종료일</th> -->
-			
 		</tr>
 	</thead>
 	<tbody id="result"></tbody>
 	</table>
 </div>
-
 <script id="codeTemp" type="text/xxx-mytemplate">
-	<div>
-		<img src="{{firstimage2}}" style="width:300px; height:350px; float:left; margin:2%;">	
+<!--	<div> -->
+<!--		<img src="{{firstimage2}}" style="width:300px; height:350px; float:left; margin:2%;"> -->	
+<!--	</div> -->
+<div class="abc temp">		
+	<div class="info">
+		<br>
+		<div class="title"><h3>{{title}}</h3></div>
+		<hr>
+		<div class="eventdate"><h4>{{eventstartdate}}~{{eventenddate}}</h4></div>
+		<div class="addr"><h4>{{addr1}}</h4></div>
+		<div class="tel"><h4>{{tel}}</h4></div>
 	</div>
+	<img class="img" src="{{firstimage2}}">
+</div>
 </script>
 
 <script type="text/javascript">
-		$('#sigungu').on('change', function() {
-			
-			var areaCode = $('#sigungu option:selected').val();
-			
-			$.getJSON("/festival/list?sigunguCode=" + areaCode, function(data) {
-				// json 객체 내부 접근하기
-				console.dir(data);
-				
-				var items = data.items.item;
-				
-				var temp2 = $('#codeTemp').html();
-				var template = Handlebars.compile(temp2);
-				
-				$('#result').html("");
-				
-				for(var i=0; i<items.length; i++) {
-					var html = template(items[i]);
-					console.log(html);
-					$('#result').append(html);
-				}
-			});
-		});
+	$('#sigungu').on('change', function() {
 		
-// 		$('#findbtn').on('click', function(){
-// 			var date1 = $('#startDate option:selected').val();
-// 			var date2 = $('#endDate option:selected').val();
-// 			var areaCode = $('#sigungu option:selected').val();
+		var areaCode = $('#sigungu option:selected').val();
+		
+		$.getJSON("/festival/list?sigunguCode=" + areaCode, function(data) {
+			// json 객체 내부 접근하기
+			console.dir(data);
 			
-// 			$.getJSON("/festival/list?sigunguCode=" + areaCode, function(data) {
-// 				// json 객체 내부 접근하기
-// 				console.dir(data);
-				
-// 				var items = data.items.item;
-				
-// 				var temp2 = $('#codeTemp').html();
-// 				var template = Handlebars.compile(temp2);
-				
-// 				$('#result').html("");
-				
-// 				for(var i=0; i<items.length; i++) {
-// 					var html = template(items[i]);
-// 					console.log(html);
-// 					$('#result').append(html);
-// 				}
-// 		});
-</script>
-<script>
+			var items = data.items.item;
+			
+			var temp2 = $('#codeTemp').html();
+			var template = Handlebars.compile(temp2);
+			
+			$('#result').html("");
+			
+			for(var i=0; i<items.length; i++) {
+				var html = template(items[i]);
+				console.log(html);
+				$('#result').append(html);
+				imgCheck(i);
+				imgHover()
+			}
+		});
+	});
+		
 	var areaCode = 1;
 	
 	$.getJSON("/festival/list?sigunguCode=" + areaCode, function(data) {
@@ -149,9 +161,37 @@
 			var html = template(items[i]);
 			console.log(html);
 			$('#result').append(html);
+			imgCheck(i);
+			imgHover();
 		}
 		
 	});
+	
+	function imgCheck(i) {
+		if($('div.abc img').eq(i).attr('src')=='')
+			$('div.abc img').eq(i).attr('src','http://placehold.it/300x300?text=No_Img');
+	};
+	
+	function imgHover() {
+	    $('div.abc').on({
+	        mouseenter: function(){
+	        	var index = getIndex(this);
+	        	console.log(index)
+	            $('div.abc img').eq(index).css("opacity", 0.1);
+	            $('div.abc div.info').eq(index).css("display", "block");
+	        },
+	        mouseleave: function(){
+	        	var index = getIndex(this);
+	            $('div.abc img').eq(index).css("opacity", 1);
+	            $('div.abc div.info').eq(index).css("display", "none");
+	        }
+	    });
+	}
+	
+	function getIndex(obj) {
+		return $('div.abc').index(obj);
+	}
+	
 </script>
 </body>
 </html>

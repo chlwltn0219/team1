@@ -78,7 +78,7 @@ div.container {
 					<div class="collapse navbar-collapse" id="myNavbar">
 						<!-- Menu -->
 						<ul class="nav navbar-nav">
-							<li class="active"><a href="#">Notice</a></li>
+							<li class="active"><a href="/notice/board">Notice</a></li>
 							<li class="dropdown">
 								<a href="/festival/festival">행사</a>
 <!-- 								<ul class="dropdown-menu"> -->
@@ -97,12 +97,27 @@ div.container {
 							<li><a href="#">Gallery</a></li>
 							<li><a href="#">Statistics</a></li>
 						</ul>
-						<!-- Log in -->
+						<!-- Before Log in -->
+						<c:if test="${empty login}">
 						<ul class="nav navbar-nav navbar-right">
 							<li>
 								<a href="/user/login"><span class="glyphicon glyphicon-log-in"></span> Login</a>
 							</li>
 						</ul>
+						</c:if>
+						<!-- After Log in -->
+						<c:if test="${not empty login}">
+						<ul class="nav navbar-nav navbar-right">
+							<li>
+								<a href="/user/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a>
+							</li>
+						</ul>
+						<ul class="nav navbar-nav navbar-right">
+							<li>
+								<a href="/user/logout"> ${login.uname }</a>
+							</li>
+						</ul>
+						</c:if>
 					</div>
 				</div>
 			</nav>

@@ -20,6 +20,7 @@
 
   <!-- Exclude path from decoration. -->
   <mapping path="/study/**" exclue="true"/>
+  <mapping path="/views/notice/**" exclue="true"/>
 <!--   <mapping path="/brochures/*" exclue="true"/> -->
 
 </sitemesh>

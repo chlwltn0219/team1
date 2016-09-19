@@ -21,6 +21,36 @@ public class WeatherProxyController {
 	static Logger logger = LoggerFactory.getLogger(WeatherProxyController.class);
 	private static final String SERVICE_KEY = "oMYSCkfnU%2BrM%2F6ad8zAICkGBj0eUCOxJc9bR%2F8MHuzhfo62P6cGA1YVZ7iY5QnDedVyfk5tMhc0Wu42fjDJ%2BcA%3D%3D";
 	
+	@RequestMapping(value="/test", method = RequestMethod.GET )
+	public ResponseEntity<Body> test() {
+		
+		Result result = null;
+		
+		DateUtil date = new DateUtil();
+		String tmFc = date.gettmFc();
+		logger.info("tmFc = " + date.gettmFc());
+		
+		RestTemplate restTemplate = new RestTemplate();
+		String baseURI = "http://newsky2.kma.go.kr/service/MiddleFrcstInfoService/getMiddleLandWeather"
+							+ "?ServiceKey=" + SERVICE_KEY
+							+ "&regId=11B00000"				/* 서울,경기도,인천 */
+							+ "&tmFc=" + tmFc				/* 예보 발표 시각 */
+							+ "&numOfRows=10"
+							+ "&pageNo=1"
+							+ "&_type=json";
+
+		URI uri = URI.create(baseURI);
+		logger.info("request uri : " + uri);
+		
+		result = restTemplate.getForObject(uri, Result.class);
+		logger.info(restTemplate.getForObject(uri, String.class));
+		
+		Body body = result.getResponse().getBody();
+		
+		return new ResponseEntity<Body>(body, HttpStatus.OK);
+		
+	}
+
 	@RequestMapping(value="/middleFrcst", method = RequestMethod.GET )
 	public ResponseEntity<Body> MiddleFrcstInfo() {
 		

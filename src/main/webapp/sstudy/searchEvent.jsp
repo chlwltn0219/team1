@@ -88,6 +88,8 @@
 	   {{#each .}}
 			<li class="list-group-item">
 				{{title}}
+				<hr>
+				<span class="badge">{{eventstartdate}}~{{eventenddate}}</span>
 			</li>
 	   {{/each}}
 	</script>
@@ -111,35 +113,25 @@
 		});
 		
 		function searshEvent(keyword) {
-			$.getJSON('/jboard/keywordFestival?keyword='+ keyword + '&pageNo=1', function(data) {
+			$.getJSON('/jboard/keywordFestival?keyword=' + keyword + '&pageNo=1', function(data) {
 				console.dir(data);
 				
 				var items = data.items.item;
 				console.dir(items);
 				
-				for(var i=0; i<items.length; i++) {
-					var contentId = items[i].contentid;
-// 					eventDetailInfo(contentId);
-				}
+// <<<<<<< HEAD
+// =======
 				
-//  				var temp = $('#eventTemplate').html();
-//  				var template = Handlebars.compile(temp);
+// >>>>>>> c32f1c21ce3c383249c98d95ef38903c22def398
+ 				var temp = $('#eventTemplate').html();
+ 				var template = Handlebars.compile(temp);
 
-//  				var html = template(items);
+ 				var html = template(items);
 
-//  				$('#eventList').html(html);
+ 				$('#eventList').html(html);
 			});
 		};
 		
-		function eventDetailInfo(contentId) {
-			
-			$.getJSON('/detail/intro?contentId=' + contentId + '&contentTypeId=15', function(data) {
-				var items = data.items.item;
-				console.dir(items);
-				alert("xxx");
-			});
-			
-		};
 		
 	</script>
 

@@ -24,7 +24,6 @@ import org.zerock.util.DateUtil;
 @RequestMapping("/festival/*")
 public class FestivalBoardController {
   private static final Logger logger = LoggerFactory.getLogger(FestivalBoardController.class);
-//  private static final String SERVICE_KEY = "oMYSCkfnU%2BrM%2F6ad8zAICkGBj0eUCOxJc9bR%2F8MHuzhfo62P6cGA1YVZ7iY5QnDedVyfk5tMhc0Wu42fjDJ%2BcA%3D%3D";
 
   @RequestMapping(value = "/festival")
   public void festival(@ModelAttribute("cri") SearchCriteria cri, Model model){

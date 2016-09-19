@@ -1,6 +1,9 @@
-package org.zerock.proxycontroller;
+package org.zerock.controller;
 
+import java.io.UnsupportedEncodingException;
 import java.net.URI;
+import java.net.URLEncoder;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,47 +15,54 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import org.zerock.openapi.Body;
+import org.zerock.openapi.Items;
 import org.zerock.openapi.Result;
-import org.zerock.util.AreaUtil;
 import org.zerock.util.DateUtil;
 
 @RestController
-@RequestMapping("/festival")
-public class FestivalProxyController {
+@RequestMapping("/keyword")
+public class KeywordProxyController {
 	
-	static Logger logger = LoggerFactory.getLogger(FestivalProxyController.class);
+	static Logger logger = LoggerFactory.getLogger(KeywordProxyController.class);
 	private static final String SERVICE_KEY = "oMYSCkfnU%2BrM%2F6ad8zAICkGBj0eUCOxJc9bR%2F8MHuzhfo62P6cGA1YVZ7iY5QnDedVyfk5tMhc0Wu42fjDJ%2BcA%3D%3D";
-			
-	@RequestMapping(value="/list", method = RequestMethod.GET )
-	public ResponseEntity<Body> test(@RequestParam Integer sigunguCode) {
+	
+	@RequestMapping(value="/test2", method = RequestMethod.GET )
+	public ResponseEntity<Body> test() throws UnsupportedEncodingException {
 		
 		Result result = null;
 		
 		DateUtil date = new DateUtil();
+		String tmFc = date.gettmFc();
 		logger.info("tmFc = " + date.gettmFc());
+		String encordedKeyword = URLEncoder.encode("축제", "UTF-8");
+		logger.info("tmFc = " + encordedKeyword);
 		
 		RestTemplate restTemplate = new RestTemplate();
-		String baseURI = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/searchFestival"
+		String baseURI = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/searchKeyword"
 							+ "?ServiceKey=" + SERVICE_KEY
-							+ "&numOfRows=10"
+							+ "&arrange=c"
+							+ "&contentTypeId=15"
 							+ "&areaCode=1"
-							+ "&sigunguCode=" + sigunguCode
-							+ "&pageNo=1"
+							+ "&keyword=" + encordedKeyword
+							+ "&numOfRows=10"
 							+ "&MobileOS=ETC"
-							+ "&MobileApp=TestApp"
+							+ "&MobileApp=testApp"
+							+ "&listYN=Y"
+							+ "&pageNo=2"
 							+ "&_type=json";
 
 		URI uri = URI.create(baseURI);
 		logger.info("request uri : " + uri);
 		
 		result = restTemplate.getForObject(uri, Result.class);
-		logger.info(restTemplate.getForObject(uri, String.class));
+		logger.info(result.toString());
 		
 		Body body = result.getResponse().getBody();
-		System.out.println("items = " + body.getItems().getItem());
-		
+		logger.info(body.getItems().getItem().toString());
 		
 		return new ResponseEntity<Body>(body, HttpStatus.OK);
 		
-	}	
+	}
+	
+	
 }
