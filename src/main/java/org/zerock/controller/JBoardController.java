@@ -65,7 +65,7 @@ public class JBoardController {
 
 		rttr.addFlashAttribute("msg", "SUCCESS");
 
-		return "redirect:/sboard/list";
+		return "redirect:/jboard/list";
 	}
 
 	@RequestMapping(value = "/modifyPage", method = RequestMethod.GET)
@@ -89,7 +89,7 @@ public class JBoardController {
 
 		logger.info(rttr.toString());
 
-		return "redirect:/sboard/list";
+		return "redirect:/jboard/list";
 	}
 
 	@RequestMapping(value = "/register", method = RequestMethod.GET)

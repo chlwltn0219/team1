@@ -39,7 +39,7 @@
 				</div>
 				<!-- /.box-header -->
 
-				<form id='registerForm' role="form" method="post">
+				<form id='registerForm' role="form" method="post" onsubmit="submitCheck(event)">
 					<div class="box-body">
 						<!-- title -->
 						<div class="form-group">
@@ -58,8 +58,7 @@
 						<!-- writer (read only) -->
 						<div class="form-group">
 							<label for="exampleInputEmail1">Writer</label> <input type="text"
-								name="writer" class="form-control" value='${login.uid }'
-								readonly>
+								name="writer" class="form-control" value='${login.uid }'readonly>
 						</div>
 					</div>
 
@@ -84,9 +83,7 @@
 					<h3 class="box-title">Search Event</h3>
 				</div>
 				<!-- /.box-header -->
-
-<!-- 				<form id='registerForm' role="form" method="post"> -->
-				
+	
 					<div class="box-body">
 						<!-- selected event -->
 						<div>
@@ -100,16 +97,13 @@
 						<!-- pager -->
 						<div id="pager" style="text-align: center;"></div>
 					</div>
-
+	
 					<!-- /.box-body -->
-
+	
 					<div class="box-footer">
-
-					</div>
+	
+				</div>
 					
-<!-- 				</form> -->
-
-
 			</div>
 			<!-- /.box -->
 		</div>
@@ -177,7 +171,7 @@
 				$('#pager').html(pagehtml);
 
 				setPaginationEvent(data);
-				setListEvent();
+				setListEvent(item);
 				
 			});
 		}
@@ -194,24 +188,51 @@
 			});
 		}
 		
-		function setListEvent() {
+		function setListEvent(item) {
 			$('li.list-group-item').on({
+				// hover event
 			    mouseenter: function(){
 			        $(this).css("background-color", "#FAFAFA");
 			    }, 
 			    mouseleave: function(){
 			        $(this).css("background-color", "#FFFFFF");
-			    }, 
+			    },
+			 	// click event
 			    click: function(){
 			    	$(this).css("background-color", "#F0F0F0");
 			        var index = $('li.list-group-item').index(this);
-			        var selectTitle = $('li.list-group-item div.title h4').eq(index).html();
-			        var contentId = $('li.list-group-item input').eq(index).val();
-			    	$('#selectedEvent').val(selectTitle);
-			    	$('#contentId').val(contentId);
+			    	
+// 			        console.dir(item);
+// 			        alert(item[index].today);
+			        
+			    	
+					if(item[index].today > item[index].eventenddate){
+						 alert("*   이미 종료된 행사입니다.   *"+"\n"+"* 다른 행사를 선택해 주세요. *");
+					} else {
+				        var selectTitle = $('li.list-group-item div.title h4').eq(index).html();
+				        var contentId = $('li.list-group-item input').eq(index).val();
+				    	$('#selectedEvent').val(selectTitle);
+				    	$('#contentId').val(contentId);
+						
+					} 
+			    	
+								    	
 			    } 
 			});
 		}
+		
+		function submitCheck(event) {
+
+			var contentId = $('#contentId').val();
+// 			alert(contentId);
+			
+			if(contentId == "") {
+				alert("* 참여하는 행사를 선택해 주세요. *");
+				event.preventDefault();
+			}
+			
+		}
+		
 		
 		Handlebars.registerHelper('onTime' , function(today, eventstartdate, eventenddate) {
 			if(today > eventenddate){
