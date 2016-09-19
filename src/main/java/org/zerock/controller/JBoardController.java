@@ -108,7 +108,7 @@ public class JBoardController {
 
 		rttr.addFlashAttribute("msg", "SUCCESS");
 
-		return "redirect:/sboard/list";
+		return "redirect:/jboard/list";
 	}
 
 	@RequestMapping("/getAttach/{bno}")

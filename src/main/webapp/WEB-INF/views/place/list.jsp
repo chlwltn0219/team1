@@ -88,46 +88,16 @@
 		               <option value="24">중구</option>
 		               <option value="25">중랑구</option>
 		            </select>
-	          	  <button id="getjson">test</button>
 				</div>
 			</div>
 
-<div style="width: 100%; height: 600px;">
 
-	<div>
-		<div>
-			<div class="table_img">
-				<img class="table_imgbox fade_in" alt="xx" src="http://tong.visitkorea.or.kr/cms/resource/39/1939139_image2_1.jpg">
-				<div class="img_hover">
-					<p>[관광]test 서울특별시 어쩌구저쩌구</p>
-				</div>
+			<div class="table-responsive" style="width: 100%">
+			   <table class="table table-hover">
+			   <tbody id="result"></tbody>
+			   </table>
 			</div>
-		</div>
-		<div class="table_img">
-			<img class="table_imgbox" alt="xx" src="http://tong.visitkorea.or.kr/cms/resource/39/1939139_image2_1.jpg">
-		</div>
-		<div class="table_img">
-			<img class="table_imgbox" alt="xx" src="http://tong.visitkorea.or.kr/cms/resource/39/1939139_image2_1.jpg">
-		</div>
-	</div>
-	<div>
-		<div class="table_img">
-			<img class="table_imgbox" alt="xx" src="http://tong.visitkorea.or.kr/cms/resource/39/1939139_image2_1.jpg">
-		</div>
-		<div class="table_img">
-			<img class="table_imgbox" alt="xx" src="http://tong.visitkorea.or.kr/cms/resource/39/1939139_image2_1.jpg">
-		</div>
-		<div class="table_img">
-			<img class="table_imgbox" alt="xx" src="http://tong.visitkorea.or.kr/cms/resource/39/1939139_image2_1.jpg">
-		</div>
-	</div>
-</div>
 
-<div class="table-responsive">
-   <table class="table table-hover">
-   <tbody id="result"></tbody>
-   </table>
-</div>
 
 
 <a class="return-top" href="#" style="right:27px; bottom:50px; position:fixed; z-index:9999;">
@@ -136,16 +106,12 @@
 
 
 <script id="codeTemp" type="text/xxx-mytemplate">
-   {{#each .}}
-	<div>
-		<div class="table_img">
-				<img class="table_imgbox fade_in" alt="" src="{{firstimage}}">
-				<div class="img_hover">
-					<p>[관광] {{title}} </p>
-				</div>
-		</div>
+	<div class="table_list imgbox_hover">
+			<img class="table_imgbox" alt="" src="{{firstimage}}">
+			<div class="img_hover">
+				<p>[관광] {{title}} </p>
+			</div>
 	</div>
-   {{/each}}
 </script>
 
 <script type="text/javascript">
@@ -155,59 +121,92 @@
    $.getJSON("http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList?ServiceKey=" + serviceKey + "&contentTypeid=12&areaCode=1&sigunguCode=" + 1 + "&MobileOS=ETC&MobileApp=AppTesting", function(areaCode) {
        
        var items = areaCode.response.body.items.item;
-       
        var temp2 = $('#codeTemp').html();
        var template = Handlebars.compile(temp2);
        
-       var html = template(items);
+       $('#result').html("");
        
-       $('#result').html(html);
+       var j = 0;
+       for(var i=0; i<items.length; i++) {
+	         var html = template(items[i]);
+	         $('#result').append(html);
+	         imgCheck(i);
+	         imgHover();
+       }
     });
-   
    /* select 버튼 클릭시 */
-   $('#getjson').on('click', function() {
+   $('#gu').on('change', function() {
 	   
    var sigunguCode = $('#gu option:selected').val();
 
       $.getJSON("http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList?ServiceKey=" + serviceKey + "&contentTypeid=12&areaCode=1&sigunguCode=" + sigunguCode + "&MobileOS=ETC&MobileApp=AppTesting", function(areaCode) {
          
          var items = areaCode.response.body.items.item;
-         
          var temp2 = $('#codeTemp').html();
          var template = Handlebars.compile(temp2);
          
-         var html = template(items);
+         $('#result').html("");
          
-         $('#result').html(html);
+         for(var i=0; i<items.length; i++) {
+	         var html = template(items[i]);
+	         $('#result').append(html);
+	         imgCheck(i);
+	         imgHover();
+         }
       });
    });
+   /*----------------------------------------------------------------*/
+	
+	function imgCheck(i) {
+		if($('div.table_list img').eq(i).attr('src')==''){
+			$('div.table_list img').eq(i).attr('src','http://placehold.it/300x350?text=No_Image');
+		}
+	};
       
-//       for(var i=0; i<30; i++){
-// 			$('img').eq(i).attr("src", function(i, originValue) {
-// 				if(originValue=="")
-// 					return "http://placehold.it/350x250?text=" + item[i].title;
-// 			});
-// 		}
-      
-//    $('#db').on('click', function() {
-//    });	   
+	function imgHover() {
+		var $btn=$('.img_hover');
+		
+		$( ".imgbox_hover" ).on({
+			mouseenter: function() {
+				var index = getIndex(this);
+// 				$btn.eq(index).fadeIn();
+				if(!$btn.eq(index).is(':animated')) 
+					$btn.eq(index).fadeIn();
+			},
+			mouseleave: function() {
+				$btn.fadeOut();
+			}
+		});
+	}
+	
+	function getIndex(obj) {
+		return $('.imgbox_hover').index(obj);
+	}
 </script>
 
-<script type="text/javascript">
-$(document).ready(
-		function() {
-		   $( ".fade_in" ).mouseenter(function() {
-			   console.log("cc");
-			   $( ".img_hover" ).fadeIn( "slow", function() {
-			     	console.log("aa");
-			   });
-			 });
-		   $( ".fade_in" ).mouseleave(function() {
-			   $( ".img_hover" ).fadeOut( "slow", function() {
-			     	console.log("bb");
-			   });
-			 });
-		});
+<script>
+	/* 스크롤 이벤트 */
+	$(document).ready(function(){
+        
+	    $(".return-top").hide(); // 탑 버튼 숨김
+	    $(function () {
+	                 
+	        $(window).scroll(function () {
+	            if ($(this).scrollTop() > 100) { // 스크롤 내릴 표시
+	                $('.return-top').fadeIn();
+	            } else {
+	                $('.return-top').fadeOut();
+	            }
+	        });
+	                
+	        $('.return-top').click(function () {
+	            $('body,html').animate({
+	                scrollTop: 0
+	            }, 600);  // 탑 이동 스크롤 속도
+	            return false;
+	        });
+	    });
+	});
 </script>
 
 <script>
@@ -220,46 +219,19 @@ $(document).ready(
 </script>
 
 <script>
-	$(document).ready(
-			function() {
+	$(document).ready( function() {
+		$('#searchBtn').on("click", function(event) {
+			self.location = "list"
+			+ '${pageMaker.makeQuery(1)}'
+			+ "&searchType="
+			+ $("select option:selected").val()
+			+ "&keyword="
+			+ $('#keywordInput').val();
+		});
 
-				$('#searchBtn').on(
-						"click",
-						function(event) {
-							self.location = "list"
-									+ '${pageMaker.makeQuery(1)}'
-									+ "&searchType="
-									+ $("select option:selected").val()
-									+ "&keyword="
-									+ $('#keywordInput').val();
-						});
-
-				$('#newBtn').on("click", function(evt) {
-					self.location = "register";
-				});
-			});
-	
-	$(document).ready(function(){
-        
-	    $(".return-top").hide(); // 탑 버튼 숨김
-	    $(function () {
-	                 
-	        $(window).scroll(function () {
-	            if ($(this).scrollTop() > 200) { // 스크롤 내릴 표시
-	                $('.return-top').fadeIn();
-	            } else {
-	                $('.return-top').fadeOut();
-	            }
-	        });
-	                
-	        $('.return-top').click(function () {
-	            $('body,html').animate({
-	                scrollTop: 0
-	            }, 800);  // 탑 이동 스크롤 속도
-	            return false;
-	        });
-	    });
-	 
+		$('#newBtn').on("click", function(evt) {
+			self.location = "register";
+		});
 	});
 </script>
 
