@@ -37,8 +37,6 @@ public class FestivalProxyController {
 							+ "&numOfRows=10"
 							+ "&areaCode=1"
 							+ "&sigunguCode=" + sigunguCode
-//							+ "&eventstartdate=" + startDate
-//							+ "&eventenddate=" + endDate
 							+ "&pageNo=1"
 							+ "&MobileOS=ETC"
 							+ "&MobileApp=TestApp"
