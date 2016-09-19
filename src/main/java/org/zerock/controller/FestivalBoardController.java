@@ -34,4 +34,8 @@ public class FestivalBoardController {
   public void openAPI(@ModelAttribute("cri") SearchCriteria cri, Model model){
 	  logger.info(cri.toString());
   }
+  @RequestMapping(value = "/FRead")
+  public void FRead(@ModelAttribute("cri") SearchCriteria cri, Model model){
+	  logger.info(cri.toString());
+  }
 }
