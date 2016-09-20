@@ -58,7 +58,7 @@
 						<div class="form-group">
 							<label for="nation">Nationality</label>
 							 <select class="form-control" id="nation">
-							 	<c:forTokens var="ii" items="ARH,BRZ.CHI.DEN.EGY" delims=",.">
+							 	<c:forTokens var="ii" items="ASIA,EUROPE.AFRICA.NORTH AMERICA.SOUTH AMERICA.OCEANIA" delims=",.">
 							 	 <option>${ii}</option>
 							 	</c:forTokens>
 						      </select>
