@@ -18,7 +18,7 @@
 .temp{
 	float: left;
 	position: relative;
-	margin: 2.9%;
+	margin: 2%;
 }
 .img, .info{
 	width: 300px;
@@ -30,8 +30,8 @@
 	z-index: 50;
 }
 .info{
-	opacity : 0.7;
-	background-color:white;
+	opacity : 0.3;
+	
 	position: absolute;
 	display: none;
 	z-index: 100;
@@ -49,7 +49,7 @@
   	margin-top: 1%; 
  	margin-left: 3%;
  }
-
+ 
 </style>
 </head>
 <body>
@@ -102,21 +102,22 @@
 <!-- 			<th>행사 종료일</th> -->
 		</tr>
 	</thead>
-	<tbody id="result"></tbody>
+	<tbody id="result" ></tbody>
 	</table>
 </div>
 <script id="codeTemp" type="text/xxx-mytemplate">
 
 <div class="abc temp">		
 	<div class="info">
-		<a href="/festival/fRead?contentid={{contentid}}">
+		<a class="atag" href="/festival/fRead?contentid={{contentid}}" style="text-decoration: none; color: black;">
 			<br>
-			<div class="title"><h3>{{title}}</h3></div>
-			<hr>
-			<div class="addr"><h4>{{addr1}}</h4></div>
-			<div class="eventdate"><h4>{{eventstartdate}}~{{eventenddate}}</h4></div>
-			<div class="tel"><h4>{{tel}}</h4></div>
-			<button class="map">map</button>
+			<div style="opacity : 1" >
+				<div class="title"><h3>{{title}}</h3></div>
+				<hr>
+				<div class="addr"><h4>{{addr1}}</h4></div>
+				<div class="eventdate"><h4>{{eventstartdate}}~{{eventenddate}}</h4></div>
+				<div class="tel"><h4>{{tel}}</h4></div>
+			</div>
 		</a>
 	</div>
 	<img class="img" src="{{firstimage2}}">
@@ -201,11 +202,7 @@
 		return $('div.abc').index(obj);
 	}
 	
-	function mapclick() {
-		$('div.abc map').click(function(){
-		    alert("지도나와랏");
-		});
-	}
+
 	
 </script>
 </body>
