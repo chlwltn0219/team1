@@ -44,15 +44,15 @@
 			var temp2 = $('#codeTemp').html();
 			var template = Handlebars.compile(temp2);
 			
-			$('#result').append(html);
+			$('#result').html("");
 			
-// 			for(var i=0; i<items.length; i++) {
-// 				var html = template(items[i]);
-// 				console.log(html);
-// 				$('#result').append(html);
-// 				imgCheck(i);
-// 				imgHover()
-// 			}
+			for(var i=0; i<items.length; i++) {
+				var html = template(items[i]);
+				console.log(html);
+				$('#result').append(html);
+				imgCheck(i);
+				imgHover()
+			}
 	});
 </script>
 </body>

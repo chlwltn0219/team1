@@ -34,8 +34,6 @@ public class FestivalProxyController {
 							+ "&numOfRows=10"
 							+ "&areaCode=1"
 							+ "&sigunguCode=" + sigunguCode
-							+ "&eventStartDate=20160901"
-							+ "&eventEndDate=20160930"
 							+ "&pageNo=1"
 							+ "&MobileOS=ETC"
 							+ "&MobileApp=TestApp"
@@ -56,14 +54,15 @@ public class FestivalProxyController {
 	}	
 	@RequestMapping(value="/read", method = RequestMethod.GET)
 	public ResponseEntity<Body> test123(){
+		
 		Result result = null;
 		
 		RestTemplate restTemplate = new RestTemplate();
 		String baseURI = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/searchFestival"
 							+ "?ServiceKey=" + SERVICE_KEY
-							+ "&numOfRows=1"
+							+ "&areaCode=1"
+							+ "&numOfRows=20"
 							+ "&pageNo=1"
-//							+ "&contentid=2381406"
 							+ "&MobileOS=ETC"
 							+ "&MobileApp=TestApp"
 							+ "&_type=json";

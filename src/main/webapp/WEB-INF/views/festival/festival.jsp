@@ -121,9 +121,11 @@
 </script>
 
 <script type="text/javascript">
-	$('#sigungu').on('change', function() {
+	$('#find').on('click', function() {
 		
 		var areaCode = $('#sigungu option:selected').val();
+// 		var start = $('#start option:selected').val();
+// 		var end = $('#end option:selected').val();
 		
 		$.getJSON("/festival/list?sigunguCode=" + areaCode, function(data) {
 			// json 객체 내부 접근하기
