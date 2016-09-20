@@ -57,7 +57,7 @@
 	<table class="table table-hover">
 	<thead>
 		<tr>	
-				<th>contentId = ${contentid}</th>
+			<th>contentId = ${contentid}</th>
 <!-- 			<th>썸네일</th> -->
 <!-- 			<th>타이틀</th> -->
 <!-- 			<th>주소</th> -->
@@ -71,7 +71,8 @@
 </div>
 <script id="codeTemp" type="text/xxx-mytemplate">
 
-<div class="abc temp">		
+/*
+ <div class="abc temp">		
 	<div class="info">
 		<br>
 		<div class="title"><h3>{{title}}</h3></div>
@@ -82,7 +83,8 @@
 		<button class="map">map</button>
 	</div>
 	<img class="img" src="{{firstimage2}}">
-</div>
+</div> 
+*/
 </script>
 
 <script type="text/javascript">
@@ -136,11 +138,7 @@
 // 		return $('div.abc').index(obj);
 // 	}
 	
-// 	function mapclick() {
-// 		$('div.abc map').click(function(){
-// 		    alert("지도나와랏");
-// 		});
-// 	}
+
 	
 </script>
 
