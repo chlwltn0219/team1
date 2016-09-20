@@ -108,24 +108,38 @@
 		<div class="col-md-6">
 			<div class="box box-warning">
 				<div class="box-header">
-					<h3 class="box-title">Event Info</h3>
+					<h3 class="box-title">{{title}}</h3>
 				</div>
 				<div class="box-body">
 					<div>
-						<img alt="picture" src="">
+						<img alt="picture1" src="">
+						<img alt="picture2" src="">
+						<img alt="picture3" src="">
+						<img alt="picture4" src="">
+						<img alt="picture5" src="">
 					</div>
 					<hr>
 					<div class="row">
-						<div class="col-xs-3"><label>Title : </label></div>
-						<div class="col-xs-9">aa</div>
+						<div class="col-xs-3"><label>Location : </label></div>
+						<div class="col-xs-9">{{addr1}}<img alt="mapIcon" src=""></div>
 					</div>
 					<div class="row">
-						<div class="col-xs-3"><label>Address : </label></div>
-						<div class="col-xs-9">aa</div>
+						<div class="col-xs-3"><label>Programs : </label></div>
+						<div class="col-xs-9">
+							<div>{{program}}</div>
+							<div>{{subevent}}</div>
+						</div>
 					</div>
 					<div class="row">
-						<div class="col-xs-3"><label>PlayTime : </label></div>
-						<div class="col-xs-9">aa</div>
+						<div class="col-xs-3"><label>Cost : </label></div>
+						<div class="col-xs-9">
+							<div>{{usertimefestival}}</div>
+							<div>{{discountinfofestival}}</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-xs-3"><label>HomePage : </label></div>
+						<div class="col-xs-9">{{homepage}}</div>
 					</div>
 				</div>
 				
