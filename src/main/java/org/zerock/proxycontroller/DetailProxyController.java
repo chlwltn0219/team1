@@ -26,14 +26,14 @@ public class DetailProxyController {
 	DateUtil date = new DateUtil();
 	
 	@RequestMapping(value="/common", method = RequestMethod.GET )
-	public ResponseEntity<SingleBody> common(@RequestParam Integer contnetId) {
+	public ResponseEntity<Body> common(@RequestParam Integer contentId) {
 		
-		SingleResult result = null;
+		Result result = null;
 		
 		RestTemplate restTemplate = new RestTemplate();
 		String baseURI = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailCommon"
 							+ "?ServiceKey=" + SERVICE_KEY
-							+ "&contentId=" + contnetId
+							+ "&contentId=" + contentId
 							+ "&defaultYN=Y"
 							+ "&firstImageYN=Y"
 							+ "&addrinfoYN=Y"
@@ -46,13 +46,13 @@ public class DetailProxyController {
 		URI uri = URI.create(baseURI);
 		logger.info("request uri : " + uri);
 		
-		result = restTemplate.getForObject(uri, SingleResult.class);
+		result = restTemplate.getForObject(uri, Result.class);
 		logger.info(result.toString());
 		
-		SingleBody body = result.getResponse().getBody();
+		Body body = result.getResponse().getBody();
 		System.out.println("items = " + body.getItems().getItem());
 
-		return new ResponseEntity<SingleBody>(body, HttpStatus.OK);
+		return new ResponseEntity<Body>(body, HttpStatus.OK);
 		
 	}
 
@@ -80,6 +80,33 @@ public class DetailProxyController {
 		System.out.println("items = " + body.getItems().getItem());
 
 		return new ResponseEntity<SingleBody>(body, HttpStatus.OK);
+		
+	}
+
+	@RequestMapping(value="/info", method = RequestMethod.GET )
+	public ResponseEntity<Body> info(@RequestParam Integer contentId, @RequestParam Integer contentTypeId) {
+		
+		Result result = null;
+		
+		RestTemplate restTemplate = new RestTemplate();
+		String baseURI = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailInfo"
+							+ "?ServiceKey=" + SERVICE_KEY
+							+ "&contentId=" + contentId
+							+ "&contentTypeId=" + contentTypeId
+							+ "&MobileOS=ETC"
+							+ "&MobileApp=AppTesting"
+							+ "&_type=json";
+					
+		URI uri = URI.create(baseURI);
+		logger.info("request uri : " + uri);
+		
+		result = restTemplate.getForObject(uri, Result.class);
+		logger.info(restTemplate.getForObject(uri, String.class));
+		
+		Body body = result.getResponse().getBody();
+		System.out.println("items = " + body.getItems().getItem());
+
+		return new ResponseEntity<Body>(body, HttpStatus.OK);
 		
 	}
 	
