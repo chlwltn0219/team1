@@ -56,49 +56,48 @@
 <div class="table-responsive">
 	<table class="table table-hover">
 	<thead>
-		<tr>	
-			<th>contentId = ${contentid}</th>
-<!-- 			<th>썸네일</th> -->
-<!-- 			<th>타이틀</th> -->
-<!-- 			<th>주소</th> -->
-<!-- 			<th>전화번호</th> -->
-<!-- 			<th>행사 시작일</th> -->
-<!-- 			<th>행사 종료일</th> -->
+		<tr>
+			<td>contentId = ${contentid}</td>
+		</tr>
+		<tr>
+			<td><img src="{{firstimage}}">
 		</tr>
 	</thead>
 	<tbody id="result"></tbody>
 	</table>
 </div>
-<script id="codeTemp" type="text/xxx-mytemplate">
 
-/*
- <div class="abc temp">		
-	<div class="info">
-		<br>
-		<div class="title"><h3>{{title}}</h3></div>
-		<hr>
-		<div class="addr"><h4>{{addr1}}</h4></div>
-		<div class="eventdate"><h4>{{eventstartdate}}~{{eventenddate}}</h4></div>
-		<div class="tel"><h4>{{tel}}</h4></div>
-		<button class="map">map</button>
-	</div>
-	<img class="img" src="{{firstimage2}}">
-</div> 
-*/
+
+<script id="codeTemp" type="text/xxx-mytemplate">
+{{#each .}}
+	<tr>
+		<td>{{title}}</td>
+	</tr>
+	<tr>
+		<td><img src="{{firstimage}}"></td>
+	</tr>
+	<tr>
+		<td>{{addr1}}{{addr2}}</td>
+	</tr>
+	<tr>
+		<td>{{tel}}</td>
+	</tr>
+	<tr>
+		<td>{{eventstartdate}}~{{eventenddate}}</td>
+	</tr>
+{{/each}}
 </script>
 
 <script type="text/javascript">
-
-	$.getJSON("/detail/common?contentId=" + '${contentid}', function(data) {
-		// json 객체 내부 접근하기
+	$.getJSON("/detail/common?contentId=" + "${contentid}", function(data) {
 		console.dir(data);
 		
-// 		var items = data.items.item;
+		var items = data.items.item;
 		
-// 		var temp2 = $('#codeTemp').html();
-// 		var template = Handlebars.compile(temp2);
+		var temp2 = $('#codeTemp').html();
+		var template = Handlebars.compile(temp2);
 		
-// 		$('#result').html("");
+		$('#result').append(temp2);
 		
 // 		for(var i=0; i<items.length; i++) {
 // 			var html = template(items[i]);
@@ -107,40 +106,7 @@
 // 			imgCheck(i);
 // 			imgHover();
 // 		}
-		
 	});
-	
-// 	function imgCheck(i) {
-// 		if($('div.abc img').eq(i).attr('src')=='')
-// 			$('div.abc img').eq(i).attr('src','http://placehold.it/300x300?text=No_Img');
-// 	};
-	
-// 	function imgHover() {
-// 	    $('div.abc').on({
-// 	        mouseenter: function(){
-// 	        	var index = getIndex(this);
-// 	        	console.log(index)
-// 	            $('div.abc img').eq(index).css("opacity", 0.1);
-// // 	            $('div.abc div.info').eq(index).css("display", "block");
-// 	            if(!$('div.abc div.info').eq(index).is(':animated')) 
-// 					$('div.abc div.info').eq(index).fadeIn();
-// 	        },
-// 	        mouseleave: function(){
-// 	        	var index = getIndex(this);
-// 	            $('div.abc img').eq(index).css("opacity", 1);
-// // 	            $('div.abc div.info').eq(index).css("display", "none");
-// 	            $('div.abc div.info').fadeOut();
-// 	        }
-// 	    });
-// 	}
-	
-// 	function getIndex(obj) {
-// 		return $('div.abc').index(obj);
-// 	}
-	
-
-	
 </script>
-
 </body>
 </html>
