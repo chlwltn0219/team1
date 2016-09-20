@@ -84,14 +84,14 @@ public class DetailProxyController {
 	}
 	
 	@RequestMapping(value="/image", method = RequestMethod.GET )
-	public ResponseEntity<Body> image(@RequestParam Integer contnetId) {
+	public ResponseEntity<Body> image(@RequestParam Integer contentId) {
 		
 		Result result = null;
 		
 		RestTemplate restTemplate = new RestTemplate();
 		String baseURI = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailImage"
 							+ "?ServiceKey=" + SERVICE_KEY
-							+ "&contentId=" + contnetId
+							+ "&contentId=" + contentId
 							+ "&imageYN=Y"
 							+ "&MobileOS=ETC"
 							+ "&MobileApp=AppTesting"

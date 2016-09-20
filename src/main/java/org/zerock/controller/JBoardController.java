@@ -50,7 +50,7 @@ public class JBoardController {
 	public void read(@RequestParam("bno") int bno, @ModelAttribute("cri") SearchCriteria cri, Model model)
 			throws Exception {
 		
-		model.addAttribute("boardVO", service.read(bno));
+		model.addAttribute("jBoardVO", service.read(bno));
 	}
 
 	@RequestMapping(value = "/removePage", method = RequestMethod.POST)
