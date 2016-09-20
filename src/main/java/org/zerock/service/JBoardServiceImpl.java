@@ -26,18 +26,6 @@ public class JBoardServiceImpl implements JBoardService {
     dao.create(board);
     
   }
-  
-  //
-//  @Override
-//  public void regist(JBoardVO board) throws Exception {
-//    dao.create(board);
-//  }
-
-//  @Override
-//  public JBoardVO read(Integer bno) throws Exception {
-//    return dao.read(bno);
-//  }
-
 
   @Transactional(isolation=Isolation.READ_COMMITTED)
   @Override

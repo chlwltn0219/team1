@@ -58,7 +58,7 @@
 				<!-- /.box-header -->
 
 				<form role="form" action="modifyPage" method="post">
-					<input type='hidden' name='bno' value="${boardVO.bno}">
+					<input type='hidden' name='bno' value="${jBoardVO.bno}">
 					<input type='hidden' name='page' value="${cri.page}">
 					<input type='hidden' name='perPageNum' value="${cri.perPageNum}">
 					<input type='hidden' name='searchType' value="${cri.searchType}">
@@ -68,15 +68,15 @@
 				<div class="box-body">
 					<div class="form-group">
 						<label for="exampleInputEmail1">Title</label>
-						<input type="text" name='title' class="form-control" value="${boardVO.title}" readonly="readonly">
+						<input type="text" name='title' class="form-control" value="${jBoardVO.title}" readonly="readonly">
 					</div>
 					<div class="form-group">
 						<label for="exampleInputPassword1">Content</label>
-						<textarea class="form-control" name="content" rows="3" readonly="readonly">${boardVO.content}</textarea>
+						<textarea class="form-control" name="content" rows="3" readonly="readonly">${jBoardVO.content}</textarea>
 					</div>
 					<div class="form-group">
 						<label for="exampleInputEmail1">Writer</label>
-						<input type="text" name="writer" class="form-control" value="${boardVO.writer}" readonly="readonly">
+						<input type="text" name="writer" class="form-control" value="${jBoardVO.writer}" readonly="readonly">
 					</div>
 				</div>
 				<!-- /.box-body -->
@@ -89,7 +89,7 @@
 
 					<ul class="mailbox-attachments clearfix uploadedList">
 					</ul>
-					<c:if test="${login.uid == boardVO.writer}">
+					<c:if test="${login.uid == jBoardVO.writer}">
 						<button type="submit" class="btn btn-warning" id="modifyBtn">Modify</button>
 						<button type="submit" class="btn btn-danger" id="removeBtn">REMOVE</button>
 					</c:if>
@@ -173,7 +173,7 @@
 				<!-- timeline time label -->
 				<li class="time-label" id="repliesDiv"><span class="bg-green">
 						Replies List <small id='replycntSmall'> [
-							${boardVO.replycnt} ] </small>
+							${jBoardVO.replycnt} ] </small>
 				</span></li>
 			</ul>
 
@@ -280,8 +280,7 @@
 
 	}
 
-	var bno = ${boardVO.bno};
-
+	var bno = ${jBoardVO.bno};
 	var replyPage = 1;
 
 	function getPage(pageInfo) {
@@ -487,7 +486,7 @@ $(document).ready(function(){
 		formObj.submit();
 	});
 	
-	var bno = ${boardVO.bno};
+	var bno = ${jBoardVO.bno};
 	var template = Handlebars.compile($("#templateAttach").html());
 	
 // 	$.getJSON("/jboard/getAttach/"+bno,function(list){
