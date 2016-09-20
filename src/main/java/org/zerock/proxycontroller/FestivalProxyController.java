@@ -28,9 +28,6 @@ public class FestivalProxyController {
 		
 		Result result = null;
 		
-		DateUtil date = new DateUtil();
-		logger.info("tmFc = " + date.gettmFc());
-		
 		RestTemplate restTemplate = new RestTemplate();
 		String baseURI = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/searchFestival"
 							+ "?ServiceKey=" + SERVICE_KEY
@@ -55,4 +52,31 @@ public class FestivalProxyController {
 		return new ResponseEntity<Body>(body, HttpStatus.OK);
 		
 	}	
+	@RequestMapping(value="/read", method = RequestMethod.GET)
+	public ResponseEntity<Body> test123(){
+		
+		Result result = null;
+		
+		RestTemplate restTemplate = new RestTemplate();
+		String baseURI = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/searchFestival"
+							+ "?ServiceKey=" + SERVICE_KEY
+							+ "&areaCode=1"
+							+ "&numOfRows=20"
+							+ "&pageNo=1"
+							+ "&MobileOS=ETC"
+							+ "&MobileApp=TestApp"
+							+ "&_type=json";
+
+		URI uri = URI.create(baseURI);
+		logger.info("request uri : " + uri);
+		
+		result = restTemplate.getForObject(uri, Result.class);
+		logger.info(restTemplate.getForObject(uri, String.class));
+		
+		Body body = result.getResponse().getBody();
+		System.out.println("items = " + body.getItems().getItem());
+		
+		
+		return new ResponseEntity<Body>(body, HttpStatus.OK);
+	}
 }
