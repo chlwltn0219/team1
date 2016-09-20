@@ -78,6 +78,8 @@
 						<label for="exampleInputEmail1">Writer</label>
 						<input type="text" name="writer" class="form-control" value="${jBoardVO.writer}" readonly="readonly">
 					</div>
+						<label>Content Id</label>
+						<input type="text" value="${boardVO.contentid}" readonly="readonly" >
 				</div>
 				<!-- /.box-body -->
 
