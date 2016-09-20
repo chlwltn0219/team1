@@ -12,39 +12,8 @@
 <script src="/resources/plugins/jQuery/jQuery-2.1.4.min.js"></script>
 <!-- HandleBars -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+<link href="/resources/css/fRead.css" rel="stylesheet" type="text/css" />
 
-<style type="text/css">
-
-.temp{
-	float: left;
-	position: relative;
-	margin: 2.9%;
-}
-
-.img, .info{
-	width: 300px;
-	height:300px;
-	float:left; 
-	
-}
-
-.img{
-	z-index: 50;
-}
-
-.info{
-	opacity : 0.7;
-	background-color : white;
-	position : absolute;
-	display : none;
-	z-index : 100;
-}
-
-.info * {
-	padding : 1px 5px;
-}
-
-</style>
 </head>
 <body>
 <!-- <button id="json" class="btn btn-primary">getJSON form Open API</button> -->
@@ -55,36 +24,40 @@
 
 <div class="table-responsive">
 	<table class="table table-hover">
-	<thead>
-		<tr>
-		</tr>
-		<tr>
-<!-- 			<td><img src="{{firstimage}}"> -->
-		</tr>
+	<thead id="result">
 	</thead>
-	<tbody id="result"></tbody>
+	<tbody id="result1"></tbody>
 	</table>
 </div>
 
 
 <script id="codeTemp" type="text/xxx-mytemplate">
-	<tr>
-		<td>{{title}}</td>
-	</tr>
-	<tr>
-		<td><img src="{{firstimage}}"></td>
-	</tr>
-	<tr>
-		<td>{{addr1}}{{addr2}}</td>
-	</tr>
-	<tr>
-		<td>{{tel}}</td>
-	</tr>
-	<tr>
-		<td>{{eventstartdate}}~{{eventenddate}}</td>
-	</tr>
+<br>
+	<div class="title">{{title}}</div>
+<br>
+<hr>
+	<div>
+		<img class="firstimg" src="{{firstimage}}">
+	</div>
+<br>
+<hr>
+<ul>
+<li>전화번호</li><br>
+	<p>{{tel}}</p>
+<li>주소</li><br>
+	<p>{{addr1}}{{addr2}}</p>
+<br>
+<li>상세 페이지</li><br>
+	<p id="homepage"></p><br>
+<li>개요</li><br>
+	<p id="overview"></p>
+</ul>
 </script>
-
+<script id="codeTemp1" type="text/xxx-mytemplate">
+		<tr>
+		<td>{{eventstartdate}}~{{eventenddate}}</td>
+		</tr>
+</script>
 <script type="text/javascript">
 	$.getJSON("/detail/common?contentId=" + "${contentid}", function(data) {
 		console.dir(data);
@@ -97,20 +70,24 @@
 		var html = template(items);
 		
 		$('#result').html(html);
-			imgCheck();
+		$('#overview').html(items.overview);
+		$('#homepage').html(items.homepage);
 		
-// 		for(var i=0; i<items.length; i++) {
-// 			var html = template(items[i]);
-// 			console.log(html);
-// 			$('#result').append(html);
-// 			imgHover();
-// 		}
+		
+	$.getJSON("/detail/intro?contentId=" + "${contentid}" + "&contentTypeId=" + "${contenttypeid}", function(data) {
+		console.dir(data);
+		
+		var items = data.items.item;
+		console.dir(items);
+		
+		var temp2 = $('#codeTemp1').html();
+		var template = Handlebars.compile(temp2);
+		var html = template(items);
+		
+		$('#result1').html(html);
 
-		function imgCheck() {
-			if($('div.abc img').eq().attr('src')=='')
-				$('div.abc img').eq().attr('src','/resources/img/no-image.jpg');
-		};
 	});
+});
 </script>
 </body>
 </html>

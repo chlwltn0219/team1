@@ -1,0 +1,67 @@
+@CHARSET "UTF-8";
+@import url(http://fonts.googleapis.com/earlyaccess/jejugothic.css);
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothiccoding.css);
+
+/* *{ */
+/* 	text-align:center;	 */
+
+/* } */
+hr{
+	border-color:darkgray;
+}
+
+p{
+	font-size: 20px;
+}
+
+li{
+	text-align: left;
+	font-weight: bold;
+	font-size: 15px;
+	font-family: 'Nanum Gothic Coding', monospace;
+}
+
+#overview{
+	margin: 10px;
+	font-size: 15px;
+	text-align:left;
+}
+
+.firstimg{
+	width: 70%;
+	height:40%;
+}
+
+.title{
+	font-size: 30px;
+	font-weight: bold;
+}
+
+.temp{
+	float: left;
+	position: relative;
+	margin: 2.9%;
+}
+
+.img, .info{
+	width: 300px;
+	height:300px;
+	float:left; 
+}
+
+.img{
+	z-index: 50;
+}
+
+.info{
+	opacity : 0.7;
+	background-color : white;
+	position : absolute;
+	display : none;
+	z-index : 100;
+}
+
+.info * {
+	padding : 1px 5px;
+}
