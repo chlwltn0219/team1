@@ -176,7 +176,7 @@
 	
 	function imgCheck(i) {
 		if($('div.abc img').eq(i).attr('src')=='')
-			$('div.abc img').eq(i).attr('src','http://placehold.it/300x300?text=No_Img');
+			$('div.abc img').eq(i).attr('src','/resources/img/NoImage.jpg');
 	};
 	
 	function imgHover() {
