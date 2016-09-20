@@ -78,6 +78,8 @@
 						<label for="exampleInputEmail1">Writer</label>
 						<input type="text" name="writer" class="form-control" value="${boardVO.writer}" readonly="readonly">
 					</div>
+						<label>Content Id</label>
+						<input type="text" value="${boardVO.contentid}" readonly="readonly" >
 				</div>
 				<!-- /.box-body -->
 
@@ -245,6 +247,13 @@
 		{{/each}}
 	</script>  
 
+	<script id="EventTemplate" type="text/x-handlebars-template">
+		<li >
+			<div >
+				
+			</div>
+		</li>                
+	</script>  
 <script>
 	
 	Handlebars.registerHelper("eqReplyer", function(replyer, block) {
@@ -439,7 +448,7 @@ $(document).ready(function(){
 	console.log(formObj);
 	
 	$("#modifyBtn").on("click", function(){
-		formObj.attr("action", "/sboard/modifyPage");
+		formObj.attr("action", "/jboard/modifyPage");
 		formObj.attr("method", "get");		
 		formObj.submit();
 	});
@@ -470,50 +479,50 @@ $(document).ready(function(){
 			});
 		}
 		
-		formObj.attr("action", "/sboard/removePage");
+		formObj.attr("action", "/jboard/removePage");
 		formObj.submit();
 	});	
 	
 	$("#goListBtn ").on("click", function(){
 		formObj.attr("method", "get");
-		formObj.attr("action", "/sboard/list");
+		formObj.attr("action", "/jboard/list");
 		formObj.submit();
 	});
 	
 	var bno = ${boardVO.bno};
 	var template = Handlebars.compile($("#templateAttach").html());
 	
-	$.getJSON("/sboard/getAttach/"+bno,function(list){
-		$(list).each(function(){
+// 	$.getJSON("/jboard/getAttach/"+bno,function(list){
+// 		$(list).each(function(){
 			
-			var fileInfo = getFileInfo(this);
+// 			var fileInfo = getFileInfo(this);
 			
-			var html = template(fileInfo);
+// 			var html = template(fileInfo);
 			
-			 $(".uploadedList").append(html);
+// 			 $(".uploadedList").append(html);
 			
-		});
-	});
+// 		});
+// 	});
 	
 
 
-	$(".uploadedList").on("click", ".mailbox-attachment-info a", function(event){
+// 	$(".uploadedList").on("click", ".mailbox-attachment-info a", function(event){
 		
-		var fileLink = $(this).attr("href");
+// 		var fileLink = $(this).attr("href");
 		
-		if(checkImageType(fileLink)){
+// 		if(checkImageType(fileLink)){
 			
-			event.preventDefault();
+// 			event.preventDefault();
 					
-			var imgTag = $("#popup_img");
-			imgTag.attr("src", fileLink);
+// 			var imgTag = $("#popup_img");
+// 			imgTag.attr("src", fileLink);
 			
-			console.log(imgTag.attr("src"));
+// 			console.log(imgTag.attr("src"));
 					
-			$(".popup").show('slow');
-			imgTag.addClass("show");		
-		}	
-	});
+// 			$(".popup").show('slow');
+// 			imgTag.addClass("show");		
+// 		}	
+// 	});
 	
 	$("#popup_img").on("click", function(){
 		
