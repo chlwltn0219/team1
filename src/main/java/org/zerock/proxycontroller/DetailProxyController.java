@@ -26,9 +26,9 @@ public class DetailProxyController {
 	DateUtil date = new DateUtil();
 	
 	@RequestMapping(value="/common", method = RequestMethod.GET )
-	public ResponseEntity<Body> common(@RequestParam Integer contentId) {
+	public ResponseEntity<SingleBody> common(@RequestParam Integer contentId) {
 		
-		Result result = null;
+		SingleResult result = null;
 		
 		RestTemplate restTemplate = new RestTemplate();
 		String baseURI = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailCommon"
@@ -46,13 +46,13 @@ public class DetailProxyController {
 		URI uri = URI.create(baseURI);
 		logger.info("request uri : " + uri);
 		
-		result = restTemplate.getForObject(uri, Result.class);
+		result = restTemplate.getForObject(uri, SingleResult.class);
 		logger.info(result.toString());
 		
-		Body body = result.getResponse().getBody();
+		SingleBody body = result.getResponse().getBody();
 		System.out.println("items = " + body.getItems().getItem());
 
-		return new ResponseEntity<Body>(body, HttpStatus.OK);
+		return new ResponseEntity<SingleBody>(body, HttpStatus.OK);
 		
 	}
 

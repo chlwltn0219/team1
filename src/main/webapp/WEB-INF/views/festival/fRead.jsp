@@ -57,10 +57,9 @@
 	<table class="table table-hover">
 	<thead>
 		<tr>
-			<td>contentId = ${contentid}</td>
 		</tr>
 		<tr>
-			<td><img src="{{firstimage}}">
+<!-- 			<td><img src="{{firstimage}}"> -->
 		</tr>
 	</thead>
 	<tbody id="result"></tbody>
@@ -69,7 +68,6 @@
 
 
 <script id="codeTemp" type="text/xxx-mytemplate">
-{{#each .}}
 	<tr>
 		<td>{{title}}</td>
 	</tr>
@@ -85,7 +83,6 @@
 	<tr>
 		<td>{{eventstartdate}}~{{eventenddate}}</td>
 	</tr>
-{{/each}}
 </script>
 
 <script type="text/javascript">
@@ -93,19 +90,26 @@
 		console.dir(data);
 		
 		var items = data.items.item;
+		console.dir(items);
 		
 		var temp2 = $('#codeTemp').html();
 		var template = Handlebars.compile(temp2);
+		var html = template(items);
 		
-		$('#result').append(temp2);
+		$('#result').html(html);
+			imgCheck();
 		
 // 		for(var i=0; i<items.length; i++) {
 // 			var html = template(items[i]);
 // 			console.log(html);
 // 			$('#result').append(html);
-// 			imgCheck(i);
 // 			imgHover();
 // 		}
+
+		function imgCheck() {
+			if($('div.abc img').eq().attr('src')=='')
+				$('div.abc img').eq().attr('src','/resources/img/no-image.jpg');
+		};
 	});
 </script>
 </body>
