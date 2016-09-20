@@ -33,6 +33,51 @@
 		<!-- left column -->
 		<div class="col-md-6">
 			<!-- general form elements -->
+			<div class="box box-primary">
+				<div class="box-header">
+					<h3 class="box-title">REGISTER BOARD</h3>
+				</div>
+				<!-- /.box-header -->
+
+				<form id='registerForm' role="form" method="post">
+					<div class="box-body">
+						<div class="form-group">
+							<label for="exampleInputEmail1">Title</label>
+							<input type="text" name='title' class="form-control" placeholder="Enter Title">
+						</div>
+						<div class="form-group">
+							<label for="exampleInputPassword1">Content</label>
+							<textarea class="form-control" name="content" rows="25" placeholder="Enter ..."></textarea>
+						</div>
+
+						<div class="form-group">
+							<input id="contentId" type="hidden" name=contentId value="">
+						</div>
+						
+						<div class="form-group">
+							<label for="exampleInputEmail1">Writer</label> <input type="text"
+								name="writer" class="form-control" value='${login.uid }'
+								readonly>
+						</div>
+						
+					</div>
+
+					<!-- /.box-body -->
+
+					<div class="box-footer">
+						<button type="submit" class="btn btn-primary">Submit</button>
+					</div>
+				</form>
+
+
+			</div>
+			<!-- /.box -->
+		</div>
+		<!--/.col (left) -->
+
+		<!-- right column -->
+		<div class="col-md-6">
+			<!-- general form elements -->
 			<div class="box box-warning">
 				<div class="box-header">
 					<h3 class="box-title">Search Event</h3>
@@ -42,9 +87,6 @@
 <!-- 				<form id='registerForm' role="form" method="post"> -->
 				
 					<div class="box-body">
-<!-- 						<div> -->
-<!-- 							<input id="keyword" class="form-control" type="search" value="" placeholder="Searsh Keyword..."> -->
-<!-- 						</div> -->
 						<div>
 							<input id="selectedEvent" class="form-control" type="text" value="" readonly="readonly" placeholder="Selected Event...">
 						</div>
@@ -74,11 +116,18 @@
 
 	<script type="text/javascript" src="/resources/js/upload.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+	
+	<script id="selectTemplate" type="text/x-handlebars-template">
+		
+
+
+	</script>
 
 	<script id="eventTemplate" type="text/x-handlebars-template">
 	   {{#each .}}
 			<li class="list-group-item">
-				<div><h4>{{title}}<h4></div>
+				<div class="title"><h4>{{title}}</h4></div>
+				<input type="hidden" name="contentId" value="{{contentid}}">
 				<hr>
 				<div style="text-align: right;">
 					<h4><span class="label {{onTime today eventstartdate eventenddate}}">{{eventstartdate}}-{{eventenddate}}</span></h4>
@@ -86,6 +135,7 @@
 			</li>
 	   {{/each}}
 	</script>
+
 
 	<script id="pageTemplate" type="text/x-handlebars-template">
 		<button id="prev" type="button" class="btn btn-default" style="visibility: {{visiblility prev}}">Prev</button>
@@ -121,19 +171,41 @@
 				var pageTemplate = Handlebars.compile(page);
 				var pagehtml = pageTemplate(pageMaker);
 				$('#pager').html(pagehtml);
+
+				setPaginationEvent(data);
+				setListEvent();
 				
-				$('button.page').on('click', function() {
-					getList(this.value);
-				});
-				
-				$('#prev').on('click', function() {
-					getList(data.pageMaker.startPage-1);					
-				});
-				
-				$('#next').on('click', function() {
-					getList(data.pageMaker.endPage+1);
-				});
-				
+			});
+		}
+
+		function setPaginationEvent(data) {
+			$('button.page').on('click', function() {
+				getList(this.value);
+			});
+			$('#prev').on('click', function() {
+				getList(data.pageMaker.startPage-1);					
+			});
+			$('#next').on('click', function() {
+				getList(data.pageMaker.endPage+1);
+			});
+		}
+		
+		function setListEvent() {
+			$('li.list-group-item').on({
+			    mouseenter: function(){
+			        $(this).css("background-color", "#FAFAFA");
+			    }, 
+			    mouseleave: function(){
+			        $(this).css("background-color", "#FFFFFF");
+			    }, 
+			    click: function(){
+			    	$(this).css("background-color", "#F0F0F0");
+			        var index = $('li.list-group-item').index(this);
+			        var selectTitle = $('li.list-group-item div.title h4').eq(index).html();
+			        var contentId = $('li.list-group-item input').eq(index).val();
+			    	$('#selectedEvent').val(selectTitle);
+			    	$('#contentId').val(contentId);
+			    } 
 			});
 		}
 		
@@ -177,7 +249,6 @@
 		    
 		    return accum;
 		});
-		
 		
 	</script>
 

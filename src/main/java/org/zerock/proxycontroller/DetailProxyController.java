@@ -26,14 +26,14 @@ public class DetailProxyController {
 	DateUtil date = new DateUtil();
 	
 	@RequestMapping(value="/common", method = RequestMethod.GET )
-	public ResponseEntity<SingleBody> common(@RequestParam Integer contnetId) {
+	public ResponseEntity<SingleBody> common(@RequestParam Integer contentId) {
 		
 		SingleResult result = null;
 		
 		RestTemplate restTemplate = new RestTemplate();
 		String baseURI = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailCommon"
 							+ "?ServiceKey=" + SERVICE_KEY
-							+ "&contentId=" + contnetId
+							+ "&contentId=" + contentId
 							+ "&defaultYN=Y"
 							+ "&firstImageYN=Y"
 							+ "&addrinfoYN=Y"

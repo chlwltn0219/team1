@@ -6,8 +6,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="org.zerock.mapper.JBoardMapper">
 
 	<insert id="create">
-		insert into tbl_JBoard (title, content, writer)
-		values(#{title},#{content}, #{writer})
+		insert into tbl_JBoard (title, content, writer, contentid)
+		values(#{title},#{content}, #{writer}, #{contentid})
 	</insert>
 
 	<select id="read" resultType="org.zerock.domain.JBoardVO">

@@ -7,7 +7,7 @@
 	border: 2px solid gray;
 }
 
-.table_img {
+.table_list {
 	width: 340px;
 	height: 240px;
 	margin: 11px;
@@ -27,7 +27,7 @@
 	height: 90px;
 	background-color: white;
 	border-top: 1px solid gray;
-	display: block;
+	display: none;
 	position: absolute;
 	line-height: 6;
 }
