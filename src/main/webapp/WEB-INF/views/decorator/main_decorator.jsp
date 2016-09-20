@@ -78,7 +78,7 @@ div.container {
 					<div class="collapse navbar-collapse" id="myNavbar">
 						<!-- Menu -->
 						<ul class="nav navbar-nav">
-							<li class="active"><a href="/notice/board">Notice</a></li>
+							<li class="active"><a href="/jboard/list">Go With Me?</a></li>
 							<li class="dropdown">
 								<a href="/festival/festival">행사</a>
 <!-- 								<ul class="dropdown-menu"> -->
