@@ -78,7 +78,6 @@ div.container {
 					<div class="collapse navbar-collapse" id="myNavbar">
 						<!-- Menu -->
 						<ul class="nav navbar-nav">
-							<li class="active"><a href="/jboard/list">Go With Me?</a></li>
 							<li class="dropdown">
 								<a href="/festival/festival">행사</a>
 <!-- 								<ul class="dropdown-menu"> -->
@@ -94,6 +93,7 @@ div.container {
 									<li><a href="/place/list">문화시설</a></li>
 								</ul>
 							</li>
+							<li class="active"><a href="/jboard/list">Go With Me?</a></li>
 							<li><a href="#">Gallery</a></li>
 							<li><a href="#">Statistics</a></li>
 						</ul>
