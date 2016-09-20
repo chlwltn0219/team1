@@ -82,6 +82,33 @@ public class DetailProxyController {
 		return new ResponseEntity<SingleBody>(body, HttpStatus.OK);
 		
 	}
+
+	@RequestMapping(value="/info", method = RequestMethod.GET )
+	public ResponseEntity<Body> info(@RequestParam Integer contentId, @RequestParam Integer contentTypeId) {
+		
+		Result result = null;
+		
+		RestTemplate restTemplate = new RestTemplate();
+		String baseURI = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailInfo"
+							+ "?ServiceKey=" + SERVICE_KEY
+							+ "&contentId=" + contentId
+							+ "&contentTypeId=" + contentTypeId
+							+ "&MobileOS=ETC"
+							+ "&MobileApp=AppTesting"
+							+ "&_type=json";
+					
+		URI uri = URI.create(baseURI);
+		logger.info("request uri : " + uri);
+		
+		result = restTemplate.getForObject(uri, Result.class);
+		logger.info(restTemplate.getForObject(uri, String.class));
+		
+		Body body = result.getResponse().getBody();
+		System.out.println("items = " + body.getItems().getItem());
+
+		return new ResponseEntity<Body>(body, HttpStatus.OK);
+		
+	}
 	
 	@RequestMapping(value="/image", method = RequestMethod.GET )
 	public ResponseEntity<Body> image(@RequestParam Integer contnetId) {
