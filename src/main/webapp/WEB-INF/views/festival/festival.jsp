@@ -18,20 +18,20 @@
 .temp{
 	float: left;
 	position: relative;
-	margin:2%;
+	margin: 2.9%;
 }
-
 .img, .info{
 	width: 300px;
 	height:300px;
-	float:left; 
+	float:left; 	
 }
 
 .img{
 	z-index: 50;
 }
-
 .info{
+	opacity : 0.7;
+	background-color:white;
 	position: absolute;
 	display: none;
 	z-index: 100;
@@ -41,22 +41,24 @@
 	padding: 1px 5px;
 }
 
- .title { 
+ .title,.eventdate,.addr,.tel,.map { 
  	text-align: center; 
  } 
+ 
+ .wldur {
+  	margin-top: 1%; 
+ 	margin-left: 3%;
+ }
 
 </style>
 </head>
 <body>
 <!-- <button id="json" class="btn btn-primary">getJSON form Open API</button> -->
-<!-- <button id="clear" class="btn btn-info">clear</button> -->
-<!-- <input type="text" id="find"> -->
-<!-- <button id="findbtn" class="btn btn-info">find</button> -->
 <!-- <label><input type="date" id="start"></label> -->
 <!-- <label><input type="date" id="stop"></label> -->
 <!-- <input type="text" id="find"> -->
-
-<label>지역: </label>
+<div class="wldur">
+<label>지역: &nbsp;</label>
 <select id="sigungu">
 	<option value="1">강남구</option>
     <option value="2">강동구</option>
@@ -84,7 +86,9 @@
     <option value="24">중구</option>
     <option value="25">중랑구</option>
 </select>
-<br>
+<hr>
+</div>
+
 
 <div class="table-responsive">
 	<table class="table table-hover">
@@ -102,21 +106,23 @@
 	</table>
 </div>
 <script id="codeTemp" type="text/xxx-mytemplate">
-<!--	<div> -->
-<!--		<img src="{{firstimage2}}" style="width:300px; height:350px; float:left; margin:2%;"> -->	
-<!--	</div> -->
+
 <div class="abc temp">		
 	<div class="info">
-		<br>
-		<div class="title"><h3>{{title}}</h3></div>
-		<hr>
-		<div class="eventdate"><h4>{{eventstartdate}}~{{eventenddate}}</h4></div>
-		<div class="addr"><h4>{{addr1}}</h4></div>
-		<div class="tel"><h4>{{tel}}</h4></div>
+		<a href="/festival/fRead?contentid={{contentid}}">
+			<br>
+			<div class="title"><h3>{{title}}</h3></div>
+			<hr>
+			<div class="addr"><h4>{{addr1}}</h4></div>
+			<div class="eventdate"><h4>{{eventstartdate}}~{{eventenddate}}</h4></div>
+			<div class="tel"><h4>{{tel}}</h4></div>
+			<button class="map">map</button>
+		</a>
 	</div>
 	<img class="img" src="{{firstimage2}}">
 </div>
 </script>
+
 
 <script type="text/javascript">
 	$('#sigungu').on('change', function() {
@@ -139,7 +145,7 @@
 				console.log(html);
 				$('#result').append(html);
 				imgCheck(i);
-				imgHover()
+				imgHover();
 			}
 		});
 	});
@@ -178,18 +184,27 @@
 	        	var index = getIndex(this);
 	        	console.log(index)
 	            $('div.abc img').eq(index).css("opacity", 0.1);
-	            $('div.abc div.info').eq(index).css("display", "block");
+// 	            $('div.abc div.info').eq(index).css("display", "block");
+	            if(!$('div.abc div.info').eq(index).is(':animated')) 
+					$('div.abc div.info').eq(index).fadeIn();
 	        },
 	        mouseleave: function(){
 	        	var index = getIndex(this);
 	            $('div.abc img').eq(index).css("opacity", 1);
-	            $('div.abc div.info').eq(index).css("display", "none");
+// 	            $('div.abc div.info').eq(index).css("display", "none");
+	            $('div.abc div.info').fadeOut();
 	        }
 	    });
 	}
 	
 	function getIndex(obj) {
 		return $('div.abc').index(obj);
+	}
+	
+	function mapclick() {
+		$('div.abc map').click(function(){
+		    alert("지도나와랏");
+		});
 	}
 	
 </script>
