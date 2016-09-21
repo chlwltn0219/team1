@@ -53,10 +53,7 @@ public class DetailProxyController {
 		logger.info("request uri : " + uri);
 		
 		result = restTemplate.getForObject(uri, SingleResult.class);
-<<<<<<< HEAD
-=======
-		logger.info(result.toString());
->>>>>>> 2614a5b6213c923441f5ac88db07ad6085cee393
+
 		
 		SingleBody body = result.getResponse().getBody();
 		System.out.println("items = " + body.getItems().getItem());
