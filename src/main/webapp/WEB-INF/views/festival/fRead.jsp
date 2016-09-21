@@ -27,10 +27,18 @@
 	<thead id="result">
 	</thead>
 	<tbody id="result1"></tbody>
+	<tbody id="result2"></tbody>
 	</table>
 </div>
 
-
+<script id="codeTemp1" type="text/xxx-mytemplate">
+<br>
+		<ul>	
+			<li>행사 기간</li>
+<br>
+				<div>{{eventstartdate}}~{{eventenddate}}</div>
+		</ul>	
+</script>
 <script id="codeTemp" type="text/xxx-mytemplate">
 <br>
 	<div class="title">{{title}}</div>
@@ -42,22 +50,18 @@
 <br>
 <hr>
 <ul>
-<li>전화번호</li><br>
-	<p>{{tel}}</p>
-<li>주소</li><br>
-	<p>{{addr1}}{{addr2}}</p>
-<br>
-<li>상세 페이지</li><br>
-	<p id="homepage"></p><br>
-<li>개요</li><br>
-	<p id="overview"></p>
-</ul>
+	<li>전화번호</li><br>
+		<p>{{tel}}</p>
+	<li>주소</li><br>
+		<p>{{addr1}}{{addr2}} <button style="font-size:15px">Map</button></p>
+	<br>
+	<li>상세 페이지</li><br>
+		<p id="homepage"></p><br>
+	<li>개요</li><br>
+		<p id="overview"></p>
+	</ul>
 </script>
-<script id="codeTemp1" type="text/xxx-mytemplate">
-		<tr>
-		<td>{{eventstartdate}}~{{eventenddate}}</td>
-		</tr>
-</script>
+
 <script type="text/javascript">
 	$.getJSON("/detail/common?contentId=" + "${contentid}", function(data) {
 		console.dir(data);
@@ -73,8 +77,10 @@
 		$('#overview').html(items.overview);
 		$('#homepage').html(items.homepage);
 		
+
 		
-	$.getJSON("/detail/intro?contentId=" + "${contentid}" + "&contentTypeId=" + "${contenttypeid}", function(data) {
+	var typeId = items.contenttypeid;
+	$.getJSON("/detail/intro?contentId=" + "${contentid}" + "&contentTypeId=" + typeId, function(data) {
 		console.dir(data);
 		
 		var items = data.items.item;
