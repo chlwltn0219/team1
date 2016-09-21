@@ -3,10 +3,6 @@
 @import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
 @import url(http://fonts.googleapis.com/earlyaccess/nanumgothiccoding.css);
 
-/* *{ */
-/* 	text-align:center;	 */
-
-/* } */
 hr{
 	border-color:darkgray;
 }
@@ -33,10 +29,6 @@ li{
 	height:40%;
 }
 
-#map{
-	font-size:15px;
-}
-
 .title{
 	font-size: 30px;
 	font-weight: bold;
@@ -46,26 +38,4 @@ li{
 	float: left;
 	position: relative;
 	margin: 2.9%;
-}
-
-.img, .info{
-	width: 300px;
-	height:300px;
-	float:left; 
-}
-
-.img{
-	z-index: 50;
-}
-
-.info{
-	opacity : 0.7;
-	background-color : white;
-	position : absolute;
-	display : none;
-	z-index : 100;
-}
-
-.info * {
-	padding : 1px 5px;
 }

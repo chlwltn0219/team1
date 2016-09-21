@@ -4,6 +4,11 @@
 <html>
 <head>
 <title>festival.jsp</title>
+<!-- Modal -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <!-- Bootstrap 3.3.4 -->
 <link href="/resources/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css" />
 <!-- Font Awesome Icons -->
@@ -13,16 +18,10 @@
 <!-- HandleBars -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 <link href="/resources/css/fRead.css" rel="stylesheet" type="text/css" />
-<!-- Modal -->
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 </head>
 <body>
 
-<div class="container">
 
 <div class="table-responsive">
 	<table class="table table-hover">
@@ -32,26 +31,26 @@
 	</table>
 </div>
 
-<div class="modal fade" id="map" role="dialog">
-    <div class="modal-dialog">
-    
-    <!-- Modal content-->
+<!-- 지도 -->
+
+<div class="container">
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Modal Header</h4>
+          <h4 class="modal-title">지도</h4>
         </div>
         <div class="modal-body">
-          <p>Some text in the modal.</p>
+          <p>지도를 보여줘</p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
       </div>
-      
     </div>
   </div>
-  
 </div>
 
 <!-- 행사 기간 -->
@@ -79,7 +78,7 @@
 	<li>전화번호</li><br>
 		<p>{{tel}}</p>
 	<li>주소</li><br>
-		<p>{{addr1}}{{addr2}} <button id="map" class="btn btn-info btn-lg" data-toggle="modal" data-target="#map">Map</button></p>
+		<p>{{addr1}}{{addr2}} <button style="font-size:15px;" type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Map</button></p>
 	<br>
 	<li>상세 페이지</li><br>
 		<p id="homepage"></p><br>
