@@ -1,6 +1,8 @@
 package org.zerock.service;
 
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -37,6 +39,11 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void regist(UserVO board) throws Exception {
 	    dao.create(board);
+	}
+
+	@Override
+	public UserVO checkID(String check) throws Exception {
+		return dao.check(check);
 	}
 
 	
