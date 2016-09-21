@@ -33,6 +33,10 @@ li{
 	height:40%;
 }
 
+#map{
+	font-size:15px;
+}
+
 .title{
 	font-size: 30px;
 	font-weight: bold;
