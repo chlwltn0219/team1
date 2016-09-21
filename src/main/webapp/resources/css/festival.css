@@ -1,0 +1,37 @@
+@CHARSET "UTF-8";
+.temp{
+	float: left;
+	position: relative;
+	margin: 2%;
+}
+.img, .info{
+	width: 300px;
+	height:300px;
+	float:left; 	
+}
+
+.img{
+	z-index: 50;
+}
+.info{
+	opacity : 0.8;
+	position: absolute;
+	display: none;
+	z-index: 100;
+}
+
+ .title,.eventdate,.addr,.tel,.map { 
+ 	text-align: center; 
+ } 
+ 
+ .return-top{
+ 	right:27px;
+ 	bottom:50px;
+ 	position:fixed;
+ 	z-index:9999;
+ }
+ 
+ .wldur {
+  	margin-top: 1%; 
+ 	margin-left: 3%;
+ }

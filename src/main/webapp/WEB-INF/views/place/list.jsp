@@ -107,10 +107,12 @@
 
 <script id="codeTemp" type="text/xxx-mytemplate">
 	<div class="table_list imgbox_hover">
-			<img class="table_imgbox" alt="" src="{{firstimage}}">
-			<div class="img_hover">
-				<p>[관광] {{title}} </p>
-			</div>
+			<a href="/place/detailList?contentid={{contentid}}">
+				<img class="table_imgbox" alt="" src="{{firstimage}}">
+				<div class="img_hover">
+					<p> [관광] {{title}} </p>
+				</div>
+			</a>
 	</div>
 </script>
 

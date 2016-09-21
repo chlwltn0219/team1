@@ -17,24 +17,27 @@
 				</div>
 				<!-- /.box-header -->
 
-				<form id='registerForm' role="form" method="post">
+				<form role="form" method="post">
 					<div class="box-body">
 					<div class="row">
 					<div class="col-sm-6">
 						<div class="form-group">
-							<label for="">Email</label>
-							<input type="email"
-								name='uid' class="form-control" placeholder="Enter Email">
+							<label for="">ID</label>
+							<div class="row">
+							<div class="col-md-10">
+							<input type="text"
+								name='uid' class="form-control" placeholder="Enter ID">
+							</div>
+								<button type="button" class="btn btn-primary">Check</button>
+							</div>
 						</div>
 						<div class="form-group">
 							<label for="">Password</label>
-							<input type="password"
-								name='upw' class="form-control" placeholder="Enter Password">
+							<input type="password" name='upw' class="form-control" placeholder="Enter Password">
 						</div>
 						<div class="form-group">
 							<label for="">PW Check</label>
-							<input type="password"
-								name='upwcheck' class="form-control" placeholder="check Password">
+							<input type="password" name='upwcheck' class="form-control" placeholder="check Password">
 						</div>
 						<div class="form-group">
 							<label for="">Sex &nbsp;</label> 
@@ -44,20 +47,25 @@
 					</div>
 					<div class="col-sm-6">
 						<div class="form-group">
-							<label for="">User Name</label> <input
-								type="text" name="uname" class="form-control">
+							<label for="">User Name</label> 
+							<div class="row">
+							<div class="col-md-10">
+							<input type="text" name="uname" class="form-control" placeholder="Enter Name">
+							</div>
+								<button type="button" class="btn btn-primary">Check</button>
+							</div>
 						</div>
 						<div class="form-group">
-							<label for="gen">Generation</label>
-						      <select class="form-control" id="gen">
+							<label for="bir">Birth Year</label>
+						      <select class="form-control" id="bir">
 						        <c:forEach var="i" begin="1900" end="2016" step="1">
 							        <option>${i}</option>
 						        </c:forEach>
 						      </select>
 						</div>
 						<div class="form-group">
-							<label for="nation">Nationality</label>
-							 <select class="form-control" id="nation">
+							<label for="cont">Continent</label>
+							 <select class="form-control" id="cont">
 							 	<c:forTokens var="ii" items="ASIA,EUROPE.AFRICA.NORTH AMERICA.SOUTH AMERICA.OCEANIA" delims=",.">
 							 	 <option>${ii}</option>
 							 	</c:forTokens>
@@ -83,24 +91,5 @@
 	</div>
 	<!-- /.row -->
 
-	<script type="text/javascript" src="/resources/js/upload.js"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
-	<script id="template" type="text/x-handlebars-template"></script>
-	<script>
-		var template = Handlebars.compile($("#template").html());
-		$("#registerForm").submit(
-				function(event) {
-					event.preventDefault();
-
-					var that = $(this);
-
-					var str = "";
-
-					that.append(str);
-
-					that.get(0).submit();
-				});
-	</script>
 </body>
 </html>

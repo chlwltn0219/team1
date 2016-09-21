@@ -12,45 +12,8 @@
 <script src="/resources/plugins/jQuery/jQuery-2.1.4.min.js"></script>
 <!-- HandleBars -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+<link href="/resources/css/festival.css" rel="stylesheet" type="text/css" />
 
-<style type="text/css">
-
-.temp{
-	float: left;
-	position: relative;
-	margin: 2%;
-}
-.img, .info{
-	width: 300px;
-	height:300px;
-	float:left; 	
-}
-
-.img{
-	z-index: 50;
-}
-.info{
-	opacity : 0.3;
-	
-	position: absolute;
-	display: none;
-	z-index: 100;
-}
-
-.info * {
-	padding: 1px 5px;
-}
-
- .title,.eventdate,.addr,.tel,.map { 
- 	text-align: center; 
- } 
- 
- .wldur {
-  	margin-top: 1%; 
- 	margin-left: 3%;
- }
- 
-</style>
 </head>
 <body>
 <!-- <button id="json" class="btn btn-primary">getJSON form Open API</button> -->
@@ -93,39 +56,38 @@
 <div class="table-responsive">
 	<table class="table table-hover">
 	<thead>
-		<tr>
-<!-- 			<th>썸네일</th> -->
-<!-- 			<th>타이틀</th> -->
-<!-- 			<th>주소</th> -->
-<!-- 			<th>전화번호</th> -->
-<!-- 			<th>행사 시작일</th> -->
-<!-- 			<th>행사 종료일</th> -->
-		</tr>
 	</thead>
 	<tbody id="result" ></tbody>
 	</table>
 </div>
+
+<a class="return-top" href="#">
+	<img src="http://cfs.tistory.com/custom/blog/202/2025510/skin/images/top1.png"> <!-- TOP 스크롤 -->
+</a>
+
+<!-- 리스트 나타내기 -->
 <script id="codeTemp" type="text/xxx-mytemplate">
 
 <div class="abc temp">		
-	<div class="info">
 		<a class="atag" href="/festival/fRead?contentid={{contentid}}" style="text-decoration: none; color: black;">
+	<div class="info">
 			<br>
-			<div style="opacity : 1" >
+			<div >
 				<div class="title"><h3>{{title}}</h3></div>
 				<hr>
 				<div class="addr"><h4>{{addr1}}</h4></div>
 				<div class="eventdate"><h4>{{eventstartdate}}~{{eventenddate}}</h4></div>
 				<div class="tel"><h4>{{tel}}</h4></div>
 			</div>
-		</a>
 	</div>
+		</a>
 	<img class="img" src="{{firstimage2}}">
 </div>
 </script>
 
 
 <script type="text/javascript">
+	/* 시군구 셀렉트 값을 받아 리스트 리턴 */
 	$('#sigungu').on('change', function() {
 		
 		var areaCode = $('#sigungu option:selected').val();
@@ -151,8 +113,10 @@
 		});
 	});
 		
-	var areaCode = 1;
+	areaCode = 1;
 	
+	
+	/* 기본 리스트 */
 	$.getJSON("/festival/list?sigunguCode=" + areaCode, function(data) {
 		// json 객체 내부 접근하기
 		console.dir(data);
@@ -174,17 +138,19 @@
 		
 	});
 	
+	/* 이미지 없을 경우 대체 이미지 나타내기 */
 	function imgCheck(i) {
 		if($('div.abc img').eq(i).attr('src')=='')
 			$('div.abc img').eq(i).attr('src','/resources/img/NoImage.jpg');
 	};
 	
+	/* 마우스 over시 이벤트 */
 	function imgHover() {
 	    $('div.abc').on({
 	        mouseenter: function(){
 	        	var index = getIndex(this);
 	        	console.log(index)
-	            $('div.abc img').eq(index).css("opacity", 0.1);
+	            $('div.abc img').eq(index).css("opacity", 0.3);
 // 	            $('div.abc div.info').eq(index).css("display", "block");
 	            if(!$('div.abc div.info').eq(index).is(':animated')) 
 					$('div.abc div.info').eq(index).fadeIn();
@@ -198,11 +164,33 @@
 	    });
 	}
 	
+	/* 인덱스값 리턴 */
 	function getIndex(obj) {
 		return $('div.abc').index(obj);
 	}
 	
-
+	/* 스크롤 이벤트 */
+	$(document).ready(function(){
+        
+	    $(".return-top").hide(); // 탑 버튼 숨김
+	    $(function () {
+	                 
+	        $(window).scroll(function () {
+	            if ($(this).scrollTop() > 100) { // 스크롤 내릴 표시
+	                $('.return-top').fadeIn();
+	            } else {
+	                $('.return-top').fadeOut();
+	            }
+	        });
+	                
+	        $('.return-top').click(function () {
+	            $('body,html').animate({
+	                scrollTop: 0
+	            }, 600);  // 탑 이동 스크롤 속도
+	            return false;
+	        });
+	    });
+	});
 	
 </script>
 </body>

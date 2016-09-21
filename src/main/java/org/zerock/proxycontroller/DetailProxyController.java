@@ -18,10 +18,8 @@ import org.springframework.web.client.RestTemplate;
 import org.zerock.jboardobj.Info;
 import org.zerock.openapi.Body;
 import org.zerock.openapi.CheckResult;
-import org.zerock.openapi.Items;
 import org.zerock.openapi.Result;
 import org.zerock.openapi.SingleBody;
-import org.zerock.openapi.SingleItems;
 import org.zerock.openapi.SingleResult;
 import org.zerock.util.DateUtil;
 
