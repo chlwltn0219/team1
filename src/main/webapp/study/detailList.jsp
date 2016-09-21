@@ -29,8 +29,7 @@
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 <!-- GoogoleMap Asynchronously Loading the API ********************************************* -->
-<script async defer
-	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAA4WMo8DvHp--izPUaJTqHDV0wJotTBpc"></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAA4WMo8DvHp--izPUaJTqHDV0wJotTBpc&callback=initMap"></script>
 
 </head>
 
@@ -46,7 +45,6 @@
 				</div>
 				<hr>
 				<div id="result"></div>
-<!-- 								<div id="map" style="width:100%; height: 400px"></div>	 -->
 
 				<div class="container">
 					<h2>Modal Example</h2>
@@ -65,8 +63,8 @@
 									<h4 class="modal-title">Modal Header</h4>
 								</div>
 								<div class="modal-body">
-									여기에 지도가 떠야해
-									<div id="map" style="width: 100%; height: 400px"></div>
+										여기에 지도가 떠야해
+								<div id="map" style="width:100%; height: 400px"></div>								
 								</div>
 								<div class="modal-footer">
 									<button type="button" class="btn btn-default"
@@ -102,52 +100,65 @@
 	<script type="text/javascript">
 		var serviceKey = "oMYSCkfnU%2BrM%2F6ad8zAICkGBj0eUCOxJc9bR%2F8MHuzhfo62P6cGA1YVZ7iY5QnDedVyfk5tMhc0Wu42fjDJ%2BcA%3D%3D";
 
+		
+		
+		$.getJSON(
+						"http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailCommon?ServiceKey="
 
+								+ serviceKey
+								+ "&contentId=126508"
+								+ "&defaultYN=Y"
+								+ "&addrinfoYN=Y"
+								+ "&firstImageYN=Y"
+								+ "&areacodeYN=Y"
+								+ "&overviewYN=Y"
+								+ "&mapinfoYN=Y"
+								+ "&MobileOS=ETC" + "&MobileApp=TestApp",
 
-		$.getJSON("/detail/common?contentId=" + "${contentid}", function(data) {
+						function(areaCode) {
 
+							// json 객체 내부 접근하기
+							var items = areaCode.response.body.items.item;
+							var mapzoom = items.mlevel;
+							var title = items.title;
 
-			// json 객체 내부 접근하기
-			var items = data.items.item;
-			var mapzoom = items.mlevel;
-			var title = items.title;
+							//x,y값 items에서 가져와 적용 
+							initMap(items.mapx, items.mapy);
 
-			//x,y값 items에서 가져와 적용 
-			initMap(items.mapx, items.mapy);
+							var temp2 = $('#codeTemp').html();
+							var template = Handlebars.compile(temp2);
 
-			var temp2 = $('#codeTemp').html();
-			var template = Handlebars.compile(temp2);
+							var html = template(items);
 
-			var html = template(items);
+							$('#result').html(html);
+							$('#overview').html(items.overview);
+							$('#homepage').html(items.homepage);
+							
+							
 
-			$('#result').html(html);
-			$('#overview').html(items.overview);
-			$('#homepage').html(items.homepage);
-			
-			//////////////////////////////////////////////////	Map
-			
-			function initMap(x, y) {
-				var map_center = {
-					lat : y,
-					lng : x
-				};
+							function initMap(x, y) {
+								var map_center = {
+									lat : y,
+									lng : x
+								};
 
-				// Create a map object and specify the DOM element for display.
-				var map = new google.maps.Map(document.getElementById('map'), {
-					center : map_center,
-					scrollwheel : false,
-					zoom : mapzoom + 10
-				});
+								// Create a map object and specify the DOM element for display.
+								var map = new google.maps.Map(document
+										.getElementById('map'), {
+									center : map_center,
+									scrollwheel : false,
+									zoom : mapzoom + 10
+								});
 
-				// Create a marker and set its position.
-				var marker = new google.maps.Marker({
-					map : map,
-					position : map_center,
-					title : title
-				});
-			}
+								// Create a marker and set its position.
+								var marker = new google.maps.Marker({
+									map : map,
+									position : map_center,
+									title : title
+								});
+							}
 
-		});
+						});
 	</script>
 
 
