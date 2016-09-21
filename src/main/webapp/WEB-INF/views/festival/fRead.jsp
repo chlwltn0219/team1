@@ -13,6 +13,10 @@
 <!-- HandleBars -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 <link href="/resources/css/fRead.css" rel="stylesheet" type="text/css" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 </head>
 <body>
@@ -27,10 +31,10 @@
 	<thead id="result">
 	</thead>
 	<tbody id="result1"></tbody>
-	<tbody id="result2"></tbody>
 	</table>
 </div>
 
+<!-- 행사 기간 -->
 <script id="codeTemp1" type="text/xxx-mytemplate">
 <br>
 		<ul>	
@@ -39,6 +43,8 @@
 				<div>{{eventstartdate}}~{{eventenddate}}</div>
 		</ul>	
 </script>
+
+<!-- 제목, 이미지, 전화번호, 주소, 홈페이지, 개요 -->
 <script id="codeTemp" type="text/xxx-mytemplate">
 <br>
 	<div class="title">{{title}}</div>
@@ -62,6 +68,7 @@
 	</ul>
 </script>
 
+<!-- Id 값을 받아 기본정보 리턴 -->
 <script type="text/javascript">
 	$.getJSON("/detail/common?contentId=" + "${contentid}", function(data) {
 		console.dir(data);
@@ -76,9 +83,11 @@
 		$('#result').html(html);
 		$('#overview').html(items.overview);
 		$('#homepage').html(items.homepage);
+
+		imgCheck();
 		
 
-		
+	/* contenttypeid, contentid 값을 받아 행사기간 리턴 */
 	var typeId = items.contenttypeid;
 	$.getJSON("/detail/intro?contentId=" + "${contentid}" + "&contentTypeId=" + typeId, function(data) {
 		console.dir(data);
@@ -94,6 +103,12 @@
 
 	});
 });
+	
+	/* 이미지 없을 경우 대체 이미지 나타내기 */
+	function imgCheck() {
+		if($('.firstimg').eq(0).attr('src')=='')
+			$('.firstimg').eq(0).attr('src','/resources/img/no-image.jpg');
+	};
 </script>
 </body>
 </html>

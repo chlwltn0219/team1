@@ -24,6 +24,13 @@
  	text-align: center; 
  } 
  
+ .return-top{
+ 	right:27px;
+ 	bottom:50px;
+ 	position:fixed;
+ 	z-index:9999;
+ }
+ 
  .wldur {
   	margin-top: 1%; 
  	margin-left: 3%;

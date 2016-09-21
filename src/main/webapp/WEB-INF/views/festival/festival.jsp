@@ -61,7 +61,11 @@
 	</table>
 </div>
 
+<a class="return-top" href="#">
+	<img src="http://cfs.tistory.com/custom/blog/202/2025510/skin/images/top1.png"> <!-- TOP 스크롤 -->
+</a>
 
+<!-- 리스트 나타내기 -->
 <script id="codeTemp" type="text/xxx-mytemplate">
 
 <div class="abc temp">		
@@ -83,6 +87,7 @@
 
 
 <script type="text/javascript">
+	/* 시군구 셀렉트 값을 받아 리스트 리턴 */
 	$('#sigungu').on('change', function() {
 		
 		var areaCode = $('#sigungu option:selected').val();
@@ -108,8 +113,10 @@
 		});
 	});
 		
-	var areaCode = 1;
+	areaCode = 1;
 	
+	
+	/* 기본 리스트 */
 	$.getJSON("/festival/list?sigunguCode=" + areaCode, function(data) {
 		// json 객체 내부 접근하기
 		console.dir(data);
@@ -131,11 +138,13 @@
 		
 	});
 	
+	/* 이미지 없을 경우 대체 이미지 나타내기 */
 	function imgCheck(i) {
 		if($('div.abc img').eq(i).attr('src')=='')
 			$('div.abc img').eq(i).attr('src','/resources/img/NoImage.jpg');
 	};
 	
+	/* 마우스 over시 이벤트 */
 	function imgHover() {
 	    $('div.abc').on({
 	        mouseenter: function(){
@@ -155,11 +164,33 @@
 	    });
 	}
 	
+	/* 인덱스값 리턴 */
 	function getIndex(obj) {
 		return $('div.abc').index(obj);
 	}
 	
-
+	/* 스크롤 이벤트 */
+	$(document).ready(function(){
+        
+	    $(".return-top").hide(); // 탑 버튼 숨김
+	    $(function () {
+	                 
+	        $(window).scroll(function () {
+	            if ($(this).scrollTop() > 100) { // 스크롤 내릴 표시
+	                $('.return-top').fadeIn();
+	            } else {
+	                $('.return-top').fadeOut();
+	            }
+	        });
+	                
+	        $('.return-top').click(function () {
+	            $('body,html').animate({
+	                scrollTop: 0
+	            }, 600);  // 탑 이동 스크롤 속도
+	            return false;
+	        });
+	    });
+	});
 	
 </script>
 </body>
