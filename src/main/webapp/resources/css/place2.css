@@ -3,13 +3,13 @@
 /* Sinae */
 
 h2{
-	margin-left:auto;
-	margin-right:auto;
-	text-align: center;
+ margin-left:auto;
+ margin-right:auto;
+ text-align: center;
 }
 
 .img1{
-	display: block;
+ display: block;
     margin: auto;
     width:80%;
     height:80%;
@@ -17,11 +17,17 @@ h2{
 }
 
 .detailtext{
-	width: 70%;
-	margin-left: 10%;
+ width: 70%;
+ margin-left: 10%;
 }
 
 .detail{
-	margin-top: 3%;
-	margin-left: 15%;
+ margin-top: 3%;
+ margin-left: 15%;
+}
+
+.btn_map{
+        width: 30px;
+        height: 30px;
+        cursor: pointer;
 }

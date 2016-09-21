@@ -114,7 +114,7 @@ div.container {
 						</ul>
 						<ul class="nav navbar-nav navbar-right">
 							<li>
-								<a href="/user/logout"> ${login.uname }</a>
+								<a href="/user/logout"> ${login.uid }</a>
 							</li>
 						</ul>
 						</c:if>

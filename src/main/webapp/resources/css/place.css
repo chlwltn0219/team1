@@ -9,22 +9,23 @@
 
 .table_list {
 	width: 340px;
-	height: 240px;
+	height: 300px;
 	margin: 11px;
 	float: left;
 	border: 1px solid gray;
+	background-color: black;
 	position: relative;
 }
 
 .table_imgbox {
 	width: 338px; 
-	height: 238px;
+	height: 298px;
 }
 
 .img_hover {
-	top: 148px;
+	top: 178px;
 	width: 338px;
-	height: 90px;
+	height: 120px;
 	background-color: white;
 	border-top: 1px solid gray;
 	display: none;
@@ -34,4 +35,27 @@
 
 .selectBox {
 	float: right;
+}
+
+.btn_detail{
+	background-color: red;
+	width: 70px;
+	height: 20px;
+	top: 30px;
+	left: 30px;
+	position: absolute;
+}
+
+.test{
+	position: absolute;
+	top: 30px;
+	background-color: red;
+}
+
+.info{
+	color: white;
+	position: absolute;
+	display: none;
+	z-index: 100;
+	top: 70px;
 }
