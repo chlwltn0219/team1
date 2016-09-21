@@ -39,6 +39,12 @@
 		max-height: 800px;
 		overflow: auto;
 	}
+	
+	button.btnImg{
+		width : 100%;
+		height: 100%;
+	}
+	
 	</style>
 </head>
 <body>
@@ -105,14 +111,25 @@
 					<h3 id="infoTitle" class="box-title">{{title}}</h3>
 				</div>
 				<div class="box-body">
-					<div id="infoImage">
-						<img alt="{{image}}" src="{{image}}">
+					<div id="btnre" class="row">
+						<div class="col-xs-2 btnImg">
+							<button id="btnLeft" class="btn btn-warning" style="height: 200px; width: 100%"><h3><i class="fa fa-arrow-circle-o-left"></i></h3></button>
+						</div>
+						<div class="col-xs-8" style="text-align: center;" id="infoImage">
+							<img alt="image" src="/resources/img/NoImage.jpg" style="height: 200px">
+						</div>
+						<div class="col-xs-2 btnImg">
+							<button id="btnRight" class="btn btn-warning" style="height: 200px; width: 100%"><h3><i class="fa fa-arrow-circle-o-right"></i></h3></button>
+						</div>
 					</div>
 					<hr>
 					<div class="row">
 						<div class="col-xs-1"></div>
 						<div class="col-xs-3"><label>Location : </label></div>
-						<div class="col-xs-7" id="infoLocation"><spam>{{addr1}}</spam><img alt="{{mapIcon}}" src=""></div>
+						<div class="col-xs-7" id="infoLocation">
+							<span>{{addr1}}</span>
+							<button class="btn" style="background-color: white;"><img alt="{{mapIcon}}" src="/resources/img/location.png" style="width: 20px; height: 20px;"></button>
+						</div>
 						<div class="col-xs-1"></div>
 					</div>
 					<hr>
@@ -258,22 +275,27 @@
 // 		$('#eventInfo').append(html);
 // 	}
 	
+	var imageNo = 0;
+	var image ;
+	
 	$.getJSON("/detail/jboardInfo?contentId=${jBoardVO.contentid}&contentTypeId=15", function(data){
 		console.dir(data);
+		image = data.image
 		var location = data.location;
 		var cost = data.cost;
 		var programs = data.programs;
 		
 		$('#infoTitle').html(data.title);
-		$('#infoLocation spam').html(location.addr1);
+		
+		if(image!=null)
+			$('#infoImage img').attr("src", image[imageNo]);
+		
+		$('#infoLocation span').html(location.addr1);
 		$('#infoProgram div').eq(0).html(programs.program);
 		$('#infoProgram div').eq(1).html(programs.subevent);
 		$('#infoCost div').eq(0).html(cost.usetimefestival);
 		$('#infoCost div').eq(1).html(cost.discountinfofestival);
 		$('#infoHomepage').html(data.homepage);
-		
-		
-		
 		
 // // 		var temp = $('#temp').html();
 // // 		var template = Handlebars.compile(temp);
@@ -288,10 +310,24 @@
 // 		printInfo('#infoCost', data.cost);
 // 		printInfo('#infoHomePage', data);
 		
-	});		
-
-
-
+		$('#btnRight').on('click', function() {
+			if(imageNo==image.length-1)
+				imageNo = 0;
+			else
+				imageNo += 1;
+			
+			$('#infoImage img').attr("src", image[imageNo]);
+		})
+		$('#btnLeft').on('click', function() {
+			if(imageNo==0)
+				imageNo = image.length-1;
+			else
+				imageNo -= 1;
+			
+			$('#infoImage img').attr("src", image[imageNo]);
+		})
+	});	
+	
 
 	// reply
 	Handlebars.registerHelper("eqReplyer", function(replyer, block) {
