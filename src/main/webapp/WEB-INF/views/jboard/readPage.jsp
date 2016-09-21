@@ -78,8 +78,6 @@
 						<label>Writer</label>
 						<input type="text" name="writer" class="form-control" value="${jBoardVO.writer}" readonly="readonly">
 					</div>
-						<label>Content Id</label>
-						<input type="text" value="${jBoardVO.contentid}" readonly="readonly" >
 				</div>
 				<!-- /.box-body -->
 
@@ -102,39 +100,49 @@
 		
 		<!-- festival info -->
 		<div class="col-md-6">
-			<div class="box box-warning">
+			<div id="eventInfo" class="box box-warning">
 				<div class="box-header">
-					<h3 class="box-title">{{title}}</h3>
+					<h3 id="infoTitle" class="box-title">{{title}}</h3>
 				</div>
 				<div class="box-body">
-					<div>
+					<div id="infoImage">
 						<img alt="{{image}}" src="{{image}}">
 					</div>
 					<hr>
 					<div class="row">
+						<div class="col-xs-1"></div>
 						<div class="col-xs-3"><label>Location : </label></div>
-						<div class="col-xs-9">{{addr1}}<img alt="mapIcon" src=""></div>
+						<div class="col-xs-7" id="infoLocation"><spam>{{addr1}}</spam><img alt="{{mapIcon}}" src=""></div>
+						<div class="col-xs-1"></div>
 					</div>
+					<hr>
 					<div class="row">
+						<div class="col-xs-1"></div>
 						<div class="col-xs-3"><label>Programs : </label></div>
-						<div class="col-xs-9">
+						<div class="col-xs-7" id="infoProgram">
 							<div>{{program}}</div>
 							<div>{{subevent}}</div>
 						</div>
+						<div class="col-xs-1"></div>
 					</div>
+					<hr>
 					<div class="row">
+						<div class="col-xs-1"></div>
 						<div class="col-xs-3"><label>Cost : </label></div>
-						<div class="col-xs-9">
-							<div>{{usertimefestival}}</div>
+						<div class="col-xs-7" id="infoCost">
+							<div>{{usetimefestival}}</div>
 							<div>{{discountinfofestival}}</div>
 						</div>
+						<div class="col-xs-1"></div>
 					</div>
+					<hr>
 					<div class="row">
+						<div class="col-xs-1"></div>
 						<div class="col-xs-3"><label>HomePage : </label></div>
-						<div class="col-xs-9">{{homepage}}</div>
+						<div class="col-xs-7" id="infoHomepage">{{homepage}}</div>
+						<div class="col-xs-1"></div>
 					</div>
 				</div>
-				
 			</div>
 		</div>
 	</div>
@@ -151,16 +159,15 @@
 				<!-- 로그인 상태 -->
 				<c:if test="${not empty login}">
 					<div class="box-body">
-						<label for="exampleInputEmail1">Writer</label> 
+						<label>Writer</label> 
 							<input class="form-control" type="text" placeholder="USER ID"
 								   id="newReplyWriter" value="${login.uid }" readonly="readonly">
-						<label for="exampleInputEmail1">Reply Text</label>
+						<label>Reply Text</label>
 							<input class="form-control" type="text" placeholder="REPLY TEXT" id="newReplyText">
 					</div>
 
 					<div class="box-footer">
-						<button type="submit" class="btn btn-primary" id="replyAddBtn">ADD
-							REPLY</button>
+						<button type="submit" class="btn btn-primary" id="replyAddBtn">ADD REPLY</button>
 					</div>
 				</c:if>
 				
@@ -179,15 +186,16 @@
 			<!-- The time line -->
 			<ul class="timeline">
 				<!-- timeline time label -->
-				<li class="time-label" id="repliesDiv"><span class="bg-green">
-						Replies List <small id='replycntSmall'> [
-							${jBoardVO.replycnt} ] </small>
-				</span></li>
+				<li class="time-label" id="repliesDiv">
+					<span class="bg-green">
+							Replies List <small id='replycntSmall'> [ ${jBoardVO.replycnt} ] </small>
+					</span>
+				</li>
 			</ul>
 
 			<div class='text-center'>
 				<ul id="pagination" class="pagination pagination-sm no-margin ">
-
+				
 				</ul>
 			</div>
 
@@ -220,23 +228,10 @@
 		</div>
 	</div>
 
-
-	<script id="templateAttach" type="text/x-handlebars-template">
-		<li data-src='{{fullName}}'>
-			<span class="mailbox-attachment-icon has-img">
-				<img src="{{imgsrc}}" alt="Attachment">
-			</span>
-			<div class="mailbox-attachment-info">
-				<a href="{{getLink}}" class="mailbox-attachment-name">{{fileName}}</a>
-				</span>
-  			</div>
-		</li>                
-	</script>  
-
 	<script id="template" type="text/x-handlebars-template">
 		{{#each .}}
 			<li class="replyLi" data-rno={{rno}}>
-				<i class="fa fa-forward bg-blue"></i>
+				<i class="fa fa-thumbs-o-up bg-blue"></i>
 				<div class="timeline-item" >
 					<span class="time">
 						<i class="fa fa-clock-o"></i>{{prettifyDate regdate}}
@@ -251,17 +246,54 @@
 				</div>			
 			</li>
 		{{/each}}
-	</script>  
-
-	<script id="EventTemplate" type="text/x-handlebars-template">
-		<li >
-			<div >
-				
-			</div>
-		</li>                
-	</script>  
-<script>
+	</script>
 	
+
+	<script>
+
+// 	function printInfo(template, valueObj) {
+// 		var temp = $(template).html();
+// 		var template = Handlebars.compile(temp);
+// 		var html = template(valueObj);
+// 		$('#eventInfo').append(html);
+// 	}
+	
+	$.getJSON("/detail/jboardInfo?contentId=${jBoardVO.contentid}&contentTypeId=15", function(data){
+		console.dir(data);
+		var location = data.location;
+		var cost = data.cost;
+		var programs = data.programs;
+		
+		$('#infoTitle').html(data.title);
+		$('#infoLocation spam').html(location.addr1);
+		$('#infoProgram div').eq(0).html(programs.program);
+		$('#infoProgram div').eq(1).html(programs.subevent);
+		$('#infoCost div').eq(0).html(cost.usetimefestival);
+		$('#infoCost div').eq(1).html(cost.discountinfofestival);
+		$('#infoHomepage').html(data.homepage);
+		
+		
+		
+		
+// // 		var temp = $('#temp').html();
+// // 		var template = Handlebars.compile(temp);
+// // 		var html = template(item);
+// // 		console.log(html);
+// // 		$('#hotFestival').html(html);
+		
+// 		printInfo('#infoTitle', data);
+// 		printInfo('#infoImage', data.image);
+// 		printInfo('#infoLocation', data.location);
+// 		printInfo('#infoPrograms', data.programs);
+// 		printInfo('#infoCost', data.cost);
+// 		printInfo('#infoHomePage', data);
+		
+	});		
+
+
+
+
+	// reply
 	Handlebars.registerHelper("eqReplyer", function(replyer, block) {
 		var accum = '';
 		if (replyer == '${login.uid}') {
@@ -287,70 +319,58 @@
 		target.after(html);
 
 	}
-
+	
+	
+	
+	// reply pagination
 	var bno = ${jBoardVO.bno};
 	var replyPage = 1;
 
 	function getPage(pageInfo) {
-
 		$.getJSON(pageInfo, function(data) {
 			printData(data.list, $("#repliesDiv"), $('#template'));
 			printPaging(data.pageMaker, $(".pagination"));
 
 			$("#modifyModal").modal('hide');
 			$("#replycntSmall").html("[ " + data.pageMaker.totalCount + " ]");
-
 		});
 	}
 
 	var printPaging = function(pageMaker, target) {
-
 		var str = "";
-
 		if (pageMaker.prev) {
 			str += "<li><a href='" + (pageMaker.startPage - 1)
 					+ "'> << </a></li>";
 		}
-
 		for (var i = pageMaker.startPage, len = pageMaker.endPage; i <= len; i++) {
 			var strClass = pageMaker.cri.page == i ? 'class=active' : '';
 			str += "<li "+strClass+"><a href='"+i+"'>" + i + "</a></li>";
 		}
-
 		if (pageMaker.next) {
 			str += "<li><a href='" + (pageMaker.endPage + 1)
 					+ "'> >> </a></li>";
 		}
-
 		target.html(str);
 	};
-
+	
+	// reply pager print
 	$("#repliesDiv").on("click", function() {
-		
-// 		alert("#repliesDiv clicked...");
-		
 		if ($(".timeline li").size() > 1) {
 			return;
 		}
 		getPage("/replies/" + bno + "/1");
-
 	});
-
+	
+	// change page
 	$(".pagination").on("click", "li a", function(event) {
-
-		alert(".pagenation clicked... page : " + replyPage);
-		
 		event.preventDefault();
-
 		replyPage = $(this).attr("href");
 
 		getPage("/replies/" + bno + "/" + replyPage);
-
 	});
-
+	
+	// add reply
 	$("#replyAddBtn").on("click", function() {
-		
-// 		alert("replyAddBtn clicked...");
 
 		var replyerObj = $("#newReplyWriter");
 		var replytextObj = $("#newReplyText");
@@ -382,20 +402,17 @@
 			}
 		});
 	});
-
+	
+	// print reply
 	$(".timeline").on("click", ".replyLi", function(event) {
-
 		var reply = $(this);
 
 		$("#replytext").val(reply.find('.timeline-body').text());
 		$(".modal-title").html(reply.attr("data-rno"));
-
 	});
-
+	
+	// modify reply
 	$("#replyModBtn").on("click", function() {
-
-		alert("replyModBtn clicked...");
-		
 		var rno = $(".modal-title").html();
 		var replytext = $("#replytext").val();
 
@@ -420,6 +437,7 @@
 		});
 	});
 
+	// delete reply
 	$("#replyDelBtn").on("click", function() {
 
 		var rno = $(".modal-title").html();
@@ -442,6 +460,9 @@
 			}
 		});
 	});
+	
+	
+	
 </script>
 
 
@@ -449,7 +470,6 @@
 $(document).ready(function(){
 	
 	var formObj = $("form[role='form']");
-	
 	console.log(formObj);
 	
 	$("#modifyBtn").on("click", function(){
@@ -465,7 +485,6 @@ $(document).ready(function(){
 
 	
 	$("#removeBtn").on("click", function(){
-		
 		var replyCnt =  $("#replycntSmall").html();
 		
 		if(replyCnt > 0 ){
@@ -493,49 +512,6 @@ $(document).ready(function(){
 		formObj.attr("action", "/jboard/list");
 		formObj.submit();
 	});
-	
-	var bno = ${jBoardVO.bno};
-	var template = Handlebars.compile($("#templateAttach").html());
-	
-// 	$.getJSON("/jboard/getAttach/"+bno,function(list){
-// 		$(list).each(function(){
-			
-// 			var fileInfo = getFileInfo(this);
-			
-// 			var html = template(fileInfo);
-			
-// 			 $(".uploadedList").append(html);
-			
-// 		});
-// 	});
-	
-
-
-// 	$(".uploadedList").on("click", ".mailbox-attachment-info a", function(event){
-		
-// 		var fileLink = $(this).attr("href");
-		
-// 		if(checkImageType(fileLink)){
-			
-// 			event.preventDefault();
-					
-// 			var imgTag = $("#popup_img");
-// 			imgTag.attr("src", fileLink);
-			
-// 			console.log(imgTag.attr("src"));
-					
-// 			$(".popup").show('slow');
-// 			imgTag.addClass("show");		
-// 		}	
-// 	});
-	
-	$("#popup_img").on("click", function(){
-		
-		$(".popup").hide('slow');
-		
-	});	
-	
-		
 	
 });
 </script>

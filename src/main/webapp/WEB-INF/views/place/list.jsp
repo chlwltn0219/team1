@@ -110,12 +110,12 @@
 				<img class="table_imgbox" src="{{firstimage}}">
 			</a>
 			<div class="info">
-			<br>
-			<div >
-				<div class="title"><h3>{{title}}</h3></div>
-				<div class="addr"><h4>{{addr1}}</h4></div>
+				<br>
+				<div>
+					<div class="title"><h3>{{title}}</h3></div>
+					<div class="addr"><h4>{{addr1}}</h4></div>
+				</div>
 			</div>
-	</div>
 	</div>
 </script>
 
@@ -187,8 +187,10 @@
 	        mouseenter: function(){
 	        	var index = getIndex(this);
 	        	$(this).eq(index).css("opacity", 0.3);
-	            if(!$('.info').eq(index).is(':animated')) 
-					$('.info').eq(index).fadeIn();
+	            if(!$('.info').eq(index).is(':animated')) {
+		        	console.log(index);
+					$('.info').eq(index).fadeIn();	            	
+	            }
 	        },
 	        mouseleave: function(){
 	        	var index = getIndex(this);
@@ -238,7 +240,7 @@
 	}
 	
 	function getIndex(obj) {
-		return $('.imgbox_hover').index(obj);
+		return $('.table_imgbox').index(obj);
 	}
 	
 </script>
