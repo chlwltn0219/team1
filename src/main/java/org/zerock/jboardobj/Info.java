@@ -5,7 +5,6 @@ import java.util.Map;
 
 public class Info {
 
-//	List<Object> image;
 	List<Map<String,Object>> image;
 	Map<String,Object> location ;
 	Map<String,Object> cost ;
