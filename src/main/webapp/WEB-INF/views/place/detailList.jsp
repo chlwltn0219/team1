@@ -102,10 +102,7 @@
 	<script type="text/javascript">
 		var serviceKey = "oMYSCkfnU%2BrM%2F6ad8zAICkGBj0eUCOxJc9bR%2F8MHuzhfo62P6cGA1YVZ7iY5QnDedVyfk5tMhc0Wu42fjDJ%2BcA%3D%3D";
 
-
-
 		$.getJSON("/detail/common?contentId=" + "${contentid}", function(data) {
-
 
 			// json 객체 내부 접근하기
 			var items = data.items.item;
@@ -125,7 +122,7 @@
 			$('#homepage').html(items.homepage);
 			
 			//////////////////////////////////////////////////	Map
-			
+
 			function initMap(x, y) {
 				var map_center = {
 					lat : y,
@@ -146,6 +143,7 @@
 					title : title
 				});
 			}
+			
 
 		});
 	</script>
