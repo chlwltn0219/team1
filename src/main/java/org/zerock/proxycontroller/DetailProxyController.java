@@ -16,10 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import org.zerock.jboardobj.Info;
 import org.zerock.openapi.Body;
-import org.zerock.openapi.Items;
 import org.zerock.openapi.Result;
 import org.zerock.openapi.SingleBody;
-import org.zerock.openapi.SingleItems;
 import org.zerock.openapi.SingleResult;
 import org.zerock.util.DateUtil;
 
@@ -189,6 +187,8 @@ public class DetailProxyController {
 		baseURI = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailImage"
 				+ "?ServiceKey=" + SERVICE_KEY
 				+ "&contentId=" + contentId
+				+ "&numOfRows=" + 10
+				+ "&pageNo=" + 1
 				+ "&imageYN=Y"
 				+ "&MobileOS=ETC"
 				+ "&MobileApp=AppTesting"
@@ -197,12 +197,6 @@ public class DetailProxyController {
 		imageResult = restTemplate.getForObject(uri, Result.class);
 		List<Map<String, Object>> imageItems = imageResult.getResponse().getBody().getItems().getItem();
 		logger.info("image items : " + imageItems);
-		
-//		Map<String, Object> rtn = new HashMap<String, Object>();
-//		
-//		rtn.put("common", commonItems);
-//		rtn.put("intro", introItems);
-//		rtn.put("image", imageItems);
 		
 		// location
 		Map<String, Object> loc = new HashMap<String, Object>();
