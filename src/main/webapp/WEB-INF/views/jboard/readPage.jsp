@@ -67,15 +67,15 @@
 
 				<div class="box-body">
 					<div class="form-group">
-						<label for="exampleInputEmail1">Title</label>
+						<label>Title</label>
 						<input type="text" name='title' class="form-control" value="${jBoardVO.title}" readonly="readonly">
 					</div>
 					<div class="form-group">
-						<label for="exampleInputPassword1">Content</label>
+						<label>Content</label>
 						<textarea class="form-control" name="content" rows="3" readonly="readonly">${jBoardVO.content}</textarea>
 					</div>
 					<div class="form-group">
-						<label for="exampleInputEmail1">Writer</label>
+						<label>Writer</label>
 						<input type="text" name="writer" class="form-control" value="${jBoardVO.writer}" readonly="readonly">
 					</div>
 						<label>Content Id</label>
@@ -85,9 +85,6 @@
 
 				<div class="box-footer">
 
-					<div>
-						<hr>
-					</div>
 
 					<ul class="mailbox-attachments clearfix uploadedList">
 					</ul>
@@ -95,8 +92,7 @@
 						<button type="submit" class="btn btn-warning" id="modifyBtn">Modify</button>
 						<button type="submit" class="btn btn-danger" id="removeBtn">REMOVE</button>
 					</c:if>
-					<button type="submit" class="btn btn-primary" id="goListBtn">GO
-						LIST</button>
+					<button type="submit" class="btn btn-primary" id="goListBtn">GO	LIST</button>
 				</div>
 
 			</div>
@@ -112,11 +108,7 @@
 				</div>
 				<div class="box-body">
 					<div>
-						<img alt="picture1" src="">
-						<img alt="picture2" src="">
-						<img alt="picture3" src="">
-						<img alt="picture4" src="">
-						<img alt="picture5" src="">
+						<img alt="{{image}}" src="{{image}}">
 					</div>
 					<hr>
 					<div class="row">
@@ -176,7 +168,7 @@
 				<c:if test="${empty login}">
 					<div class="box-body">
 						<div>
-							<a href="javascript:goLogin();">Login Please</a>
+							<a href="/user/login">Login Please</a>
 						</div>
 					</div>
 				</c:if>
@@ -335,7 +327,7 @@
 
 	$("#repliesDiv").on("click", function() {
 		
-		alert("#repliesDiv clicked...");
+// 		alert("#repliesDiv clicked...");
 		
 		if ($(".timeline li").size() > 1) {
 			return;

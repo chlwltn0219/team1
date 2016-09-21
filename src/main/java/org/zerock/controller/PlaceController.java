@@ -28,7 +28,17 @@ public class PlaceController {
 
   @Inject
   private BoardService service;
+  
+  //################################################
+  
+  @RequestMapping(value = "/detailList")
+  public void detailInfo(@RequestParam("contentid") int contentid, @ModelAttribute("cri") SearchCriteria cri, Model model)
+			throws Exception {
+	  model.addAttribute("contentid", contentid);
+  }
 
+  //################################################
+  
   @RequestMapping(value = "/list", method = RequestMethod.GET)
   public void listPage(@ModelAttribute("cri") SearchCriteria cri, Model model) throws Exception {
 

@@ -142,7 +142,6 @@ public class JBoardProxyController {
 		pageMaker.setDisplayPageNum(5);
 		pageMaker.setTotalCount(body.getTotalCount());
 		
-		
 		body.setPageMaker(pageMaker);
 
 		System.out.println(body.getPageNo());
