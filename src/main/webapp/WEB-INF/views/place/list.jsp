@@ -90,8 +90,7 @@
 		            </select>
 				</div>
 			</div>
-
-
+			
 			<div class="table-responsive" style="width: 100%">
 			   <table class="table table-hover">
 			   <tbody id="result"></tbody>
@@ -169,7 +168,6 @@
 		$( ".imgbox_hover" ).on({
 			mouseenter: function() {
 				var index = getIndex(this);
-// 				$btn.eq(index).fadeIn();
 				if(!$btn.eq(index).is(':animated')) 
 					$btn.eq(index).fadeIn();
 			},
@@ -182,6 +180,7 @@
 	function getIndex(obj) {
 		return $('.imgbox_hover').index(obj);
 	}
+	
 </script>
 
 <script>
