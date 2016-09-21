@@ -2,13 +2,13 @@ package org.zerock.persistence;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
-import org.zerock.domain.BoardVO;
 import org.zerock.domain.UserVO;
 import org.zerock.dto.LoginDTO;
 
@@ -47,6 +47,11 @@ public class UserDAOImpl implements UserDAO {
 	@Override
 	public void create(UserVO vo) throws Exception {
 		session.insert(namespace + ".create", vo);
+	}
+
+	@Override
+	public UserVO check(String uid) throws Exception {
+		return session.selectOne(namespace + ".check", uid);
 	}
 
 }
