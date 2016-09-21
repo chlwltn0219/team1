@@ -43,7 +43,7 @@
           <h4 class="modal-title">지도</h4>
         </div>
         <div class="modal-body">
-          <p>지도를 보여줘</p>
+          <div id="map" style="width: 100%; height: 400px"></div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -99,11 +99,38 @@
 		var template = Handlebars.compile(temp2);
 		var html = template(items);
 		
+		var x = items.mapx;
+		var y = items.mapy;
+		
 		$('#result').html(html);
 		$('#overview').html(items.overview);
 		$('#homepage').html(items.homepage);
 
+		initMap(x, y);
 		imgCheck();
+		
+		
+		/* Map */
+		function initMap(x, y) {
+			var map_center = {
+				lat : y,
+				lng : x
+			};
+	
+			// Create a map object and specify the DOM element for display.
+			var map = new google.maps.Map(document.getElementById('map'), {
+				center : map_center,
+				scrollwheel : false,
+				zoom : mapzoom + 10
+			});
+	
+			// Create a marker and set its position.
+			var marker = new google.maps.Marker({
+				map : map,
+				position : map_center,
+				title : title
+			});
+		}
 		
 
 	/* contenttypeid, contentid 값을 받아 행사기간 리턴 */
@@ -128,6 +155,8 @@
 		if($('.firstimg').eq(0).attr('src')=='')
 			$('.firstimg').eq(0).attr('src','/resources/img/no-image.jpg');
 	};
+	
+	
 </script>
 </body>
 </html>
