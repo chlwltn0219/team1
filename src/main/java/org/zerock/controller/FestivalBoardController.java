@@ -1,7 +1,6 @@
 package org.zerock.controller;
 
 
-
 import java.net.URI;
 import java.util.Map;
 
@@ -24,6 +23,7 @@ import org.zerock.util.DateUtil;
 @Controller
 @RequestMapping("/festival/*")
 public class FestivalBoardController {
+
 	private static final Logger logger = LoggerFactory.getLogger(FestivalBoardController.class);
 
 	@RequestMapping(value = "/festival")

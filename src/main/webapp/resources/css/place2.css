@@ -1,0 +1,27 @@
+@CHARSET "UTF-8";
+
+/* Sinae */
+
+h2{
+	margin-left:auto;
+	margin-right:auto;
+	text-align: center;
+}
+
+.img1{
+	display: block;
+    margin: auto;
+    width:80%;
+    height:80%;
+    
+}
+
+.detailtext{
+	width: 70%;
+	margin-left: 10%;
+}
+
+.detail{
+	margin-top: 3%;
+	margin-left: 15%;
+}

@@ -12,135 +12,123 @@
 <script src="/resources/plugins/jQuery/jQuery-2.1.4.min.js"></script>
 <!-- HandleBars -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+<link href="/resources/css/fRead.css" rel="stylesheet" type="text/css" />
+<!-- Modal -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-<style type="text/css">
-
-.temp{
-	float: left;
-	position: relative;
-	margin: 2.9%;
-}
-
-.img, .info{
-	width: 300px;
-	height:300px;
-	float:left; 
-	
-}
-
-.img{
-	z-index: 50;
-}
-
-.info{
-	opacity : 0.7;
-	background-color : white;
-	position : absolute;
-	display : none;
-	z-index : 100;
-}
-
-.info * {
-	padding : 1px 5px;
-}
-
-</style>
 </head>
 <body>
-<!-- <button id="json" class="btn btn-primary">getJSON form Open API</button> -->
-<!-- <label><input type="date" id="start"></label> -->
-<!-- <label><input type="date" id="stop"></label> -->
-<!-- <input type="text" id="find"> -->
 
+<div class="container">
 
 <div class="table-responsive">
 	<table class="table table-hover">
-	<thead>
-		<tr>	
-			<th>contentId = ${contentid}</th>
-<!-- 			<th>썸네일</th> -->
-<!-- 			<th>타이틀</th> -->
-<!-- 			<th>주소</th> -->
-<!-- 			<th>전화번호</th> -->
-<!-- 			<th>행사 시작일</th> -->
-<!-- 			<th>행사 종료일</th> -->
-		</tr>
+	<thead id="result">
 	</thead>
-	<tbody id="result"></tbody>
+	<tbody id="result1"></tbody>
 	</table>
 </div>
-<script id="codeTemp" type="text/xxx-mytemplate">
 
-/*
- <div class="abc temp">		
-	<div class="info">
-		<br>
-		<div class="title"><h3>{{title}}</h3></div>
-		<hr>
-		<div class="addr"><h4>{{addr1}}</h4></div>
-		<div class="eventdate"><h4>{{eventstartdate}}~{{eventenddate}}</h4></div>
-		<div class="tel"><h4>{{tel}}</h4></div>
-		<button class="map">map</button>
-	</div>
-	<img class="img" src="{{firstimage2}}">
-</div> 
-*/
+<div class="modal fade" id="map" role="dialog">
+    <div class="modal-dialog">
+    
+    <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Modal Header</h4>
+        </div>
+        <div class="modal-body">
+          <p>Some text in the modal.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
+
+<!-- 행사 기간 -->
+<script id="codeTemp1" type="text/xxx-mytemplate">
+<br>
+		<ul>	
+			<li>행사 기간</li>
+<br>
+				<div>{{eventstartdate}}~{{eventenddate}}</div>
+		</ul>	
 </script>
 
-<script type="text/javascript">
+<!-- 제목, 이미지, 전화번호, 주소, 홈페이지, 개요 -->
+<script id="codeTemp" type="text/xxx-mytemplate">
+<br>
+	<div class="title">{{title}}</div>
+<br>
+<hr>
+	<div>
+		<img class="firstimg" src="{{firstimage}}">
+	</div>
+<br>
+<hr>
+<ul>
+	<li>전화번호</li><br>
+		<p>{{tel}}</p>
+	<li>주소</li><br>
+		<p>{{addr1}}{{addr2}} <button id="map" class="btn btn-info btn-lg" data-toggle="modal" data-target="#map">Map</button></p>
+	<br>
+	<li>상세 페이지</li><br>
+		<p id="homepage"></p><br>
+	<li>개요</li><br>
+		<p id="overview"></p>
+	</ul>
+</script>
 
-	$.getJSON("/detail/common?contentId=" + '${contentid}', function(data) {
-		// json 객체 내부 접근하기
+<!-- Id 값을 받아 기본정보 리턴 -->
+<script type="text/javascript">
+	$.getJSON("/detail/common?contentId=" + "${contentid}", function(data) {
 		console.dir(data);
 		
-// 		var items = data.items.item;
+		var items = data.items.item;
+		console.dir(items);
 		
-// 		var temp2 = $('#codeTemp').html();
-// 		var template = Handlebars.compile(temp2);
+		var temp2 = $('#codeTemp').html();
+		var template = Handlebars.compile(temp2);
+		var html = template(items);
 		
-// 		$('#result').html("");
+		$('#result').html(html);
+		$('#overview').html(items.overview);
+		$('#homepage').html(items.homepage);
+
+		imgCheck();
 		
-// 		for(var i=0; i<items.length; i++) {
-// 			var html = template(items[i]);
-// 			console.log(html);
-// 			$('#result').append(html);
-// 			imgCheck(i);
-// 			imgHover();
-// 		}
+
+	/* contenttypeid, contentid 값을 받아 행사기간 리턴 */
+	var typeId = items.contenttypeid;
+	$.getJSON("/detail/intro?contentId=" + "${contentid}" + "&contentTypeId=" + typeId, function(data) {
+		console.dir(data);
 		
+		var items = data.items.item;
+		console.dir(items);
+		
+		var temp2 = $('#codeTemp1').html();
+		var template = Handlebars.compile(temp2);
+		var html = template(items);
+		
+		$('#result1').html(html);
+
 	});
+});
 	
-// 	function imgCheck(i) {
-// 		if($('div.abc img').eq(i).attr('src')=='')
-// 			$('div.abc img').eq(i).attr('src','http://placehold.it/300x300?text=No_Img');
-// 	};
-	
-// 	function imgHover() {
-// 	    $('div.abc').on({
-// 	        mouseenter: function(){
-// 	        	var index = getIndex(this);
-// 	        	console.log(index)
-// 	            $('div.abc img').eq(index).css("opacity", 0.1);
-// // 	            $('div.abc div.info').eq(index).css("display", "block");
-// 	            if(!$('div.abc div.info').eq(index).is(':animated')) 
-// 					$('div.abc div.info').eq(index).fadeIn();
-// 	        },
-// 	        mouseleave: function(){
-// 	        	var index = getIndex(this);
-// 	            $('div.abc img').eq(index).css("opacity", 1);
-// // 	            $('div.abc div.info').eq(index).css("display", "none");
-// 	            $('div.abc div.info').fadeOut();
-// 	        }
-// 	    });
-// 	}
-	
-// 	function getIndex(obj) {
-// 		return $('div.abc').index(obj);
-// 	}
-	
-
-	
+	/* 이미지 없을 경우 대체 이미지 나타내기 */
+	function imgCheck() {
+		if($('.firstimg').eq(0).attr('src')=='')
+			$('.firstimg').eq(0).attr('src','/resources/img/no-image.jpg');
+	};
 </script>
-
 </body>
 </html>
