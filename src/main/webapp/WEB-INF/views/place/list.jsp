@@ -30,7 +30,7 @@
 				</div>
 
 
-				<div class='box-body'  ani_type="fade">
+				<div class='box-body'>
 
 					<select name="searchType">
 						<option value="n"
@@ -169,20 +169,6 @@
 	};
 	
 	function imgHover2() {
-// 		var $btn=$('.table_imgbox');
-		
-// 		$(".table_imgbox").on({
-// 			mouseenter: function() {
-// 				var index = getIndex(this);
-// 				if(!$btn.eq(index).is(':animated')){
-// 					$btn.eq(index).fadeTo('slow', 0.3);		
-// 					console.log($btn.eq(index));
-// 				}
-// 			},
-// 			mouseleave: function() {
-// 				$btn.fadeTo('slow', 1);
-// 			}
-// 		});
 		$(".imgbox_hover").on({
 	        mouseenter: function(){
 	        	var index = getIndex(this);

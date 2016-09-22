@@ -9,10 +9,11 @@
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
 <head>
 <title>readPage.jsp</title>
-	<script type="text/javascript" src="/resources/js/upload.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
-	<!-- Main content -->
-	<style type="text/css">
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAA4WMo8DvHp--izPUaJTqHDV0wJotTBpc"></script>
+<script type="text/javascript" src="/resources/js/upload.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+<!-- Main content -->
+<style type="text/css">
 	.popup {
 		position: absolute;
 	}
@@ -128,7 +129,18 @@
 						<div class="col-xs-3"><label>Location : </label></div>
 						<div class="col-xs-7" id="infoLocation">
 							<span>{{addr1}}</span>
-							<button class="btn" style="background-color: white;"><img alt="{{mapIcon}}" src="/resources/img/location.png" style="width: 20px; height: 20px;"></button>
+							<button class="btn" type="button" data-toggle="modal" data-target="#mapModal" style="background-color: white;">
+								<img alt="{{mapIcon}}" src="/resources/img/location.png" style="width: 20px; height: 20px;">
+							</button>
+						</div>
+						<div class="col-xs-1"></div>
+					</div>
+					<hr>
+					<div class="row">
+						<div class="col-xs-1"></div>
+						<div class="col-xs-3"><label>Overview : </label></div>
+						<div class="col-xs-7" id="infoOverview">
+							<div>{{overview}}</div>
 						</div>
 						<div class="col-xs-1"></div>
 					</div>
@@ -167,7 +179,20 @@
 	
 	<!-- Map Modal -->
 	<div id="mapModal" class="modal fade" role="dialog">
-		hello
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h3 class="modal-title">행사 장소</h3>
+				</div>
+				<div class="modal-body">
+					<div id="map" style="width: 100%; height: 400px"></div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
 	</div>
 
 	<div class="row">
@@ -271,14 +296,17 @@
 	</script>
 	
 
-	<script>
+<script>
 	
 	var imageNo = 0;
-	var image ;
+	var item ;
+	var zoom ;
 	
 	$.getJSON("/detail/jboardInfo?contentId=${jBoardVO.contentid}&contentTypeId=15", function(data){
 		console.dir(data);
-		image = data.image
+		item = data;
+		
+		var image = data.image
 		var location = data.location;
 		var cost = data.cost;
 		var programs = data.programs;
@@ -288,6 +316,7 @@
 		if(image!=null)
 			$('#infoImage img').attr("src", image[imageNo]);
 		
+		$('#infoOverview div').html(data.overview);
 		$('#infoLocation span').html(location.addr1);
 		$('#infoProgram div').eq(0).html(programs.program);
 		$('#infoProgram div').eq(1).html(programs.subevent);
@@ -311,7 +340,31 @@
 			
 			$('#infoImage img').attr("src", image[imageNo]);
 		})
-	});	
+	});
+	
+	$("#mapModal").on('shown.bs.modal', function () {
+		initMap(item);
+	});
+
+	// Map
+	function initMap(item) {
+		var map_center = {
+			lat : item.location.mapy*1,
+			lng : item.location.mapx*1
+		};
+		// Create a map object and specify the DOM element for display.
+		var map = new google.maps.Map(document.getElementById('map'), {
+			center : map_center,
+			scrollwheel : true,
+			zoom : item.location.mlevel*1 + 10
+		});
+		// Create a marker and set its position.
+		var marker = new google.maps.Marker({
+			map : map,
+			position : map_center,
+			title : item.title
+		});
+	}
 	
 
 	// reply
@@ -481,7 +534,6 @@
 			}
 		});
 	});
-	
 	
 	
 </script>
