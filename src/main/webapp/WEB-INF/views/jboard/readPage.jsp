@@ -164,6 +164,11 @@
 		</div>
 	</div>
 	<!-- /.row -->
+	
+	<!-- Map Modal -->
+	<div id="mapModal" class="modal fade" role="dialog">
+		hello
+	</div>
 
 	<div class="row">
 		<div class="col-md-12">
@@ -267,13 +272,6 @@
 	
 
 	<script>
-
-// 	function printInfo(template, valueObj) {
-// 		var temp = $(template).html();
-// 		var template = Handlebars.compile(temp);
-// 		var html = template(valueObj);
-// 		$('#eventInfo').append(html);
-// 	}
 	
 	var imageNo = 0;
 	var image ;
@@ -296,19 +294,6 @@
 		$('#infoCost div').eq(0).html(cost.usetimefestival);
 		$('#infoCost div').eq(1).html(cost.discountinfofestival);
 		$('#infoHomepage').html(data.homepage);
-		
-// // 		var temp = $('#temp').html();
-// // 		var template = Handlebars.compile(temp);
-// // 		var html = template(item);
-// // 		console.log(html);
-// // 		$('#hotFestival').html(html);
-		
-// 		printInfo('#infoTitle', data);
-// 		printInfo('#infoImage', data.image);
-// 		printInfo('#infoLocation', data.location);
-// 		printInfo('#infoPrograms', data.programs);
-// 		printInfo('#infoCost', data.cost);
-// 		printInfo('#infoHomePage', data);
 		
 		$('#btnRight').on('click', function() {
 			if(imageNo==image.length-1)
