@@ -58,7 +58,7 @@ public class NoticeController {
 
 	    rttr.addFlashAttribute("msg", "SUCCESS");
 
-	    return "redirect://notice/board";
+	    return "redirect:/notice/board";
 		
 	}
 	

@@ -18,7 +18,7 @@
 
 	<div class="row">
 		<!-- left column -->
-		<div class="col-md-12">
+		<div class="col-md-6">
 			<!-- general form elements -->
 			<div class="box box-primary">
 				<div class="box-header">
@@ -37,39 +37,29 @@
 
 						<div class="form-group">
 							<label for="exampleInputEmail1">BNO</label> <input type="text"
-								name='bno' class="form-control" value="${boardVO.bno}"
+								name='bno' class="form-control" value="${jBoardVO.bno}"
 								readonly="readonly">
 						</div>
 
 						<div class="form-group">
 							<label for="exampleInputEmail1">Title</label> <input type="text"
-								name='title' class="form-control" value="${boardVO.title}">
+								name='title' class="form-control" value="${jBoardVO.title}">
 						</div>
 						<div class="form-group">
 							<label for="exampleInputPassword1">Content</label>
-							<textarea class="form-control" name="content" rows="3">${boardVO.content}</textarea>
+							<textarea class="form-control" name="content" rows="3">${jBoardVO.content}</textarea>
 						</div>
 
 						<div class="form-group">
 							<label for="exampleInputEmail1">Writer</label> <input type="text"
-								name="writer" class="form-control" value="${boardVO.writer}">
+								name="writer" class="form-control" value="${jBoardVO.writer}">
 						</div>
 
-						<div class="form-group">
-							<label for="exampleInputEmail1">File DROP Here</label>
-							<div class="fileDrop"></div>
-						</div>
 
 					</div>
 					<!-- /.box-body -->
 
 					<div class="box-footer">
-						<div>
-							<hr>
-						</div>
-
-						<ul class="mailbox-attachments clearfix uploadedList">
-						</ul>
 
 						<button type="submit" class="btn btn-primary">SAVE</button>
 						<button type="submit" class="btn btn-warning">CANCEL</button>
@@ -82,16 +72,7 @@
 					src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 
 				<script id="template" type="text/x-handlebars-template">
-<li>
-  <span class="mailbox-attachment-icon has-img"><img src="{{imgsrc}}" alt="Attachment"></span>
-  <div class="mailbox-attachment-info">
-	<a href="{{getLink}}" class="mailbox-attachment-name">{{fileName}}</a>
-	<a href="{{fullName}}" 
-     class="btn btn-default btn-xs pull-right delbtn"><i class="fa fa-fw fa-remove"></i></a>
-	</span>
-  </div>
-</li>                
-</script>
+				</script>
 
 <script>
 	$(document).ready(	function() {var formObj = $("form[role='form']");
@@ -100,22 +81,17 @@
 		var str = "";
 		});
 		$(".btn-warning").on("click",function() {
-
+				self.location = "/jboard/list?page=${cri.page}&perPageNum=${cri.perPageNum}"+ "&searchType=${cri.searchType}&keyword=${cri.keyword}";
 			});
 		});
+	
+	$(".btn-primary").on("click" , function() {
+		formObj.submit();
+	});
 		var template = Handlebars.compile($("#template").html());
 		
-
-
-
+		
 		//console.log(file);
-		var bno = $
-		{
-			boardVO.bno
-		};
-			$("#popup_img").on("click", function() {
-				$(".popup").hide('slow');
-				});
 		</script>
 
 			</div>
