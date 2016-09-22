@@ -1,5 +1,6 @@
 package org.zerock.openapi;
 
+
 public class SingleBody {
 	
 	private SingleItems items;
