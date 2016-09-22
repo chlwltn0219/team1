@@ -78,7 +78,7 @@
 					</div>
 					<div class="form-group">
 						<label>Content</label>
-						<textarea class="form-control" name="content" rows="3" readonly="readonly">${jBoardVO.content}</textarea>
+						<textarea class="form-control" name="content" rows="25" readonly="readonly">${jBoardVO.content}</textarea>
 					</div>
 					<div class="form-group">
 						<label>Writer</label>
