@@ -31,7 +31,7 @@ public class JBoardProxyController {
 	DateUtil date = new DateUtil();
 	
 	@RequestMapping(value="/nearFestival", method = RequestMethod.GET )
-	public ResponseEntity<Body> nearFestival() {
+	public ResponseEntity<Body> nearFestival(@RequestParam Integer pageNo ) {
 		
 		Result result = null;
 		Map<String, String> eventDate = date.getFestivalDate();
@@ -42,7 +42,7 @@ public class JBoardProxyController {
 		String baseURI = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/searchFestival"
 							+ "?ServiceKey=" + SERVICE_KEY
 							+ "&numOfRows=6"
-							+ "&pageNo=1"
+							+ "&pageNo=" + pageNo
 							+ "&arrange=B"
 							+ "&MobileOS=ETC"
 							+ "&MobileApp=TestApp"
