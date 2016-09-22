@@ -53,7 +53,6 @@ public class JoinBoardProxyController {
 		logger.info("request uri : " + uri);
 
 		result = restTemplate.getForObject(uri, Result.class);
-		logger.info(restTemplate.getForObject(uri, String.class));
 
 		Body body = result.getResponse().getBody();
 		System.out.println("items = " + body.getItems().getItem());
@@ -80,7 +79,6 @@ public class JoinBoardProxyController {
 		logger.info("request uri : " + uri);
 
 		result = restTemplate.getForObject(uri, Result.class);
-		logger.info(restTemplate.getForObject(uri, String.class));
 
 		Body body = result.getResponse().getBody();
 		System.out.println("items = " + body.getItems().getItem());
