@@ -131,7 +131,7 @@
 					<h4><span class="label {{onTime today eventstartdate eventenddate}}">{{eventstartdate}}-{{eventenddate}}</span></h4>
 				</div>
 			</li>
-	   {{/each}}
+ 	   {{/each}}
 	</script>
 
 
@@ -152,6 +152,7 @@
 		function getList(pageNo) {
 			$.getJSON('/jboard/threeMonth?pageNo='+ pageNo, function(data) {
 				console.dir(data);
+				console.log(pageNo);
 				
 				var item = data.items.item;
 				var pageMaker = data.pageMaker;

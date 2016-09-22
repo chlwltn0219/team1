@@ -164,6 +164,8 @@ public class DetailProxyController {
 		Result imageResult = null;
 		SingleResult singleImageResult = null;
 		
+		List<String> imageList = new ArrayList<>();
+		
 		Info info = new Info();
 		
 		RestTemplate restTemplate = new RestTemplate();
@@ -185,6 +187,10 @@ public class DetailProxyController {
 		commonResult = restTemplate.getForObject(uri, SingleResult.class);
 		Map<String, Object> commonItems = commonResult.getResponse().getBody().getItems().getItem();
 		logger.info("common items : " + commonItems);
+		
+		Object commonImage = commonItems.get("firstimage");
+		if(commonImage!=null)
+			imageList.add((String) commonItems.get("firstimage"));
 		
 		// Get DetailIntro
 		baseURI = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailIntro"
@@ -219,16 +225,19 @@ public class DetailProxyController {
 			List<Map<String, Object>> imageItems = imageResult.getResponse().getBody().getItems().getItem();
 			logger.info("image items : " + imageItems);
 			
-			info.setImage(imageItems);
+			for(int i=0; i<imageItems.size(); i++) {
+				imageList.add((String) imageItems.get(i).get("originimgurl"));
+			}
 		} else if (checkResult.getResponse().getBody().getTotalCount() == 1) {
 			singleImageResult = restTemplate.getForObject(uri, SingleResult.class);
 			Map<String, Object> singleImageItems = singleImageResult.getResponse().getBody().getItems().getItem();
 			logger.info("image items : " + singleImageItems);
 			
-			List<Map<String, Object>> list = new ArrayList<>();
-			list.add(singleImageItems);
-			info.setImage(list);
+			imageList.add((String) singleImageItems.get("originimgurl"));
 		} 
+		
+		//image
+		info.setImage(imageList);
 		
 		// location
 		Map<String, Object> loc = new HashMap<String, Object>();

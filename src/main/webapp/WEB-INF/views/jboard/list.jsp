@@ -12,6 +12,38 @@
 <title>jboard/list.jsp</title>
 <!-- HandleBars -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+<style type="text/css">
+	.info-box {
+		position: relative;
+		width: 100%;
+		height: 200px;
+	}
+
+	div.info, div.image{
+		float: left;
+		position : absolute;
+ 		top: 0; 
+ 		left: 0;
+		width: 100%;
+		height: 200px;
+		text-align: center;
+		background-color: black;
+		color: white;
+	}
+	
+	div.info {
+		z-index: 50;
+	}
+	
+	div.image {
+		z-index: 100;
+	}
+	
+	.info .title, .info .date {
+		width: 100%;
+		height: 100px;
+	}
+</style>
 </head>
 <body>
 
@@ -22,7 +54,7 @@
 			<!-- Hot Festival List -->
 			<div class="box">
 				<div class="box-header with-border">
-					<h3 class="box-title">Hot Festivals in This Month</h3>
+					<h3 class="box-title">Hot Event</h3>
 				</div>
 				<div class="box-body container-fluid">
 					<div id="hotFestival" class="row">
@@ -31,39 +63,39 @@
 			</div>
 			
 			<!-- general form elements -->
-<!-- 			<div class='box'> -->
-<!-- 				<div class="box-header with-border"> -->
-<!-- 					<h3 class="box-title">Search</h3> -->
-<!-- 				</div> -->
-<!-- 				<div class='box-body'> -->
-<!-- 					<select name="searchType"> -->
-<!-- 						<option value="n" -->
-<%-- 							<c:out value="${cri.searchType == null?'selected':''}"/>> --%>
-<!-- 							---</option> -->
-<!-- 						<option value="t" -->
-<%-- 							<c:out value="${cri.searchType eq 't'?'selected':''}"/>> --%>
-<!-- 							Title</option> -->
-<!-- 						<option value="c" -->
-<%-- 							<c:out value="${cri.searchType eq 'c'?'selected':''}"/>> --%>
-<!-- 							Content</option> -->
-<!-- 						<option value="w" -->
-<%-- 							<c:out value="${cri.searchType eq 'w'?'selected':''}"/>> --%>
-<!-- 							Writer</option> -->
-<!-- 						<option value="tc" -->
-<%-- 							<c:out value="${cri.searchType eq 'tc'?'selected':''}"/>> --%>
-<!-- 							Title OR Content</option> -->
-<!-- 						<option value="cw" -->
-<%-- 							<c:out value="${cri.searchType eq 'cw'?'selected':''}"/>> --%>
-<!-- 							Content OR Writer</option> -->
-<!-- 						<option value="tcw" -->
-<%-- 							<c:out value="${cri.searchType eq 'tcw'?'selected':''}"/>> --%>
-<!-- 							Title OR Content OR Writer</option> -->
-<!-- 					</select> <input type="text" name='keyword' id="keywordInput" -->
-<%-- 						value='${cri.keyword }'> --%>
-<!-- 					<button id='searchBtn'>Search</button> -->
-<!-- 					<button id='newBtn'>New Board</button> -->
-<!-- 				</div> -->
-<!-- 			</div> -->
+			<div class='box'>
+				<div class="box-header with-border">
+					<h3 class="box-title">Search</h3>
+				</div>
+				<div class='box-body'>
+					<select name="searchType">
+						<option value="n"
+							<c:out value="${cri.searchType == null?'selected':''}"/>>
+							---</option>
+						<option value="t"
+							<c:out value="${cri.searchType eq 't'?'selected':''}"/>>
+							Title</option>
+						<option value="c"
+							<c:out value="${cri.searchType eq 'c'?'selected':''}"/>>
+							Content</option>
+						<option value="w"
+							<c:out value="${cri.searchType eq 'w'?'selected':''}"/>>
+							Writer</option>
+						<option value="tc"
+							<c:out value="${cri.searchType eq 'tc'?'selected':''}"/>>
+							Title OR Content</option>
+						<option value="cw"
+							<c:out value="${cri.searchType eq 'cw'?'selected':''}"/>>
+							Content OR Writer</option>
+						<option value="tcw"
+							<c:out value="${cri.searchType eq 'tcw'?'selected':''}"/>>
+							Title OR Content OR Writer</option>
+					</select> <input type="text" name='keyword' id="keywordInput"
+						value='${cri.keyword }'>
+					<button id='searchBtn'>Search</button>
+					<button id='newBtn'>New Board</button>
+				</div>
+			</div>
 
 			<div class="box">
 				<div class="box-header with-border">
@@ -137,14 +169,25 @@
 	
 	<script id="temp" type="text/xxx-mytemplate">
 		{{#each .}}
-			<div class="col-md-4">
-				<img alt="{{title}}" src="{{firstimage}}" width="100%" height="200">
+			<div class="col-md-4 col-xs-6">
+				<div class=" info-box">
+					<div class="image">
+						<img alt="{{title}}" src="{{firstimage}}" width="100%" height="200">
+					</div>
+					<div class="info">
+						<br>
+						<div>
+							<div class="title"><h3>{{title}}</h3></div>
+							<div class="date"><h4>{{eventstartdate}} - {{eventenddate}}</h4></div>
+						</div>
+					</div>
+				</div>
 			</div>
 		{{/each}}
 	</script>
 	
 	<script type="text/javascript">
-		$.getJSON("/jboard/nearFestival", function(data){
+		$.getJSON("/jboard/nearFestival?pageNo=" + Math.floor(Math.random()*10), function(data){
 			console.dir(data);
 			
 			var item = data.items.item;
@@ -161,8 +204,25 @@
 			for(var i=0; i<data.numOfRows; i++){
 				$('img').eq(i).attr("src", function(j, originValue) {
 					if(originValue=="")
-						return "http://placehold.it/350x250?text=" + item[i].title;
+						return "/resources/img/NoImage.jpg";
 				});
+			}
+			
+			$('div.info-box').on({
+				mouseenter: function() {
+					var index = getIndex('div.info-box', this);
+					console.log("enter: " + index);
+					$('div.image').eq(index).css('opacity', 0.3);
+				},
+				mouseleave: function() {
+					var index = getIndex('div.info-box', this);
+					console.log("leave: " + index);
+					$('div.image').eq(index).css('opacity', 1);
+				}
+			});
+			
+			function getIndex(which, obj) {
+				return $(which).index(obj);
 			}
 			
 		});		
@@ -191,9 +251,11 @@
 
 			$('#newBtn').on("click", function(evt) {
 				self.location = "register";
+// 				location.replace("/user/login");
 			});
-
+			
 		});
+		
 	</script>
 
 </body>
