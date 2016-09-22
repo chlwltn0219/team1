@@ -95,6 +95,25 @@
 				<table class="table table-hover">
 					<tbody id="result"></tbody>
 				</table>
+				<div class="text-center">
+					<ul class="pagination">
+						<c:if test="${pageMaker.prev}">
+							<li><a href="list${pageMaker.makeSearch(pageMaker.startPage - 1) }">&laquo;</a></li>
+						</c:if>
+
+						<c:forEach begin="${pageMaker.startPage }"
+							end="${pageMaker.endPage }" var="idx">
+							<li
+								<c:out value="${pageMaker.cri.page == idx?'class =active':''}"/>>
+								<a href="list${pageMaker.makeSearch(idx)}">${idx}</a>
+							</li>
+						</c:forEach>
+
+						<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+							<li><a href="list${pageMaker.makeSearch(pageMaker.endPage +1) }">&raquo;</a></li>
+						</c:if>
+					</ul>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -131,7 +150,6 @@
        
        $('#result').html("");
        
-       var j = 0;
        for(var i=0; i<items.length; i++) {
 	         var html = template(items[i]);
 	         $('#result').append(html);
@@ -169,20 +187,6 @@
 	};
 	
 	function imgHover2() {
-// 		var $btn=$('.table_imgbox');
-		
-// 		$(".table_imgbox").on({
-// 			mouseenter: function() {
-// 				var index = getIndex(this);
-// 				if(!$btn.eq(index).is(':animated')){
-// 					$btn.eq(index).fadeTo('slow', 0.3);		
-// 					console.log($btn.eq(index));
-// 				}
-// 			},
-// 			mouseleave: function() {
-// 				$btn.fadeTo('slow', 1);
-// 			}
-// 		});
 		$(".imgbox_hover").on({
 	        mouseenter: function(){
 	        	var index = getIndex(this);
