@@ -4304,6 +4304,10 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   .navbar-form .input-group > .form-control {
     width: 100%;
   }
+  
+/*   #myNavbar { */
+/*   	background-color: rgb(14,201,190); */
+/*   } */
   .navbar-form .control-label {
     margin-bottom: 0;
     vertical-align: middle;
@@ -4492,11 +4496,11 @@ fieldset[disabled] .navbar-default .btn-link:focus {
   color: #ccc;
 }
 .navbar-inverse {
-  background-color: #222;
-  border-color: #080808;
+  background-color: rgb(14, 201, 190);
+  border-color: rgb(14, 201, 190);
 }
 .navbar-inverse .navbar-brand {
-  color: #9d9d9d;
+  color: white;
 }
 .navbar-inverse .navbar-brand:hover,
 .navbar-inverse .navbar-brand:focus {
@@ -4507,11 +4511,11 @@ fieldset[disabled] .navbar-default .btn-link:focus {
   color: #9d9d9d;
 }
 .navbar-inverse .navbar-nav > li > a {
-  color: #9d9d9d;
+  color: white;
 }
 .navbar-inverse .navbar-nav > li > a:hover,
 .navbar-inverse .navbar-nav > li > a:focus {
-  color: #fff;
+  color: black;
   background-color: transparent;
 }
 .navbar-inverse .navbar-nav > .active > a,

@@ -30,7 +30,7 @@
 				</div>
 
 
-				<div class='box-body'>
+				<div class='box-body'  ani_type="fade">
 
 					<select name="searchType">
 						<option value="n"
@@ -60,7 +60,7 @@
 					<button id='newBtn'>New Board</button>
 
 				</div>
-				<div class="selectBox">
+				<div class="selectBox" >
 					<select id="gu">
 		               <option value="1">강남구</option>
 		               <option value="2">강동구</option>
@@ -90,29 +90,32 @@
 		            </select>
 				</div>
 			</div>
-
-
+			
 			<div class="table-responsive" style="width: 100%">
-			   <table class="table table-hover">
-			   <tbody id="result"></tbody>
-			   </table>
+				<table class="table table-hover">
+					<tbody id="result"></tbody>
+				</table>
 			</div>
+		</div>
+	</div>
+			
 
-
-
-<a class="return-top" href="#" style="right:27px; bottom:50px; position:fixed; z-index:9999;">
-	<img src="http://cfs.tistory.com/custom/blog/202/2025510/skin/images/top1.png">
-</a>
-
+	<a class="return-top" href="#" style="right:27px; bottom:50px; position:fixed; z-index:9999;">
+		<img src="http://cfs.tistory.com/custom/blog/202/2025510/skin/images/top1.png">
+	</a>
 
 <script id="codeTemp" type="text/xxx-mytemplate">
 	<div class="table_list imgbox_hover">
 			<a href="/place/detailList?contentid={{contentid}}">
-				<img class="table_imgbox" alt="" src="{{firstimage}}">
-				<div class="img_hover">
-					<p> [관광] {{title}} </p>
-				</div>
+				<img class="table_imgbox" src="{{firstimage}}">
 			</a>
+			<div class="info">
+				<br>
+				<div>
+					<div class="title"><h3>{{title}}</h3></div>
+					<div class="addr"><h4>{{addr1}}</h4></div>
+				</div>
+			</div>
 	</div>
 </script>
 
@@ -133,7 +136,7 @@
 	         var html = template(items[i]);
 	         $('#result').append(html);
 	         imgCheck(i);
-	         imgHover();
+	         imgHover2();
        }
     });
    /* select 버튼 클릭시 */
@@ -153,7 +156,7 @@
 	         var html = template(items[i]);
 	         $('#result').append(html);
 	         imgCheck(i);
-	         imgHover();
+	         imgHover2();
          }
       });
    });
@@ -164,6 +167,58 @@
 			$('div.table_list img').eq(i).attr('src','http://placehold.it/300x350?text=No_Image');
 		}
 	};
+	
+	function imgHover2() {
+// 		var $btn=$('.table_imgbox');
+		
+// 		$(".table_imgbox").on({
+// 			mouseenter: function() {
+// 				var index = getIndex(this);
+// 				if(!$btn.eq(index).is(':animated')){
+// 					$btn.eq(index).fadeTo('slow', 0.3);		
+// 					console.log($btn.eq(index));
+// 				}
+// 			},
+// 			mouseleave: function() {
+// 				$btn.fadeTo('slow', 1);
+// 			}
+// 		});
+		$(".table_imgbox").on({
+	        mouseenter: function(){
+	        	var index = getIndex(this);
+	        	$(this).eq(index).css("opacity", 0.3);
+	            if(!$('.info').eq(index).is(':animated')) {
+		        	console.log(index);
+					$('.info').eq(index).fadeIn();	            	
+	            }
+	        },
+	        mouseleave: function(){
+	        	var index = getIndex(this);
+	        	$(this).eq(index).css("opacity", 1);
+	            $('.info').fadeOut();
+	        }
+	    });
+		
+// 		$( ".table_imgbox" )
+// 		  .mouseover(function() {
+// 			  var index = getIndex(this);
+// 			  $(this).eq(index).css("opacity", 0.3);
+// // 			  if(!$(this).eq(index).is(':animated'))
+// // 		   		$( this ).eq(index).fadeTo('fast', 0.3);
+// // 			  	$(this).eq(index).show( "bounce", { times: 3 }, "slow" );
+// 			  if(!$(".info").eq(index).is(':animated')){
+// 					$(".info").eq(index).fadeIn();				  
+// 			  }
+// 		  })
+// 		  .mouseout(function() {
+// 			  var index = getIndex(this);
+// 			  $(this).eq(index).css("opacity", 1);
+// 			  $(".info").fadeOut();
+		
+// // 		    $( this ).fadeTo('slow', 1);
+// // 			  $(this).hide();
+// 		  });
+	}
       
 	function imgHover() {
 		var $btn=$('.img_hover');
@@ -171,19 +226,23 @@
 		$( ".imgbox_hover" ).on({
 			mouseenter: function() {
 				var index = getIndex(this);
-// 				$btn.eq(index).fadeIn();
-				if(!$btn.eq(index).is(':animated')) 
-					$btn.eq(index).fadeIn();
+				
+				if(!$btn.eq(index).is(':animated')){
+					$(".table_imgbox").eq(index).css("opacity", 0.3);
+					$btn.eq(index).fadeIn();					
+				} 
 			},
 			mouseleave: function() {
+				$(".table_imgbox").css("opacity", 1);
 				$btn.fadeOut();
 			}
 		});
 	}
 	
 	function getIndex(obj) {
-		return $('.imgbox_hover').index(obj);
+		return $('.table_imgbox').index(obj);
 	}
+	
 </script>
 
 <script>

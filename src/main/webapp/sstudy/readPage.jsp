@@ -58,7 +58,7 @@
 				<!-- /.box-header -->
 
 				<form role="form" action="modifyPage" method="post">
-					<input type='hidden' name='bno' value="${boardVO.bno}">
+					<input type='hidden' name='bno' value="${jBoardVO.bno}">
 					<input type='hidden' name='page' value="${cri.page}">
 					<input type='hidden' name='perPageNum' value="${cri.perPageNum}">
 					<input type='hidden' name='searchType' value="${cri.searchType}">
@@ -67,34 +67,32 @@
 
 				<div class="box-body">
 					<div class="form-group">
-						<label for="exampleInputEmail1">Title</label>
-						<input type="text" name='title' class="form-control" value="${boardVO.title}" readonly="readonly">
+						<label>Title</label>
+						<input type="text" name='title' class="form-control" value="${jBoardVO.title}" readonly="readonly">
 					</div>
 					<div class="form-group">
-						<label for="exampleInputPassword1">Content</label>
-						<textarea class="form-control" name="content" rows="3" readonly="readonly">${boardVO.content}</textarea>
+						<label>Content</label>
+						<textarea class="form-control" name="content" rows="3" readonly="readonly">${jBoardVO.content}</textarea>
 					</div>
 					<div class="form-group">
-						<label for="exampleInputEmail1">Writer</label>
-						<input type="text" name="writer" class="form-control" value="${boardVO.writer}" readonly="readonly">
+						<label>Writer</label>
+						<input type="text" name="writer" class="form-control" value="${jBoardVO.writer}" readonly="readonly">
 					</div>
+						<label>Content Id</label>
+						<input type="text" value="${jBoardVO.contentid}" readonly="readonly" >
 				</div>
 				<!-- /.box-body -->
 
 				<div class="box-footer">
 
-					<div>
-						<hr>
-					</div>
 
 					<ul class="mailbox-attachments clearfix uploadedList">
 					</ul>
-					<c:if test="${login.uid == boardVO.writer}">
+					<c:if test="${login.uid == jBoardVO.writer}">
 						<button type="submit" class="btn btn-warning" id="modifyBtn">Modify</button>
 						<button type="submit" class="btn btn-danger" id="removeBtn">REMOVE</button>
 					</c:if>
-					<button type="submit" class="btn btn-primary" id="goListBtn">GO
-						LIST</button>
+					<button type="submit" class="btn btn-primary" id="goListBtn">GO	LIST</button>
 				</div>
 
 			</div>
@@ -106,24 +104,34 @@
 		<div class="col-md-6">
 			<div class="box box-warning">
 				<div class="box-header">
-					<h3 class="box-title">Event Info</h3>
+					<h3 class="box-title">{{title}}</h3>
 				</div>
 				<div class="box-body">
 					<div>
-						<img alt="picture" src="">
+						<img alt="{{image}}" src="{{image}}">
 					</div>
 					<hr>
 					<div class="row">
-						<div class="col-xs-3"><label>Title : </label></div>
-						<div id="title" class="col-xs-9"></div>
+						<div class="col-xs-3"><label>Location : </label></div>
+						<div class="col-xs-9">{{addr1}}<img alt="mapIcon" src=""></div>
 					</div>
 					<div class="row">
-						<div class="col-xs-3"><label>Event Place : </label></div>
-						<div id="eventPlace" class="col-xs-9"></div>
+						<div class="col-xs-3"><label>Programs : </label></div>
+						<div class="col-xs-9">
+							<div>{{program}}</div>
+							<div>{{subevent}}</div>
+						</div>
 					</div>
 					<div class="row">
-						<div class="col-xs-3"><label>Play Time : </label></div>
-						<div id="playTime" class="col-xs-9"></div>
+						<div class="col-xs-3"><label>Cost : </label></div>
+						<div class="col-xs-9">
+							<div>{{usertimefestival}}</div>
+							<div>{{discountinfofestival}}</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-xs-3"><label>HomePage : </label></div>
+						<div class="col-xs-9">{{homepage}}</div>
 					</div>
 				</div>
 				
@@ -160,7 +168,7 @@
 				<c:if test="${empty login}">
 					<div class="box-body">
 						<div>
-							<a href="javascript:goLogin();">Login Please</a>
+							<a href="/user/login">Login Please</a>
 						</div>
 					</div>
 				</c:if>
@@ -173,7 +181,7 @@
 				<!-- timeline time label -->
 				<li class="time-label" id="repliesDiv"><span class="bg-green">
 						Replies List <small id='replycntSmall'> [
-							${boardVO.replycnt} ] </small>
+							${jBoardVO.replycnt} ] </small>
 				</span></li>
 			</ul>
 
@@ -245,6 +253,13 @@
 		{{/each}}
 	</script>  
 
+	<script id="EventTemplate" type="text/x-handlebars-template">
+		<li >
+			<div >
+				
+			</div>
+		</li>                
+	</script>  
 <script>
 	
 	Handlebars.registerHelper("eqReplyer", function(replyer, block) {
@@ -273,8 +288,7 @@
 
 	}
 
-	var bno = ${boardVO.bno};
-
+	var bno = ${jBoardVO.bno};
 	var replyPage = 1;
 
 	function getPage(pageInfo) {
@@ -313,7 +327,7 @@
 
 	$("#repliesDiv").on("click", function() {
 		
-		alert("#repliesDiv clicked...");
+// 		alert("#repliesDiv clicked...");
 		
 		if ($(".timeline li").size() > 1) {
 			return;
@@ -439,16 +453,11 @@ $(document).ready(function(){
 	console.log(formObj);
 	
 	$("#modifyBtn").on("click", function(){
-		formObj.attr("action", "/sboard/modifyPage");
+		formObj.attr("action", "/jboard/modifyPage");
 		formObj.attr("method", "get");		
 		formObj.submit();
 	});
 	
-/* 	$("#removeBtn").on("click", function(){
-		formObj.attr("action", "/sboard/removePage");
-		formObj.submit();
-	}); */
-
 	
 	$("#removeBtn").on("click", function(){
 		
@@ -470,57 +479,15 @@ $(document).ready(function(){
 			});
 		}
 		
-		formObj.attr("action", "/sboard/removePage");
+		formObj.attr("action", "/jboard/removePage");
 		formObj.submit();
 	});	
 	
 	$("#goListBtn ").on("click", function(){
 		formObj.attr("method", "get");
-		formObj.attr("action", "/sboard/list");
+		formObj.attr("action", "/jboard/list");
 		formObj.submit();
 	});
-	
-	var bno = ${boardVO.bno};
-	var template = Handlebars.compile($("#templateAttach").html());
-	
-	$.getJSON("/sboard/getAttach/"+bno,function(list){
-		$(list).each(function(){
-			
-			var fileInfo = getFileInfo(this);
-			
-			var html = template(fileInfo);
-			
-			 $(".uploadedList").append(html);
-			
-		});
-	});
-	
-
-
-	$(".uploadedList").on("click", ".mailbox-attachment-info a", function(event){
-		
-		var fileLink = $(this).attr("href");
-		
-		if(checkImageType(fileLink)){
-			
-			event.preventDefault();
-					
-			var imgTag = $("#popup_img");
-			imgTag.attr("src", fileLink);
-			
-			console.log(imgTag.attr("src"));
-					
-			$(".popup").show('slow');
-			imgTag.addClass("show");		
-		}	
-	});
-	
-	$("#popup_img").on("click", function(){
-		
-		$(".popup").hide('slow');
-		
-	});	
-	
 		
 	
 });

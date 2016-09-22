@@ -5,8 +5,7 @@ import java.util.Map;
 
 public class Info {
 
-//	List<Object> image;
-	List<Map<String,Object>> image;
+	List<String> image;
 	Map<String,Object> location ;
 	Map<String,Object> cost ;
 	Map<String,Object> programs ;
@@ -19,10 +18,10 @@ public class Info {
 	
 	
 	
-	public List<Map<String, Object>> getImage() {
+	public List<String> getImage() {
 		return image;
 	}
-	public void setImage(List<Map<String, Object>> image) {
+	public void setImage(List<String> image) {
 		this.image = image;
 	}
 	public Map<String, Object> getLocation() {

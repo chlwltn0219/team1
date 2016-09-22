@@ -51,7 +51,7 @@ div.container {
 /* Add a gray background color and some padding to the footer */
 .footer {
 	width: 100%;
-	background-color: #f2f2f2;
+ 	background-color: rgb(14, 201, 190);
 	padding: 25px;
 	bottom: 0;
 	position: relative;
@@ -93,7 +93,7 @@ div.container {
 									<li><a href="/place/list">문화시설</a></li>
 								</ul>
 							</li>
-							<li class="active"><a href="/jboard/list">Go With Me?</a></li>
+							<li><a href="/jboard/list">Go With Me?</a></li>
 							<li><a href="#">Gallery</a></li>
 							<li><a href="#">Statistics</a></li>
 						</ul>
@@ -114,7 +114,7 @@ div.container {
 						</ul>
 						<ul class="nav navbar-nav navbar-right">
 							<li>
-								<a href="/user/logout"> ${login.uname }</a>
+								<a href="/user/logout"> ${login.uid }</a>
 							</li>
 						</ul>
 						</c:if>

@@ -1,10 +1,11 @@
 package org.zerock.service;
 
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 import org.zerock.domain.UserVO;
 import org.zerock.dto.LoginDTO;
-import org.zerock.persistence.UserDAO;
 
 public interface UserService {
 
@@ -15,5 +16,7 @@ public interface UserService {
   public UserVO checkLoginBefore(String value);
 
   public void regist(UserVO board) throws Exception;
+  
+  public UserVO checkID(String check) throws Exception;
 
 }

@@ -58,12 +58,12 @@ public class FestivalProxyController {
 		
 //		logger.info(cri.toString());
 //
-//		model.addAttribute("list", );
+//		model.addAttribute("list", service.listSearchCriteria(cri));
 //
 //		PageMaker pageMaker = new PageMaker();
 //		pageMaker.setCri(cri);
 //
-//		pageMaker.setTotalCount(items.totalCount.listSearchCount(cri));
+//		pageMaker.setTotalCount(items.totalCount);
 //
 //		model.addAttribute("pageMaker", pageMaker);
 		
