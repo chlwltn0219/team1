@@ -22,9 +22,9 @@ import org.zerock.service.JBoardService;
 
 @Controller
 @RequestMapping("/jboard/*")
-public class JBoardController {
+public class JoinBoardController {
 
-	private static final Logger logger = LoggerFactory.getLogger(JBoardController.class);
+	private static final Logger logger = LoggerFactory.getLogger(JoinBoardController.class);
 
 	@Inject
 	private JBoardService service;

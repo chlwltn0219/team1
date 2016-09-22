@@ -169,7 +169,7 @@
 	
 	<script id="temp" type="text/xxx-mytemplate">
 		{{#each .}}
-			<div class="col-md-4">
+			<div class="col-md-4 col-xs-6">
 				<div class=" info-box">
 					<div class="image">
 						<img alt="{{title}}" src="{{firstimage}}" width="100%" height="200">
@@ -251,6 +251,7 @@
 
 			$('#newBtn').on("click", function(evt) {
 				self.location = "register";
+// 				location.replace("/user/login");
 			});
 			
 		});
