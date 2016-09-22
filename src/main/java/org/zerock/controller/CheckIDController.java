@@ -35,12 +35,12 @@ public class CheckIDController {
 		try {
 			who = service.checkID(uid); 
 			if(who==null) {
-				rtn.put("avaluable", true);
+				rtn.put("IDchecking", true);
 			
 			System.out.println(rtn.get("avaluable"));
 			
 			} else {
-				rtn.put("disavaluable", false);
+				rtn.put("IDchecking", false);
 			
 			System.out.println(rtn.get("disavaluable"));
 			

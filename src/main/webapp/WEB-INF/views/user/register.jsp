@@ -19,7 +19,7 @@
 				</div>
 				<!-- /.box-header -->
 
-				<form role="form" method="post">
+				<form role="form" method="post" onsubmit="">
 					<div class="box-body">
 						<div class="row">
 							<div class="col-sm-6">
@@ -27,31 +27,31 @@
 									<label for="">ID</label>
 									<div class="row">
 										<div class="col-md-10">
-											<input type="text" name='uid' id="uid" class="form-control"
+											<input type="text" name='uid' id="uid" class="form-control" required
 												placeholder="Enter ID">
 										</div>
 										<input type="button" id="iddc" value="check" />
 									</div>
 								</div>
 								<div class="form-group">
-									<label for="">Password</label> <input type="password"
+									<label for="">Password</label> <input type="password" required
 										name='upw' class="form-control" placeholder="Enter Password">
 								</div>
 								<div class="form-group">
-									<label for="">PW Check</label> <input type="password"
+									<label for="">PW Check</label> <input type="password" required
 										name='upwcheck' class="form-control"
 										placeholder="check Password">
 								</div>
 								<div class="form-group">
 									<label for="">Sex &nbsp;</label> <label class="radio-inline"><input
-										type="radio" name="sex"> Female</label> <label
-										class="radio-inline"><input type="radio" name="sex">
+										required type="radio" name="sex"> Female</label> <label
+										class="radio-inline"><input type="radio" name="sex" required>
 										Male</label>
 								</div>
 							</div>
 							<div class="col-sm-6">
 								<div class="form-group">
-									<label for="">E-mail</label> <input type="email" name="uname"
+									<label for="">E-mail</label> <input type="email" name="uname" required
 										class="form-control" placeholder="Enter Email">
 								</div>
 								<div class="form-group">
@@ -94,23 +94,29 @@
 	<script>
 		$("#iddc").on("click", function() {
 
-			alert("iddc clicked...");
 			var uidl = $("#uid");
 			var uidll = uidl.val();
 			
-			$.ajax({
-				type : 'get',
-				url : '/check/dup?uid=' + uidll,
-				headers : {
-					"Content-Type" : "application/json",
-					"X-HTTP-Method-Override" : "GET"
-				},
-				success : function(result) {
-					if (result == 'SUCCESS') {
-						alert("avaluable");
-					}
+			$.getJSON("/check/dup?uid=" + uidll, function(data) {
+				var IDchecking = data.IDchecking;
+				if (IDchecking) {
+					alert("만들 수 있습니다.");	
+				} else {
+					alert("만들 수 없습니다.");
 				}
-			});
+			 	
+			});	
+// 			$.ajax({
+// 				type : 'get',
+// 				url : '/check/dup?uid=' + uidll,
+// 				headers : {
+// 					"Content-Type" : "json",
+// 					"X-HTTP-Method-Override" : "GET"
+// 				},
+// 				success : function(data, textStatus) {
+// 					alert(textStatus)
+// 				}
+// 			});
 		});
 	</script>
 </body>
