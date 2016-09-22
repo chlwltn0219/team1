@@ -18,6 +18,8 @@
 <!-- HandleBars -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 <link href="/resources/css/fRead.css" rel="stylesheet" type="text/css" />
+<script async defer
+	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAA4WMo8DvHp--izPUaJTqHDV0wJotTBpc"></script>
 
 </head>
 <body>
@@ -29,6 +31,7 @@
 	</thead>
 	<tbody id="result1"></tbody>
 	</table>
+<!-- 	<div id="map" style="width: 100%; height: 400px"></div> -->
 </div>
 
 <!-- 지도 -->
@@ -40,7 +43,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">지도</h4>
+          <h4 class="modal-title">행사위치</h4>
         </div>
         <div class="modal-body">
           <div id="map" style="width: 100%; height: 400px"></div>
@@ -101,6 +104,8 @@
 		
 		var x = items.mapx;
 		var y = items.mapy;
+		var mapzoom = items.mlevel;
+		var title1 = items.title;
 		
 		$('#result').html(html);
 		$('#overview').html(items.overview);
@@ -109,6 +114,10 @@
 		initMap(x, y);
 		imgCheck();
 		
+		
+		$("#myModal").on('shown.bs.modal', function () {
+			initMap(x, y);
+		});
 		
 		/* Map */
 		function initMap(x, y) {
@@ -128,7 +137,7 @@
 			var marker = new google.maps.Marker({
 				map : map,
 				position : map_center,
-				title : title
+				title1 : title1
 			});
 		}
 		

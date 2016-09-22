@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ page session="false"%>
 <html>
 <head>
 <title>festival.jsp</title>
@@ -60,6 +62,31 @@
 	<tbody id="result" ></tbody>
 	</table>
 </div>
+<!-- <div class="box-footer"> -->
+<!-- 	<div class="text-center"> -->
+<!-- 		<ul class="pagination"> -->
+
+<%-- 			<c:if test="${pageMaker.prev}"> --%>
+<!-- 				<li><a -->
+<%-- 					href="list${pageMaker.makeSearch(pageMaker.startPage - 1) }">&laquo;</a></li> --%>
+<%-- 			</c:if> --%>
+
+<%-- 			<c:forEach begin="${pageMaker.startPage }" --%>
+<%-- 				end="${pageMaker.endPage }" var="idx"> --%>
+<!-- 				<li -->
+<%-- 					<c:out value="${pageMaker.cri.page == idx?'class = active':''}"/>> --%>
+<%-- 					<a href="list${pageMaker.makeSearch(idx)}">${idx}</a> --%>
+<!-- 				</li> -->
+<%-- 			</c:forEach> --%>
+
+<%-- 			<c:if test="${pageMaker.next && pageMaker.endPage > 0}"> --%>
+<!-- 				<li><a -->
+<%-- 					href="list${pageMaker.makeSearch(pageMaker.endPage +1) }">&raquo;</a></li> --%>
+<%-- 			</c:if> --%>
+
+<!-- 		</ul> -->
+<!-- 	</div> -->
+<!-- </div> -->
 
 <a class="return-top" href="#">
 	<img src="http://cfs.tistory.com/custom/blog/202/2025510/skin/images/top1.png"> <!-- TOP 스크롤 -->
@@ -110,6 +137,8 @@
 				imgCheck(i);
 				imgHover();
 			}
+			
+			
 		});
 	});
 		
