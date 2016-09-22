@@ -43,7 +43,6 @@ public class WeatherProxyController {
 		logger.info("request uri : " + uri);
 		
 		result = restTemplate.getForObject(uri, Result.class);
-		logger.info(restTemplate.getForObject(uri, String.class));
 		
 		Body body = result.getResponse().getBody();
 		

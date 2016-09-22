@@ -30,7 +30,7 @@
 				</div>
 
 
-				<div class='box-body'  ani_type="fade">
+				<div class='box-body'>
 
 					<select name="searchType">
 						<option value="n"
