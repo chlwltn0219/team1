@@ -108,14 +108,14 @@
 	<div class="table_list imgbox_hover">
 			<a href="/place/detailList?contentid={{contentid}}">
 				<img class="table_imgbox" src="{{firstimage}}">
-			</a>
-			<div class="info">
-				<br>
-				<div>
-					<div class="title"><h3>{{title}}</h3></div>
-					<div class="addr"><h4>{{addr1}}</h4></div>
+				<div class="info">
+					<br>
+					<div>
+						<div class="title"><h3>{{title}}</h3></div>
+						<div class="addr"><h4>{{addr1}}</h4></div>
+					</div>
 				</div>
-			</div>
+			</a>
 	</div>
 </script>
 
@@ -183,41 +183,23 @@
 // 				$btn.fadeTo('slow', 1);
 // 			}
 // 		});
-		$(".table_imgbox").on({
+		$(".imgbox_hover").on({
 	        mouseenter: function(){
 	        	var index = getIndex(this);
-	        	$(this).eq(index).css("opacity", 0.3);
+	        	if(!$(".table_imgbox").eq(index).is(':animated')){
+		        	$(".table_imgbox").eq(index).fadeTo('slow', 0.2);
+	        	}
 	            if(!$('.info').eq(index).is(':animated')) {
-		        	console.log(index);
 					$('.info').eq(index).fadeIn();	            	
 	            }
 	        },
 	        mouseleave: function(){
-	        	var index = getIndex(this);
-	        	$(this).eq(index).css("opacity", 1);
+	        	var index = getIndex(this);	
+        		$(".table_imgbox").eq(index).stop().fadeTo('slow',1);	        	
 	            $('.info').fadeOut();
 	        }
 	    });
 		
-// 		$( ".table_imgbox" )
-// 		  .mouseover(function() {
-// 			  var index = getIndex(this);
-// 			  $(this).eq(index).css("opacity", 0.3);
-// // 			  if(!$(this).eq(index).is(':animated'))
-// // 		   		$( this ).eq(index).fadeTo('fast', 0.3);
-// // 			  	$(this).eq(index).show( "bounce", { times: 3 }, "slow" );
-// 			  if(!$(".info").eq(index).is(':animated')){
-// 					$(".info").eq(index).fadeIn();				  
-// 			  }
-// 		  })
-// 		  .mouseout(function() {
-// 			  var index = getIndex(this);
-// 			  $(this).eq(index).css("opacity", 1);
-// 			  $(".info").fadeOut();
-		
-// // 		    $( this ).fadeTo('slow', 1);
-// // 			  $(this).hide();
-// 		  });
 	}
       
 	function imgHover() {
@@ -240,7 +222,7 @@
 	}
 	
 	function getIndex(obj) {
-		return $('.table_imgbox').index(obj);
+		return $('.imgbox_hover').index(obj);
 	}
 	
 </script>
