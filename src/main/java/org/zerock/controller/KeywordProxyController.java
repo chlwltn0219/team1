@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
-import org.zerock.openapi.Body;
-import org.zerock.openapi.Items;
-import org.zerock.openapi.Result;
+import org.zerock.openapi.tour.Body;
+import org.zerock.openapi.tour.Items;
+import org.zerock.openapi.tour.Result;
 import org.zerock.util.DateUtil;
 
 @RestController

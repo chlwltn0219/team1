@@ -18,13 +18,13 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import org.zerock.domain.Criteria;
 import org.zerock.domain.PageMaker;
-import org.zerock.openapi.Body;
-import org.zerock.openapi.CheckBody;
-import org.zerock.openapi.CheckResult;
-import org.zerock.openapi.Items;
-import org.zerock.openapi.Response;
-import org.zerock.openapi.Result;
-import org.zerock.openapi.SingleResult;
+import org.zerock.openapi.tour.Body;
+import org.zerock.openapi.tour.CheckBody;
+import org.zerock.openapi.tour.CheckResult;
+import org.zerock.openapi.tour.Items;
+import org.zerock.openapi.tour.Response;
+import org.zerock.openapi.tour.Result;
+import org.zerock.openapi.tour.SingleResult;
 import org.zerock.util.DateUtil;
 
 @RestController
