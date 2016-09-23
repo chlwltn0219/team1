@@ -3,12 +3,24 @@
 @import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
 @import url(http://fonts.googleapis.com/earlyaccess/nanumgothiccoding.css);
 
+
+.w {
+	text-align: left;	
+}
+
 hr{
 	border-color:darkgray;
 }
 
 p{
 	font-size: 20px;
+	text-align: left;
+	margin-left: 10%;
+}
+
+* {
+	text-align: center;
+	
 }
 
 li{
@@ -19,14 +31,15 @@ li{
 }
 
 #overview{
-	margin: 10px;
 	font-size: 15px;
 	text-align:left;
+	
 }
 
 .firstimg{
 	width: 70%;
 	height:40%;
+	
 }
 
 .title{

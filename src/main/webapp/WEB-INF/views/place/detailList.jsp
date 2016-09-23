@@ -31,7 +31,9 @@
 <!-- GoogoleMap Asynchronously Loading the API ********************************************* -->
 <script async defer
    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAA4WMo8DvHp--izPUaJTqHDV0wJotTBpc"></script>
+<style type="text/css">
 
+</style>
 </head>
 
 <body>

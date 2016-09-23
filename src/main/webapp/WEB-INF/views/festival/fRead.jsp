@@ -62,7 +62,7 @@
 		<ul>	
 			<li>행사 기간</li>
 <br>
-				<div>{{eventstartdate}}~{{eventenddate}}</div>
+				<div class="w"><p>{{eventstartdate}}~{{eventenddate}}</p></div>
 		</ul>	
 </script>
 
@@ -73,20 +73,20 @@
 <br>
 <hr>
 	<div>
-		<img class="firstimg" src="{{firstimage}}">
+		<img class="firstimg " src="{{firstimage}}">
 	</div>
 <br>
 <hr>
 <ul>
 	<li>전화번호</li><br>
-		<p>{{tel}}</p>
+		<div class="w"><p>{{tel}}</p></div>
 	<li>주소</li><br>
-		<p>{{addr1}}{{addr2}} <button style="font-size:15px;" type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Map</button></p>
+		<div class="w"><p>{{addr1}}{{addr2}} <button style="font-size:15px;" type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Map</button></p></div>
 	<br>
 	<li>상세 페이지</li><br>
-		<p id="homepage"></p><br>
+		<div class="w"><p id="homepage"></p></div><br>
 	<li>개요</li><br>
-		<p id="overview"></p>
+		<div class="w"><p id="overview"></p></div>
 	</ul>
 </script>
 
