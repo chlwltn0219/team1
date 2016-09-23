@@ -32,6 +32,7 @@
 	}
 	
 	div.info {
+		display: none;
 		z-index: 50;
 	}
 	
@@ -212,12 +213,19 @@
 				mouseenter: function() {
 					var index = getIndex('div.info-box', this);
 					console.log("enter: " + index);
-					$('div.image').eq(index).css('opacity', 0.3);
+		        	if(!$('div.image').eq(index).is(':animated')){
+			        	$('div.image').eq(index).fadeTo('slow', 0.2);
+		        	}
+		            if(!$('div.info').eq(index).is(':animated')) {
+						$('div.info').eq(index).fadeIn();	            	
+		            }
+					
 				},
 				mouseleave: function() {
 					var index = getIndex('div.info-box', this);
 					console.log("leave: " + index);
-					$('div.image').eq(index).css('opacity', 1);
+	        		$('div.image').eq(index).stop().fadeTo('slow',1);	        	
+		            $('div.info').fadeOut();
 				}
 			});
 			

@@ -30,7 +30,7 @@
 				</div>
 
 
-				<div class='box-body'  ani_type="fade">
+				<div class='box-body'>
 
 					<select name="searchType">
 						<option value="n"
@@ -95,6 +95,25 @@
 				<table class="table table-hover">
 					<tbody id="result"></tbody>
 				</table>
+				<div class="text-center">
+					<ul class="pagination">
+						<c:if test="${pageMaker.prev}">
+							<li><a href="list${pageMaker.makeSearch(pageMaker.startPage - 1) }">&laquo;</a></li>
+						</c:if>
+
+						<c:forEach begin="${pageMaker.startPage }"
+							end="${pageMaker.endPage }" var="idx">
+							<li
+								<c:out value="${pageMaker.cri.page == idx?'class =active':''}"/>>
+								<a href="list${pageMaker.makeSearch(idx)}">${idx}</a>
+							</li>
+						</c:forEach>
+
+						<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+							<li><a href="list${pageMaker.makeSearch(pageMaker.endPage +1) }">&raquo;</a></li>
+						</c:if>
+					</ul>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -108,14 +127,14 @@
 	<div class="table_list imgbox_hover">
 			<a href="/place/detailList?contentid={{contentid}}">
 				<img class="table_imgbox" src="{{firstimage}}">
-			</a>
-			<div class="info">
-				<br>
-				<div>
-					<div class="title"><h3>{{title}}</h3></div>
-					<div class="addr"><h4>{{addr1}}</h4></div>
+				<div class="info">
+					<br>
+					<div>
+						<div class="title"><h3>{{title}}</h3></div>
+						<div class="addr"><h4>{{addr1}}</h4></div>
+					</div>
 				</div>
-			</div>
+			</a>
 	</div>
 </script>
 
@@ -131,7 +150,6 @@
        
        $('#result').html("");
        
-       var j = 0;
        for(var i=0; i<items.length; i++) {
 	         var html = template(items[i]);
 	         $('#result').append(html);
@@ -169,55 +187,23 @@
 	};
 	
 	function imgHover2() {
-// 		var $btn=$('.table_imgbox');
-		
-// 		$(".table_imgbox").on({
-// 			mouseenter: function() {
-// 				var index = getIndex(this);
-// 				if(!$btn.eq(index).is(':animated')){
-// 					$btn.eq(index).fadeTo('slow', 0.3);		
-// 					console.log($btn.eq(index));
-// 				}
-// 			},
-// 			mouseleave: function() {
-// 				$btn.fadeTo('slow', 1);
-// 			}
-// 		});
-		$(".table_imgbox").on({
+		$(".imgbox_hover").on({
 	        mouseenter: function(){
 	        	var index = getIndex(this);
-	        	$(this).eq(index).css("opacity", 0.3);
+	        	if(!$(".table_imgbox").eq(index).is(':animated')){
+		        	$(".table_imgbox").eq(index).fadeTo('slow', 0.2);
+	        	}
 	            if(!$('.info').eq(index).is(':animated')) {
-		        	console.log(index);
 					$('.info').eq(index).fadeIn();	            	
 	            }
 	        },
 	        mouseleave: function(){
-	        	var index = getIndex(this);
-	        	$(this).eq(index).css("opacity", 1);
+	        	var index = getIndex(this);	
+        		$(".table_imgbox").eq(index).stop().fadeTo('slow',1);	        	
 	            $('.info').fadeOut();
 	        }
 	    });
 		
-// 		$( ".table_imgbox" )
-// 		  .mouseover(function() {
-// 			  var index = getIndex(this);
-// 			  $(this).eq(index).css("opacity", 0.3);
-// // 			  if(!$(this).eq(index).is(':animated'))
-// // 		   		$( this ).eq(index).fadeTo('fast', 0.3);
-// // 			  	$(this).eq(index).show( "bounce", { times: 3 }, "slow" );
-// 			  if(!$(".info").eq(index).is(':animated')){
-// 					$(".info").eq(index).fadeIn();				  
-// 			  }
-// 		  })
-// 		  .mouseout(function() {
-// 			  var index = getIndex(this);
-// 			  $(this).eq(index).css("opacity", 1);
-// 			  $(".info").fadeOut();
-		
-// // 		    $( this ).fadeTo('slow', 1);
-// // 			  $(this).hide();
-// 		  });
 	}
       
 	function imgHover() {
@@ -240,7 +226,7 @@
 	}
 	
 	function getIndex(obj) {
-		return $('.table_imgbox').index(obj);
+		return $('.imgbox_hover').index(obj);
 	}
 	
 </script>

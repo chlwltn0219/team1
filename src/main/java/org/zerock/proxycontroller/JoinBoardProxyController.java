@@ -29,9 +29,9 @@ import org.zerock.util.DateUtil;
 
 @RestController
 @RequestMapping("/jboard")
-public class JBoardProxyController {
+public class JoinBoardProxyController {
 
-	static Logger logger = LoggerFactory.getLogger(JBoardProxyController.class);
+	static Logger logger = LoggerFactory.getLogger(JoinBoardProxyController.class);
 	private static final String SERVICE_KEY = "oMYSCkfnU%2BrM%2F6ad8zAICkGBj0eUCOxJc9bR%2F8MHuzhfo62P6cGA1YVZ7iY5QnDedVyfk5tMhc0Wu42fjDJ%2BcA%3D%3D";
 	DateUtil date = new DateUtil();
 
@@ -53,7 +53,6 @@ public class JBoardProxyController {
 		logger.info("request uri : " + uri);
 
 		result = restTemplate.getForObject(uri, Result.class);
-		logger.info(restTemplate.getForObject(uri, String.class));
 
 		Body body = result.getResponse().getBody();
 		System.out.println("items = " + body.getItems().getItem());
@@ -80,7 +79,6 @@ public class JBoardProxyController {
 		logger.info("request uri : " + uri);
 
 		result = restTemplate.getForObject(uri, Result.class);
-		logger.info(restTemplate.getForObject(uri, String.class));
 
 		Body body = result.getResponse().getBody();
 		System.out.println("items = " + body.getItems().getItem());
