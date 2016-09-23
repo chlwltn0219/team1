@@ -4,6 +4,11 @@
 <html>
 <head>
 <title>festival.jsp</title>
+<!-- Modal -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <!-- Bootstrap 3.3.4 -->
 <link href="/resources/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css" />
 <!-- Font Awesome Icons -->
@@ -13,16 +18,12 @@
 <!-- HandleBars -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 <link href="/resources/css/fRead.css" rel="stylesheet" type="text/css" />
-<!-- Modal -->
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script async defer
+	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAA4WMo8DvHp--izPUaJTqHDV0wJotTBpc"></script>
 
 </head>
 <body>
 
-<div class="container">
 
 <div class="table-responsive">
 	<table class="table table-hover">
@@ -30,28 +31,29 @@
 	</thead>
 	<tbody id="result1"></tbody>
 	</table>
+<!-- 	<div id="map" style="width: 100%; height: 400px"></div> -->
 </div>
 
-<div class="modal fade" id="map" role="dialog">
-    <div class="modal-dialog">
-    
-    <!-- Modal content-->
+<!-- 지도 -->
+
+<div class="container">
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Modal Header</h4>
+          <h4 class="modal-title">행사위치</h4>
         </div>
         <div class="modal-body">
-          <p>Some text in the modal.</p>
+          <div id="map" style="width: 100%; height: 400px"></div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
       </div>
-      
     </div>
   </div>
-  
 </div>
 
 <!-- 행사 기간 -->
@@ -60,7 +62,7 @@
 		<ul>	
 			<li>행사 기간</li>
 <br>
-				<div>{{eventstartdate}}~{{eventenddate}}</div>
+				<div class="w"><p>{{eventstartdate}}~{{eventenddate}}</p></div>
 		</ul>	
 </script>
 
@@ -71,20 +73,20 @@
 <br>
 <hr>
 	<div>
-		<img class="firstimg" src="{{firstimage}}">
+		<img class="firstimg " src="{{firstimage}}">
 	</div>
 <br>
 <hr>
 <ul>
 	<li>전화번호</li><br>
-		<p>{{tel}}</p>
+		<div class="w"><p>{{tel}}</p></div>
 	<li>주소</li><br>
-		<p>{{addr1}}{{addr2}} <button id="map" class="btn btn-info btn-lg" data-toggle="modal" data-target="#map">Map</button></p>
+		<div class="w"><p>{{addr1}}{{addr2}} <button style="font-size:15px;" type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Map</button></p></div>
 	<br>
 	<li>상세 페이지</li><br>
-		<p id="homepage"></p><br>
+		<div class="w"><p id="homepage"></p></div><br>
 	<li>개요</li><br>
-		<p id="overview"></p>
+		<div class="w"><p id="overview"></p></div>
 	</ul>
 </script>
 
@@ -100,11 +102,44 @@
 		var template = Handlebars.compile(temp2);
 		var html = template(items);
 		
+		var x = items.mapx;
+		var y = items.mapy;
+		var mapzoom = items.mlevel;
+		var title1 = items.title;
+		
 		$('#result').html(html);
 		$('#overview').html(items.overview);
 		$('#homepage').html(items.homepage);
 
+		initMap(x, y);
 		imgCheck();
+		
+		
+		$("#myModal").on('shown.bs.modal', function () {
+			initMap(x, y);
+		});
+		
+		/* Map */
+		function initMap(x, y) {
+			var map_center = {
+				lat : y,
+				lng : x
+			};
+	
+			// Create a map object and specify the DOM element for display.
+			var map = new google.maps.Map(document.getElementById('map'), {
+				center : map_center,
+				scrollwheel : false,
+				zoom : mapzoom + 10
+			});
+	
+			// Create a marker and set its position.
+			var marker = new google.maps.Marker({
+				map : map,
+				position : map_center,
+				title1 : title1
+			});
+		}
 		
 
 	/* contenttypeid, contentid 값을 받아 행사기간 리턴 */
@@ -129,6 +164,8 @@
 		if($('.firstimg').eq(0).attr('src')=='')
 			$('.firstimg').eq(0).attr('src','/resources/img/no-image.jpg');
 	};
+	
+	
 </script>
 </body>
 </html>

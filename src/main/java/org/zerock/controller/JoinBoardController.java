@@ -71,7 +71,7 @@ public class JoinBoardController {
 	@RequestMapping(value = "/modifyPage", method = RequestMethod.GET)
 	public void modifyPagingGET(int bno, @ModelAttribute("cri") SearchCriteria cri, Model model) throws Exception {
 
-		model.addAttribute(service.read(bno));
+		model.addAttribute("jBoardVO", service.read(bno));
 	}
 
 	@RequestMapping(value = "/modifyPage", method = RequestMethod.POST)

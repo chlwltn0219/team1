@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import org.zerock.openapi.tour.Body;
 import org.zerock.openapi.tour.Result;
-import org.zerock.util.AreaUtil;
-import org.zerock.util.DateUtil;
 
 @RestController
 @RequestMapping("/festival")
@@ -31,9 +29,10 @@ public class FestivalProxyController {
 		RestTemplate restTemplate = new RestTemplate();
 		String baseURI = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/searchFestival"
 							+ "?ServiceKey=" + SERVICE_KEY
-							+ "&numOfRows=10"
+							+ "&numOfRows=9"
 							+ "&areaCode=1"
 							+ "&sigunguCode=" + sigunguCode
+//							+ "&pageNo=" + page
 							+ "&pageNo=1"
 							+ "&MobileOS=ETC"
 							+ "&MobileApp=TestApp"
@@ -49,6 +48,17 @@ public class FestivalProxyController {
 		
 		
 		return new ResponseEntity<Body>(body, HttpStatus.OK);
+		
+//		logger.info(cri.toString());
+//
+//		model.addAttribute("list", service.listSearchCriteria(cri));
+//
+//		PageMaker pageMaker = new PageMaker();
+//		pageMaker.setCri(cri);
+//
+//		pageMaker.setTotalCount(items.totalCount);
+//
+//		model.addAttribute("pageMaker", pageMaker);
 		
 	}	
 	@RequestMapping(value="/read", method = RequestMethod.GET)
