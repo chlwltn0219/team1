@@ -68,7 +68,6 @@
 						</tr>
 
 						<c:forEach items="${list}" var="boardVO">
-
 							<tr>
 								<td>${boardVO.bno}</td>
 								<td>
@@ -83,7 +82,6 @@
 								<td><span class="badge bg-red">${boardVO.viewcnt }</span>
 								</td>
 							</tr>
-
 						</c:forEach>
 
 					</table>
@@ -92,10 +90,10 @@
 
 
 				<div class="box-footer">
-
+retrete
 					<div class="text-center">
-						<ul class="pagination">
 
+						<ul class="pagination">
 							<c:if test="${pageMaker.prev}">
 								<li><a
 									href="list${pageMaker.makeSearch(pageMaker.startPage - 1) }">&laquo;</a></li>
@@ -113,7 +111,6 @@
 								<li><a
 									href="list${pageMaker.makeSearch(pageMaker.endPage +1) }">&raquo;</a></li>
 							</c:if>
-
 						</ul>
 					</div>
 
