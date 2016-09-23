@@ -24,11 +24,45 @@
 <script src="/resources/plugins/jQuery/jQuery-2.1.4.min.js"></script>
 <head>
 <title>register.jsp</title>
+<style type="text/css">
 
-
+	.weather, .date, .temp{
+		position: absolute;
+		width: 100%;
+		text-align: center;
+	}
+	
+	.temp {
+		bottom: 0;
+		text-align: right;
+	}
+	
+	span.max {
+		color: red;
+	}
+	
+	span.min {
+		color: blue;
+	}
+	
+</style>
 </head>
 <body>
+	
+			<div class="box box-success">
+				<div class="box-header">
+					<h3 class="box-title">Weather</h3>
+				</div>
+	
+				<div class="box-body">
+					<div id="summary" class="row"></div>
+					<hr style="visibility: hidden;"><br><br>
+					<div class="row">
 
+					</div>
+				</div>
+			</div>
+	
 	<div class="row">
 		<!-- left column -->
 		<div class="col-md-6">
@@ -77,31 +111,27 @@
 
 		<!-- right column -->
 		<div class="col-md-6">
-			<!-- general form elements -->
+			<!-- select event -->
 			<div class="box box-warning">
 				<div class="box-header">
 					<h3 class="box-title">Search Event</h3>
 				</div>
-				<!-- /.box-header -->
 	
-					<div class="box-body">
-						<!-- selected event -->
-						<div>
-							<input id="selectedEvent" class="form-control" type="text" readonly="readonly" placeholder="Selected Event...">
-						</div>
-						<hr>
-						<!-- event list -->
-						<div>
-							<ul id="eventList" class="list-group"></ul>
-						</div>
-						<!-- pager -->
-						<div id="pager" style="text-align: center;"></div>
+				<div class="box-body">
+					<!-- selected event -->
+					<div>
+						<input id="selectedEvent" class="form-control" type="text" readonly="readonly" placeholder="Selected Event...">
 					</div>
-	
-					<!-- /.box-body -->
-	
-					<div class="box-footer">
-	
+					<hr>
+					<!-- event list -->
+					<div>
+						<ul id="eventList" class="list-group"></ul>
+					</div>
+				</div>
+
+				<div class="box-footer">
+					<!-- pager -->
+					<div id="pager" style="text-align: center;"></div>
 				</div>
 					
 			</div>
@@ -115,10 +145,16 @@
 	<script type="text/javascript" src="/resources/js/upload.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 	
-	<script id="selectTemplate" type="text/x-handlebars-template">
-		
-
-
+	<script id="summaryTemplate" type="text/x-handlebars-template">
+		<div class="col-xs-1 col-md-1">
+			<div class="weather">
+				<div class="date"></div>
+				<img alt="sorry" src={{sky.icon}} width="100%">
+				<div class="temp">
+					<b><span class="max">{{temperature.tmax}}</span> - <span class="min">{{temperature.tmin}}</span></b>
+				</div>
+			</div>
+		</div>
 	</script>
 
 	<script id="eventTemplate" type="text/x-handlebars-template">
@@ -133,7 +169,6 @@
 			</li>
  	   {{/each}}
 	</script>
-
 
 	<script id="pageTemplate" type="text/x-handlebars-template">
 		<button id="prev" type="button" class="btn btn-default" style="visibility: {{visiblility prev}}">Prev</button>
@@ -150,6 +185,10 @@
 		getList(1);
 	
 		function getList(pageNo) {
+			
+			var mapx;
+			var mapy;
+			
 			$.getJSON('/jboard/threeMonth?pageNo='+ pageNo, function(data) {
 				console.dir(data);
 				console.log(pageNo);
@@ -159,13 +198,13 @@
 				console.dir(item);
 				console.dir(pageMaker);
 				
-	// 			Print List
+				// Print List
 				var temp = $('#eventTemplate').html();
 				var template = Handlebars.compile(temp);
 				var html = template(item);
 				$('#eventList').html(html);
 				
-	// 			Print Pager
+				// Print Pager
 				var page = $('#pageTemplate').html();
 				var pageTemplate = Handlebars.compile(page);
 				var pagehtml = pageTemplate(pageMaker);
@@ -173,9 +212,10 @@
 
 				setPaginationEvent(data);
 				setListEvent(item);
-				
 			});
+			
 		}
+		
 
 		function setPaginationEvent(data) {
 			$('button.page').on('click', function() {
@@ -203,10 +243,6 @@
 			    	$(this).css("background-color", "#F0F0F0");
 			        var index = $('li.list-group-item').index(this);
 			    	
-// 			        console.dir(item);
-// 			        alert(item[index].today);
-			        
-			    	
 					if(item[index].today > item[index].eventenddate){
 						 alert("*   이미 종료된 행사입니다.   *"+"\n"+"* 다른 행사를 선택해 주세요. *");
 					} else {
@@ -215,8 +251,36 @@
 				    	$('#selectedEvent').val(selectTitle);
 				    	$('#contentId').val(contentId);
 						
+						$.getJSON('/weather/forecast?lat='+ item[index].mapy + "&lon=" + item[index].mapx, function(weather) {
+							var date = new Date();
+							var today = date.getDate();
+							var month;
+							var day;
+							
+							var summary = weather.summary[0];
+							var forecast6days = weather.forecast6days[0];
+							
+							var summaryTemp = $('#summaryTemplate').html();
+							var CompSummaryTemp = Handlebars.compile(summaryTemp);
+							
+							console.dir(summary.today);
+							
+							$('#summary').html("");
+							$('#summary').append(CompSummaryTemp(summary.today));
+							$('#summary').append(CompSummaryTemp(summary.tomorrow));
+							$('#summary').append(CompSummaryTemp(summary.dayAfterTomorrow));
+							
+							for(var i=0; i<3; i++) {
+								date.setDate(today + 1 + i);
+								month = date.getMonth()+ 1;
+								day = date.getDate();
+								
+								$('div.date').eq(i).html("<b>" + month + "/" + day + "</b>");
+							}
+							
+						});
+				    	
 					} 
-			    	
 								    	
 			    } 
 			});
