@@ -1,9 +1,9 @@
-package org.zerock.openapi;
+package org.zerock.openapi.tour;
 
-public class SingleResponse {
+public class Response {
 
 	private Header header;
-	private SingleBody body;
+	private Body body;
 
 	public Header getHeader() {
 		return header;
@@ -11,10 +11,10 @@ public class SingleResponse {
 	public void setHeader(Header header) {
 		this.header = header;
 	}
-	public SingleBody getBody() {
+	public Body getBody() {
 		return body;
 	}
-	public void setBody(SingleBody body) {
+	public void setBody(Body body) {
 		this.body = body;
 	}
 	

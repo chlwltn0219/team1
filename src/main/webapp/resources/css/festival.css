@@ -2,18 +2,29 @@
 .temp{
 	float: left;
 	position: relative;
-	margin: 2%;
+	margin: 1.1%;
+	background-color: black;
 }
 .img, .info{
-	width: 300px;
-	height:300px;
-	float:left; 	
+	width: 338px; 
+	height: 298px;
+	float:left; 
 }
 
 .img{
 	z-index: 50;
 }
+
+.info div{
+	text-align: left;	
+}
+
+.info .a{
+	margin-top: 30%;	
+}
+
 .info{
+	color: white;
 	opacity : 0.8;
 	position: absolute;
 	display: none;

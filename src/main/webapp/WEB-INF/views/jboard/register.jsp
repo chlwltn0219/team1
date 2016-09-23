@@ -24,11 +24,63 @@
 <script src="/resources/plugins/jQuery/jQuery-2.1.4.min.js"></script>
 <head>
 <title>register.jsp</title>
+<style type="text/css">
 
-
+	.weather, .date, .temp{
+		position: absolute;
+		width: 100%;
+		text-align: center;
+	}
+	
+	.temp {
+		bottom: 0;
+		text-align: right;
+	}
+	
+	span.max {
+		color: red;
+	}
+	
+	span.min {
+		color: blue;
+	}
+	
+	#summary, #forecast6days {
+		height: 50px;
+		text-align: center;
+	}
+	
+	@media ( min-width :992px){
+		#summary, #forecast6days {
+			height: 70px;
+		}
+	}
+	
+	@media ( min-width :1200px) {
+		#summary, #forecast6days {
+			height: 90px;
+		}
+	}
+	
+</style>
 </head>
 <body>
+	<!-- Weather -->
+	<div class="box box-success">
+		<div class="box-header">
+			<h3 class="box-title">Weather</h3>
+		</div>
 
+		<div class="box-body">
+			<div id="summary" class="row">
+				<h2> 3일 예보 </h2>
+			</div>
+			<div id="forecast6days" class="row">
+				<h2> 중기 예보 (오전/오후) </h2>
+			</div>
+		</div>
+	</div>
+	
 	<div class="row">
 		<!-- left column -->
 		<div class="col-md-6">
@@ -77,31 +129,27 @@
 
 		<!-- right column -->
 		<div class="col-md-6">
-			<!-- general form elements -->
+			<!-- select event -->
 			<div class="box box-warning">
 				<div class="box-header">
 					<h3 class="box-title">Search Event</h3>
 				</div>
-				<!-- /.box-header -->
 	
-					<div class="box-body">
-						<!-- selected event -->
-						<div>
-							<input id="selectedEvent" class="form-control" type="text" readonly="readonly" placeholder="Selected Event...">
-						</div>
-						<hr>
-						<!-- event list -->
-						<div>
-							<ul id="eventList" class="list-group"></ul>
-						</div>
-						<!-- pager -->
-						<div id="pager" style="text-align: center;"></div>
+				<div class="box-body">
+					<!-- selected event -->
+					<div>
+						<input id="selectedEvent" class="form-control" type="text" readonly="readonly" placeholder="Selected Event...">
 					</div>
-	
-					<!-- /.box-body -->
-	
-					<div class="box-footer">
-	
+					<hr>
+					<!-- event list -->
+					<div>
+						<ul id="eventList" class="list-group"></ul>
+					</div>
+				</div>
+
+				<div class="box-footer">
+					<!-- pager -->
+					<div id="pager" style="text-align: center;"></div>
 				</div>
 					
 			</div>
@@ -115,10 +163,30 @@
 	<script type="text/javascript" src="/resources/js/upload.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 	
-	<script id="selectTemplate" type="text/x-handlebars-template">
-		
-
-
+	<script id="summaryTemplate" type="text/x-handlebars-template">
+		<div class="col-xs-1 col-md-1">
+			<div class="weather">
+				<div class="date"></div>
+				<img alt="sorry" src={{sky.icon}} width="100%">
+				<div class="temp">
+					<b><span class="max">{{temperature.tmax}}</span> - <span class="min">{{temperature.tmin}}</span></b>
+				</div>
+			</div>
+		</div>
+	</script>
+	
+	<script id="forecastTemplate" type="text/x-handlebars-template">
+		{{#for 0 12 1}}
+			<div class="col-xs-1 col-md-1">
+				<div class="weather">
+					<div class="date"></div>
+					<img alt="sorry" src="" width="100%">
+					<div class="temp">
+						<b><span class="max"></span> - <span class="min"></span></b>
+					</div>
+				</div>
+			</div>
+		{{/for}}
 	</script>
 
 	<script id="eventTemplate" type="text/x-handlebars-template">
@@ -133,7 +201,6 @@
 			</li>
  	   {{/each}}
 	</script>
-
 
 	<script id="pageTemplate" type="text/x-handlebars-template">
 		<button id="prev" type="button" class="btn btn-default" style="visibility: {{visiblility prev}}">Prev</button>
@@ -150,6 +217,10 @@
 		getList(1);
 	
 		function getList(pageNo) {
+			
+			var mapx;
+			var mapy;
+			
 			$.getJSON('/jboard/threeMonth?pageNo='+ pageNo, function(data) {
 				console.dir(data);
 				console.log(pageNo);
@@ -159,13 +230,13 @@
 				console.dir(item);
 				console.dir(pageMaker);
 				
-	// 			Print List
+				// Print List
 				var temp = $('#eventTemplate').html();
 				var template = Handlebars.compile(temp);
 				var html = template(item);
 				$('#eventList').html(html);
 				
-	// 			Print Pager
+				// Print Pager
 				var page = $('#pageTemplate').html();
 				var pageTemplate = Handlebars.compile(page);
 				var pagehtml = pageTemplate(pageMaker);
@@ -173,9 +244,10 @@
 
 				setPaginationEvent(data);
 				setListEvent(item);
-				
 			});
+			
 		}
+		
 
 		function setPaginationEvent(data) {
 			$('button.page').on('click', function() {
@@ -203,10 +275,6 @@
 			    	$(this).css("background-color", "#F0F0F0");
 			        var index = $('li.list-group-item').index(this);
 			    	
-// 			        console.dir(item);
-// 			        alert(item[index].today);
-			        
-			    	
 					if(item[index].today > item[index].eventenddate){
 						 alert("*   이미 종료된 행사입니다.   *"+"\n"+"* 다른 행사를 선택해 주세요. *");
 					} else {
@@ -215,8 +283,62 @@
 				    	$('#selectedEvent').val(selectTitle);
 				    	$('#contentId').val(contentId);
 						
+						$.getJSON('/weather/forecast?lat='+ item[index].mapy + "&lon=" + item[index].mapx, function(weather) {
+							var date = new Date();
+							var today = date.getDate();
+							var month;
+							var day;
+							
+							var summary = weather.summary[0];
+							var forecast6days = weather.forecast6days[0];
+							
+							var summaryTemp = $('#summaryTemplate').html();
+							var compSummaryTemp = Handlebars.compile(summaryTemp);
+							
+							var forecastTemp = $('#forecastTemplate').html();
+							var comForecastTemp = Handlebars.compile(forecastTemp);
+							
+							$('#summary').html("");
+							$('#summary').append(compSummaryTemp(summary.today));
+							$('#summary').append(compSummaryTemp(summary.tomorrow));
+							$('#summary').append(compSummaryTemp(summary.dayAfterTomorrow));
+							
+							$('#forecast6days').html(comForecastTemp());
+							
+							alert();
+							
+							$('#forecast6days img').eq(0).attr("src", forecast6days.sky.amIcon3day);
+							$('#forecast6days img').eq(1).attr("src", forecast6days.sky.pmIcon3day);
+							$('#forecast6days img').eq(2).attr("src", forecast6days.sky.amIcon4day);
+							$('#forecast6days img').eq(3).attr("src", forecast6days.sky.pmIcon4day);
+							$('#forecast6days img').eq(4).attr("src", forecast6days.sky.amIcon5day);
+							$('#forecast6days img').eq(5).attr("src", forecast6days.sky.pmIcon5day);
+							$('#forecast6days img').eq(6).attr("src", forecast6days.sky.amIcon6day);
+							$('#forecast6days img').eq(7).attr("src", forecast6days.sky.pmIcon6day);
+							$('#forecast6days img').eq(8).attr("src", forecast6days.sky.amIcon7day);
+							$('#forecast6days img').eq(9).attr("src", forecast6days.sky.pmIcon7day);
+							$('#forecast6days img').eq(10).attr("src", forecast6days.sky.amIcon8day);
+							$('#forecast6days img').eq(11).attr("src", forecast6days.sky.pmIcon8day);
+							
+							for(var i=0; i<3; i++) {
+								date.setDate(today + i);
+								month = date.getMonth()+ 1;
+								day = date.getDate();
+								
+								$('div.date').eq(i).html("<b>" + month + "/" + day + "</b>");
+							}
+							for(var i=3; i<15; i += 2) {
+								date.setDate(today + i);
+								month = date.getMonth()+ 1;
+								day = date.getDate();
+								
+								$('div.date').eq(i).html("<b>" + month + "/" + day + "</b>");
+								$('div.date').eq(i+1).html("<b>" + month + "/" + day + "</b>");
+							}
+							
+						});
+				    	
 					} 
-			    	
 								    	
 			    } 
 			});
@@ -273,6 +395,15 @@
 		    }
 		    console.dir(accum);
 		    
+		    return accum;
+		});
+		
+		
+		Handlebars.registerHelper('for', function(from, to, incr, block) {
+		    var accum = '';
+		    for(var i = from; i < to; i += incr){
+		        accum += block.fn();
+		    }
 		    return accum;
 		});
 		

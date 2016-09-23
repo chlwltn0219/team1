@@ -1,4 +1,4 @@
-package org.zerock.jboardobj;
+package org.zerock.openapi.tour;
 
 import java.util.List;
 import java.util.Map;

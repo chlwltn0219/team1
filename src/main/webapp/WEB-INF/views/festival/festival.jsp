@@ -60,6 +60,33 @@
 	<tbody id="result" ></tbody>
 	</table>
 </div>
+<div class="box-footer">
+
+		<div class="text-center">
+			<ul class="pagination">
+
+				<c:if test="${pageMaker.prev}">
+					<li><a
+						href="festival${pageMaker.makeSearch(pageMaker.startPage - 1) }">&laquo;</a></li>
+				</c:if>
+
+				<c:forEach begin="${pageMaker.startPage }"
+					end="${pageMaker.endPage }" var="idx">
+					<li
+						<c:out value="${pageMaker.cri.page == idx?'class =active':''}"/>>
+						<a href="festival${pageMaker.makeSearch(idx)}">${idx}</a>
+					</li>
+				</c:forEach>
+
+				<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+					<li><a
+						href="festival${pageMaker.makeSearch(pageMaker.endPage +1) }">&raquo;</a></li>
+				</c:if>
+
+			</ul>
+		</div>
+
+	</div>
 
 <a class="return-top" href="#">
 	<img src="http://cfs.tistory.com/custom/blog/202/2025510/skin/images/top1.png"> <!-- TOP 스크롤 -->
@@ -72,12 +99,9 @@
 		<a class="atag" href="/festival/fRead?contentid={{contentid}}" style="text-decoration: none; color: black;">
 	<div class="info">
 			<br>
-			<div >
+			<div class="a">
 				<div class="title"><h3>{{title}}</h3></div>
-				<hr>
-				<div class="addr"><h4>{{addr1}}</h4></div>
 				<div class="eventdate"><h4>{{eventstartdate}}~{{eventenddate}}</h4></div>
-				<div class="tel"><h4>{{tel}}</h4></div>
 			</div>
 	</div>
 		</a>
@@ -90,9 +114,10 @@
 	/* 시군구 셀렉트 값을 받아 리스트 리턴 */
 	$('#sigungu').on('change', function() {
 		
+		var page = "";
 		var areaCode = $('#sigungu option:selected').val();
 		
-		$.getJSON("/festival/list?sigunguCode=" + areaCode, function(data) {
+		$.getJSON("/festival/list?sigunguCode=" + areaCode + "&pageNo=" + page, function(data) {
 			// json 객체 내부 접근하기
 			console.dir(data);
 			
@@ -108,7 +133,7 @@
 				console.log(html);
 				$('#result').append(html);
 				imgCheck(i);
-				imgHover();
+				imgHover2();
 			}
 		});
 	});
@@ -117,7 +142,7 @@
 	
 	
 	/* 기본 리스트 */
-	$.getJSON("/festival/list?sigunguCode=" + areaCode, function(data) {
+	$.getJSON("/festival/list?sigunguCode=" + areaCode + "&pageNo=" + page, function(data) {
 		// json 객체 내부 접근하기
 		console.dir(data);
 		
@@ -133,10 +158,32 @@
 			console.log(html);
 			$('#result').append(html);
 			imgCheck(i);
-			imgHover();
+			imgHover2();
 		}
 		
 	});
+	
+	/* 마우스 오버 */
+	function imgHover2() {
+		$("div.abc").on({
+	        mouseenter: function(){
+	        	var index = getIndex(this);
+	        	if(!$("div.abc img").eq(index).is(':animated')){
+		        	$("div.abc img").eq(index).fadeTo('slow', 0.2);
+	        	}
+	            if(!$('div.abc div.info').eq(index).is(':animated')) {
+					$('div.abc div.info').eq(index).fadeIn();	            	
+	            }
+	        },
+	        mouseleave: function(){
+	        	var index = getIndex(this);	
+        		$("div.abc img").eq(index).stop().fadeTo('slow',1);	        	
+	            $('div.abc div.info').fadeOut();
+	        }
+	    });
+		
+	}
+	
 	
 	/* 이미지 없을 경우 대체 이미지 나타내기 */
 	function imgCheck(i) {
@@ -151,14 +198,12 @@
 	        	var index = getIndex(this);
 	        	console.log(index)
 	            $('div.abc img').eq(index).css("opacity", 0.3);
-// 	            $('div.abc div.info').eq(index).css("display", "block");
 	            if(!$('div.abc div.info').eq(index).is(':animated')) 
 					$('div.abc div.info').eq(index).fadeIn();
 	        },
 	        mouseleave: function(){
 	        	var index = getIndex(this);
 	            $('div.abc img').eq(index).css("opacity", 1);
-// 	            $('div.abc div.info').eq(index).css("display", "none");
 	            $('div.abc div.info').fadeOut();
 	        }
 	    });

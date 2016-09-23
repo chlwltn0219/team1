@@ -51,11 +51,33 @@ div.container {
 /* Add a gray background color and some padding to the footer */
 .footer {
 	width: 100%;
-	background-color: #f2f2f2;
+ 	background-color: rgb(14, 201, 190);
 	padding: 25px;
 	bottom: 0;
 	position: relative;
 }
+
+.navbar {
+background-color: rgb(14, 201, 190);
+border-color: rgb(14, 201, 190);
+}
+
+.navbar-inverse .navbar-nav > li > a {
+  color: white;
+}
+
+a:hover
+a:focus {
+	color:black;
+}
+
+
+.navbar .navbar-inverse .navbar-fixed-top:hover,
+.navbar .navbar-inverse .navbar-fixed-top:focus  {
+	color: black;
+}
+
+
 
 </style>
 
@@ -72,7 +94,7 @@ div.container {
 						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
 							<span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
 						</button>
-						<a class="navbar-brand" href="#">Website Logo</a>
+						<a style="color: yellow; font-weight:bold; font-size:22px;" class="navbar-brand" href="/home">SEOUL TOUR</a>
 					</div>
 					<!-- Menu bar -->
 					<div class="collapse navbar-collapse" id="myNavbar">
@@ -80,11 +102,6 @@ div.container {
 						<ul class="nav navbar-nav">
 							<li class="dropdown">
 								<a href="/festival/festival">행사</a>
-<!-- 								<ul class="dropdown-menu"> -->
-<!-- 									<li><a href="#">행사</a></li> -->
-<!-- 									<li><a href="/festival/festival">축제</a></li> -->
-<!-- 									<li><a href="#">공연</a> -->
-<!-- 								</ul> -->
 							</li>
 							<li class="dropdown">
 								<a class="dropdown-toggle" data-toggle="dropdown" href="#">관광 <span class="caret"></span></a>
@@ -93,7 +110,7 @@ div.container {
 									<li><a href="/place/list">문화시설</a></li>
 								</ul>
 							</li>
-							<li class="active"><a href="/jboard/list">Go With Me?</a></li>
+							<li><a href="/jboard/list">Go With Me?</a></li>
 							<li><a href="#">Gallery</a></li>
 							<li><a href="#">Statistics</a></li>
 						</ul>

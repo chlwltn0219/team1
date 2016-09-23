@@ -57,6 +57,7 @@
 			<th>주소</th>
 			<th>전화번호</th>
 			<th>ID</th>
+			<th>위치</th>			
 		</tr>
 	</thead>
 	<tbody id="result"></tbody>
@@ -72,6 +73,7 @@
 		<td>{{addr1}}{{addr2}}</td>
 		<td>{{tel}}</td>
 		<td>{{contentid}}</td>
+		<td>{{mapx}} {{mapy}}</td>
 	</tr>
 	{{/each}}
 </script>
@@ -81,7 +83,7 @@
 	var serviceKey = "oMYSCkfnU%2BrM%2F6ad8zAICkGBj0eUCOxJc9bR%2F8MHuzhfo62P6cGA1YVZ7iY5QnDedVyfk5tMhc0Wu42fjDJ%2BcA%3D%3D";
 	
 	$('button').eq(1).on('click', function() {
-		$.getJSON("http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList?ServiceKey=" + serviceKey + "&areaCode=1&numOfRows=10&pageNo=1&MobileOS=ETC&MobileApp=TestApp&_type=json", function(areaCode) {
+		$.getJSON("http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList?ServiceKey=" + serviceKey + "&areaCode=1&sigunguCode=1&numOfRows=40&pageNo=1&MobileOS=ETC&MobileApp=TestApp&_type=json", function(areaCode) {
 			// json 객체 내부 접근하기
 			console.dir(areaCode);
 			console.log(areaCode);
