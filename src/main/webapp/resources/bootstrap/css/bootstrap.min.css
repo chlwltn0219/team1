@@ -3,12 +3,17 @@
  * Copyright 2011-2015 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */ /*! normalize.css v3.0.2 | MIT License | git.io/normalize */
+ @import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+
+
+* {
+	font-family: 'Noto Sans KR', sans-serif;
+}
 html {
 	font-family: sans-serif;
 	-webkit-text-size-adjust: 100%;
 	-ms-text-size-adjust: 100%
 }
-
 body {
 	margin: 0
 }
@@ -6025,6 +6030,7 @@ border-bottom-right-radius
 	border-color: #080808
 }
 
+
 .navbar-inverse .navbar-brand {
 	color: #9d9d9d
 }
@@ -6033,6 +6039,11 @@ border-bottom-right-radius
 	{
 	color: #fff;
 	background-color: transparent
+}
+.navbar-inverse .navbar-nav>.open>a, .navbar-inverse .navbar-nav>.open>a:focus,
+.navbar-inverse .navbar-nav>.open>a:hover {
+	color: white;
+	background-color: #080808;
 }
 
 .navbar-inverse .navbar-text {
@@ -6078,9 +6089,10 @@ border-bottom-right-radius
 	border-color: #101010
 }
 
+
 .navbar-inverse .navbar-nav>.open>a, .navbar-inverse .navbar-nav>.open>a:focus,
 	.navbar-inverse .navbar-nav>.open>a:hover {
-	color: black;
+	color: white;
 	background-color: #080808
 }
 
@@ -6977,7 +6989,7 @@ a.list-group-item-danger.active, a.list-group-item-danger.active:focus,
 }
 
 .panel-heading>.dropdown .dropdown-toggle {
-	color: inherit
+	color: inherit;
 }
 
 .panel-title {

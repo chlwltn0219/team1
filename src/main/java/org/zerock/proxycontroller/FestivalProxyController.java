@@ -28,7 +28,7 @@ public class FestivalProxyController {
 	private static final String SERVICE_KEY = "oMYSCkfnU%2BrM%2F6ad8zAICkGBj0eUCOxJc9bR%2F8MHuzhfo62P6cGA1YVZ7iY5QnDedVyfk5tMhc0Wu42fjDJ%2BcA%3D%3D";
 			
 	@RequestMapping(value="/list", method = RequestMethod.GET )
-	public ResponseEntity<Body> test(@RequestParam Integer sigunguCode) {
+	public ResponseEntity<Body> test(@RequestParam Integer sigunguCode, @RequestParam Integer page) {
 		
 		Result result = null;
 		
@@ -38,8 +38,8 @@ public class FestivalProxyController {
 							+ "&numOfRows=9"
 							+ "&areaCode=1"
 							+ "&sigunguCode=" + sigunguCode
-//							+ "&pageNo=" + page
-							+ "&pageNo=1"
+							+ "&pageNo=" + page
+//							+ "&pageNo=4"
 							+ "&MobileOS=ETC"
 							+ "&MobileApp=TestApp"
 							+ "&_type=json";

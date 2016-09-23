@@ -7,7 +7,7 @@
 img {
 	width: 1028px;
 	height: 940px;
-	text-align: center;
+
 }
 
 </style>
