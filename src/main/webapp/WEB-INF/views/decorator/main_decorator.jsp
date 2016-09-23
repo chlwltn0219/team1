@@ -66,11 +66,6 @@ border-color: rgb(14, 201, 190);
   color: white;
 }
 
-.navbar-brand:focus
-.navbar-brand:hover {
-	color:black;
-}
-
 a:hover
 a:focus {
 	color:black;
@@ -99,7 +94,7 @@ a:focus {
 						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
 							<span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
 						</button>
-						<a style="color:white;" class="navbar-brand" href="#">Website Logo</a>
+						<a style="color: yellow; font-weight:bold; font-size:22px;" class="navbar-brand" href="/home">SEOUL TOUR</a>
 					</div>
 					<!-- Menu bar -->
 					<div class="collapse navbar-collapse" id="myNavbar">
