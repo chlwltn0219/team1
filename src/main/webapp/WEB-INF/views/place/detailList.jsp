@@ -47,6 +47,10 @@
                </h3>
             </div>
             <hr>
+            
+            <a href="list">
+            	<button>List</button>
+            </a>
             <div id="result"></div>
 <!--             <div id="map" style="width:100%; height: 400px"></div>    -->
 
@@ -75,10 +79,10 @@
          </div>
       </div>
    </div>
-   <div>
-      <button></button>
-      <a type="submi"></a>
-   </div>
+   
+   <a class="return-top" href="#" style="right:27px; bottom:50px; position:fixed; z-index:9999;">
+		<img src="http://cfs.tistory.com/custom/blog/202/2025510/skin/images/top1.png">
+	</a>
 
    <script id="codeTemp" type="text/xxx-mytemplate">
          <div class="centered">
@@ -155,6 +159,31 @@
       });
       
    </script>
+   
+<script>
+	/* 스크롤 이벤트 */
+	$(document).ready(function(){
+        
+	    $(".return-top").hide(); // 탑 버튼 숨김
+	    $(function () {
+	                 
+	        $(window).scroll(function () {
+	            if ($(this).scrollTop() > 100) { // 스크롤 내릴 표시
+	                $('.return-top').fadeIn();
+	            } else {
+	                $('.return-top').fadeOut();
+	            }
+	        });
+	                
+	        $('.return-top').click(function () {
+	            $('body,html').animate({
+	                scrollTop: 0
+	            }, 600);  // 탑 이동 스크롤 속도
+	            return false;
+	        });
+	    });
+	});
+</script>
 
 </body>
 </html>

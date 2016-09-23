@@ -217,7 +217,7 @@
 					<div class="timeline-body">{{replytext}} </div>
 					<div class="timeline-footer">
 						{{#eqReplyer replyer }}
-							<a class="btn btn-primary btn-xs" data-toggle="modal" data-target="#modifyModal">Modify</a>
+							<a class="btn btn-primary btn-xs" data-toggle="modal" data-target="#modify">Modify</a>
 						{{/eqReplyer}}
 					</div>
 				</div>			

@@ -94,9 +94,7 @@
 </script>
 
 				<script>
-					$(document)
-							.ready(
-									function() {
+					$(document).ready(function() {
 
 										var formObj = $("form[role='form']");
 
@@ -107,17 +105,11 @@
 													var that = $(this);
 
 													var str = "";
-													$(".uploadedList .delbtn")
-															.each(
-																	function(
-																			index) {
-																		str += "<input type='hidden' name='files["
-																				+ index
-																				+ "]' value='"
-																				+ $(
-																						this)
-																						.attr(
-																								"href")
+													$(".uploadedList .delbtn").each(function(index) {
+																str += "<input type='hidden' name='files["
+																	+ index
+																	+ "]' value='"
+																	+ $(this).attr("href")
 																				+ "'> ";
 																	});
 
