@@ -45,23 +45,41 @@
 		color: blue;
 	}
 	
+	#summary, #forecast6days {
+		height: 50px;
+		text-align: center;
+	}
+	
+	@media ( min-width :992px){
+		#summary, #forecast6days {
+			height: 70px;
+		}
+	}
+	
+	@media ( min-width :1200px) {
+		#summary, #forecast6days {
+			height: 90px;
+		}
+	}
+	
 </style>
 </head>
 <body>
-	
-			<div class="box box-success">
-				<div class="box-header">
-					<h3 class="box-title">Weather</h3>
-				</div>
-	
-				<div class="box-body">
-					<div id="summary" class="row"></div>
-					<hr style="visibility: hidden;"><br><br>
-					<div class="row">
+	<!-- Weather -->
+	<div class="box box-success">
+		<div class="box-header">
+			<h3 class="box-title">Weather</h3>
+		</div>
 
-					</div>
-				</div>
+		<div class="box-body">
+			<div id="summary" class="row">
+				<h2> 3일 예보 </h2>
 			</div>
+			<div id="forecast6days" class="row">
+				<h2> 중기 예보 (오전/오후) </h2>
+			</div>
+		</div>
+	</div>
 	
 	<div class="row">
 		<!-- left column -->
@@ -155,6 +173,20 @@
 				</div>
 			</div>
 		</div>
+	</script>
+	
+	<script id="forecastTemplate" type="text/x-handlebars-template">
+		{{#for 0 12 1}}
+			<div class="col-xs-1 col-md-1">
+				<div class="weather">
+					<div class="date"></div>
+					<img alt="sorry" src="" width="100%">
+					<div class="temp">
+						<b><span class="max"></span> - <span class="min"></span></b>
+					</div>
+				</div>
+			</div>
+		{{/for}}
 	</script>
 
 	<script id="eventTemplate" type="text/x-handlebars-template">
@@ -261,21 +293,47 @@
 							var forecast6days = weather.forecast6days[0];
 							
 							var summaryTemp = $('#summaryTemplate').html();
-							var CompSummaryTemp = Handlebars.compile(summaryTemp);
+							var compSummaryTemp = Handlebars.compile(summaryTemp);
 							
-							console.dir(summary.today);
+							var forecastTemp = $('#forecastTemplate').html();
+							var comForecastTemp = Handlebars.compile(forecastTemp);
 							
 							$('#summary').html("");
-							$('#summary').append(CompSummaryTemp(summary.today));
-							$('#summary').append(CompSummaryTemp(summary.tomorrow));
-							$('#summary').append(CompSummaryTemp(summary.dayAfterTomorrow));
+							$('#summary').append(compSummaryTemp(summary.today));
+							$('#summary').append(compSummaryTemp(summary.tomorrow));
+							$('#summary').append(compSummaryTemp(summary.dayAfterTomorrow));
+							
+							$('#forecast6days').html(comForecastTemp());
+							
+							alert();
+							
+							$('#forecast6days img').eq(0).attr("src", forecast6days.sky.amIcon3day);
+							$('#forecast6days img').eq(1).attr("src", forecast6days.sky.pmIcon3day);
+							$('#forecast6days img').eq(2).attr("src", forecast6days.sky.amIcon4day);
+							$('#forecast6days img').eq(3).attr("src", forecast6days.sky.pmIcon4day);
+							$('#forecast6days img').eq(4).attr("src", forecast6days.sky.amIcon5day);
+							$('#forecast6days img').eq(5).attr("src", forecast6days.sky.pmIcon5day);
+							$('#forecast6days img').eq(6).attr("src", forecast6days.sky.amIcon6day);
+							$('#forecast6days img').eq(7).attr("src", forecast6days.sky.pmIcon6day);
+							$('#forecast6days img').eq(8).attr("src", forecast6days.sky.amIcon7day);
+							$('#forecast6days img').eq(9).attr("src", forecast6days.sky.pmIcon7day);
+							$('#forecast6days img').eq(10).attr("src", forecast6days.sky.amIcon8day);
+							$('#forecast6days img').eq(11).attr("src", forecast6days.sky.pmIcon8day);
 							
 							for(var i=0; i<3; i++) {
-								date.setDate(today + 1 + i);
+								date.setDate(today + i);
 								month = date.getMonth()+ 1;
 								day = date.getDate();
 								
 								$('div.date').eq(i).html("<b>" + month + "/" + day + "</b>");
+							}
+							for(var i=3; i<15; i += 2) {
+								date.setDate(today + i);
+								month = date.getMonth()+ 1;
+								day = date.getDate();
+								
+								$('div.date').eq(i).html("<b>" + month + "/" + day + "</b>");
+								$('div.date').eq(i+1).html("<b>" + month + "/" + day + "</b>");
 							}
 							
 						});
@@ -337,6 +395,15 @@
 		    }
 		    console.dir(accum);
 		    
+		    return accum;
+		});
+		
+		
+		Handlebars.registerHelper('for', function(from, to, incr, block) {
+		    var accum = '';
+		    for(var i = from; i < to; i += incr){
+		        accum += block.fn();
+		    }
 		    return accum;
 		});
 		
