@@ -15,12 +15,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
-import org.zerock.jboardobj.Info;
-import org.zerock.openapi.Body;
-import org.zerock.openapi.CheckResult;
-import org.zerock.openapi.Result;
-import org.zerock.openapi.SingleBody;
-import org.zerock.openapi.SingleResult;
+import org.zerock.openapi.tour.Body;
+import org.zerock.openapi.tour.CheckResult;
+import org.zerock.openapi.tour.Info;
+import org.zerock.openapi.tour.Result;
+import org.zerock.openapi.tour.SingleBody;
+import org.zerock.openapi.tour.SingleResult;
 import org.zerock.util.DateUtil;
 
 @RestController

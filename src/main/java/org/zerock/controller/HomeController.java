@@ -36,11 +36,10 @@ public class HomeController {
     return "home";
   }
   
-  @RequestMapping(value = "/doA", method = RequestMethod.GET)
+  @RequestMapping(value = "/home", method = RequestMethod.GET)
   public String doA(Locale locale, Model model) {
     
 
-    System.out.println("doA....................");
     
     return "home";
   }  
@@ -61,5 +60,6 @@ public class HomeController {
   public void ajaxTest() {
 
   }
+
 
 }

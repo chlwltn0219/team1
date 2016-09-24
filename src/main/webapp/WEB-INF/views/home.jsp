@@ -2,43 +2,19 @@
 <html>
 <head>
    <title>Home</title>
+<style type="text/css">
+
+img {
+	width: 1028px;
+	height: 940px;
+
+}
+
+</style>
 </head>
 
 <body>
-<h1>
-	Hello world! ### [MosaicWeb] ### 
-	<br>
-	Hello world! ### [MosaicWeb] ###  
-</h1>
-
-<h1>
-   Hello world! ### [MosaicWeb] ###  
-</h1>
-
-<h1>
-   Hello world! ### [MosaicWeb] ###  
-</h1>
-
-<h1>
-   Hello world! ### [MosaicWeb] ###  
-</h1>
-
-<h1>
-   Hello world! ### [MosaicWeb] ###  
-</h1>
-
-<h1>
-   Hello world! ### [MosaicWeb] ###  
-</h1>
-
-<h1>
-   Hello world! ### [MosaicWeb] ###  
-</h1>
-
-<h1>
-   Hello world! ### [MosaicWeb] ###  
-</h1>
-
+<img alt="xx" src="/resources/img/hehe.jpg">
 <h2>${result}</h2>
 
 </body>

@@ -1,4 +1,4 @@
-package org.zerock.openapi;
+package org.zerock.openapi.tour;
 
 public class Result {
 

@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
+
 <head>
 <title>register.jsp</title>
 <link href="/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet"
@@ -19,7 +20,7 @@
 				</div>
 				<!-- /.box-header -->
 
-				<form role="form" method="post" onsubmit="">
+				<form name="myForm" role="form" method="post" onsubmit="return validateForm()">
 					<div class="box-body">
 						<div class="row">
 							<div class="col-sm-6">
@@ -27,36 +28,44 @@
 									<label for="">ID</label>
 									<div class="row">
 										<div class="col-md-10">
-											<input type="text" name='uid' id="uid" class="form-control" required
-												placeholder="Enter ID">
+											<input type="text" name='uid' id="uid" class="form-control input-lg"
+											required placeholder="Enter ID" />
 										</div>
-										<input type="button" id="iddc" value="check" />
+										<div class="col-md-2">
+											<input type="button" id="iddc" name="niddc" value="check"
+											class="btn btn-primary input-lg"/>
+										</div>
 									</div>
 								</div>
 								<div class="form-group">
-									<label for="">Password</label> <input type="password" required
-										name='upw' class="form-control" placeholder="Enter Password">
+									<label for="">Password</label>
+										<input type="password" required pattern="(?=.*\d)(?=.*[A-Za-z]).{8,}" 
+										title="Must contain at least one number and one letter, and at least 8 or more characters"
+										name='upw' class="form-control input-lg" placeholder="Enter Password">
 								</div>
 								<div class="form-group">
-									<label for="">PW Check</label> <input type="password" required
-										name='upwcheck' class="form-control"
+									<label for="">PW Check</label> 
+										<input type="password" required	name='upwcheck' class="form-control input-lg"
 										placeholder="check Password">
 								</div>
 								<div class="form-group">
-									<label for="">Sex &nbsp;</label> <label class="radio-inline"><input
-										required type="radio" name="sex"> Female</label> <label
-										class="radio-inline"><input type="radio" name="sex" required>
-										Male</label>
+									<label for="">Sex &nbsp;</label>
+										<label class="radio-inline">
+											<input required type="radio" name="sex"> Female
+										</label> 
+										<label class="radio-inline">
+											<input required type="radio" name="sex"> Male
+										</label>
 								</div>
 							</div>
 							<div class="col-sm-6">
 								<div class="form-group">
-									<label for="">E-mail</label> <input type="email" name="uname" required
-										class="form-control" placeholder="Enter Email">
+									<label for="">E-mail</label> 
+										<input type="email" name="uname" required class="form-control input-lg" placeholder="Enter Email">
 								</div>
 								<div class="form-group">
-									<label for="bir">Birth Year</label> <select
-										class="form-control" id="bir">
+									<label for="bir">Birth Year</label>
+									 <select class="form-control input-lg" id="bir" name="bir">
 										<c:forEach var="i" begin="1900" end="2016" step="1">
 											<option>${i}</option>
 										</c:forEach>
@@ -64,7 +73,7 @@
 								</div>
 								<div class="form-group">
 									<label for="cont">Continent</label> <select
-										class="form-control" id="cont">
+										class="form-control input-lg" id="cont" name="conti">
 										<c:forTokens var="ii"
 											items="ASIA,EUROPE.AFRICA.NORTH AMERICA.SOUTH AMERICA.OCEANIA"
 											delims=",.">
@@ -79,7 +88,7 @@
 					<!-- /.box-body -->
 
 					<div class="box-footer">
-						<button type="submit" class="btn btn-primary">Submit</button>
+						<button type="submit" class="btn btn-success">Submit</button>
 					</div>
 				</form>
 
@@ -92,32 +101,32 @@
 	</div>
 	<!-- /.row -->
 	<script>
+	function validateForm() {
+	    var x = document.forms["myForm"]["niddc"].value;
+	    var y = document.forms["myForm"]["upw"].value;
+	    var z = document.forms["myForm"]["upwcheck"].value;
+	    if (x == "check" || y != z) {
+	        alert("Please check ID or Password");
+	        return false;
+	    }
+	}
+	
 		$("#iddc").on("click", function() {
-
 			var uidl = $("#uid");
 			var uidll = uidl.val();
 			
 			$.getJSON("/check/dup?uid=" + uidll, function(data) {
 				var IDchecking = data.IDchecking;
 				if (IDchecking) {
-					alert("만들 수 있습니다.");	
+					alert("* Available ID *");
+					document.getElementById("iddc").value = "confirm";
 				} else {
-					alert("만들 수 없습니다.");
+					alert("* Unavailable ID *");
+					document.getElementById("iddc").value = "check";
 				}
-			 	
-			});	
-// 			$.ajax({
-// 				type : 'get',
-// 				url : '/check/dup?uid=' + uidll,
-// 				headers : {
-// 					"Content-Type" : "json",
-// 					"X-HTTP-Method-Override" : "GET"
-// 				},
-// 				success : function(data, textStatus) {
-// 					alert(textStatus)
-// 				}
-// 			});
+			});
 		});
+		
 	</script>
 </body>
 </html>

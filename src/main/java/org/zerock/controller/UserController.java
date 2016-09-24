@@ -20,6 +20,8 @@ import org.zerock.domain.UserVO;
 import org.zerock.dto.LoginDTO;
 import org.zerock.service.UserService;
 
+import javafx.scene.control.Alert;
+
 @Controller
 @RequestMapping("/user")
 public class UserController {
@@ -106,7 +108,7 @@ public class UserController {
 
     rttr.addFlashAttribute("msg", "SUCCESS");
 
-    return "redirect:/";
+    return "redirect:/user/login";
   }
   
 

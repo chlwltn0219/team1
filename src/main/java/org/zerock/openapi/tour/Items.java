@@ -1,4 +1,4 @@
-package org.zerock.openapi;
+package org.zerock.openapi.tour;
 
 import java.util.List;
 import java.util.Map;
