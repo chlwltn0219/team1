@@ -62,8 +62,21 @@ background-color: rgb(14, 201, 190);
 border-color: rgb(14, 201, 190);
 }
 
+.navbar-inverse .navbar-nav > li > a:active {
+  color: white;
+}
+.navbar-inverse .navbar-nav>.open>a,
+.navbar-inverse .navbar-nav>.open>a:focus,
+.navbar-inverse .navbar-nav>.open>a:hover {
+
+	color:white;
+	}
+
 .navbar-inverse .navbar-nav > li > a {
   color: white;
+}
+.navbar-inverse .navbar-nav>li>a:focus, .navbar-inverse .navbar-nav>li>a:hover {
+	color: black;
 }
 
 a:hover
@@ -71,6 +84,9 @@ a:focus {
 	color:black;
 }
 
+.marginsize {
+	margin-top: 5%;
+}
 
 .navbar .navbar-inverse .navbar-fixed-top:hover,
 .navbar .navbar-inverse .navbar-fixed-top:focus  {
@@ -104,7 +120,7 @@ a:focus {
 								<a href="/festival/festival">행사</a>
 							</li>
 							<li class="dropdown">
-								<a class="dropdown-toggle" data-toggle="dropdown" href="#">관광 <span class="caret"></span></a>
+								<a class="dropdown-toggle"  data-toggle="dropdown" href="#">관광 <span class="caret"></span></a>
 								<ul class="dropdown-menu">
 									<li><a href="/place/list">관광지</a></li>
 									<li><a href="/place/list">문화시설</a></li>
@@ -141,7 +157,8 @@ a:focus {
 		</header>
 		
 		<!-- Content Wrapper. Contains page content -->
-		<div class="container well well-lg">
+<!-- 		<div class="container well well-lg"> -->
+			<div class="marginsize">
 			<section>
 				<!-- ################## -->
 				<!-- START Main Content -->
@@ -153,7 +170,8 @@ a:focus {
 				<!-- END   Main Content -->
 				<!-- ################## -->
 			</section>
-		</div>
+<!-- 		</div> -->
+			</div>
 
 		<footer class="container-fluid text-center footer">
 			<div class="pull-right hidden-xs">

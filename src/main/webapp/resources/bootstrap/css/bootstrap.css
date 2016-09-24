@@ -4224,6 +4224,12 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .navbar-toggle .icon-bar + .icon-bar {
   margin-top: 4px;
 }
+
+
+:active {
+	color: black;
+}
+
 @media (min-width: 768px) {
   .navbar-toggle {
     display: none;
@@ -4536,7 +4542,7 @@ fieldset[disabled] .navbar-default .btn-link:focus {
   background-color: transparent;
 }
 .navbar-inverse .navbar-toggle {
-  border-color: #333;
+  border-color: rgb(14,201,190);
 }
 .navbar-inverse .navbar-toggle:hover,
 .navbar-inverse .navbar-toggle:focus {
