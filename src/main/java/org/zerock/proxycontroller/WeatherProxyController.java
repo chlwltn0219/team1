@@ -202,41 +202,91 @@ public class WeatherProxyController {
 			String name = "";
 			String icon = "";
 			
+			// Daytime
 			if(ampm) {
 				icon = "amIcon" + i + "day";
 				name = sky.get("amName" + i + "day");
+				
+				switch (name) {
+				case "맑음":
+					sky.put(icon, "/resources/img/weather_icons/01.png");
+					break;
+				case "구름조금":
+					sky.put(icon, "/resources/img/weather_icons/02.png");
+					break;
+				case "구름많음":
+					sky.put(icon, "/resources/img/weather_icons/03.png");
+					break;
+				case "흐림":
+					sky.put(icon, "/resources/img/weather_icons/18.png");
+					break;
+				case "흐리고 비":
+					sky.put(icon, "/resources/img/weather_icons/21.png");
+					break;
+				case "구름 많고 비":
+					sky.put(icon, "/resources/img/weather_icons/12.png");
+					break;
+				case "소나기":
+					sky.put(icon, "/resources/img/weather_icons/21.png");
+					break;
+				case "비 또는 눈":
+					sky.put(icon, "/resources/img/weather_icons/4.png");
+					break;
+				case "구름 많고 눈":
+					sky.put(icon, "/resources/img/weather_icons/13.png");
+					break;
+				case "흐리고 눈":
+					sky.put(icon, "/resources/img/weather_icons/32.png");
+					break;
+				default:
+					sky.put(icon, "/resources/img/weather_icons/38.png");
+					break;
+				}
+				
 			}
+			// Night			
 			else {
 				icon = "pmIcon" + i + "day";
 				name = sky.get("pmName" + i + "day");
+				
+				switch (name) {
+				case "맑음":
+					sky.put(icon, "/resources/img/weather_icons/08.png");
+					break;
+				case "구름조금":
+					sky.put(icon, "/resources/img/weather_icons/09.png");
+					break;
+				case "구름많음":
+					sky.put(icon, "/resources/img/weather_icons/10.png");
+					break;
+				case "흐림":
+					sky.put(icon, "/resources/img/weather_icons/18.png");
+					break;
+				case "흐리고 비":
+					sky.put(icon, "/resources/img/weather_icons/21.png");
+					break;
+				case "구름 많고 비":
+					sky.put(icon, "/resources/img/weather_icons/40.png");
+					break;
+				case "소나기":
+					sky.put(icon, "/resources/img/weather_icons/21.png");
+					break;
+				case "비 또는 눈":
+					sky.put(icon, "/resources/img/weather_icons/4.png");
+					break;
+				case "구름 많고 눈":
+					sky.put(icon, "/resources/img/weather_icons/41.png");
+					break;
+				case "흐리고 눈":
+					sky.put(icon, "/resources/img/weather_icons/32.png");
+					break;
+				default:
+					sky.put(icon, "/resources/img/weather_icons/38.png");
+					break;
+				}
 			}
 			
-			switch (name) {
-			case "맑음":
-				sky.put(icon, "/resources/img/weather_icons/01.png");
-				break;
-			case "구름조금":
-				sky.put(icon, "/resources/img/weather_icons/02.png");
-				break;
-			case "구름많음":
-				sky.put(icon, "/resources/img/weather_icons/03.png");
-				break;
-			case "흐림":
-				sky.put(icon, "/resources/img/weather_icons/18.png");
-				break;
-			case "비":
-				sky.put(icon, "/resources/img/weather_icons/21.png");
-				break;
-			case "눈":
-				sky.put(icon, "/resources/img/weather_icons/32.png");
-				break;
-			case "비 또는 눈":
-				sky.put(icon, "/resources/img/weather_icons/4.png");
-				break;
-			default:
-				sky.put(icon, "/resources/img/weather_icons/38.png");
-				break;
-			}
+
 			
 			if(i==10 && ampm){
 				ampm = false;
