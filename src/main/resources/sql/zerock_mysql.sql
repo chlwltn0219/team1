@@ -82,6 +82,7 @@ CREATE TABLE tbl_jboard
    viewcnt    int DEFAULT 0,
    replycnt   int DEFAULT 0,
    contentid  varchar(20) NOT NULL,
+   contitle   text NOT NULL,
    PRIMARY KEY(bno)
 );
 

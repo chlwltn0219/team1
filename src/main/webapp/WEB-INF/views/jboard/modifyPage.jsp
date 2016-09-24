@@ -26,7 +26,7 @@
 				</div>
 				<!-- /.box-header -->
 
-				<form role="form" action="modifyPage" method="post">
+				<form role="form" action="modifyPage" method="post"  >
 
 					<input type='hidden' name='page' value="${cri.page}"> <input
 						type='hidden' name='perPageNum' value="${cri.perPageNum}">
@@ -43,11 +43,11 @@
 
 						<div class="form-group">
 							<label for="exampleInputEmail1">Title</label> <input type="text"
-								name='title' class="form-control" value="${jBoardVO.title}">
+								name='title' class="form-control" value="${jBoardVO.title}" required="required">
 						</div>
 						<div class="form-group">
 							<label for="exampleInputPassword1">Content</label>
-							<textarea class="form-control" name="content" rows="3">${jBoardVO.content}</textarea>
+							<textarea class="form-control" name="content" rows="3" required="required">${jBoardVO.content}</textarea>
 						</div>
 						<!-- contentId -->
 						<div class="form-group">
@@ -81,12 +81,12 @@
 					<!-- selected event -->
 					<div>
 						<input id="selectedEvent" class="form-control" type="text"
-							readonly="readonly" placeholder="Selected Event...">
+							readonly="readonly" placeholder="Selected Event..." value="${jBoardVO.contitle}">
 					</div>
 					<hr>
 					<!-- event list -->
 					<div>
-						<ul id="eventList" class="list-group"></ul>
+						<ul id="eventList" class="list-group" ></ul>
 					</div>
 					<!-- pager -->
 					<div id="pager" style="text-align: center;"></div>
@@ -125,7 +125,8 @@
 			</div>
 		<button id="next" type="button" class="btn btn-default" style="visibility: {{visiblility next}}">Next</button>
 	</script>
-	<script type="text/javascript">
+	
+<script type="text/javascript">
 		
 		getList(1);
 	
@@ -151,10 +152,14 @@
 				var pagehtml = pageTemplate(pageMaker);
 				$('#pager').html(pagehtml);
 
+				
+				
 				setPaginationEvent(data);
 				setListEvent(item);
 				
 			});
+			
+			
 		}
 
 		function setPaginationEvent(data) {
@@ -203,13 +208,13 @@
 		
 		function submitCheck(event) {
 
-			var contentId = $('#contentId').val();
+// 			var contentId = $('#contentId').val();
 // 			alert(contentId);
 			
-			if(contentId == "") {
-				alert("* 참여하는 행사를 선택해 주세요. *");
-				event.preventDefault();
-			}
+// 			if(contentId == "") {
+// 				alert("* 참여하는 행사를 선택해 주세요. *");
+// 				event.preventDefault();
+// 			}
 			
 		}
 		
@@ -264,17 +269,29 @@
 			var that = $(this);
 			var str = "";
 			that.append(str);
-// 			console.log(str);
+			console.log(str);
 			that.get(0).submit();
 		});
 		$(".btn-warning").on("click",function() {
-			alert("clicked  cancel");
-				self.location = "/jboard/list?page=${cri.page}&perPageNum=${cri.perPageNum}"+ "&searchType=${cri.searchType}&keyword=${cri.keyword}";
+				alert("clicked  cancel");
+// 				self.location = "/jboard/list?page=${cri.page}&perPageNum=${cri.perPageNum}"+ "&searchType=${cri.searchType}&keyword=${cri.keyword}";
+// 				self.location = "/jboard/list";
+				formObj.attr("method", "get");
+				formObj.attr("action", "/jboard/list");
+				formObj.submit();
+				
 			});
 		});
-		$(".btn-primary").on("click" , function() {
+		$(".btn-primary").on("click" , function(event) {
 			alert("clicked");
-			formObj.submit();
+			var contentId = $('#contentId').val();
+// 			alert(contentId);
+			
+			if(contentId == "") {
+				alert("* 참여하는 행사를 선택해 주세요. *");
+				event.preventDefault();
+				formObj.submit();
+			}
 		});
 	
 		var template = Handlebars.compile($("#template").html());

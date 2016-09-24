@@ -267,7 +267,6 @@ public class DetailProxyController {
 		info.setTel((String)commonItems.get("tel"));
 		info.setOverview((String)commonItems.get("overview"));
 		
-		
 		return new ResponseEntity<Info>(info, HttpStatus.OK);
 
 	}
