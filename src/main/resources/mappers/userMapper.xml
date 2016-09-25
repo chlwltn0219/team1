@@ -7,7 +7,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
   	<insert id="create">
 		insert into tbl_user (uid, upw, uname)
-		values(#{uid}, #{upw}, #{uname} )
+		values(#{uid}, #{upw}, #{uname})
 	</insert>
 
     <select id="check" resultType="UserVO">
