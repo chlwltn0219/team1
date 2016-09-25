@@ -84,7 +84,7 @@ public class JoinBoardController {
 		rttr.addAttribute("perPageNum", cri.getPerPageNum());
 		rttr.addAttribute("searchType", cri.getSearchType());
 		rttr.addAttribute("keyword", cri.getKeyword());
-
+		
 		rttr.addFlashAttribute("msg", "SUCCESS");
 
 		logger.info(rttr.toString());

@@ -107,6 +107,10 @@
 						<div class="form-group">
 							<input id="contentId" type="hidden" name=contentid>
 						</div>
+						<!-- contentTitle -->
+						<div class="form-group">
+							<input id="contentTitle" type="hidden" name=contitle>
+						</div>
 						<!-- writer (read only) -->
 						<div class="form-group">
 							<label for="exampleInputEmail1">Writer</label> <input type="text"
@@ -281,6 +285,7 @@
 				        var selectTitle = $('li.list-group-item div.title h4').eq(index).html();
 				        var contentId = $('li.list-group-item input').eq(index).val();
 				    	$('#selectedEvent').val(selectTitle);
+				    	$('#contentTitle').val(selectTitle);
 				    	$('#contentId').val(contentId);
 						
 						$.getJSON('/weather/forecast?lat='+ item[index].mapy + "&lon=" + item[index].mapx, function(weather) {
