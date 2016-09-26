@@ -47,16 +47,16 @@
 						</div>
 						<div class="form-group">
 							<label for="exampleInputPassword1">Content</label>
-							<textarea class="form-control" name="content" rows="3" required="required">${jBoardVO.content}</textarea>
+							<textarea class="form-control" name="content" rows="25" required="required">${jBoardVO.content}</textarea>
 						</div>
 						<!-- contentId -->
 						<div class="form-group">
-							<input id="contentId" type="hidden" name="contentid" value="${jBoard.contentid}">
+							<input id="contentId" type="hidden" name="contentid" value="${jBoardVO.contentid}">
 						</div>
 
 						<div class="form-group">
 							<label for="exampleInputEmail1">Writer</label> <input type="text"
-								name="writer" class="form-control" value="${jBoardVO.writer}">
+								name="writer" class="form-control" value="${jBoardVO.writer}" readonly="readonly">
 						</div>
 					</div>
 					<div class="box-footer">
@@ -273,24 +273,23 @@
 			that.get(0).submit();
 		});
 		$(".btn-warning").on("click",function() {
-				alert("clicked  cancel");
+// 				alert("clicked  cancel");
 // 				self.location = "/jboard/list?page=${cri.page}&perPageNum=${cri.perPageNum}"+ "&searchType=${cri.searchType}&keyword=${cri.keyword}";
 // 				self.location = "/jboard/list";
 				formObj.attr("method", "get");
-				formObj.attr("action", "/jboard/list");
+				formObj.attr("action", "/jboard/readPage?bno=${jBoardVO.bno}");
 				formObj.submit();
 				
 			});
 		});
 		$(".btn-primary").on("click" , function(event) {
-			alert("clicked");
+// 			alert("clicked");
 			var contentId = $('#contentId').val();
 // 			alert(contentId);
 			
 			if(contentId == "") {
 				alert("* 참여하는 행사를 선택해 주세요. *");
 				event.preventDefault();
-				formObj.submit();
 			}
 		});
 	
