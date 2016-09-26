@@ -135,12 +135,12 @@
 
 <script type="text/javascript">
 
-  	pageNo = 1;
-	sigunguCode = 1;
-   	getList(1);
-   	function getList(pageNo) {
+  	var pageNo = 1;
+   	getList(1, 1);
+   	function getList(pageNo, sigunguCode) {
    	/* default Page */
-   	
+   		
+	   	sigunguCode = $('#gu option:selected').val();
 		$.getJSON("/place/common?sigunguCode=" + sigunguCode + "&pageNo=" + pageNo, function(data) {
 		   
 	    var items = data.items.item;
@@ -255,7 +255,6 @@
 	
 	
 	Handlebars.registerHelper('pageMaker', function(from, to, incr, block) {
-		console.dir(block);
 		
 	    var accum = '';
 	    var nowPage = block.data.root.cri.page;
@@ -272,7 +271,6 @@
 	        accum += block.fn(custom);
 	        active = '';
 	    }
-	    console.dir(accum);
 	    
 	    return accum;
 	});
