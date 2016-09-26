@@ -3,7 +3,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page session="false"%>
+
 <html>
+
 <head>
 <!-- CSS -->
 <link href="/resources/css/place.css" rel="stylesheet" type="text/css" />
@@ -16,181 +18,158 @@
 <!-- HandleBars -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 <title>list.jsp</title>
+
 </head>
 <body>
 
 	<div class="row">
 		<!-- left column -->
-
 		<div class="col-md-12">
 			<!-- general form elements -->
 			<div class='box'>
 				<div class="box-header with-border">
 					<h3 class="box-title">관광리스트</h3>
-				</div>
-
-
-				<div class='box-body'>
-
-					<select name="searchType">
-						<option value="n"
-							<c:out value="${cri.searchType == null?'selected':''}"/>>
-							---</option>
-						<option value="t"
-							<c:out value="${cri.searchType eq 't'?'selected':''}"/>>
-							Title</option>
-						<option value="c"
-							<c:out value="${cri.searchType eq 'c'?'selected':''}"/>>
-							Content</option>
-						<option value="w"
-							<c:out value="${cri.searchType eq 'w'?'selected':''}"/>>
-							Writer</option>
-						<option value="tc"
-							<c:out value="${cri.searchType eq 'tc'?'selected':''}"/>>
-							Title OR Content</option>
-						<option value="cw"
-							<c:out value="${cri.searchType eq 'cw'?'selected':''}"/>>
-							Content OR Writer</option>
-						<option value="tcw"
-							<c:out value="${cri.searchType eq 'tcw'?'selected':''}"/>>
-							Title OR Content OR Writer</option>
-					</select> <input type="text" name='keyword' id="keywordInput"
-						value='${cri.keyword }'>
-					<button id='searchBtn'>Search</button>
-					<button id='newBtn'>New Board</button>
-
-				</div>
-				<div class="selectBox" >
-					<select id="gu">
-		               <option value="1">강남구</option>
-		               <option value="2">강동구</option>
-		               <option value="3">강북구</option>
-		               <option value="4">강서구</option>
-		               <option value="5">관악구</option>
-		               <option value="6">광진구</option>
-		               <option value="7">구로구</option>
-		               <option value="8">금천구</option>
-		               <option value="9">노원구</option>
-		               <option value="10">도봉구</option>
-		               <option value="11">동대문구</option>
-		               <option value="12">동작구</option>
-		               <option value="13">마포구</option>
-		               <option value="14">서대문구</option>
-		               <option value="15">서초구</option>
-		               <option value="16">성동구</option>
-		               <option value="17">성북구</option>
-		               <option value="18">송파구</option>
-		               <option value="19">양천구</option>
-		               <option value="20">영등포구</option>
-		               <option value="21">용산구</option>
-		               <option value="22">은평구</option>
-		               <option value="23">종로구</option>
-		               <option value="24">중구</option>
-		               <option value="25">중랑구</option>
-		            </select>
+					<div class="selectBox" >
+						<label>지역: &nbsp;</label>
+						<select id="gu">
+			               <option value="1">강남구</option>
+			               <option value="2">강동구</option>
+			               <option value="3">강북구</option>
+			               <option value="4">강서구</option>
+			               <option value="5">관악구</option>
+			               <option value="6">광진구</option>
+			               <option value="7">구로구</option>
+			               <option value="8">금천구</option>
+			               <option value="9">노원구</option>
+			               <option value="10">도봉구</option>
+			               <option value="11">동대문구</option>
+			               <option value="12">동작구</option>
+			               <option value="13">마포구</option>
+			               <option value="14">서대문구</option>
+			               <option value="15">서초구</option>
+			               <option value="16">성동구</option>
+			               <option value="17">성북구</option>
+			               <option value="18">송파구</option>
+			               <option value="19">양천구</option>
+			               <option value="20">영등포구</option>
+			               <option value="21">용산구</option>
+			               <option value="22">은평구</option>
+			               <option value="23">종로구</option>
+			               <option value="24">중구</option>
+			               <option value="25">중랑구</option>
+			            </select>
+					</div>
 				</div>
 			</div>
 			
-			<div class="table-responsive" style="width: 100%">
-				<table class="table table-hover">
-					<tbody id="result"></tbody>
-				</table>
-				
-				<div class="text-center">
-					<ul class="pagination">
-						<c:if test="${placePageMaker.prev}">
-							<li><a href="list${placePageMaker.makeQuery(placePageMaker.startPage - 1) }">&laquo;</a></li>
-						</c:if>
-
-						<c:forEach begin="${placePageMaker.startPage }"
-							end="${placePageMaker.endPage }" var="idx">
-							<li
-								<c:out value="${placePageMaker.cri.page == idx?'class =active':''}"/>>
-								<a href="list${placePageMaker.makeSearch(idx)}">${idx}</a>
-							</li>
-						</c:forEach>
-
-						<c:if test="${placePageMaker.next && placePageMaker.endPage > 0}">
-							<li><a href="list${placePageMaker.makeQuery(placePageMaker.endPage +1) }">&raquo;</a></li>
-						</c:if>
-					</ul>
+<!-- 			<div class="table-responsive" style="width: 100%"> -->
+				<div class="fList table-hover">
+					<div id="result"></div>
 				</div>
-				
-			</div>
+				<div id="pagination"></div>				
+<!-- 			</div> -->
 		</div>
 	</div>
 			
-
 	<a class="return-top" href="#" style="right:27px; bottom:50px; position:fixed; z-index:9999;">
 		<img src="http://cfs.tistory.com/custom/blog/202/2025510/skin/images/top1.png">
 	</a>
 
 <script id="codeTemp" type="text/xxx-mytemplate">
 	<div class="table_list imgbox_hover">
-			<a href="/place/detailList${placePageMaker.makeQuery(placePageMaker.cri.page) }&contentid={{contentid}}">
-				<img class="table_imgbox" src="{{firstimage}}">
-				<div class="info">
-					<br>
-					<div>
-						<div class="title"><h3>{{title}}</h3></div>
-						<div class="addr"><h4>{{addr1}}</h4></div>
-					</div>
+		<a href="/place/detailList${placePageMaker.makeQuery(placePageMaker.cri.page) }&contentid={{contentid}}">
+			<img class="table_imgbox" src="{{firstimage}}">
+			<div class="info">
+				<br>
+				<div>
+					<div class="title"><h3>{{title}}</h3></div>
+					<div class="addr"><h4>{{addr1}}</h4></div>
 				</div>
-			</a>
+			</div>
+		</a>
 	</div>
 </script>
 
-<script type="text/javascript">
+<script id="pageTemp" type="text/x-handlebars-template">
+	<button id="prev" type="button" class="btn btn-default" style="visibility: {{visiblility prev}}">Prev</button>
+		<div class="btn-group">
+			{{#pageMaker startPage endPage 1}}
+				<button type="button" class="btn btn-default page {{this.active}}" value={{this.pageNo}}>{{this.pageNo}}</button>
+			{{/pageMaker}}
+		</div>
+	<button id="next" type="button" class="btn btn-default" style="visibility: {{visiblility next}}">Next</button>
+</script>
 
-   var serviceKey = "oMYSCkfnU%2BrM%2F6ad8zAICkGBj0eUCOxJc9bR%2F8MHuzhfo62P6cGA1YVZ7iY5QnDedVyfk5tMhc0Wu42fjDJ%2BcA%3D%3D";
-   var pageNo = 1;
-   var numOfRows = 9;
-   /* default Page */
-   $.getJSON("http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList?ServiceKey=" + serviceKey + "&pageNo=" + pageNo + "&numOfRows="+ numOfRows + "&contentTypeId=12&areaCode=1&sigunguCode=" + 1 + "&MobileOS=ETC&MobileApp=AppTesting", function(areaCode) {
-       
-       var items = areaCode.response.body.items.item;
-       var temp2 = $('#codeTemp').html();
-       var template = Handlebars.compile(temp2);
-       
-       $('#result').html("");
-       
-       for(var i=0; i<items.length; i++) {
-	         var html = template(items[i]);
-	         $('#result').append(html);
-	         imgCheck(i);
-	         imgHover2();
-       }
-    });
+<script type="text/javascript">
+  	var pageNo = 1;
+   	getList(1, 1);
+   	function getList(pageNo, sigunguCode) {
+   	/* default Page */
+   		
+	   	sigunguCode = $('#gu option:selected').val();
+		$.getJSON("/place/common?sigunguCode=" + sigunguCode + "&pageNo=" + pageNo, function(data) {
+		   
+	    var items = data.items.item;
+	    var pageMaker = data.pageMaker;
+	       
+	    var temp2 = $('#codeTemp').html();
+	    var template = Handlebars.compile(temp2);
+	       
+	   	var page = $('#pageTemp').html();
+		var pageTemplate = Handlebars.compile(page);
+		var pagehtml = pageTemplate(pageMaker);
+		$('#pagination').html(pagehtml);
+	
+		setPaginationEvent(data);
+	       
+	    $('#result').html("");
+	       
+	    for(var i=0; i<items.length; i++) {
+			var html = template(items[i]);
+		    $('#result').append(html);
+		    imgCheck(i);
+		    imgHover();
+		    }
+	    });
+   }
    /* select 버튼 클릭시 */
    $('#gu').on('change', function() {
 	   
-   var sigunguCode = $('#gu option:selected').val();
-
-      $.getJSON("http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList?ServiceKey=" + serviceKey + "&pageNo=" + pageNo + "&numOfRows="+ numOfRows + "&contentTypeId=12&areaCode=1&sigunguCode=" + sigunguCode + "&MobileOS=ETC&MobileApp=AppTesting", function(areaCode) {
-         
-         var items = areaCode.response.body.items.item;
-         var temp2 = $('#codeTemp').html();
-         var template = Handlebars.compile(temp2);
-         
-         $('#result').html("");
-         
-         for(var i=0; i<items.length; i++) {
-	         var html = template(items[i]);
-	         $('#result').append(html);
-	         imgCheck(i);
-	         imgHover2();
-         }
-      });
+	   var sigunguCode = $('#gu option:selected').val();
+	   
+	   $.getJSON("/place/common?sigunguCode=" + sigunguCode + "&pageNo=" + pageNo, function(data) {
+	         
+	        var items = data.items.item;
+	        var pageMaker = data.pageMaker;
+	         
+	        var temp2 = $('#codeTemp').html();
+	        var template = Handlebars.compile(temp2);
+	         
+	        var page = $('#pageTemp').html();
+	 		var pageTemplate = Handlebars.compile(page);
+	 		var pagehtml = pageTemplate(pageMaker);
+	 		$('#pagination').html(pagehtml);
+	 	
+	 		setPaginationEvent(data);
+	         
+	        $('#result').html("");
+	         
+	        for(var i=0; i<items.length; i++) {
+		    	var html = template(items[i]);
+		        $('#result').append(html);
+		        imgCheck(i);
+		        imgHover();
+	        }
+        });
    });
-   /*----------------------------------------------------------------*/
-	
+	/* img url주소 null값 일때, 대체 이미지 */	
 	function imgCheck(i) {
 		if($('div.table_list img').eq(i).attr('src')==''){
 			$('div.table_list img').eq(i).attr('src','http://placehold.it/300x350?text=No_Image');
 		}
 	};
-	
-	function imgHover2() {
+	/* image Hover Event */
+	function imgHover() {
 		$(".imgbox_hover").on({
 	        mouseenter: function(){
 	        	var index = getIndex(this);
@@ -209,30 +188,53 @@
 	    });
 		
 	}
-      
-	function imgHover() {
-		var $btn=$('.img_hover');
-		
-		$( ".imgbox_hover" ).on({
-			mouseenter: function() {
-				var index = getIndex(this);
-				
-				if(!$btn.eq(index).is(':animated')){
-					$(".table_imgbox").eq(index).css("opacity", 0.3);
-					$btn.eq(index).fadeIn();					
-				} 
-			},
-			mouseleave: function() {
-				$(".table_imgbox").css("opacity", 1);
-				$btn.fadeOut();
-			}
-		});
-	}
-	
+	/* 각각의 이미지 객체 리턴 값 */
 	function getIndex(obj) {
 		return $('.imgbox_hover').index(obj);
 	}
+</script>
+
+<script type="text/javascript">
+	/* Paging Event */
+	function setPaginationEvent(data) {
+		$('button.page').on('click', function() {
+			getList(this.value)
+		});
+		$('#prev').on('click', function() {
+			getList(data.pageMaker.startPage-1);					
+		});
+		$('#next').on('click', function() {
+			getList(data.pageMaker.endPage+1);
+		});
+	}
 	
+	Handlebars.registerHelper('visiblility' , function(visible) {
+		if(visible)
+			return 'visible'; 
+		else 
+			return 'hidden';
+	});
+	
+	Handlebars.registerHelper('pageMaker', function(from, to, incr, block) {
+		
+	    var accum = '';
+	    var nowPage = block.data.root.cri.page;
+		var active = '';
+	    
+	    for(var i = from; i <= to; i += incr){
+		    if(nowPage==i)
+	    		active = 'active';
+	    	
+	    	var custom = {
+	    		pageNo : i,
+	    		active : active
+	    	};
+	        accum += block.fn(custom);
+	        active = '';
+	    }
+	    
+	    return accum;
+	});
 </script>
 
 <script>
@@ -257,32 +259,6 @@
 	            return false;
 	        });
 	    });
-	});
-</script>
-
-<script>
-	var result = '${msg}';
-
-	if (result == 'SUCCESS') {
-		alert("처리가 완료되었습니다.");
-		location.replace(self.location);
-	}
-</script>
-
-<script>
-	$(document).ready( function() {
-		$('#searchBtn').on("click", function(event) {
-			self.location = "list"
-			+ '${pageMaker.makeQuery(1)}'
-			+ "&searchType="
-			+ $("select option:selected").val()
-			+ "&keyword="
-			+ $('#keywordInput').val();
-		});
-
-		$('#newBtn').on("click", function(evt) {
-			self.location = "register";
-		});
 	});
 </script>
 

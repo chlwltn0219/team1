@@ -27,13 +27,13 @@ import org.zerock.openapi.tour.Result;
 import org.zerock.openapi.tour.SingleResult;
 
 @RestController
-@RequestMapping("/festival")
-public class FestivalProxyController {
+@RequestMapping("/place")
+public class PlaceProxyController {
 	
-	static Logger logger = LoggerFactory.getLogger(FestivalProxyController.class);
+	static Logger logger = LoggerFactory.getLogger(PlaceProxyController.class);
 	private static final String SERVICE_KEY = "oMYSCkfnU%2BrM%2F6ad8zAICkGBj0eUCOxJc9bR%2F8MHuzhfo62P6cGA1YVZ7iY5QnDedVyfk5tMhc0Wu42fjDJ%2BcA%3D%3D";
 			
-	@RequestMapping(value="/list", method = RequestMethod.GET )
+	@RequestMapping(value="/common", method = RequestMethod.GET )
 	public ResponseEntity<Body> test(@ModelAttribute("cri") SearchCriteria cri, @RequestParam Integer sigunguCode, @RequestParam Integer pageNo) {
 		
 		CheckResult checkResult = null;
@@ -41,18 +41,19 @@ public class FestivalProxyController {
 		Result result = null;
 		
 		RestTemplate restTemplate = new RestTemplate();
-		String baseURI = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/searchFestival"
+		String baseURI = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList"
 							+ "?ServiceKey=" + SERVICE_KEY
 							+ "&numOfRows=12"
 							+ "&areaCode=1"
 							+ "&sigunguCode=" + sigunguCode
 							+ "&pageNo=" + pageNo
-//							+ "&pageNo=1"
+							+ "&contentTypeId=" + "12"
 							+ "&MobileOS=ETC"
-							+ "&MobileApp=TestApp"
+							+ "&MobileApp=AppTesting"
 							+ "&_type=json";
 
 		URI uri = URI.create(baseURI);
+		logger.info(uri.toString());
 		
 		checkResult = restTemplate.getForObject(uri, CheckResult.class);
 		CheckBody checkBody = checkResult.getResponse().getBody();
@@ -78,7 +79,7 @@ public class FestivalProxyController {
 			result = restTemplate.getForObject(uri, Result.class);
 			logger.info(result.toString());
 		}
-		
+		//
 		Body body = result.getResponse().getBody();
 		
 		PageMaker pageMaker = new PageMaker();
@@ -93,32 +94,5 @@ public class FestivalProxyController {
 		
 		return new ResponseEntity<Body>(body, HttpStatus.OK);
 		
-		
 	}	
-	@RequestMapping(value="/read", method = RequestMethod.GET)
-	public ResponseEntity<Body> test123(){
-		
-		Result result = null;
-		
-		RestTemplate restTemplate = new RestTemplate();
-		String baseURI = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/searchFestival"
-							+ "?ServiceKey=" + SERVICE_KEY
-							+ "&areaCode=1"
-							+ "&numOfRows=20"
-							+ "&pageNo=1"
-							+ "&MobileOS=ETC"
-							+ "&MobileApp=TestApp"
-							+ "&_type=json";
-
-		URI uri = URI.create(baseURI);
-		logger.info("request uri : " + uri);
-		
-		result = restTemplate.getForObject(uri, Result.class);
-		
-		Body body = result.getResponse().getBody();
-		System.out.println("items = " + body.getItems().getItem());
-		
-		
-		return new ResponseEntity<Body>(body, HttpStatus.OK);
-	}
 }

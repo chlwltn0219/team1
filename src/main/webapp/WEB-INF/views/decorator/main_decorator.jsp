@@ -38,7 +38,7 @@
 <style type="text/css">
 
 div.container {
-	margin-top: 65px;
+	margin-top: 30px;
  	margin-bottom: 15px;
 }
 
@@ -89,9 +89,9 @@ a:focus {
 	color:black;
 }
 
-.marginsize {
-	margin-top: 100px;
-}
+/*  .marginsize {  */
+/*  	margin-left: 0px;  */
+/*  }  */
 
 .navbar .navbar-inverse .navbar-fixed-top:hover,
 .navbar .navbar-inverse .navbar-fixed-top:focus  {
@@ -105,9 +105,11 @@ a:focus {
 	border-color: rgb(14,201,190);
 }
 
-div.bottom {
-	height: 70px;
-}
+
+/* div.bottom { */
+/* 	height: 70px; */
+/* } */
+
 </style>
 </head>
 <body>
@@ -164,9 +166,9 @@ div.bottom {
 				<!-- ################## -->
 				<!-- START Main Content -->
 				<!-- ################## -->
-				<div class="container-fluid">
+<!-- 				<div class="container-fluid"> -->
 					<sitemesh:write property="body" />
-				</div>
+<!-- 				</div> -->
 				<!-- ################## -->
 				<!-- END   Main Content -->
 				<!-- ################## -->

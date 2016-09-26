@@ -27,12 +27,6 @@
 		z-index: 1101;
 	}
 	
-	#summary div.col-xs-2, #forecast6days div.col-xs-2 {
-		border-left: 
-		border-right:
- 		margin: 0 1%; 
-	}
-	
 	.front {
 		z-index: 1110;
 		opacity: 1;
@@ -83,11 +77,17 @@
 	}
 	
 	#summary, #forecast6days, div.sky{
-		height: 80px;
+		height: 60px;
 		text-align: center;
 	}
 	
-	@media ( min-width :992px){
+	@media ( min-width :768px){
+		#summary, #forecast6days, div.sky{
+			height: 80px;
+		}
+	}
+	
+	@media ( min-width :992px) {
 		#summary, #forecast6days, div.sky{
 			height: 100px;
 		}
@@ -106,21 +106,26 @@
 	}
 	
 	div.sky img{
-		height: 80px;
+		height: 60px;
 	}
 	
-	@media ( min-width :992px){
+	@media ( min-width :768px){
+		div.sky img{
+			height: 80px;
+		}
+	}
+	
+	@media ( min-width :992px) {
 		div.sky img{
 			height: 100px;
 		}
 	}
-	
+
 	@media ( min-width :1200px) {
 		div.sky img{
 			height: 120px;
 		}
-	}
-
+	}	
 	@media ( min-width :1600px) {
 		div.sky img{
 			height: 140px;
@@ -141,7 +146,7 @@
 		</div>
 
 		<div class="box-body">
-			<div id="summary" class="row">	
+			<div id="summary" class="row">
 				<h2> 3일 예보 </h2>
 			</div>
 			<hr>
@@ -358,7 +363,7 @@
 		</div>
 	</div>
 	
-		<!-- Image Modal -->
+	<!-- Image Modal -->
 	<div id="imageModal" class="modal fade" role="dialog">
 		<div class="modal-dialog">
 			<div class="modal-content">

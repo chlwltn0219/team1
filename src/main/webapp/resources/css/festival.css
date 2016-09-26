@@ -12,6 +12,10 @@
 	border: 1px solid black;
 }
 
+.fList{
+	margin-left: 12%;
+}
+
 .img{
 	z-index: 50;
 }
@@ -44,6 +48,12 @@
  }
  
  .wldur {
-  	margin-top: 1%; 
+  	margin-top: 70px; 
  	margin-left: 3%;
+ }
+ 
+ #pager{
+ 	margin-bottom: 100px;
+ 	clear: both;
+ 	text-align: center;
  }

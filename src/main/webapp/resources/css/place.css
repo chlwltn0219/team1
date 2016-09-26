@@ -22,6 +22,10 @@
 	height: 298px;
 }
 
+.fList{
+	margin-left: 12%;
+}
+
 .img_hover {
 	top: 178px;
 	width: 338px;
@@ -35,6 +39,10 @@
 
 .selectBox {
 	float: right;
+}
+
+.box {
+	margin-top: 3%;
 }
 
 .btn_detail{
@@ -52,10 +60,20 @@
 	background-color: red;
 }
 
+#pagination {
+	margin-bottom: 100px;
+	
+}
 .info{
 	color: white;
 	position: absolute;
 	display: none;
 	z-index: 100;
 	top: 70px;
+}
+
+#pagination{
+	margin-bottom: 100px;
+ 	clear: both;
+ 	text-align: center;	
 }
