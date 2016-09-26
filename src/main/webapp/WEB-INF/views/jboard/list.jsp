@@ -30,7 +30,7 @@
 		background-color: black;
 		color: white;
 	}
-	
+
 	div.info {
 		display: none;
 		z-index: 50;
@@ -44,6 +44,7 @@
 		width: 100%;
 		height: 100px;
 	}
+	
 </style>
 </head>
 <body>
@@ -170,7 +171,7 @@
 	
 	<script id="temp" type="text/xxx-mytemplate">
 		{{#each .}}
-			<div class="col-md-4 col-xs-6">
+			<div class="col-lg-2 col-md-4 col-xs-6">
 				<div class=" info-box">
 					<div class="image">
 						<img alt="{{title}}" src="{{firstimage}}" width="100%" height="200">

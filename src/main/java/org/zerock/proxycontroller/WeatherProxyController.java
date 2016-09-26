@@ -286,8 +286,6 @@ public class WeatherProxyController {
 				}
 			}
 			
-
-			
 			if(i==10 && ampm){
 				ampm = false;
 				i = 1;

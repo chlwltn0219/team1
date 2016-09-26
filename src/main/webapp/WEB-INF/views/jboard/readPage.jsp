@@ -27,12 +27,6 @@
 		z-index: 1101;
 	}
 	
-	#summary div.col-xs-2, #forecast6days div.col-xs-2 {
-		border-left: 
-		border-right:
- 		margin: 0 1%; 
-	}
-	
 	.front {
 		z-index: 1110;
 		opacity: 1;
@@ -83,22 +77,60 @@
 	}
 	
 	#summary, #forecast6days, div.sky{
-		height: 50px;
+		height: 60px;
 		text-align: center;
 	}
 	
-	@media ( min-width :992px){
+	@media ( min-width :768px){
 		#summary, #forecast6days, div.sky{
-			height: 70px;
+			height: 80px;
+		}
+	}
+	
+	@media ( min-width :992px) {
+		#summary, #forecast6days, div.sky{
+			height: 100px;
 		}
 	}
 	
 	@media ( min-width :1200px) {
 		#summary, #forecast6days, div.sky{
-			height: 90px;
+			height: 120px;
 		}
 	}
 	
+	@media ( min-width :1600px) {
+		#summary, #forecast6days, div.sky{
+			height: 140px;
+		}
+	}
+	
+	div.sky img{
+		height: 60px;
+	}
+	
+	@media ( min-width :768px){
+		div.sky img{
+			height: 80px;
+		}
+	}
+	
+	@media ( min-width :992px) {
+		div.sky img{
+			height: 100px;
+		}
+	}
+
+	@media ( min-width :1200px) {
+		div.sky img{
+			height: 120px;
+		}
+	}	
+	@media ( min-width :1600px) {
+		div.sky img{
+			height: 140px;
+		}
+	}	
 </style>
 </head>
 <body>
@@ -114,7 +146,7 @@
 		</div>
 
 		<div class="box-body">
-			<div id="summary" class="row">	
+			<div id="summary" class="row">
 				<h2> 3일 예보 </h2>
 			</div>
 			<hr>
@@ -186,7 +218,7 @@
 						<div class="col-xs-2 btnImg">
 							<button id="btnLeft" class="btn btn-warning" style="height: 150px; width: 100%"><h3><i class="fa fa-arrow-circle-o-left"></i></h3></button>
 						</div>
-						<div class="col-xs-8" style="text-align: center;" id="infoImage">
+						<div class="col-xs-8" style="text-align: center;" data-toggle="modal" data-target="#imageModal" id="infoImage">
 							<img alt="image" src="/resources/img/NoImage.jpg" style="height: 150px">
 						</div>
 						<div class="col-xs-2 btnImg">
@@ -210,6 +242,7 @@
 						<div class="col-xs-1"></div>
 						<div class="col-xs-3"><label>Playtime : </label></div>
 						<div class="col-xs-7" id="infoPlaytime">
+							<div>{{eventstartdate}} - {{eventenddate}}</div>
 							<div>{{Playtime}}</div>
 						</div>
 						<div class="col-xs-1"></div>
@@ -255,24 +288,6 @@
 		</div>
 	</div>
 	<!-- /.row -->
-	
-	<!-- Map Modal -->
-	<div id="mapModal" class="modal fade" role="dialog">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h3 class="modal-title">행사 장소</h3>
-				</div>
-				<div class="modal-body">
-					<div id="map" style="width: 100%; height: 400px"></div>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				</div>
-			</div>
-		</div>
-	</div>
 
 	<div class="row">
 		<div class="col-md-12">
@@ -329,9 +344,44 @@
 		<!-- /.col -->
 	</div>
 	<!-- /.row -->
+	
+	<!-- Map Modal -->
+	<div id="mapModal" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h3 class="modal-title">행사 장소</h3>
+				</div>
+				<div class="modal-body">
+					<div id="map" style="width: 100%; height: 400px"></div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- Image Modal -->
+	<div id="imageModal" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h3 class="modal-title">관련 이미지</h3>
+				</div>
+				<div class="modal-body">
+					<img alt="" src="" width="100%">
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
 
-
-	<!-- Modal -->
+	<!-- Reply Modal -->
 	<div id="modifyModal" class="modal modal-primary fade" role="dialog">
 		<div class="modal-dialog">
 			<!-- Modal content-->
@@ -379,7 +429,7 @@
 			<div class="weather">
 				<div class="date"></div>
 				<div class="sky">
-					<img alt="sorry" src={{sky.icon}} width="50%">
+					<img alt="sorry" src={{sky.icon}}  width="50%">
 				</div>
 				<div class="temp">
 					<b><span class="max">{{temperature.tmax}}</span> - <span class="min">{{temperature.tmin}}</span></b>
@@ -419,6 +469,7 @@
 		var location = data.location;
 		var cost = data.cost;
 		var programs = data.programs;
+		var playtime = data.playtime;
 		
 		$('#infoTitle').html(data.title);
 		
@@ -427,7 +478,8 @@
 		
 		$('#infoOverview div').html(data.overview);
 		$('#infoLocation span').html(location.addr1);
-		$('#infoPlaytime').html(data.playtime);
+		$('#infoPlaytime div').eq(0).html(playtime.eventstartdate + " - " + playtime.eventenddate);
+		$('#infoPlaytime div').eq(1).html(playtime.playtime);
 		$('#infoProgram div').eq(0).html(programs.program);
 		$('#infoProgram div').eq(1).html(programs.subevent);
 		$('#infoCost div').eq(0).html(cost.usetimefestival);
@@ -519,6 +571,10 @@
 			
 			$('#infoImage img').attr("src", image[imageNo]);
 		})
+	});
+
+	$("#imageModal").on('shown.bs.modal', function () {
+		$('#imageModal img').attr("src", $('#infoImage img').attr("src"));
 	});
 	
 	$("#mapModal").on('shown.bs.modal', function () {

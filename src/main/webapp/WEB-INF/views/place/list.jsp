@@ -97,31 +97,14 @@
 		            </select>
 				</div>
 			</div>
+			<hr>
 			
 			<div class="table-responsive" style="width: 100%">
 				<table class="table table-hover">
 					<tbody id="result"></tbody>
 				</table>
 				
-				<div class="text-center">
-					<ul class="pagination">
-						<c:if test="${placePageMaker.prev}">
-							<li><a href="list${placePageMaker.makeQuery(placePageMaker.startPage - 1) }">&laquo;</a></li>
-						</c:if>
-
-						<c:forEach begin="${placePageMaker.startPage }"
-							end="${placePageMaker.endPage }" var="idx">
-							<li
-								<c:out value="${placePageMaker.cri.page == idx?'class =active':''}"/>>
-								<a href="list${placePageMaker.makeSearch(idx)}">${idx}</a>
-							</li>
-						</c:forEach>
-
-						<c:if test="${placePageMaker.next && placePageMaker.endPage > 0}">
-							<li><a href="list${placePageMaker.makeQuery(placePageMaker.endPage +1) }">&raquo;</a></li>
-						</c:if>
-					</ul>
-				</div>
+				<div id="pagination"></div>
 				
 			</div>
 		</div>
@@ -147,47 +130,79 @@
 	</div>
 </script>
 
+<script id="pageTemp" type="text/x-handlebars-template">
+	<button id="prev" type="button" class="btn btn-default" style="visibility: {{visiblility prev}}">Prev</button>
+		<div class="btn-group">
+			{{#pageMaker startPage endPage 1}}
+				<button type="button" class="btn btn-default page {{this.active}}" value={{this.pageNo}}>{{this.pageNo}}</button>
+			{{/pageMaker}}
+		</div>
+	<button id="next" type="button" class="btn btn-default" style="visibility: {{visiblility next}}">Next</button>
+</script>
+
 <script type="text/javascript">
 
-   var serviceKey = "oMYSCkfnU%2BrM%2F6ad8zAICkGBj0eUCOxJc9bR%2F8MHuzhfo62P6cGA1YVZ7iY5QnDedVyfk5tMhc0Wu42fjDJ%2BcA%3D%3D";
-   var pageNo = 1;
-   var numOfRows = 9;
-   /* default Page */
-   $.getJSON("http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList?ServiceKey=" + serviceKey + "&pageNo=" + pageNo + "&numOfRows="+ numOfRows + "&contentTypeId=12&areaCode=1&sigunguCode=" + 1 + "&MobileOS=ETC&MobileApp=AppTesting", function(areaCode) {
-       
-       var items = areaCode.response.body.items.item;
-       var temp2 = $('#codeTemp').html();
-       var template = Handlebars.compile(temp2);
-       
-       $('#result').html("");
-       
-       for(var i=0; i<items.length; i++) {
-	         var html = template(items[i]);
-	         $('#result').append(html);
-	         imgCheck(i);
-	         imgHover2();
-       }
-    });
+  	var pageNo = 1;
+   	getList(1, 1);
+   	function getList(pageNo, sigunguCode) {
+   	/* default Page */
+   		
+	   	sigunguCode = $('#gu option:selected').val();
+		$.getJSON("/place/common?sigunguCode=" + sigunguCode + "&pageNo=" + pageNo, function(data) {
+		   
+	    var items = data.items.item;
+	    var pageMaker = data.pageMaker;
+	       
+	    var temp2 = $('#codeTemp').html();
+	    var template = Handlebars.compile(temp2);
+	       
+	   	var page = $('#pageTemp').html();
+		var pageTemplate = Handlebars.compile(page);
+		var pagehtml = pageTemplate(pageMaker);
+		$('#pagination').html(pagehtml);
+	
+		setPaginationEvent(data);
+	       
+	    $('#result').html("");
+	       
+	    for(var i=0; i<items.length; i++) {
+			var html = template(items[i]);
+		    $('#result').append(html);
+		    imgCheck(i);
+		    imgHover();
+		    }
+	    });
+   }
+   	
    /* select 버튼 클릭시 */
    $('#gu').on('change', function() {
 	   
-   var sigunguCode = $('#gu option:selected').val();
-
-      $.getJSON("http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList?ServiceKey=" + serviceKey + "&pageNo=" + pageNo + "&numOfRows="+ numOfRows + "&contentTypeId=12&areaCode=1&sigunguCode=" + sigunguCode + "&MobileOS=ETC&MobileApp=AppTesting", function(areaCode) {
-         
-         var items = areaCode.response.body.items.item;
-         var temp2 = $('#codeTemp').html();
-         var template = Handlebars.compile(temp2);
-         
-         $('#result').html("");
-         
-         for(var i=0; i<items.length; i++) {
-	         var html = template(items[i]);
-	         $('#result').append(html);
-	         imgCheck(i);
-	         imgHover2();
-         }
-      });
+	   var sigunguCode = $('#gu option:selected').val();
+	   
+	   $.getJSON("/place/common?sigunguCode=" + sigunguCode + "&pageNo=" + pageNo, function(data) {
+	         
+	        var items = data.items.item;
+	        var pageMaker = data.pageMaker;
+	         
+	        var temp2 = $('#codeTemp').html();
+	        var template = Handlebars.compile(temp2);
+	         
+	        var page = $('#pageTemp').html();
+	 		var pageTemplate = Handlebars.compile(page);
+	 		var pagehtml = pageTemplate(pageMaker);
+	 		$('#pagination').html(pagehtml);
+	 	
+	 		setPaginationEvent(data);
+	         
+	        $('#result').html("");
+	         
+	        for(var i=0; i<items.length; i++) {
+		    	var html = template(items[i]);
+		        $('#result').append(html);
+		        imgCheck(i);
+		        imgHover();
+	        }
+        });
    });
    /*----------------------------------------------------------------*/
 	
@@ -197,7 +212,7 @@
 		}
 	};
 	
-	function imgHover2() {
+	function imgHover() {
 		$(".imgbox_hover").on({
 	        mouseenter: function(){
 	        	var index = getIndex(this);
@@ -216,30 +231,56 @@
 	    });
 		
 	}
-      
-	function imgHover() {
-		var $btn=$('.img_hover');
-		
-		$( ".imgbox_hover" ).on({
-			mouseenter: function() {
-				var index = getIndex(this);
-				
-				if(!$btn.eq(index).is(':animated')){
-					$(".table_imgbox").eq(index).css("opacity", 0.3);
-					$btn.eq(index).fadeIn();					
-				} 
-			},
-			mouseleave: function() {
-				$(".table_imgbox").css("opacity", 1);
-				$btn.fadeOut();
-			}
-		});
-	}
 	
 	function getIndex(obj) {
 		return $('.imgbox_hover').index(obj);
 	}
 	
+</script>
+
+<script type="text/javascript">
+	/* Paging Event */
+	
+	function setPaginationEvent(data) {
+		$('button.page').on('click', function() {
+			getList(this.value)
+		});
+		$('#prev').on('click', function() {
+			getList(data.pageMaker.startPage-1);					
+		});
+		$('#next').on('click', function() {
+			getList(data.pageMaker.endPage+1);
+		});
+	}
+	
+	Handlebars.registerHelper('visiblility' , function(visible) {
+		if(visible)
+			return 'visible'; 
+		else 
+			return 'hidden';
+	});
+	
+	
+	Handlebars.registerHelper('pageMaker', function(from, to, incr, block) {
+		
+	    var accum = '';
+	    var nowPage = block.data.root.cri.page;
+		var active = '';
+	    
+	    for(var i = from; i <= to; i += incr){
+		    if(nowPage==i)
+	    		active = 'active';
+	    	
+	    	var custom = {
+	    		pageNo : i,
+	    		active : active
+	    	};
+	        accum += block.fn(custom);
+	        active = '';
+	    }
+	    
+	    return accum;
+	});
 </script>
 
 <script>

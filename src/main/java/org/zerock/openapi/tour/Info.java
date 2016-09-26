@@ -6,21 +6,21 @@ import java.util.Map;
 public class Info {
 
 	List<String> image;
-	Map<String,Object> location ;
-	Map<String,Object> cost ;
-	Map<String,Object> programs ;
+	Map<String,Object> location;
+	Map<String,Object> cost;
+	Map<String,Object> programs;
+	Map<String,Object> playtime;
 	
 	String homepage;
 	String title;
 	String overview;
 	String tel;
-	String playtime;
 	
 	
-	public String getPlaytime() {
+	public Map<String, Object> getPlaytime() {
 		return playtime;
 	}
-	public void setPlaytime(String playtime) {
+	public void setPlaytime(Map<String, Object> playtime) {
 		this.playtime = playtime;
 	}
 	public List<String> getImage() {

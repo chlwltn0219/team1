@@ -261,12 +261,18 @@ public class DetailProxyController {
 		prog.put("subevent", introItems.get("subevent"));
 		info.setPrograms(prog);
 		
-		// homepage, title, overview, playtime
+		// playtime
+		Map<String, Object> playtime = new HashMap<String,Object>();
+		playtime.put("eventstartdate", introItems.get("eventstartdate"));
+		playtime.put("eventenddate", introItems.get("eventenddate"));
+		playtime.put("playtime", introItems.get("playtime"));
+		info.setPlaytime(playtime);
+		
+		// homepage, title, overview
 		info.setHomepage((String)commonItems.get("homepage"));
 		info.setTitle((String)commonItems.get("title"));
 		info.setTel((String)commonItems.get("tel"));
 		info.setOverview((String)commonItems.get("overview"));
-		info.setPlaytime((String)introItems.get("playtime"));
 		
 		return new ResponseEntity<Info>(info, HttpStatus.OK);
 

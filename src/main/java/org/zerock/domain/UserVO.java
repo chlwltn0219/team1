@@ -5,6 +5,9 @@ public class UserVO {
   private String uid;
   private String upw;
   private String uname;
+  private String sex;
+  private int bir;
+  private String conti;
   private int upoint;
 
   public String getUid() {
@@ -35,13 +38,37 @@ public class UserVO {
     return upoint;
   }
 
-  public void setUpoint(int upoint) {
+  public String getSex() {
+	return sex;
+}
+
+public void setSex(String sex) {
+	this.sex = sex;
+}
+
+public int getBir() {
+	return bir;
+}
+
+public void setBir(int bir) {
+	this.bir = bir;
+}
+
+public String getConti() {
+	return conti;
+}
+
+public void setConti(String conti) {
+	this.conti = conti;
+}
+
+public void setUpoint(int upoint) {
     this.upoint = upoint;
   }
 
   @Override
   public String toString() {
-    return "UserVO [uid=" + uid + ", upw=" + upw + ", uname=" + uname + ", upoint=" + upoint + "]";
+	  return "UserVO [uid=" + uid + ", upw=" + upw + ", uname=" + uname + ", sex=" + sex + ", bir=" + bir + ", conti=" + conti +", upoint=" + upoint + "]";
   }
 
 

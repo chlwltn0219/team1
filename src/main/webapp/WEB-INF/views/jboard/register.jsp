@@ -26,7 +26,7 @@
 <title>register.jsp</title>
 <style type="text/css">
 
-	.weather, .date, .temp{
+	.weather, .date, .temp {
 		position: absolute;
 		width: 100%;
 		text-align: center;
@@ -47,31 +47,70 @@
 	}
 	
 	div.sky {
-		text-align: left;
 		clear: both;
-		border: 1px solid #DDDDDD;
-		border-radius : 10px;
+		text-align: center;
+		border-left: 1px solid #DDDDDD;
+		border-right: 1px solid #DDDDDD;
 	}
-	div.sky img{
+	#forecast6days div.sky img{
 		float: left;
 	}
 	
 	#summary, #forecast6days, div.sky{
-		height: 50px;
+		height: 60px;
 		text-align: center;
 	}
 	
-	@media ( min-width :992px){
+	@media ( min-width :768px){
 		#summary, #forecast6days, div.sky{
-			height: 70px;
+			height: 80px;
+		}
+	}
+	
+	@media ( min-width :992px) {
+		#summary, #forecast6days, div.sky{
+			height: 100px;
 		}
 	}
 	
 	@media ( min-width :1200px) {
 		#summary, #forecast6days, div.sky{
-			height: 90px;
+			height: 120px;
 		}
 	}
+	
+	@media ( min-width :1600px) {
+		#summary, #forecast6days, div.sky{
+			height: 140px;
+		}
+	}
+	
+	div.sky img{
+		height: 60px;
+	}
+	
+	@media ( min-width :768px){
+		div.sky img{
+			height: 80px;
+		}
+	}
+	
+	@media ( min-width :992px) {
+		div.sky img{
+			height: 100px;
+		}
+	}
+
+	@media ( min-width :1200px) {
+		div.sky img{
+			height: 120px;
+		}
+	}	
+	@media ( min-width :1600px) {
+		div.sky img{
+			height: 140px;
+		}
+	}	
 	
 </style>
 </head>
@@ -180,10 +219,12 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 	
 	<script id="summaryTemplate" type="text/x-handlebars-template">
-		<div class="col-xs-1">
+		<div class="col-xs-2">
 			<div class="weather">
 				<div class="date"></div>
-				<img alt="sorry" src={{sky.icon}} width="100%">
+				<div class="sky">
+					<img alt="sorry" src={{sky.icon}}  width="50%">
+				</div>
 				<div class="temp">
 					<b><span class="max">{{temperature.tmax}}</span> - <span class="min">{{temperature.tmin}}</span></b>
 				</div>
@@ -303,8 +344,7 @@
 				    	$('#contentTitle').val(selectTitle);
 				    	$('#contentId').val(contentId);
 						
-						$.getJSON('/weather/forecast?lat='+ item[index].mapy + "&lon=" + item[index].mapx, function(weather) {
-							
+						$.getJSON('/weather/forecast?lat=' + item[index].mapy + "&lon=" + item[index].mapx, function(weather) {
 							console.log("###################################");
 							console.dir(weather);
 							console.log("###################################");
@@ -330,18 +370,18 @@
 							
 							$('#forecast6days').html(comForecastTemp());
 							
-							$('#forecast6days img').eq(0).attr("src", forecast6days.sky.amIcon3day);
-							$('#forecast6days img').eq(1).attr("src", forecast6days.sky.pmIcon3day);
-							$('#forecast6days img').eq(2).attr("src", forecast6days.sky.amIcon4day);
-							$('#forecast6days img').eq(3).attr("src", forecast6days.sky.pmIcon4day);
-							$('#forecast6days img').eq(4).attr("src", forecast6days.sky.amIcon5day);
-							$('#forecast6days img').eq(5).attr("src", forecast6days.sky.pmIcon5day);
-							$('#forecast6days img').eq(6).attr("src", forecast6days.sky.amIcon6day);
-							$('#forecast6days img').eq(7).attr("src", forecast6days.sky.pmIcon6day);
-							$('#forecast6days img').eq(8).attr("src", forecast6days.sky.amIcon7day);
-							$('#forecast6days img').eq(9).attr("src", forecast6days.sky.pmIcon7day);
-							$('#forecast6days img').eq(10).attr("src", forecast6days.sky.amIcon8day);
-							$('#forecast6days img').eq(11).attr("src", forecast6days.sky.pmIcon8day);
+							$('#forecast6days div.sky img').eq(0).attr("src", forecast6days.sky.amIcon3day);
+							$('#forecast6days div.sky img').eq(1).attr("src", forecast6days.sky.pmIcon3day);
+							$('#forecast6days div.sky img').eq(2).attr("src", forecast6days.sky.amIcon4day);
+							$('#forecast6days div.sky img').eq(3).attr("src", forecast6days.sky.pmIcon4day);
+							$('#forecast6days div.sky img').eq(4).attr("src", forecast6days.sky.amIcon5day);
+							$('#forecast6days div.sky img').eq(5).attr("src", forecast6days.sky.pmIcon5day);
+							$('#forecast6days div.sky img').eq(6).attr("src", forecast6days.sky.amIcon6day);
+							$('#forecast6days div.sky img').eq(7).attr("src", forecast6days.sky.pmIcon6day);
+							$('#forecast6days div.sky img').eq(8).attr("src", forecast6days.sky.amIcon7day);
+							$('#forecast6days div.sky img').eq(9).attr("src", forecast6days.sky.pmIcon7day);
+							$('#forecast6days div.sky img').eq(10).attr("src", forecast6days.sky.amIcon8day);
+							$('#forecast6days div.sky img').eq(11).attr("src", forecast6days.sky.pmIcon8day);
 							
 							$('#forecast6days span.max').eq(0).html(forecast6days.temperature.tmax3day);
 							$('#forecast6days span.min').eq(0).html(forecast6days.temperature.tmin3day);
