@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.zerock.domain.Criteria;
 import org.zerock.domain.ReplyVO;
-import org.zerock.persistence.BoardDAO;
+import org.zerock.persistence.JBoardDAO;
 import org.zerock.persistence.ReplyDAO;
 
 @Service
@@ -18,14 +18,15 @@ public class ReplyServiceImpl implements ReplyService {
   private ReplyDAO replyDAO;
   
   @Inject
-  private BoardDAO boardDAO;
+  private JBoardDAO jBoardDAO;
 
   @Transactional
   @Override
   public void addReply(ReplyVO vo) throws Exception {
 
     replyDAO.create(vo);
-    boardDAO.updateReplyCnt(vo.getBno(), 1);
+    jBoardDAO.updateReplyCnt(vo.getBno(), 1);
+    
   }
   
   @Transactional
@@ -34,7 +35,7 @@ public class ReplyServiceImpl implements ReplyService {
 
     int bno = replyDAO.getBno(rno);
     replyDAO.delete(rno);
-    boardDAO.updateReplyCnt(bno, -1);
+    jBoardDAO.updateReplyCnt(bno, -1);
   }   
 
 

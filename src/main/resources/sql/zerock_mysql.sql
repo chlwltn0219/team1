@@ -1,6 +1,9 @@
 --
 -- DROP table
 --
+--
+--  DROP TABLE tbl_message;
+--
 DROP TABLE tbl_user;
 DROP TABLE tbl_member;
 DROP TABLE tbl_attach;
@@ -29,24 +32,17 @@ CREATE TABLE tbl_user
    uid            VARCHAR(50) NOT NULL,
    upw            VARCHAR(50) NOT NULL,
    uname 		  VARCHAR(100) NOT NULL,
+   sex			  VARCHAR(50) NOT NULL,
+   bir			  int NOT NULL,
+   conti		  VARCHAR(100) NOT NULL,
    upoint         int NOT NULL DEFAULT 0,
    sessionkey     varchar(50) NOT NULL DEFAULT 'none',
    sessionlimit   timestamp NOT NULL DEFAULT now(),
    PRIMARY KEY(uid)
 );
 
-INSERT INTO tbl_user(UID, upw, uname)
-     VALUES ('user00', 'user00', 'IRON MAN');
-
-INSERT INTO tbl_user(UID, upw, uname)
-     VALUES ('user01', 'user01', 'CAPTAIN');
-
-INSERT INTO tbl_user(UID, upw, uname)
-     VALUES ('user02', 'user02', 'HULK');
-
-INSERT INTO tbl_user(UID, upw, uname)
-     VALUES ('user03', 'user03', 'Thor');
-	 
+INSERT INTO tbl_user(UID, upw, uname, sex, bir, conti)
+     VALUES ('user00', 'user00', 'IRON@MAN', 'Female', '1988', 'ASIA');
 --
 -- tbl_board
 --
@@ -80,6 +76,7 @@ CREATE TABLE tbl_jboard
    PRIMARY KEY(bno)
 );
 
+<<<<<<< HEAD
 INSERT INTO tbl_jboard(title, content, writer, contentid, contitle)
      VALUES ('억새 축체 가실분 ??', '분위기 짱짱', 'user01', 626944, "억새");
 INSERT INTO tbl_jboard(title, content, writer, contentid, contitle)
@@ -90,6 +87,8 @@ INSERT INTO tbl_jboard(title, content, writer, contentid, contitle)
      VALUES ('이 축제의 스타일은?', 'Gang-Nam Style! Go With Me!', 'user01', 737479, "강남축제");
 INSERT INTO tbl_jboard(title, content, writer, contentid, contitle)
      VALUES ('보드겜 한판 하실래요?', '내가 좀 잘함', 'user01', 2410727, "보드게임 컨벤션");
+=======
+>>>>>>> bc6beb1e7486133f9fdee49064db7cfc677bb8de
 
 --
 -- tbl_reply
@@ -106,7 +105,7 @@ CREATE TABLE tbl_reply
 );
 
 ALTER TABLE tbl_reply
-  ADD CONSTRAINT fk_board_reply FOREIGN KEY(bno) REFERENCES tbl_board(bno);
+  ADD CONSTRAINT fk_jboard_reply FOREIGN KEY(bno) REFERENCES tbl_jboard(bno);
 
 --
 -- tbl_attach

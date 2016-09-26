@@ -56,20 +56,52 @@
 		float: left;
 	}
 	
+	#forecast6days div.sky img{
+		float: left;
+	}
+	
 	#summary, #forecast6days, div.sky{
-		height: 50px;
+		height: 80px;
 		text-align: center;
 	}
 	
 	@media ( min-width :992px){
 		#summary, #forecast6days, div.sky{
-			height: 70px;
+			height: 100px;
 		}
 	}
 	
 	@media ( min-width :1200px) {
 		#summary, #forecast6days, div.sky{
-			height: 90px;
+			height: 120px;
+		}
+	}
+	
+	@media ( min-width :1600px) {
+		#summary, #forecast6days, div.sky{
+			height: 140px;
+		}
+	}
+	
+	div.sky img{
+		height: 80px;
+	}
+	
+	@media ( min-width :992px){
+		div.sky img{
+			height: 100px;
+		}
+	}
+	
+	@media ( min-width :1200px) {
+		div.sky img{
+			height: 120px;
+		}
+	}
+
+	@media ( min-width :1600px) {
+		div.sky img{
+			height: 140px;
 		}
 	}
 	

@@ -23,7 +23,7 @@ p{
 	
 }
 
-li{
+.infoList li{
 	text-align: left;
 	font-weight: bold;
 	font-size: 15px;
@@ -37,7 +37,7 @@ li{
 }
 
 .firstimg{
-	width: 70%;
+	width: 60%;
 	height:40%;
 	
 }

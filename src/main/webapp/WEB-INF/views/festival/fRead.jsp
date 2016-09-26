@@ -59,7 +59,7 @@
 <!-- 행사 기간 -->
 <script id="codeTemp1" type="text/xxx-mytemplate">
 <br>
-		<ul>	
+		<ul class="infoList">	
 			<li>행사 기간</li>
 <br>
 				<div class="w"><p>{{eventstartdate}}~{{eventenddate}}</p></div>
@@ -77,7 +77,7 @@
 	</div>
 <br>
 <hr>
-<ul>
+<ul class="infoList">
 	<li>전화번호</li><br>
 		<div class="w"><p>{{tel}}</p></div>
 	<li>주소</li><br>
@@ -113,6 +113,7 @@
 
 		initMap(x, y);
 		imgCheck();
+		pageCheck();
 		
 		
 		$("#myModal").on('shown.bs.modal', function () {
@@ -164,8 +165,6 @@
 		if($('.firstimg').eq(0).attr('src')=='')
 			$('.firstimg').eq(0).attr('src','/resources/img/no-image.jpg');
 	};
-	
-	
 </script>
 </body>
 </html>
