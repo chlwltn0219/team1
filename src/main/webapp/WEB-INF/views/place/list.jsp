@@ -95,25 +95,27 @@
 				<table class="table table-hover">
 					<tbody id="result"></tbody>
 				</table>
+				
 				<div class="text-center">
 					<ul class="pagination">
-						<c:if test="${pageMaker.prev}">
-							<li><a href="list${pageMaker.makeSearch(pageMaker.startPage - 1) }">&laquo;</a></li>
+						<c:if test="${placePageMaker.prev}">
+							<li><a href="list${placePageMaker.makeQuery(placePageMaker.startPage - 1) }">&laquo;</a></li>
 						</c:if>
 
-						<c:forEach begin="${pageMaker.startPage }"
-							end="${pageMaker.endPage }" var="idx">
+						<c:forEach begin="${placePageMaker.startPage }"
+							end="${placePageMaker.endPage }" var="idx">
 							<li
-								<c:out value="${pageMaker.cri.page == idx?'class =active':''}"/>>
-								<a href="list${pageMaker.makeSearch(idx)}">${idx}</a>
+								<c:out value="${placePageMaker.cri.page == idx?'class =active':''}"/>>
+								<a href="list${placePageMaker.makeSearch(idx)}">${idx}</a>
 							</li>
 						</c:forEach>
 
-						<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-							<li><a href="list${pageMaker.makeSearch(pageMaker.endPage +1) }">&raquo;</a></li>
+						<c:if test="${placePageMaker.next && placePageMaker.endPage > 0}">
+							<li><a href="list${placePageMaker.makeQuery(placePageMaker.endPage +1) }">&raquo;</a></li>
 						</c:if>
 					</ul>
 				</div>
+				
 			</div>
 		</div>
 	</div>
@@ -125,7 +127,7 @@
 
 <script id="codeTemp" type="text/xxx-mytemplate">
 	<div class="table_list imgbox_hover">
-			<a href="/place/detailList?contentid={{contentid}}">
+			<a href="/place/detailList${placePageMaker.makeQuery(placePageMaker.cri.page) }&contentid={{contentid}}">
 				<img class="table_imgbox" src="{{firstimage}}">
 				<div class="info">
 					<br>
@@ -141,8 +143,10 @@
 <script type="text/javascript">
 
    var serviceKey = "oMYSCkfnU%2BrM%2F6ad8zAICkGBj0eUCOxJc9bR%2F8MHuzhfo62P6cGA1YVZ7iY5QnDedVyfk5tMhc0Wu42fjDJ%2BcA%3D%3D";
+   var pageNo = 1;
+   var numOfRows = 9;
    /* default Page */
-   $.getJSON("http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList?ServiceKey=" + serviceKey + "&contentTypeid=12&areaCode=1&sigunguCode=" + 1 + "&MobileOS=ETC&MobileApp=AppTesting", function(areaCode) {
+   $.getJSON("http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList?ServiceKey=" + serviceKey + "&pageNo=" + pageNo + "&numOfRows="+ numOfRows + "&contentTypeId=12&areaCode=1&sigunguCode=" + 1 + "&MobileOS=ETC&MobileApp=AppTesting", function(areaCode) {
        
        var items = areaCode.response.body.items.item;
        var temp2 = $('#codeTemp').html();
@@ -162,7 +166,7 @@
 	   
    var sigunguCode = $('#gu option:selected').val();
 
-      $.getJSON("http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList?ServiceKey=" + serviceKey + "&contentTypeid=12&areaCode=1&sigunguCode=" + sigunguCode + "&MobileOS=ETC&MobileApp=AppTesting", function(areaCode) {
+      $.getJSON("http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList?ServiceKey=" + serviceKey + "&pageNo=" + pageNo + "&numOfRows="+ numOfRows + "&contentTypeId=12&areaCode=1&sigunguCode=" + sigunguCode + "&MobileOS=ETC&MobileApp=AppTesting", function(areaCode) {
          
          var items = areaCode.response.body.items.item;
          var temp2 = $('#codeTemp').html();

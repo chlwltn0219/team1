@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.domain.BoardVO;
 import org.zerock.domain.PageMaker;
+import org.zerock.domain.PlacePageMaker;
 import org.zerock.domain.SearchCriteria;
 import org.zerock.service.BoardService;
 
@@ -44,16 +45,16 @@ public class PlaceController {
 
     logger.info(cri.toString());
 
-    // model.addAttribute("list", service.listCriteria(cri));
+//     model.addAttribute("list", service.listCriteria(cri));
     model.addAttribute("list", service.listSearchCriteria(cri));
 
-    PageMaker pageMaker = new PageMaker();
-    pageMaker.setCri(cri);
+    PlacePageMaker placePageMaker = new PlacePageMaker();
+    placePageMaker.setCri(cri);
 
-    // pageMaker.setTotalCount(service.listCountCriteria(cri));
-    pageMaker.setTotalCount(service.listSearchCount(cri));
+//    placePageMaker.setTotalCount(service.listCountCriteria(cri));
+    placePageMaker.setTotalCount(service.listSearchCount(cri));
 
-    model.addAttribute("pageMaker", pageMaker);
+    model.addAttribute("placePageMaker", placePageMaker);
   }
 
   @RequestMapping(value = "/readPage", method = RequestMethod.GET)

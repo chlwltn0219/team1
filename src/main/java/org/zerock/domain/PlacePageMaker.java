@@ -4,7 +4,7 @@ import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
 
-public class PageMaker {
+public class PlacePageMaker {
 
 	private int totalCount;
 	private int startPage;
@@ -80,8 +80,8 @@ public class PageMaker {
 		
 		UriComponents uriComponents =
 	            UriComponentsBuilder.newInstance()
-	            .queryParam("page", page)
-	            .queryParam("perPageNum", cri.getPerPageNum())
+	            .queryParam("pageNo", page)
+	            .queryParam("numOfRows", cri.getPerPageNum())
 	            .build();	            
 		
 		return uriComponents.toUriString();
