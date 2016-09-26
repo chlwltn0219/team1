@@ -62,13 +62,12 @@
 				</div>
 			</div>
 			
-			<div class="table-responsive" style="width: 100%">
-				<div class="table table-hover">
+<!-- 			<div class="table-responsive" style="width: 100%"> -->
+				<div class="fList table-hover">
 					<div id="result"></div>
 				</div>
-				<hr>
 				<div id="pagination"></div>				
-			</div>
+<!-- 			</div> -->
 		</div>
 	</div>
 			

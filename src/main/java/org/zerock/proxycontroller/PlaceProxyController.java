@@ -43,7 +43,7 @@ public class PlaceProxyController {
 		RestTemplate restTemplate = new RestTemplate();
 		String baseURI = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList"
 							+ "?ServiceKey=" + SERVICE_KEY
-							+ "&numOfRows=15"
+							+ "&numOfRows=12"
 							+ "&areaCode=1"
 							+ "&sigunguCode=" + sigunguCode
 							+ "&pageNo=" + pageNo
