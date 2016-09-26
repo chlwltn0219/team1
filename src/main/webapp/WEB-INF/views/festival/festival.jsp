@@ -87,9 +87,8 @@
 <script type="text/javascript">
 	/* 시군구 셀렉트 값을 받아 리스트 리턴 */
 	$('#sigungu').on('change', function() {
-		pageNo = 1;	
 		var areaCode = $('#sigungu option:selected').val();
-		$.getJSON("/festival/list?sigunguCode=" + areaCode + "&pageNo=" + pageNo, function(data, pageNo) {
+		$.getJSON("/festival/list?sigunguCode=" + areaCode + "&pageNo=" + pageNo, function(data) {
 			// json 객체 내부 접근하기
 			console.dir(data);
 			console.dir(pageMaker);
@@ -115,44 +114,44 @@
 				$('#result').append(html);
 				imgCheck(i);
 				imgHover2();
-				setPaginationEvent(data);
 			}
 		});
 	});
-		
-	areaCode = 1;
-	pageNo = 1;	
 	
 	/* 기본 리스트 */
-	$.getJSON("/festival/list?sigunguCode=" + areaCode + "&pageNo=" + pageNo, function(data) {
-		// json 객체 내부 접근하기
-		console.dir(data);
-		console.dir(pageMaker);
+	pageNo = 1;
+	areaCode = 1;
+	getList(1);
+	function getList(pageNo) {
+		$.getJSON("/festival/list?sigunguCode=" + areaCode + "&pageNo=" + pageNo, function(data) {
+			// json 객체 내부 접근하기
+			console.dir(data);
+			console.dir(pageMaker);
+			
+			var items = data.items.item;
+			var pageMaker = data.pageMaker;
+			
+			var temp2 = $('#codeTemp').html();
+			var template = Handlebars.compile(temp2);
+			
+			var page = $('#pageTemplate').html();
+			var pageTemplate = Handlebars.compile(page);
+			var pagehtml = pageTemplate(pageMaker);
+			$('#pager').html(pagehtml);
 		
-		var items = data.items.item;
-		var pageMaker = data.pageMaker;
-		
-		var temp2 = $('#codeTemp').html();
-		var template = Handlebars.compile(temp2);
-		
-		var page = $('#pageTemplate').html();
-		var pageTemplate = Handlebars.compile(page);
-		var pagehtml = pageTemplate(pageMaker);
-		$('#pager').html(pagehtml);
-
-		setPaginationEvent(data);
-		
-		$('#result').html("");
-		
-		for(var i=0; i<items.length; i++) {
-			var html = template(items[i]);
-			console.log(html);
-			$('#result').append(html);
-			imgCheck(i);
-			imgHover2();
-		}
-		
-	});
+			setPaginationEvent(data);
+			
+			$('#result').html("");
+			
+			for(var i=0; i<items.length; i++) {
+				var html = template(items[i]);
+				console.log(html);
+				$('#result').append(html);
+				imgCheck(i);
+				imgHover2();
+			}
+		});
+	}
 	
 	/* 마우스 오버 */
 	function imgHover2() {
@@ -230,29 +229,9 @@
 	
 	/* paging */
 	
-	function getList(pageNo) {
-			$.getJSON("/festival/list?sigunguCode=" + areaCode + "&pageNo=" + pageNo, function(data) {
-				console.dir(data);
-				console.log(pageNo);
-				
-				var item = data.items.item;
-				var pageMaker = data.pageMaker;
-				console.dir(item);
-				console.dir(pageMaker);
-				
-	// 			Print Pager
-				var page = $('#pageTemplate').html();
-				var pageTemplate = Handlebars.compile(page);
-				var pagehtml = pageTemplate(pageMaker);
-				$('#pager').html(pagehtml);
-
-				setPaginationEvent(data);
-			});
-		}
-	
 	function setPaginationEvent(data) {
 		$('button.page').on('click', function() {
-			getList(this.value);
+			getList(this.value)
 		});
 		$('#prev').on('click', function() {
 			getList(data.pageMaker.startPage-1);					
