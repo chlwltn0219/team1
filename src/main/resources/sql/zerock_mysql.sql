@@ -80,16 +80,16 @@ CREATE TABLE tbl_jboard
    PRIMARY KEY(bno)
 );
 
-INSERT INTO tbl_jboard(title, content, writer, contentid)
-     VALUES ('억새 축체 가실분 ??', '분위기 짱짱', 'user01', 626944);
-INSERT INTO tbl_jboard(title, content, writer, contentid)
-     VALUES ('찿덕궁 야간 개장 얼마 안남았데요!', '서둘러 같이 가실 분 구해요!', 'user02', 1291408);
-INSERT INTO tbl_jboard(title, content, writer, contentid)
-     VALUES ('아 맥주 마시고 싶다', '혼술 하시는 분 함께하요', 'user03', 2034310);
-INSERT INTO tbl_jboard(title, content, writer, contentid)
-     VALUES ('이 축제의 스타일은?', 'Gang-Nam Style! Go With Me!', 'user01', 737479);
-INSERT INTO tbl_jboard(title, content, writer, contentid)
-     VALUES ('보드겜 한판 하실래요?', '내가 좀 잘함', 'user01', 2410727);
+INSERT INTO tbl_jboard(title, content, writer, contentid, contitle)
+     VALUES ('억새 축체 가실분 ??', '분위기 짱짱', 'user01', 626944, "억새");
+INSERT INTO tbl_jboard(title, content, writer, contentid, contitle)
+     VALUES ('찿덕궁 야간 개장 얼마 안남았데요!', '서둘러 같이 가실 분 구해요!', 'user02', 1291408, "창덕궁 야간");
+INSERT INTO tbl_jboard(title, content, writer, contentid, contitle)
+     VALUES ('아 맥주 마시고 싶다', '혼술 하시는 분 함께하요', 'user03', 2034310, "맥주축제");
+INSERT INTO tbl_jboard(title, content, writer, contentid, contitle)
+     VALUES ('이 축제의 스타일은?', 'Gang-Nam Style! Go With Me!', 'user01', 737479, "강남축제");
+INSERT INTO tbl_jboard(title, content, writer, contentid, contitle)
+     VALUES ('보드겜 한판 하실래요?', '내가 좀 잘함', 'user01', 2410727, "보드게임 컨벤션");
 
 --
 -- tbl_reply
