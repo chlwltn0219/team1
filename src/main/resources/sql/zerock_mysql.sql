@@ -1,6 +1,9 @@
 --
 -- DROP table
 --
+--
+--  DROP TABLE tbl_message;
+--
 DROP TABLE tbl_user;
 DROP TABLE tbl_member;
 DROP TABLE tbl_attach;
@@ -29,24 +32,17 @@ CREATE TABLE tbl_user
    uid            VARCHAR(50) NOT NULL,
    upw            VARCHAR(50) NOT NULL,
    uname 		  VARCHAR(100) NOT NULL,
+   sex			  VARCHAR(50) NOT NULL,
+   bir			  int NOT NULL,
+   conti		  VARCHAR(100) NOT NULL,
    upoint         int NOT NULL DEFAULT 0,
    sessionkey     varchar(50) NOT NULL DEFAULT 'none',
    sessionlimit   timestamp NOT NULL DEFAULT now(),
    PRIMARY KEY(uid)
 );
 
-INSERT INTO tbl_user(UID, upw, uname)
-     VALUES ('user00', 'user00', 'IRON MAN');
-
-INSERT INTO tbl_user(UID, upw, uname)
-     VALUES ('user01', 'user01', 'CAPTAIN');
-
-INSERT INTO tbl_user(UID, upw, uname)
-     VALUES ('user02', 'user02', 'HULK');
-
-INSERT INTO tbl_user(UID, upw, uname)
-     VALUES ('user03', 'user03', 'Thor');
-	 
+INSERT INTO tbl_user(UID, upw, uname, sex, bir, conti)
+     VALUES ('user00', 'user00', 'IRON@MAN', 'Female', '1988', 'ASIA');
 --
 -- tbl_board
 --
