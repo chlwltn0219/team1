@@ -15,9 +15,6 @@ public class JBoardVO {
 	private int contentid;
 	private String contitle;
 	
-	private String[] files;
-	
-	
 	public String getContitle() {
 		return contitle;
 	}
@@ -29,12 +26,6 @@ public class JBoardVO {
 	}
 	public void setContentid(int contentid) {
 		this.contentid = contentid;
-	}
-	public String[] getFiles() {
-		return files;
-	}
-	public void setFiles(String[] files) {
-		this.files = files;
 	}
 	public int getReplycnt() {
 		return replycnt;
@@ -82,8 +73,7 @@ public class JBoardVO {
 	public String toString() {
 		return "BoardVO [bno=" + bno + ", title=" + title + ", content="
 				+ content + ", writer=" + writer + ", regdate=" + regdate
-				+ ", viewcnt=" + viewcnt + ", replycnt=" + replycnt
-				+ ", files=" + Arrays.toString(files) + "]";
+				+ ", viewcnt=" + viewcnt + ", replycnt=" + replycnt + "]";
 	}
 
 }
