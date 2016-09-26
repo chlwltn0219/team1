@@ -6,6 +6,11 @@
 <html>
 <head>
 <title>list.jsp</title>
+<style type="text/css">
+.box-body {
+	margin-top: 20px;
+}
+</style>
 </head>
 <body>
 
