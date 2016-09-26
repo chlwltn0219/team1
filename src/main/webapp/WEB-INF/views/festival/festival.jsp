@@ -120,9 +120,10 @@
 	
 	/* 기본 리스트 */
 	pageNo = 1;
-	areaCode = 1;
-	getList(1);
-	function getList(pageNo) {
+	areaCode = $('#sigungu option:selected').val();
+	getList(1, 1);
+	function getList(pageNo, areaCode) {
+		areaCode = $('#sigungu option:selected').val();		
 		$.getJSON("/festival/list?sigunguCode=" + areaCode + "&pageNo=" + pageNo, function(data) {
 			// json 객체 내부 접근하기
 			console.dir(data);
