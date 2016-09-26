@@ -16,7 +16,9 @@
 			<!-- general form elements -->
 			<div class="box box-primary">
 				<div class="box-header">
-					<h3 class="box-title">REGISTER BOARD</h3>
+					<h3 class="box-title input-lg">
+					Join us
+					</h3>
 				</div>
 				<!-- /.box-header -->
 
@@ -27,11 +29,11 @@
 								<div class="form-group">
 									<label for="">ID</label>
 									<div class="row">
-										<div class="col-md-10">
+										<div class="col-md-9">
 											<input type="text" name='uid' id="uid" class="form-control input-lg"
-											required placeholder="Enter ID" />
+											onfocus="doubleCheck()" required placeholder="Enter ID" />
 										</div>
-										<div class="col-md-2">
+										<div class="col-md-3">
 											<input type="button" id="iddc" name="niddc" value="check"
 											class="btn btn-primary input-lg"/>
 										</div>
@@ -46,7 +48,8 @@
 								<div class="form-group">
 									<label for="">PW Check</label> 
 										<input type="password" required	name='upwcheck' class="form-control input-lg"
-										placeholder="check Password">
+										placeholder="Check Password">
+										
 								</div>
 								<div class="form-group">
 									<label for="">Sex &nbsp;</label>
@@ -88,7 +91,7 @@
 					<!-- /.box-body -->
 
 					<div class="box-footer">
-						<button type="submit" class="btn btn-success">Submit</button>
+						<button type="submit" class="btn btn-success">Sign up</button>
 					</div>
 				</form>
 
@@ -101,20 +104,23 @@
 	</div>
 	<!-- /.row -->
 	<script>
-	function validateForm() {
-	    var x = document.forms["myForm"]["niddc"].value;
-	    var y = document.forms["myForm"]["upw"].value;
-	    var z = document.forms["myForm"]["upwcheck"].value;
-	    if (x == "check" || y != z) {
-	        alert("Please check ID or Password");
-	        return false;
-	    }
-	}
+		
+		function validateForm() {
+				var a = document.getElementById("uid").value;
+			    var x = document.forms["myForm"]["niddc"].value;
+				var y = document.forms["myForm"]["upw"].value;
+				var z = document.forms["myForm"]["upwcheck"].value;
+	
+				if (x == "check" || y != z) {
+					alert("Please check ID or Password");
+					return false;
+				}
+			}
 	
 		$("#iddc").on("click", function() {
 			var uidl = $("#uid");
 			var uidll = uidl.val();
-			
+
 			$.getJSON("/check/dup?uid=" + uidll, function(data) {
 				var IDchecking = data.IDchecking;
 				if (IDchecking) {
@@ -127,6 +133,11 @@
 			});
 		});
 		
+		function doubleCheck() {
+			if(document.getElementById("iddc").value = "confirm") {
+		    document.getElementById("iddc").value = "check";
+			}
+		}
 	</script>
 </body>
 </html>

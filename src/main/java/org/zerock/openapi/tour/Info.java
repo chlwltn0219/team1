@@ -14,10 +14,16 @@ public class Info {
 	String title;
 	String overview;
 	String tel;
+	String evnetTitle;
 	
 	
 	
-	
+	public String getEvnetTitle() {
+		return evnetTitle;
+	}
+	public void setEvnetTitle(String evnetTitle) {
+		this.evnetTitle = evnetTitle;
+	}
 	public List<String> getImage() {
 		return image;
 	}

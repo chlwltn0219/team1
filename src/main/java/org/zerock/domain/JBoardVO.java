@@ -13,10 +13,17 @@ public class JBoardVO {
 	private int viewcnt;
 	private int replycnt;
 	private int contentid;
+	private String contitle;
 	
 	private String[] files;
 	
 	
+	public String getContitle() {
+		return contitle;
+	}
+	public void setContitle(String contitle) {
+		this.contitle = contitle;
+	}
 	public int getContentid() {
 		return contentid;
 	}
