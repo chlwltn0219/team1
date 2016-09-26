@@ -24,105 +24,70 @@
 
 	<div class="row">
 		<!-- left column -->
-
 		<div class="col-md-12">
 			<!-- general form elements -->
 			<div class='box'>
 				<div class="box-header with-border">
 					<h3 class="box-title">관광리스트</h3>
-				</div>
-
-
-				<div class='box-body'>
-
-					<select name="searchType">
-						<option value="n"
-							<c:out value="${cri.searchType == null?'selected':''}"/>>
-							---</option>
-						<option value="t"
-							<c:out value="${cri.searchType eq 't'?'selected':''}"/>>
-							Title</option>
-						<option value="c"
-							<c:out value="${cri.searchType eq 'c'?'selected':''}"/>>
-							Content</option>
-						<option value="w"
-							<c:out value="${cri.searchType eq 'w'?'selected':''}"/>>
-							Writer</option>
-						<option value="tc"
-							<c:out value="${cri.searchType eq 'tc'?'selected':''}"/>>
-							Title OR Content</option>
-						<option value="cw"
-							<c:out value="${cri.searchType eq 'cw'?'selected':''}"/>>
-							Content OR Writer</option>
-						<option value="tcw"
-							<c:out value="${cri.searchType eq 'tcw'?'selected':''}"/>>
-							Title OR Content OR Writer</option>
-					</select> <input type="text" name='keyword' id="keywordInput"
-						value='${cri.keyword }'>
-					<button id='searchBtn'>Search</button>
-					<button id='newBtn'>New Board</button>
-
-				</div>
-				<div class="selectBox" >
-					<select id="gu">
-		               <option value="1">강남구</option>
-		               <option value="2">강동구</option>
-		               <option value="3">강북구</option>
-		               <option value="4">강서구</option>
-		               <option value="5">관악구</option>
-		               <option value="6">광진구</option>
-		               <option value="7">구로구</option>
-		               <option value="8">금천구</option>
-		               <option value="9">노원구</option>
-		               <option value="10">도봉구</option>
-		               <option value="11">동대문구</option>
-		               <option value="12">동작구</option>
-		               <option value="13">마포구</option>
-		               <option value="14">서대문구</option>
-		               <option value="15">서초구</option>
-		               <option value="16">성동구</option>
-		               <option value="17">성북구</option>
-		               <option value="18">송파구</option>
-		               <option value="19">양천구</option>
-		               <option value="20">영등포구</option>
-		               <option value="21">용산구</option>
-		               <option value="22">은평구</option>
-		               <option value="23">종로구</option>
-		               <option value="24">중구</option>
-		               <option value="25">중랑구</option>
-		            </select>
+					<div class="selectBox" >
+						<label>지역: &nbsp;</label>
+						<select id="gu">
+			               <option value="1">강남구</option>
+			               <option value="2">강동구</option>
+			               <option value="3">강북구</option>
+			               <option value="4">강서구</option>
+			               <option value="5">관악구</option>
+			               <option value="6">광진구</option>
+			               <option value="7">구로구</option>
+			               <option value="8">금천구</option>
+			               <option value="9">노원구</option>
+			               <option value="10">도봉구</option>
+			               <option value="11">동대문구</option>
+			               <option value="12">동작구</option>
+			               <option value="13">마포구</option>
+			               <option value="14">서대문구</option>
+			               <option value="15">서초구</option>
+			               <option value="16">성동구</option>
+			               <option value="17">성북구</option>
+			               <option value="18">송파구</option>
+			               <option value="19">양천구</option>
+			               <option value="20">영등포구</option>
+			               <option value="21">용산구</option>
+			               <option value="22">은평구</option>
+			               <option value="23">종로구</option>
+			               <option value="24">중구</option>
+			               <option value="25">중랑구</option>
+			            </select>
+					</div>
 				</div>
 			</div>
-			<hr>
 			
 			<div class="table-responsive" style="width: 100%">
 				<table class="table table-hover">
 					<tbody id="result"></tbody>
 				</table>
-				
-				<div id="pagination"></div>
-				
+				<hr>
+				<div id="pagination"></div>				
 			</div>
 		</div>
 	</div>
 			
-
 	<a class="return-top" href="#" style="right:27px; bottom:50px; position:fixed; z-index:9999;">
 		<img src="http://cfs.tistory.com/custom/blog/202/2025510/skin/images/top1.png">
 	</a>
 
 <script id="codeTemp" type="text/xxx-mytemplate">
 	<div class="table_list imgbox_hover">
-			<a href="/place/detailList${placePageMaker.makeQuery(placePageMaker.cri.page) }&contentid={{contentid}}">
-				<img class="table_imgbox" src="{{firstimage}}">
-				<div class="info">
-					<br>
-					<div>
-						<div class="title"><h3>{{title}}</h3></div>
-						<div class="addr"><h4>{{addr1}}</h4></div>
-					</div>
+		<a href="/place/detailList${placePageMaker.makeQuery(placePageMaker.cri.page) }&contentid={{contentid}}">
+			<img class="table_imgbox" src="{{firstimage}}">
+			<div class="info">
+				<br>
+				<div>
+					<div class="title"><h3>{{title}}</h3></div>
+					<div class="addr"><h4>{{addr1}}</h4></div>
 				</div>
-			</a>
+			</div>
+		</a>
 	</div>
 </script>
 
@@ -137,7 +102,6 @@
 </script>
 
 <script type="text/javascript">
-
   	var pageNo = 1;
    	getList(1, 1);
    	function getList(pageNo, sigunguCode) {
@@ -169,7 +133,6 @@
 		    }
 	    });
    }
-   	
    /* select 버튼 클릭시 */
    $('#gu').on('change', function() {
 	   
@@ -200,14 +163,13 @@
 	        }
         });
    });
-   /*----------------------------------------------------------------*/
-	
+	/* img url주소 null값 일때, 대체 이미지 */	
 	function imgCheck(i) {
 		if($('div.table_list img').eq(i).attr('src')==''){
 			$('div.table_list img').eq(i).attr('src','http://placehold.it/300x350?text=No_Image');
 		}
 	};
-	
+	/* image Hover Event */
 	function imgHover() {
 		$(".imgbox_hover").on({
 	        mouseenter: function(){
@@ -227,16 +189,14 @@
 	    });
 		
 	}
-	
+	/* 각각의 이미지 객체 리턴 값 */
 	function getIndex(obj) {
 		return $('.imgbox_hover').index(obj);
 	}
-	
 </script>
 
 <script type="text/javascript">
 	/* Paging Event */
-	
 	function setPaginationEvent(data) {
 		$('button.page').on('click', function() {
 			getList(this.value)
@@ -255,7 +215,6 @@
 		else 
 			return 'hidden';
 	});
-	
 	
 	Handlebars.registerHelper('pageMaker', function(from, to, incr, block) {
 		
@@ -301,32 +260,6 @@
 	            return false;
 	        });
 	    });
-	});
-</script>
-
-<script>
-	var result = '${msg}';
-
-	if (result == 'SUCCESS') {
-		alert("처리가 완료되었습니다.");
-		location.replace(self.location);
-	}
-</script>
-
-<script>
-	$(document).ready( function() {
-		$('#searchBtn').on("click", function(event) {
-			self.location = "list"
-			+ '${pageMaker.makeQuery(1)}'
-			+ "&searchType="
-			+ $("select option:selected").val()
-			+ "&keyword="
-			+ $('#keywordInput').val();
-		});
-
-		$('#newBtn').on("click", function(evt) {
-			self.location = "register";
-		});
 	});
 </script>
 
