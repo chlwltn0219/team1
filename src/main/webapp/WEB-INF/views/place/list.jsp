@@ -18,11 +18,7 @@
 <!-- HandleBars -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 <title>list.jsp</title>
-<style type="text/css">
-.box-body {
-	margin-top: 20px;
-}
-</style>
+
 </head>
 <body>
 
