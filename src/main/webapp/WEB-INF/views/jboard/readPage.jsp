@@ -731,6 +731,8 @@ $(document).ready(function(){
 	console.log(formObj);
 	
 	$("#modifyBtn").on("click", function(){
+		var eventTitle = $('#infoTitle').html().replace(/ /gi, "_");
+		
 		formObj.attr("action", "/jboard/modifyPage");
 		formObj.attr("method", "get");		
 		formObj.submit();

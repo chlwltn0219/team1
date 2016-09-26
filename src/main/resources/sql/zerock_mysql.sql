@@ -1,9 +1,8 @@
 --
 -- DROP table
 --
-DROP TABLE tbl_member;
 DROP TABLE tbl_user;
-
+DROP TABLE tbl_member;
 DROP TABLE tbl_attach;
 DROP TABLE tbl_reply;
 DROP TABLE tbl_board;
@@ -17,7 +16,6 @@ CREATE TABLE tbl_member
    userid       VARCHAR(50) NOT NULL,
    userpw       VARCHAR(50) NOT NULL,
    username     VARCHAR(100) NOT NULL,
-   email        VARCHAR(100),
    regdate      TIMESTAMP DEFAULT now(),
    updatedate   TIMESTAMP DEFAULT now(),
    PRIMARY KEY(userid)
@@ -30,14 +28,12 @@ CREATE TABLE tbl_user
 (
    uid            VARCHAR(50) NOT NULL,
    upw            VARCHAR(50) NOT NULL,
-   uname          VARCHAR(100) NOT NULL,
-   
+   uname 		  VARCHAR(100) NOT NULL,
    upoint         int NOT NULL DEFAULT 0,
    sessionkey     varchar(50) NOT NULL DEFAULT 'none',
    sessionlimit   timestamp NOT NULL DEFAULT now(),
    PRIMARY KEY(uid)
 );
-
 
 INSERT INTO tbl_user(UID, upw, uname)
      VALUES ('user00', 'user00', 'IRON MAN');
@@ -50,10 +46,7 @@ INSERT INTO tbl_user(UID, upw, uname)
 
 INSERT INTO tbl_user(UID, upw, uname)
      VALUES ('user03', 'user03', 'Thor');
-
-
-
-
+	 
 --
 -- tbl_board
 --
@@ -83,6 +76,7 @@ CREATE TABLE tbl_jboard
    viewcnt    int DEFAULT 0,
    replycnt   int DEFAULT 0,
    contentid  varchar(20) NOT NULL,
+   contitle   text NOT NULL,
    PRIMARY KEY(bno)
 );
 

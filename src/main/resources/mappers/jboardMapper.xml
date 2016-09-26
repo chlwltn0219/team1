@@ -6,13 +6,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="org.zerock.mapper.JBoardMapper">
 
 	<insert id="create">
-		insert into tbl_JBoard (title, content, writer, contentid)
-		values(#{title},#{content}, #{writer}, #{contentid})
+		insert into tbl_JBoard (title, content, writer, contentid, contitle)
+		values(#{title},#{content}, #{writer}, #{contentid}, #{contitle})
 	</insert>
 
 	<select id="read" resultType="org.zerock.domain.JBoardVO">
 		select
-		bno, title, content, writer, regdate, viewcnt , replycnt, contentid
+		bno, title, content, writer, regdate, viewcnt , replycnt, contentid, contitle
 		from
 		tbl_JBoard
 		where bno = #{bno}

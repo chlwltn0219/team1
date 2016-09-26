@@ -5,9 +5,8 @@
 <style type="text/css">
 
 img {
-	width: 1028px;
-	height: 940px;
-
+	width: 1500px;
+	height: 1000px;
 }
 
 </style>

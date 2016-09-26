@@ -87,12 +87,8 @@
 					</table>
 				</div>
 				<!-- /.box-body -->
-
-
 				<div class="box-footer">
-retrete
 					<div class="text-center">
-
 						<ul class="pagination">
 							<c:if test="${pageMaker.prev}">
 								<li><a
@@ -125,7 +121,6 @@ retrete
 
 	<script>
 		var result = '${msg}';
-
 		if (result == 'SUCCESS') {
 			alert("처리가 완료되었습니다.");
 			location.replace(self.location);
@@ -135,26 +130,19 @@ retrete
 	<script>
 		$(document).ready(
 				function() {
-
 					$('#searchBtn').on(
 							"click",
 							function(event) {
-
 								self.location = "list"
 										+ '${pageMaker.makeQuery(1)}'
 										+ "&searchType="
 										+ $("select option:selected").val()
 										+ "&keyword="
 										+ $('#keywordInput').val();
-
 							});
-
 					$('#newBtn').on("click", function(evt) {
-
 						self.location = "register";
-
 					});
-
 				});
 	</script>
 

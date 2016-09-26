@@ -268,7 +268,6 @@ public class DetailProxyController {
 		info.setOverview((String)commonItems.get("overview"));
 		info.setPlaytime((String)introItems.get("playtime"));
 		
-		
 		return new ResponseEntity<Info>(info, HttpStatus.OK);
 
 	}

@@ -15,6 +15,10 @@ public class Criteria {
 		this.perPageNum = perPageNum;
 	}
 	
+	public Criteria(int perPageNum){
+		this.perPageNum = perPageNum;
+	}
+	
 	public void setPage(int page){
 		
 		if(page <= 0){

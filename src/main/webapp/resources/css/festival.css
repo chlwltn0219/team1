@@ -2,13 +2,14 @@
 .temp{
 	float: left;
 	position: relative;
-	margin: 1.1%;
+	margin: 11px;
 	background-color: black;
 }
 .img, .info{
 	width: 338px; 
 	height: 298px;
 	float:left; 
+	border: 1px solid black;
 }
 
 .img{
