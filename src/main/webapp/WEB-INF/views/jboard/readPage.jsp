@@ -182,7 +182,7 @@
 					<h3 id="infoTitle" class="box-title">{{title}}</h3>
 				</div>
 				<div class="box-body">
-					<div id="btnre" class="row">
+					<div class="row">
 						<div class="col-xs-2 btnImg">
 							<button id="btnLeft" class="btn btn-warning" style="height: 150px; width: 100%"><h3><i class="fa fa-arrow-circle-o-left"></i></h3></button>
 						</div>
@@ -202,6 +202,15 @@
 							<button class="btn" type="button" data-toggle="modal" data-target="#mapModal" style="background-color: white;">
 								<img alt="{{mapIcon}}" src="/resources/img/location.png" style="width: 20px; height: 20px;">
 							</button>
+						</div>
+						<div class="col-xs-1"></div>
+					</div>
+					<hr>
+					<div class="row">
+						<div class="col-xs-1"></div>
+						<div class="col-xs-3"><label>Playtime : </label></div>
+						<div class="col-xs-7" id="infoPlaytime">
+							<div>{{Playtime}}</div>
 						</div>
 						<div class="col-xs-1"></div>
 					</div>
@@ -418,6 +427,7 @@
 		
 		$('#infoOverview div').html(data.overview);
 		$('#infoLocation span').html(location.addr1);
+		$('#infoPlaytime').html(data.playtime);
 		$('#infoProgram div').eq(0).html(programs.program);
 		$('#infoProgram div').eq(1).html(programs.subevent);
 		$('#infoCost div').eq(0).html(cost.usetimefestival);

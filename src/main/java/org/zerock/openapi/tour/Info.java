@@ -14,10 +14,15 @@ public class Info {
 	String title;
 	String overview;
 	String tel;
+	String playtime;
 	
 	
-	
-	
+	public String getPlaytime() {
+		return playtime;
+	}
+	public void setPlaytime(String playtime) {
+		this.playtime = playtime;
+	}
 	public List<String> getImage() {
 		return image;
 	}
