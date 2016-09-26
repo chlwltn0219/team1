@@ -27,6 +27,12 @@
 		z-index: 1101;
 	}
 	
+	#summary div.col-xs-2, #forecast6days div.col-xs-2 {
+		border-left: 
+		border-right:
+ 		margin: 0 1%; 
+	}
+	
 	.front {
 		z-index: 1110;
 		opacity: 1;
@@ -46,14 +52,15 @@
 		height: 100%;
 	}
 	
-	.weather, .date, .temp{
+	.weather, .date, .temp {
 		position: absolute;
 		width: 100%;
 		text-align: center;
 	}
 	
 	.temp {
-		bottom: 0;
+		bottom: 5px;
+		right: 5px;
 		text-align: right;
 	}
 	
@@ -65,19 +72,29 @@
 		color: blue;
 	}
 	
-	#summary, #forecast6days {
-			height: 50px;
-			text-align: center;
+	div.sky {
+		clear: both;
+		text-align: center;
+		border-left: 1px solid #DDDDDD;
+		border-right: 1px solid #DDDDDD;
+	}
+	#forecast6days div.sky img{
+		float: left;
+	}
+	
+	#summary, #forecast6days, div.sky{
+		height: 50px;
+		text-align: center;
 	}
 	
 	@media ( min-width :992px){
-		#summary, #forecast6days {
+		#summary, #forecast6days, div.sky{
 			height: 70px;
 		}
 	}
 	
 	@media ( min-width :1200px) {
-		#summary, #forecast6days {
+		#summary, #forecast6days, div.sky{
 			height: 90px;
 		}
 	}
@@ -97,9 +114,10 @@
 		</div>
 
 		<div class="box-body">
-			<div id="summary" class="row">
+			<div id="summary" class="row">	
 				<h2> 3일 예보 </h2>
 			</div>
+			<hr>
 			<div id="forecast6days" class="row">
 				<h2> 중기 예보 (오전/오후) </h2>
 			</div>
@@ -164,7 +182,7 @@
 					<h3 id="infoTitle" class="box-title">{{title}}</h3>
 				</div>
 				<div class="box-body">
-					<div id="btnre" class="row">
+					<div class="row">
 						<div class="col-xs-2 btnImg">
 							<button id="btnLeft" class="btn btn-warning" style="height: 150px; width: 100%"><h3><i class="fa fa-arrow-circle-o-left"></i></h3></button>
 						</div>
@@ -184,6 +202,15 @@
 							<button class="btn" type="button" data-toggle="modal" data-target="#mapModal" style="background-color: white;">
 								<img alt="{{mapIcon}}" src="/resources/img/location.png" style="width: 20px; height: 20px;">
 							</button>
+						</div>
+						<div class="col-xs-1"></div>
+					</div>
+					<hr>
+					<div class="row">
+						<div class="col-xs-1"></div>
+						<div class="col-xs-3"><label>Playtime : </label></div>
+						<div class="col-xs-7" id="infoPlaytime">
+							<div>{{Playtime}}</div>
 						</div>
 						<div class="col-xs-1"></div>
 					</div>
@@ -348,10 +375,12 @@
 	</script>
 	
 	<script id="summaryTemplate" type="text/x-handlebars-template">
-		<div class="col-xs-1">
+		<div class="col-xs-2">
 			<div class="weather">
 				<div class="date"></div>
-				<img alt="sorry" src={{sky.icon}} width="100%">
+				<div class="sky">
+					<img alt="sorry" src={{sky.icon}} width="50%">
+				</div>
 				<div class="temp">
 					<b><span class="max">{{temperature.tmax}}</span> - <span class="min">{{temperature.tmin}}</span></b>
 				</div>
@@ -360,11 +389,14 @@
 	</script>
 	
 	<script id="forecastTemplate" type="text/x-handlebars-template">
-		{{#for 0 12 1}}
-			<div class="col-xs-1">
+		{{#for 0 5 1}}
+			<div class="col-xs-2">
 				<div class="weather">
 					<div class="date"></div>
-					<img alt="sorry" src="" width="100%">
+					<div class="sky">
+						<img alt="" src="" width="50%">						
+						<img alt="" src="" width="50%">
+					</div>
 					<div class="temp">
 						<b><span class="max"></span> - <span class="min"></span></b>
 					</div>
@@ -395,6 +427,7 @@
 		
 		$('#infoOverview div').html(data.overview);
 		$('#infoLocation span').html(location.addr1);
+		$('#infoPlaytime').html(data.playtime);
 		$('#infoProgram div').eq(0).html(programs.program);
 		$('#infoProgram div').eq(1).html(programs.subevent);
 		$('#infoCost div').eq(0).html(cost.usetimefestival);
@@ -402,6 +435,10 @@
 		$('#infoHomepage').html(data.homepage);
 		
 		$.getJSON('/weather/forecast?lat='+ location.mapy + "&lon=" + location.mapx, function(weather) {
+			console.log("###################################");
+			console.dir(weather);
+			console.log("###################################");
+			
 			var date = new Date();
 			var today = date.getDate();
 			var month;
@@ -423,35 +460,44 @@
 			
 			$('#forecast6days').html(comForecastTemp());
 			
-			alert();
+			$('#forecast6days div.sky img').eq(0).attr("src", forecast6days.sky.amIcon3day);
+			$('#forecast6days div.sky img').eq(1).attr("src", forecast6days.sky.pmIcon3day);
+			$('#forecast6days div.sky img').eq(2).attr("src", forecast6days.sky.amIcon4day);
+			$('#forecast6days div.sky img').eq(3).attr("src", forecast6days.sky.pmIcon4day);
+			$('#forecast6days div.sky img').eq(4).attr("src", forecast6days.sky.amIcon5day);
+			$('#forecast6days div.sky img').eq(5).attr("src", forecast6days.sky.pmIcon5day);
+			$('#forecast6days div.sky img').eq(6).attr("src", forecast6days.sky.amIcon6day);
+			$('#forecast6days div.sky img').eq(7).attr("src", forecast6days.sky.pmIcon6day);
+			$('#forecast6days div.sky img').eq(8).attr("src", forecast6days.sky.amIcon7day);
+			$('#forecast6days div.sky img').eq(9).attr("src", forecast6days.sky.pmIcon7day);
+			$('#forecast6days div.sky img').eq(10).attr("src", forecast6days.sky.amIcon8day);
+			$('#forecast6days div.sky img').eq(11).attr("src", forecast6days.sky.pmIcon8day);
 			
-			$('#forecast6days img').eq(0).attr("src", forecast6days.sky.amIcon3day);
-			$('#forecast6days img').eq(1).attr("src", forecast6days.sky.pmIcon3day);
-			$('#forecast6days img').eq(2).attr("src", forecast6days.sky.amIcon4day);
-			$('#forecast6days img').eq(3).attr("src", forecast6days.sky.pmIcon4day);
-			$('#forecast6days img').eq(4).attr("src", forecast6days.sky.amIcon5day);
-			$('#forecast6days img').eq(5).attr("src", forecast6days.sky.pmIcon5day);
-			$('#forecast6days img').eq(6).attr("src", forecast6days.sky.amIcon6day);
-			$('#forecast6days img').eq(7).attr("src", forecast6days.sky.pmIcon6day);
-			$('#forecast6days img').eq(8).attr("src", forecast6days.sky.amIcon7day);
-			$('#forecast6days img').eq(9).attr("src", forecast6days.sky.pmIcon7day);
-			$('#forecast6days img').eq(10).attr("src", forecast6days.sky.amIcon8day);
-			$('#forecast6days img').eq(11).attr("src", forecast6days.sky.pmIcon8day);
+			$('#forecast6days span.max').eq(0).html(forecast6days.temperature.tmax3day);
+			$('#forecast6days span.min').eq(0).html(forecast6days.temperature.tmin3day);
+			$('#forecast6days span.max').eq(1).html(forecast6days.temperature.tmax4day);
+			$('#forecast6days span.min').eq(1).html(forecast6days.temperature.tmin4day);
+			$('#forecast6days span.max').eq(2).html(forecast6days.temperature.tmax5day);
+			$('#forecast6days span.min').eq(2).html(forecast6days.temperature.tmin5day);
+			$('#forecast6days span.max').eq(3).html(forecast6days.temperature.tmax6day);
+			$('#forecast6days span.min').eq(3).html(forecast6days.temperature.tmin6day);
+			$('#forecast6days span.max').eq(4).html(forecast6days.temperature.tmax7day);
+			$('#forecast6days span.min').eq(4).html(forecast6days.temperature.tmin7day);
 			
 			for(var i=0; i<3; i++) {
 				date.setDate(today + i);
 				month = date.getMonth()+ 1;
 				day = date.getDate();
 				
-				$('div.date').eq(i).html("<b>" + month + "/" + day + "</b>");
+				$('#summary div.date').eq(i).html("<b>" + month + "/" + day + "</b>");
 			}
-			for(var i=3; i<15; i += 2) {
-				date.setDate(today + i);
+			for(var i=0; i<5; i ++) {
+				date.setDate(today + i + 3);
 				month = date.getMonth()+ 1;
 				day = date.getDate();
 				
-				$('div.date').eq(i).html("<b>" + month + "/" + day + "</b>");
-				$('div.date').eq(i+1).html("<b>" + month + "/" + day + "</b>");
+				$('#forecast6days div.date').eq(i*2).html("<b>" + month + "/" + day + "</b>");
+				$('#forecast6days div.date').eq(i*2+1).html("<b>" + month + "/" + day + "</b>");
 			}
 			
 		});
@@ -515,6 +561,14 @@
 		var month = dateObj.getMonth() + 1;
 		var date = dateObj.getDate();
 		return year + "/" + month + "/" + date;
+	});
+	
+	Handlebars.registerHelper('for', function(from, to, incr, block) {
+	    var accum = '';
+	    for(var i = from; i < to; i += incr){
+	        accum += block.fn();
+	    }
+	    return accum;
 	});
 
 	var printData = function(replyArr, target, templateObject) {
@@ -718,4 +772,5 @@ $(document).ready(function(){
 
 </body>
 </html>
+
 
