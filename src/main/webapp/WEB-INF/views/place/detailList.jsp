@@ -46,13 +46,11 @@
                   <b>상세보기</b>
                </h3>
             </div>
-            <hr>
             
             <a href="list">
             	<button>List</button>
             </a>
             <div id="result"></div>
-<!--             <div id="map" style="width:100%; height: 400px"></div>    -->
 
                <!-- Modal -->
                <div class="modal fade" id="myModal" role="dialog">
