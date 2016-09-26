@@ -96,25 +96,7 @@
 					<tbody id="result"></tbody>
 				</table>
 				
-				<div class="text-center">
-					<ul class="pagination">
-						<c:if test="${placePageMaker.prev}">
-							<li><a href="list${placePageMaker.makeQuery(placePageMaker.startPage - 1) }">&laquo;</a></li>
-						</c:if>
-
-						<c:forEach begin="${placePageMaker.startPage }"
-							end="${placePageMaker.endPage }" var="idx">
-							<li
-								<c:out value="${placePageMaker.cri.page == idx?'class =active':''}"/>>
-								<a href="list${placePageMaker.makeSearch(idx)}">${idx}</a>
-							</li>
-						</c:forEach>
-
-						<c:if test="${placePageMaker.next && placePageMaker.endPage > 0}">
-							<li><a href="list${placePageMaker.makeQuery(placePageMaker.endPage +1) }">&raquo;</a></li>
-						</c:if>
-					</ul>
-				</div>
+				<div id="pagination"></div>
 				
 			</div>
 		</div>
@@ -140,17 +122,32 @@
 	</div>
 </script>
 
+<script id="pageTemp" type="text/x-handlebars-template">
+	<button id="prev" type="button" class="btn btn-default" style="visibility: {{visiblility prev}}">Prev</button>
+		<div class="btn-group">
+			{{#pageMaker startPage endPage 1}}
+				<button type="button" class="btn btn-default page {{this.active}}" value={{this.pageNo}}>{{this.pageNo}}</button>
+			{{/pageMaker}}
+		</div>
+	<button id="next" type="button" class="btn btn-default" style="visibility: {{visiblility next}}">Next</button>
+</script>
+
 <script type="text/javascript">
 
    var serviceKey = "oMYSCkfnU%2BrM%2F6ad8zAICkGBj0eUCOxJc9bR%2F8MHuzhfo62P6cGA1YVZ7iY5QnDedVyfk5tMhc0Wu42fjDJ%2BcA%3D%3D";
    var pageNo = 1;
-   var numOfRows = 9;
+   var numOfRows = 15;
    /* default Page */
    $.getJSON("http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList?ServiceKey=" + serviceKey + "&pageNo=" + pageNo + "&numOfRows="+ numOfRows + "&contentTypeId=12&areaCode=1&sigunguCode=" + 1 + "&MobileOS=ETC&MobileApp=AppTesting", function(areaCode) {
        
        var items = areaCode.response.body.items.item;
        var temp2 = $('#codeTemp').html();
        var template = Handlebars.compile(temp2);
+       
+//        var page = $('#pageTemp').html();
+// 		var pageTemplate = Handlebars.compile(page);
+// 		var pagehtml = pageTemplate(pageMaker);
+// 		$('#pagination').html(pagehtml);
        
        $('#result').html("");
        
