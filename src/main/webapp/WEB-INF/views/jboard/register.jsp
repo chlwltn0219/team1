@@ -33,7 +33,8 @@
 	}
 	
 	.temp {
-		bottom: 0;
+		bottom: 5px;
+		right: 5px;
 		text-align: right;
 	}
 	
@@ -45,19 +46,29 @@
 		color: blue;
 	}
 	
-	#summary, #forecast6days {
+	div.sky {
+		text-align: left;
+		clear: both;
+		border: 1px solid #DDDDDD;
+		border-radius : 10px;
+	}
+	div.sky img{
+		float: left;
+	}
+	
+	#summary, #forecast6days, div.sky{
 		height: 50px;
 		text-align: center;
 	}
 	
 	@media ( min-width :992px){
-		#summary, #forecast6days {
+		#summary, #forecast6days, div.sky{
 			height: 70px;
 		}
 	}
 	
 	@media ( min-width :1200px) {
-		#summary, #forecast6days {
+		#summary, #forecast6days, div.sky{
 			height: 90px;
 		}
 	}
@@ -75,6 +86,7 @@
 			<div id="summary" class="row">
 				<h2> 3일 예보 </h2>
 			</div>
+			<hr>
 			<div id="forecast6days" class="row">
 				<h2> 중기 예보 (오전/오후) </h2>
 			</div>
@@ -168,7 +180,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 	
 	<script id="summaryTemplate" type="text/x-handlebars-template">
-		<div class="col-xs-1 col-md-1">
+		<div class="col-xs-1">
 			<div class="weather">
 				<div class="date"></div>
 				<img alt="sorry" src={{sky.icon}} width="100%">
@@ -180,11 +192,14 @@
 	</script>
 	
 	<script id="forecastTemplate" type="text/x-handlebars-template">
-		{{#for 0 12 1}}
-			<div class="col-xs-1 col-md-1">
+		{{#for 0 5 1}}
+			<div class="col-xs-2">
 				<div class="weather">
 					<div class="date"></div>
-					<img alt="sorry" src="" width="100%">
+					<div class="sky">
+						<img alt="" src="" width="50%">						
+						<img alt="" src="" width="50%">
+					</div>
 					<div class="temp">
 						<b><span class="max"></span> - <span class="min"></span></b>
 					</div>
@@ -289,6 +304,11 @@
 				    	$('#contentId').val(contentId);
 						
 						$.getJSON('/weather/forecast?lat='+ item[index].mapy + "&lon=" + item[index].mapx, function(weather) {
+							
+							console.log("###################################");
+							console.dir(weather);
+							console.log("###################################");
+							
 							var date = new Date();
 							var today = date.getDate();
 							var month;
@@ -310,8 +330,6 @@
 							
 							$('#forecast6days').html(comForecastTemp());
 							
-							alert();
-							
 							$('#forecast6days img').eq(0).attr("src", forecast6days.sky.amIcon3day);
 							$('#forecast6days img').eq(1).attr("src", forecast6days.sky.pmIcon3day);
 							$('#forecast6days img').eq(2).attr("src", forecast6days.sky.amIcon4day);
@@ -325,20 +343,31 @@
 							$('#forecast6days img').eq(10).attr("src", forecast6days.sky.amIcon8day);
 							$('#forecast6days img').eq(11).attr("src", forecast6days.sky.pmIcon8day);
 							
+							$('#forecast6days span.max').eq(0).html(forecast6days.temperature.tmax3day);
+							$('#forecast6days span.min').eq(0).html(forecast6days.temperature.tmin3day);
+							$('#forecast6days span.max').eq(1).html(forecast6days.temperature.tmax4day);
+							$('#forecast6days span.min').eq(1).html(forecast6days.temperature.tmin4day);
+							$('#forecast6days span.max').eq(2).html(forecast6days.temperature.tmax5day);
+							$('#forecast6days span.min').eq(2).html(forecast6days.temperature.tmin5day);
+							$('#forecast6days span.max').eq(3).html(forecast6days.temperature.tmax6day);
+							$('#forecast6days span.min').eq(3).html(forecast6days.temperature.tmin6day);
+							$('#forecast6days span.max').eq(4).html(forecast6days.temperature.tmax7day);
+							$('#forecast6days span.min').eq(4).html(forecast6days.temperature.tmin7day);
+							
 							for(var i=0; i<3; i++) {
 								date.setDate(today + i);
 								month = date.getMonth()+ 1;
 								day = date.getDate();
 								
-								$('div.date').eq(i).html("<b>" + month + "/" + day + "</b>");
+								$('#summary div.date').eq(i).html("<b>" + month + "/" + day + "</b>");
 							}
-							for(var i=3; i<15; i += 2) {
-								date.setDate(today + i);
+							for(var i=0; i<5; i ++) {
+								date.setDate(today + i + 3);
 								month = date.getMonth()+ 1;
 								day = date.getDate();
 								
-								$('div.date').eq(i).html("<b>" + month + "/" + day + "</b>");
-								$('div.date').eq(i+1).html("<b>" + month + "/" + day + "</b>");
+								$('#forecast6days div.date').eq(i*2).html("<b>" + month + "/" + day + "</b>");
+								$('#forecast6days div.date').eq(i*2+1).html("<b>" + month + "/" + day + "</b>");
 							}
 							
 						});

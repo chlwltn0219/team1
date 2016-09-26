@@ -14,15 +14,14 @@ public class Info {
 	String title;
 	String overview;
 	String tel;
-	String evnetTitle;
+	String playtime;
 	
 	
-	
-	public String getEvnetTitle() {
-		return evnetTitle;
+	public String getPlaytime() {
+		return playtime;
 	}
-	public void setEvnetTitle(String evnetTitle) {
-		this.evnetTitle = evnetTitle;
+	public void setPlaytime(String playtime) {
+		this.playtime = playtime;
 	}
 	public List<String> getImage() {
 		return image;

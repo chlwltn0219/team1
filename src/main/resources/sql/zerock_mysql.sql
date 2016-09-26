@@ -80,6 +80,7 @@ CREATE TABLE tbl_jboard
    PRIMARY KEY(bno)
 );
 
+
 --
 -- tbl_reply
 --

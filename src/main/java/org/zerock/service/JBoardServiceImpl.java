@@ -49,13 +49,6 @@ public class JBoardServiceImpl implements JBoardService {
     
     dao.deleteAttach(bno);
     
-    String[] files = board.getFiles();
-    
-    if(files == null) { return; } 
-    
-    for (String fileName : files) {
-      dao.replaceAttach(fileName, bno);
-    }
   }
   
 
