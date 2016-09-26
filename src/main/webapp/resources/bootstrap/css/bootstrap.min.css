@@ -3,17 +3,18 @@
  * Copyright 2011-2015 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */ /*! normalize.css v3.0.2 | MIT License | git.io/normalize */
- @import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
-
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
 
 * {
 	font-family: 'Noto Sans KR', sans-serif;
 }
+
 html {
 	font-family: sans-serif;
 	-webkit-text-size-adjust: 100%;
 	-ms-text-size-adjust: 100%
 }
+
 body {
 	margin: 0
 }
@@ -28,104 +29,26 @@ audio, canvas, progress, video {
 	vertical-align: baseline
 }
 
-audio
-
-
-
-
-
-
-
-
-
-
-:not
-
-
-
-
-
- 
-
-
-
-
-
+audio:not
 (
 [
 controls
 ]
 
-
-
-
-
- 
-
-
-
-
-
 ){
 display
 
-
-
-
-
-
-
-
-
-
 :
 
-
-
-
-
- 
-
-
-
-
-
 none
-
-
-
-
-
-
-
-
-
 
 ;
 height
 
-
-
-
-
-
-
-
-
-
 :
 
-
-
-
-
- 
-
-
-
-
-
-0}
+0
+}
 [hidden], template {
 	display: none
 }
@@ -186,62 +109,16 @@ img {
 svg
 
 
-
-
-
-
-
-
 :not
-
-
-
-
- 
-
-
 
 
 (
 :root
 
-
-
-
- 
-
-
-
-
 ){
 overflow
-
-
-
-
-
-
-
-
 :
-
-
-
-
- 
-
-
-
-
 hidden
-
-
-
-
-
-
-
-
 
 
 }
@@ -4031,12 +3908,20 @@ tbody.collapse.in {
 
 
 
+
+
+
+
 :not
 
 
 
 
+
+
  
+
+
 
 
 
@@ -4047,7 +3932,11 @@ tbody.collapse.in {
 
 
 
+
+
  
+
+
 
 
 
@@ -4058,7 +3947,11 @@ tbody.collapse.in {
 
 
 
+
+
  
+
+
 
 
 
@@ -4069,7 +3962,11 @@ tbody.collapse.in {
 
 
 
+
+
  
+
+
 
 
 
@@ -4080,7 +3977,11 @@ tbody.collapse.in {
 
 
 
+
+
  
+
+
 
 
 
@@ -4092,7 +3993,11 @@ tbody.collapse.in {
 
 
 
+
+
 	
+
+
 
 
 
@@ -4107,12 +4012,20 @@ border-radius
 
 
 
+
+
+
+
 :
 
 
 
 
+
+
  
+
+
 
 
 
@@ -4134,7 +4047,15 @@ border-radius
 
 
 
+
+
+
+
 :first-child
+
+
+
+
 
 
 
@@ -4148,7 +4069,11 @@ border-radius
 
 
 
+
+
  
+
+
 
 
 
@@ -4159,7 +4084,11 @@ border-radius
 
 
 
+
+
  
+
+
 
 
 
@@ -4170,7 +4099,11 @@ border-radius
 
 
 
+
+
  
+
+
 
 
 
@@ -4181,7 +4114,11 @@ border-radius
 
 
 
+
+
  
+
+
 
 
 
@@ -4196,12 +4133,20 @@ border-top-right-radius
 
 
 
+
+
+
+
 :
 
 
 
 
+
+
  
+
+
 
 
 
@@ -4216,12 +4161,20 @@ border-bottom-right-radius
 
 
 
+
+
+
+
 :
 
 
 
 
+
+
  
+
+
 
 
 
@@ -4239,7 +4192,15 @@ border-bottom-right-radius
 
 
 
+
+
+
+
 :last-child
+
+
+
+
 
 
 
@@ -4253,7 +4214,11 @@ border-bottom-right-radius
 
 
 
+
+
  
+
+
 
 
 
@@ -4264,7 +4229,11 @@ border-bottom-right-radius
 
 
 
+
+
  
+
+
 
 
 
@@ -4281,7 +4250,13 @@ border-bottom-right-radius
 
 
 
+
+
+
+
 :not
+
+
 
 
 
@@ -4292,13 +4267,19 @@ border-bottom-right-radius
 
 
 
+
+
 (
 :first-child
 
 
 
 
+
+
  
+
+
 
 
 
@@ -4313,12 +4294,20 @@ border-top-left-radius
 
 
 
+
+
+
+
 :
 
 
 
 
+
+
  
+
+
 
 
 
@@ -4333,12 +4322,20 @@ border-bottom-left-radius
 
 
 
+
+
+
+
 :
 
 
 
 
+
+
  
+
+
 
 
 
@@ -4431,12 +4428,20 @@ border-bottom-left-radius
 
 
 
+
+
+
+
 :not
 
 
 
 
+
+
  
+
+
 
 
 
@@ -4447,7 +4452,11 @@ border-bottom-left-radius
 
 
 
+
+
  
+
+
 
 
 
@@ -4458,7 +4467,11 @@ border-bottom-left-radius
 
 
 
+
+
  
+
+
 
 
 
@@ -4469,7 +4482,11 @@ border-bottom-left-radius
 
 
 
+
+
  
+
+
 
 
 
@@ -4484,12 +4501,20 @@ border-radius
 
 
 
+
+
+
+
 :
 
 
 
 
+
+
  
+
+
 
 
 
@@ -4507,7 +4532,15 @@ border-radius
 
 
 
+
+
+
+
 :first-child
+
+
+
+
 
 
 
@@ -4521,7 +4554,11 @@ border-radius
 
 
 
+
+
  
+
+
 
 
 
@@ -4532,7 +4569,11 @@ border-radius
 
 
 
+
+
  
+
+
 
 
 
@@ -4547,7 +4588,13 @@ border-top-right-radius
 
 
 
+
+
+
+
 :
+
+
 
 
 
@@ -4557,8 +4604,14 @@ border-top-right-radius
 
 
 
+
+
 4
 px
+
+
+
+
 
 
 
@@ -4577,12 +4630,20 @@ border-bottom-right-radius
 
 
 
+
+
+
+
 :
 
 
 
 
+
+
  
+
+
 
 
 
@@ -4597,12 +4658,20 @@ border-bottom-left-radius
 
 
 
+
+
+
+
 :
 
 
 
 
+
+
  
+
+
 
 
 
@@ -4620,7 +4689,15 @@ border-bottom-left-radius
 
 
 
+
+
+
+
 :last-child
+
+
+
+
 
 
 
@@ -4634,7 +4711,11 @@ border-bottom-left-radius
 
 
 
+
+
  
+
+
 
 
 
@@ -4645,7 +4726,11 @@ border-bottom-left-radius
 
 
 
+
+
  
+
+
 
 
 
@@ -4660,12 +4745,20 @@ border-top-left-radius
 
 
 
+
+
+
+
 :
 
 
 
 
+
+
  
+
+
 
 
 
@@ -4680,12 +4773,20 @@ border-top-right-radius
 
 
 
+
+
+
+
 :
 
 
 
 
+
+
  
+
+
 
 
 
@@ -4700,7 +4801,13 @@ border-bottom-left-radius
 
 
 
+
+
+
+
 :
+
+
 
 
 
@@ -4710,8 +4817,14 @@ border-bottom-left-radius
 
 
 
+
+
 4
 px
+
+
+
+
 
 
 
@@ -4843,7 +4956,11 @@ select[multiple].input-group-sm>.form-control, select[multiple].input-group-sm>.
 
 
 
+
+
  
+
+
 
 
 
@@ -4857,12 +4974,20 @@ select[multiple].input-group-sm>.form-control, select[multiple].input-group-sm>.
 
 
 
+
+
+
+
 :not
 
 
 
 
+
+
  
+
+
 
 
 
@@ -4873,7 +4998,11 @@ select[multiple].input-group-sm>.form-control, select[multiple].input-group-sm>.
 
 
 
+
+
  
+
+
 
 
 
@@ -4884,7 +5013,11 @@ select[multiple].input-group-sm>.form-control, select[multiple].input-group-sm>.
 
 
 
+
+
  
+
+
 
 
 
@@ -4895,7 +5028,11 @@ select[multiple].input-group-sm>.form-control, select[multiple].input-group-sm>.
 
 
 
+
+
  
+
+
 
 
 
@@ -4910,12 +5047,20 @@ select[multiple].input-group-sm>.form-control, select[multiple].input-group-sm>.
 
 
 
+
+
+
+
 :not
 
 
 
 
+
+
  
+
+
 
 
 
@@ -4926,7 +5071,11 @@ select[multiple].input-group-sm>.form-control, select[multiple].input-group-sm>.
 
 
 
+
+
  
+
+
 
 
 
@@ -4937,7 +5086,11 @@ select[multiple].input-group-sm>.form-control, select[multiple].input-group-sm>.
 
 
 
+
+
  
+
+
 
 
 
@@ -4948,7 +5101,11 @@ select[multiple].input-group-sm>.form-control, select[multiple].input-group-sm>.
 
 
 
+
+
  
+
+
 
 
 
@@ -4963,12 +5120,20 @@ select[multiple].input-group-sm>.form-control, select[multiple].input-group-sm>.
 
 
 
+
+
+
+
 :not
 
 
 
 
+
+
  
+
+
 
 
 
@@ -4979,7 +5144,11 @@ select[multiple].input-group-sm>.form-control, select[multiple].input-group-sm>.
 
 
 
+
+
  
+
+
 
 
 
@@ -4990,7 +5159,11 @@ select[multiple].input-group-sm>.form-control, select[multiple].input-group-sm>.
 
 
 
+
+
  
+
+
 
 
 
@@ -5001,7 +5174,11 @@ select[multiple].input-group-sm>.form-control, select[multiple].input-group-sm>.
 
 
 
+
+
  
+
+
 
 
 
@@ -5016,12 +5193,20 @@ border-radius
 
 
 
+
+
+
+
 :
 
 
 
 
+
+
  
+
+
 
 
 
@@ -5068,12 +5253,20 @@ border-radius
 
 
 
+
+
  
 
 
 
 
+
+
 .form-control
+
+
+
+
 
 
 
@@ -5093,9 +5286,17 @@ border-radius
 
 
 
+
+
+
+
 :first-child
 ,
 .input-group-btn
+
+
+
+
 
 
 
@@ -5109,6 +5310,10 @@ border-radius
 .btn
 ,
 .input-group-btn
+
+
+
+
 
 
 
@@ -5124,6 +5329,10 @@ border-radius
 .btn
 ,
 .input-group-btn
+
+
+
+
 
 
 
@@ -5145,9 +5354,17 @@ border-radius
 
 
 
+
+
+
+
 :last-child
 >
 .btn-group
+
+
+
+
 
 
 
@@ -5162,7 +5379,11 @@ border-radius
 
 
 
+
+
 	
+
+
 
 
 
@@ -5173,7 +5394,11 @@ border-radius
 
 
 
+
+
  
+
+
 
 
 
@@ -5190,6 +5415,10 @@ border-radius
 
 
 
+
+
+
+
 :last-child
 >
 .btn
@@ -5201,12 +5430,20 @@ border-radius
 
 
 
+
+
+
+
 :not
 
 
 
 
+
+
  
+
+
 
 
 
@@ -5218,7 +5455,11 @@ border-radius
 
 
 
+
+
 	
+
+
 
 
 
@@ -5229,7 +5470,11 @@ border-radius
 
 
 
+
+
  
+
+
 
 
 
@@ -5240,7 +5485,11 @@ border-radius
 
 
 
+
+
  
+
+
 
 
 
@@ -5255,12 +5504,20 @@ border-top-right-radius
 
 
 
+
+
+
+
 :
 
 
 
 
+
+
  
+
+
 
 
 
@@ -5275,12 +5532,20 @@ border-bottom-right-radius
 
 
 
+
+
+
+
 :
 
 
 
 
+
+
  
+
+
 
 
 
@@ -6027,19 +6292,18 @@ border-bottom-right-radius
 
 .navbar-inverse {
 	background-color: #222;
-	border-color: #080808
+	border-color: #080808;
 }
-
 
 .navbar-inverse .navbar-brand {
-	color: #9d9d9d
+	color: #9d9d9d;
 }
 
-.navbar-inverse .navbar-brand:focus, .navbar-inverse .navbar-brand:hover
-	{
+.navbar-inverse .navbar-brand:focus, .navbar-inverse .navbar-brand:hover {
 	color: #fff;
 	background-color: transparent
 }
+
 .navbar-inverse .navbar-nav>.open>a, .navbar-inverse .navbar-nav>.open>a:focus,
 .navbar-inverse .navbar-nav>.open>a:hover {
 	color: white;
@@ -6047,11 +6311,11 @@ border-bottom-right-radius
 }
 
 .navbar-inverse .navbar-text {
-	color: #9d9d9d
+	color: white;
 }
 
 .navbar-inverse .navbar-nav>li>a {
-	color: #9d9d9d
+	color: white;
 }
 
 .navbar-inverse .navbar-nav>li>a:focus, .navbar-inverse .navbar-nav>li>a:hover
@@ -6072,10 +6336,6 @@ border-bottom-right-radius
 	background-color: transparent
 }
 
-.navbar-inverse .navbar-toggle {
-	border-color: #333
-}
-
 .navbar-inverse .navbar-toggle:focus, .navbar-inverse .navbar-toggle:hover
 	{
 	background-color: #333
@@ -6086,9 +6346,8 @@ border-bottom-right-radius
 }
 
 .navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
-	border-color: #101010
+	border-color: rgb(14,201,190);
 }
-
 
 .navbar-inverse .navbar-nav>.open>a, .navbar-inverse .navbar-nav>.open>a:focus,
 	.navbar-inverse .navbar-nav>.open>a:hover {
@@ -6104,11 +6363,11 @@ border-bottom-right-radius
 		background-color: #080808
 	}
 	.navbar-inverse .navbar-nav .open .dropdown-menu>li>a {
-		color: #9d9d9d
+		color: white;
 	}
 	.navbar-inverse .navbar-nav .open .dropdown-menu>li>a:focus,
 		.navbar-inverse .navbar-nav .open .dropdown-menu>li>a:hover {
-		color: #fff;
+		color: black;
 		background-color: transparent
 	}
 	.navbar-inverse .navbar-nav .open .dropdown-menu>.active>a,
@@ -6174,6 +6433,9 @@ border-bottom-right-radius
 	padding-left: 0;
 	margin: 20px 0;
 	border-radius: 4px
+}
+ a:active {
+color: #fff;
 }
 
 .pagination>li {
