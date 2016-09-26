@@ -96,7 +96,7 @@ CREATE TABLE tbl_reply
 );
 
 ALTER TABLE tbl_reply
-  ADD CONSTRAINT fk_board_reply FOREIGN KEY(bno) REFERENCES tbl_board(bno);
+  ADD CONSTRAINT fk_jboard_reply FOREIGN KEY(bno) REFERENCES tbl_jboard(bno);
 
 --
 -- tbl_attach

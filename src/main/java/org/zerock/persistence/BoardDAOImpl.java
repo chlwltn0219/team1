@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
+import org.slf4j.Logger;
 import org.springframework.stereotype.Repository;
 import org.zerock.domain.BoardVO;
 import org.zerock.domain.Criteria;
@@ -88,7 +89,11 @@ public class BoardDAOImpl implements BoardDAO {
 
     paramMap.put("bno", bno);
     paramMap.put("amount", amount);
-
+    
+    System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXX");
+    System.out.println(amount);
+    System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXX");
+    
     session.update(namespace + ".updateReplyCnt", paramMap);
   }
 
