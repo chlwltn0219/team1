@@ -90,7 +90,7 @@
 
 
 				<div class="box-footer">
-retrete
+
 					<div class="text-center">
 
 						<ul class="pagination">
