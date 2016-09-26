@@ -52,11 +52,11 @@
                <h3 class="box-title">
                   <b>상세보기</b>
                </h3>
+	            <a href="list">
+	            	<img class="btn_list" src="http://kr.seaicons.com/wp-content/uploads/2015/11/Data-List-icon.png">
+	            </a>
             </div>
 
-            <a href="list">
-               <button>List</button>
-            </a>
             <div id="result"></div>
 
 

@@ -13,7 +13,7 @@ h2{
 }
 
 .img1{
- display: block;
+ 	display: block;
     margin: auto;
     width:80%;
     height:80%;
@@ -37,4 +37,10 @@ h2{
         cursor: pointer;
         margin-bottom: 0px;
         margin-left: 5px;
+}
+
+.btn_list{
+	width: 25px;
+	float: right;
+	margin-right: 5px;
 }
