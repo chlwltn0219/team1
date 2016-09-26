@@ -43,4 +43,6 @@ public class UserVO {
   public String toString() {
     return "UserVO [uid=" + uid + ", upw=" + upw + ", uname=" + uname + ", upoint=" + upoint + "]";
   }
+
+
 }

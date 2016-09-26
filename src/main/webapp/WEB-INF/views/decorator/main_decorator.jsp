@@ -54,12 +54,13 @@ div.container {
  	background-color: rgb(14, 201, 190);
 	padding: 25px;
 	bottom: 0;
-	position: relative;
+	position: fixed;
+	z-index: 500;
 }
 
 .navbar {
-background-color: rgb(14, 201, 190);
-border-color: rgb(14, 201, 190);
+	background-color: rgb(14, 201, 190);
+	border-color: rgb(14, 201, 190);
 }
 
 .navbar-inverse .navbar-nav > li > a:active {
@@ -79,13 +80,17 @@ border-color: rgb(14, 201, 190);
 	color: black;
 }
 
+.navbar-inverse .navbar-toggle {
+	border-color:rgb(14,201,190);
+}
+
 a:hover
 a:focus {
 	color:black;
 }
 
 .marginsize {
-	margin-top: 5%;
+	margin-top: 100px;
 }
 
 .navbar .navbar-inverse .navbar-fixed-top:hover,
@@ -93,10 +98,17 @@ a:focus {
 	color: black;
 }
 
+.navbar-inverse 
+.navbar-collapse,
+.navbar-inverse
+.navbar-form {
+	border-color: rgb(14,201,190);
+}
 
-
+div.bottom {
+	height: 70px;
+}
 </style>
-
 </head>
 <body>
 	<!-- wrapper -->
@@ -116,19 +128,9 @@ a:focus {
 					<div class="collapse navbar-collapse" id="myNavbar">
 						<!-- Menu -->
 						<ul class="nav navbar-nav">
-							<li class="dropdown">
-								<a href="/festival/festival">행사</a>
-							</li>
-							<li class="dropdown">
-								<a class="dropdown-toggle"  data-toggle="dropdown" href="#">관광 <span class="caret"></span></a>
-								<ul class="dropdown-menu">
-									<li><a href="/place/list">관광지</a></li>
-									<li><a href="/place/list">문화시설</a></li>
-								</ul>
-							</li>
-							<li><a href="/jboard/list">Go With Me?</a></li>
-							<li><a href="#">Gallery</a></li>
-							<li><a href="#">Statistics</a></li>
+							<li id="festival"><a href="/festival/festival">행사</a></li>
+							<li id="place"><a href="/place/list">관광지</a></li>
+							<li id="jboard"><a href="/jboard/list">Go With Me?</a></li>
 						</ul>
 						<!-- Before Log in -->
 						<c:if test="${empty login}">
@@ -155,9 +157,8 @@ a:focus {
 				</div>
 			</nav>
 		</header>
-		
 		<!-- Content Wrapper. Contains page content -->
-<!-- 		<div class="container well well-lg"> -->
+		<!-- <div class="container well well-lg"> -->
 			<div class="marginsize">
 			<section>
 				<!-- ################## -->
@@ -170,9 +171,9 @@ a:focus {
 				<!-- END   Main Content -->
 				<!-- ################## -->
 			</section>
-<!-- 		</div> -->
+		<!-- </div> -->
 			</div>
-
+		<div class="bottom"></div>
 		<footer class="container-fluid text-center footer">
 			<div class="pull-right hidden-xs">
 				<b>Version</b> 0.1
@@ -195,6 +196,28 @@ a:focus {
 	<script src="/resources/dist/js/app.min.js" type="text/javascript"></script>
 	<!-- AdminLTE for demo purposes -->
 	<script src="/resources/dist/js/demo.js" type="text/javascript"></script>
+	
+	<script type="text/javascript">
+		
+		var nowURI = document.location.href;
+		var splitArr = nowURI.split('/');
+		
+        switch (splitArr[3]) {
+	        case 'place'  : 
+				$('#place a').css('color', 'black');
+	        	break;
+	        case 'festival' : 
+ 	        	$('#festival a').css('color', 'black');
+	        	break;
+	        case 'jboard'  : 
+	        	$('#jboard a').css('color', 'black');
+	        	break;
+	        default   : 
+	         	break;
+       }
+		
+	</script>
+	
 </body>
 </html>
 

@@ -46,13 +46,65 @@
 		height: 100%;
 	}
 	
-	</style>
+	.weather, .date, .temp{
+		position: absolute;
+		width: 100%;
+		text-align: center;
+	}
+	
+	.temp {
+		bottom: 0;
+		text-align: right;
+	}
+	
+	span.max {
+		color: red;
+	}
+	
+	span.min {
+		color: blue;
+	}
+	
+	#summary, #forecast6days {
+			height: 50px;
+			text-align: center;
+	}
+	
+	@media ( min-width :992px){
+		#summary, #forecast6days {
+			height: 70px;
+		}
+	}
+	
+	@media ( min-width :1200px) {
+		#summary, #forecast6days {
+			height: 90px;
+		}
+	}
+	
+</style>
 </head>
 <body>
     <div class='popup back' style="display:none;"></div>
     <div id="popup_front" class='popup front' style="display:none;">
     	<img id="popup_img">
     </div>
+    
+	<!-- Weather -->
+	<div class="box box-success">
+		<div class="box-header">
+			<h3 class="box-title">Weather</h3>
+		</div>
+
+		<div class="box-body">
+			<div id="summary" class="row">
+				<h2> 3일 예보 </h2>
+			</div>
+			<div id="forecast6days" class="row">
+				<h2> 중기 예보 (오전/오후) </h2>
+			</div>
+		</div>
+	</div>
 
 	<div class="row">
 		<!-- left column -->
@@ -114,13 +166,13 @@
 				<div class="box-body">
 					<div id="btnre" class="row">
 						<div class="col-xs-2 btnImg">
-							<button id="btnLeft" class="btn btn-warning" style="height: 200px; width: 100%"><h3><i class="fa fa-arrow-circle-o-left"></i></h3></button>
+							<button id="btnLeft" class="btn btn-warning" style="height: 150px; width: 100%"><h3><i class="fa fa-arrow-circle-o-left"></i></h3></button>
 						</div>
 						<div class="col-xs-8" style="text-align: center;" id="infoImage">
-							<img alt="image" src="/resources/img/NoImage.jpg" style="height: 200px">
+							<img alt="image" src="/resources/img/NoImage.jpg" style="height: 150px">
 						</div>
 						<div class="col-xs-2 btnImg">
-							<button id="btnRight" class="btn btn-warning" style="height: 200px; width: 100%"><h3><i class="fa fa-arrow-circle-o-right"></i></h3></button>
+							<button id="btnRight" class="btn btn-warning" style="height: 150px; width: 100%"><h3><i class="fa fa-arrow-circle-o-right"></i></h3></button>
 						</div>
 					</div>
 					<hr>
@@ -295,6 +347,31 @@
 		{{/each}}
 	</script>
 	
+	<script id="summaryTemplate" type="text/x-handlebars-template">
+		<div class="col-xs-1">
+			<div class="weather">
+				<div class="date"></div>
+				<img alt="sorry" src={{sky.icon}} width="100%">
+				<div class="temp">
+					<b><span class="max">{{temperature.tmax}}</span> - <span class="min">{{temperature.tmin}}</span></b>
+				</div>
+			</div>
+		</div>
+	</script>
+	
+	<script id="forecastTemplate" type="text/x-handlebars-template">
+		{{#for 0 12 1}}
+			<div class="col-xs-1">
+				<div class="weather">
+					<div class="date"></div>
+					<img alt="sorry" src="" width="100%">
+					<div class="temp">
+						<b><span class="max"></span> - <span class="min"></span></b>
+					</div>
+				</div>
+			</div>
+		{{/for}}
+	</script>
 
 <script>
 	
@@ -323,6 +400,62 @@
 		$('#infoCost div').eq(0).html(cost.usetimefestival);
 		$('#infoCost div').eq(1).html(cost.discountinfofestival);
 		$('#infoHomepage').html(data.homepage);
+		
+		$.getJSON('/weather/forecast?lat='+ location.mapy + "&lon=" + location.mapx, function(weather) {
+			var date = new Date();
+			var today = date.getDate();
+			var month;
+			var day;
+			
+			var summary = weather.summary[0];
+			var forecast6days = weather.forecast6days[0];
+			
+			var summaryTemp = $('#summaryTemplate').html();
+			var compSummaryTemp = Handlebars.compile(summaryTemp);
+			
+			var forecastTemp = $('#forecastTemplate').html();
+			var comForecastTemp = Handlebars.compile(forecastTemp);
+			
+			$('#summary').html("");
+			$('#summary').append(compSummaryTemp(summary.today));
+			$('#summary').append(compSummaryTemp(summary.tomorrow));
+			$('#summary').append(compSummaryTemp(summary.dayAfterTomorrow));
+			
+			$('#forecast6days').html(comForecastTemp());
+			
+			alert();
+			
+			$('#forecast6days img').eq(0).attr("src", forecast6days.sky.amIcon3day);
+			$('#forecast6days img').eq(1).attr("src", forecast6days.sky.pmIcon3day);
+			$('#forecast6days img').eq(2).attr("src", forecast6days.sky.amIcon4day);
+			$('#forecast6days img').eq(3).attr("src", forecast6days.sky.pmIcon4day);
+			$('#forecast6days img').eq(4).attr("src", forecast6days.sky.amIcon5day);
+			$('#forecast6days img').eq(5).attr("src", forecast6days.sky.pmIcon5day);
+			$('#forecast6days img').eq(6).attr("src", forecast6days.sky.amIcon6day);
+			$('#forecast6days img').eq(7).attr("src", forecast6days.sky.pmIcon6day);
+			$('#forecast6days img').eq(8).attr("src", forecast6days.sky.amIcon7day);
+			$('#forecast6days img').eq(9).attr("src", forecast6days.sky.pmIcon7day);
+			$('#forecast6days img').eq(10).attr("src", forecast6days.sky.amIcon8day);
+			$('#forecast6days img').eq(11).attr("src", forecast6days.sky.pmIcon8day);
+			
+			for(var i=0; i<3; i++) {
+				date.setDate(today + i);
+				month = date.getMonth()+ 1;
+				day = date.getDate();
+				
+				$('div.date').eq(i).html("<b>" + month + "/" + day + "</b>");
+			}
+			for(var i=3; i<15; i += 2) {
+				date.setDate(today + i);
+				month = date.getMonth()+ 1;
+				day = date.getDate();
+				
+				$('div.date').eq(i).html("<b>" + month + "/" + day + "</b>");
+				$('div.date').eq(i+1).html("<b>" + month + "/" + day + "</b>");
+			}
+			
+		});
+		
 		
 		$('#btnRight').on('click', function() {
 			if(imageNo==image.length-1)
@@ -393,8 +526,6 @@
 		target.after(html);
 
 	}
-	
-	
 	
 	// reply pagination
 	var bno = ${jBoardVO.bno};
@@ -550,12 +681,6 @@ $(document).ready(function(){
 		formObj.attr("method", "get");		
 		formObj.submit();
 	});
-	
-/* 	$("#removeBtn").on("click", function(){
-		formObj.attr("action", "/sboard/removePage");
-		formObj.submit();
-	}); */
-
 	
 	$("#removeBtn").on("click", function(){
 		var replyCnt =  $("#replycntSmall").html();

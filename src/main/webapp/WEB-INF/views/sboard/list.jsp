@@ -87,12 +87,8 @@
 					</table>
 				</div>
 				<!-- /.box-body -->
-
-
 				<div class="box-footer">
-retrete
 					<div class="text-center">
-
 						<ul class="pagination">
 							<c:if test="${pageMaker.prev}">
 								<li><a

@@ -31,6 +31,7 @@ CREATE TABLE tbl_user
    uid            VARCHAR(50) NOT NULL,
    upw            VARCHAR(50) NOT NULL,
    uname          VARCHAR(100) NOT NULL,
+   
    upoint         int NOT NULL DEFAULT 0,
    sessionkey     varchar(50) NOT NULL DEFAULT 'none',
    sessionlimit   timestamp NOT NULL DEFAULT now(),

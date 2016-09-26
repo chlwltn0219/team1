@@ -60,33 +60,7 @@
 	<tbody id="result" ></tbody>
 	</table>
 </div>
-<div class="box-footer">
-
-		<div class="text-center">
-			<ul class="pagination">
-
-				<c:if test="${pageMaker.prev}">
-					<li><a
-						href="festival${pageMaker.makeSearch(pageMaker.startPage - 1) }">&laquo;</a></li>
-				</c:if>
-
-				<c:forEach begin="${pageMaker.startPage }"
-					end="${pageMaker.endPage }" var="idx">
-					<li
-						<c:out value="${pageMaker.cri.page == idx?'class =active':''}"/>>
-						<a href="festival${pageMaker.makeSearch(idx)}">${idx}</a>
-					</li>
-				</c:forEach>
-
-				<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-					<li><a
-						href="festival${pageMaker.makeSearch(pageMaker.endPage +1) }">&raquo;</a></li>
-				</c:if>
-
-			</ul>
-		</div>
-
-	</div>
+<div id="pager" style="text-align: center;"></div>
 
 <a class="return-top" href="#">
 	<img src="http://cfs.tistory.com/custom/blog/202/2025510/skin/images/top1.png"> <!-- TOP 스크롤 -->
@@ -113,18 +87,25 @@
 <script type="text/javascript">
 	/* 시군구 셀렉트 값을 받아 리스트 리턴 */
 	$('#sigungu').on('change', function() {
-		
-		var page = "";
+		pageNo = 1;	
 		var areaCode = $('#sigungu option:selected').val();
-		
-		$.getJSON("/festival/list?sigunguCode=" + areaCode + "&pageNo=" + page, function(data) {
+		$.getJSON("/festival/list?sigunguCode=" + areaCode + "&pageNo=" + pageNo, function(data, pageNo) {
 			// json 객체 내부 접근하기
 			console.dir(data);
+			console.dir(pageMaker);
 			
 			var items = data.items.item;
+			var pageMaker = data.pageMaker;
 			
 			var temp2 = $('#codeTemp').html();
 			var template = Handlebars.compile(temp2);
+			
+			var page = $('#pageTemplate').html();
+			var pageTemplate = Handlebars.compile(page);
+			var pagehtml = pageTemplate(pageMaker);
+			$('#pager').html(pagehtml);
+
+			setPaginationEvent(data);
 			
 			$('#result').html("");
 			
@@ -134,22 +115,32 @@
 				$('#result').append(html);
 				imgCheck(i);
 				imgHover2();
+				setPaginationEvent(data);
 			}
 		});
 	});
 		
 	areaCode = 1;
-	
+	pageNo = 1;	
 	
 	/* 기본 리스트 */
-	$.getJSON("/festival/list?sigunguCode=" + areaCode + "&pageNo=" + page, function(data) {
+	$.getJSON("/festival/list?sigunguCode=" + areaCode + "&pageNo=" + pageNo, function(data) {
 		// json 객체 내부 접근하기
 		console.dir(data);
+		console.dir(pageMaker);
 		
 		var items = data.items.item;
+		var pageMaker = data.pageMaker;
 		
 		var temp2 = $('#codeTemp').html();
 		var template = Handlebars.compile(temp2);
+		
+		var page = $('#pageTemplate').html();
+		var pageTemplate = Handlebars.compile(page);
+		var pagehtml = pageTemplate(pageMaker);
+		$('#pager').html(pagehtml);
+
+		setPaginationEvent(data);
 		
 		$('#result').html("");
 		
@@ -237,6 +228,80 @@
 	    });
 	});
 	
+	/* paging */
+	
+	function getList(pageNo) {
+			$.getJSON("/festival/list?sigunguCode=" + areaCode + "&pageNo=" + pageNo, function(data) {
+				console.dir(data);
+				console.log(pageNo);
+				
+				var item = data.items.item;
+				var pageMaker = data.pageMaker;
+				console.dir(item);
+				console.dir(pageMaker);
+				
+	// 			Print Pager
+				var page = $('#pageTemplate').html();
+				var pageTemplate = Handlebars.compile(page);
+				var pagehtml = pageTemplate(pageMaker);
+				$('#pager').html(pagehtml);
+
+				setPaginationEvent(data);
+			});
+		}
+	
+	function setPaginationEvent(data) {
+		$('button.page').on('click', function() {
+			getList(this.value);
+		});
+		$('#prev').on('click', function() {
+			getList(data.pageMaker.startPage-1);					
+		});
+		$('#next').on('click', function() {
+			getList(data.pageMaker.endPage+1);
+		});
+	}
+	
+	Handlebars.registerHelper('visiblility' , function(visible) {
+		if(visible)
+			return 'visible'; 
+		else 
+			return 'hidden';
+	});
+
+
+	Handlebars.registerHelper('pageMaker', function(from, to, incr, block) {
+		console.dir(block);
+		
+	    var accum = '';
+	    var nowPage = block.data.root.cri.page;
+		var active = '';
+	    
+	    for(var i = from; i <= to; i += incr){
+		    if(nowPage==i)
+	    		active = 'active';
+	    	
+	    	var custom = {
+	    		pageNo : i,
+	    		active : active
+	    	};
+	        accum += block.fn(custom);
+	        active = '';
+	    }
+	    console.dir(accum);
+	    
+	    return accum;
+	});
+	
+</script>
+<script id="pageTemplate" type="text/x-handlebars-template">
+	<button id="prev" type="button" class="btn btn-default" style="visibility: {{visiblility prev}}">Prev</button>
+		<div class="btn-group">
+			{{#pageMaker startPage endPage 1}}
+				<button type="button" class="btn btn-default page {{this.active}}" value={{this.pageNo}}>{{this.pageNo}}</button>
+			{{/pageMaker}}
+		</div>
+	<button id="next" type="button" class="btn btn-default" style="visibility: {{visiblility next}}">Next</button>
 </script>
 </body>
 </html>

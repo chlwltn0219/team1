@@ -37,12 +37,12 @@ public class CheckIDController {
 			if(who==null) {
 				rtn.put("IDchecking", true);
 			
-			System.out.println(rtn.get("avaluable"));
+			System.out.println(rtn.get("available"));
 			
 			} else {
 				rtn.put("IDchecking", false);
 			
-			System.out.println(rtn.get("disavaluable"));
+			System.out.println(rtn.get("unavailable"));
 			
 			}
 			entity = new ResponseEntity<>(rtn, HttpStatus.OK);
