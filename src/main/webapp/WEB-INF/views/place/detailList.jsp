@@ -9,10 +9,18 @@
 <link rel="stylesheet"
    href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <!-- CSS -->
 <link href="/resources/css/place2.css" rel="stylesheet" type="text/css" />
+
+
+<title>관광지 상세보기</title>
+<!-- Bootstrap 3.3.7 -->
+<link rel="stylesheet"
+   href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
 <title>SINAE_Detail.jsp</title>
 <script
@@ -32,7 +40,6 @@
 <script async defer
    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAA4WMo8DvHp--izPUaJTqHDV0wJotTBpc"></script>
 <style type="text/css">
-
 </style>
 </head>
 
@@ -46,11 +53,12 @@
                   <b>상세보기</b>
                </h3>
             </div>
-            
+
             <a href="list">
-            	<button>List</button>
+               <button>List</button>
             </a>
             <div id="result"></div>
+
 
                <!-- Modal -->
                <div class="modal fade" id="myModal" role="dialog">
@@ -71,49 +79,141 @@
                         </div>
                      </div>
 
+            <!-- Modal -->
+            <div class="modal fade" id="myModal" role="dialog">
+               <div class="modal-dialog">
+
+                  <!-- Modal content-->
+                  <div class="modal-content">
+                     <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">위치보기</h4>
+                     </div>
+                     <div class="modal-body">
+                        <div id="map" style="width: 100%; height: 400px"></div>
+                     </div>
+                     <div class="modal-footer">
+                        <button type="button" class="btn btn-default"
+                           data-dismiss="modal">Close</button>
+                     </div>
                   </div>
                </div>
-            
+            </div>
          </div>
       </div>
    </div>
+
+   <a class="return-top" href="#"
+      style="right: 27px; bottom: 50px; position: fixed; z-index: 9999;">
+      <img
+      src="http://cfs.tistory.com/custom/blog/202/2025510/skin/images/top1.png">
+   </a>
+
+            <script id="codeTemp2" type="text/mytemplate">
+               {{#each .}}
+                  <div class="w3-display-container mySlides">
+                     <img src="{{originimgurl}}" style="width: 100%;">
+                  </div>   
+               {{/each}}
+            </script>
+            
+            <script type="text/javascript">
+            $("#imgresult").load(function(){
+                alert("Image loaded.");
+            });
+            </script>
+            
+            <script type="text/javascript">
+               
+            
+                  var slideIndex = 2;
+                  showDivs(slideIndex);
    
-   <a class="return-top" href="#" style="right:27px; bottom:50px; position:fixed; z-index:9999;">
-		<img src="http://cfs.tistory.com/custom/blog/202/2025510/skin/images/top1.png">
-	</a>
+                  function plusDivs(n) {
+                     showDivs(slideIndex += n);
+                  }
+   
+                  function showDivs(n) {
+                     var i;
+                     var x = document.getElementsByClassName("mySlides");
+                     if (n > x.length) {
+                        slideIndex = 1
+                     }
+                     if (n < 1) {
+                        slideIndex = x.length
+                     }
+                     for (i = 0; i < x.length; i++) {
+                        x[i].style.display = "none";
+                     }
+                     x[slideIndex-1].style.display = "block";
+                  }
+            </script>
+
+            <script>
+               $.getJSON("/detail/image?contentId=" + "${contentid}",
+                     function(data) {
+                        // json 객체 내부 접근하기
+                        var items = data.items.item;
+                        //x,y값 items에서 가져와 적용 
+                        var temp2 = $('#codeTemp2').html();
+                        var template = Handlebars.compile(temp2);
+                        var html = template(items);
+                        $('#imgresult').append(html);
+                        plusDivs(0);
+                     });
+            </script>
+
 
    <script id="codeTemp" type="text/xxx-mytemplate">
          <div class="centered">
             <h2>{{title}}</h2><br>
-            <img class="img1" src="{{firstimage}}">
          </div>
+         
+            <div class="w3-content" style="max-width: 800px; position: relative">
+            
+               <!--이미지결과 -->
+               <div id="imgresult">
+                  <div class="w3-display-container mySlides">
+                     <img src="{{firstimage}}" style="width:100%; height=300px;">
+                  </div>
+               </div>
+               <!--이미지결과 -->
+               
+               <a class="w3-btn-floating w3-hover-dark-grey"
+                  style="position: absolute; top: 250px; left: 0; background-color: rgb(14,201,190);"
+                  onclick="plusDivs(-1)">❮</a> 
+               <a class="w3-btn-floating w3-hover-dark-grey"
+                  style="position: absolute; top: 250px; right: 0; background-color: rgb(14,201,190);"
+                  onclick="plusDivs(1)">❯</a>
+            </div>
+
+
+             
+
          <div class="detail">
             <p>
                <ul>
-                  <li><b>소개 : </b> <br><br> <p id="overview" class="detailtext"></p></li><br>
-                  <li><b>주소 : </b> 
-                     <p class="detailtext"> {{addr1}}&nbsp;&nbsp;&nbsp; 
-                        <a type="submit" data-toggle="modal" data-target="#myModal">
+                  <li><b>소개 : </b><br><br><p id="overview" class="detailtext"></p></li><br>
+                  <li><b>주소 : </b><br><br>
+                     <p class="detailtext"> {{addr1}} 
+                        <a data-toggle="modal" data-target="#myModal">
                            <img class="btn_map" src="/resources/img/location.png">
                         </a>
                      </p>
                   </li>
-                  <li><b>홈페이지 : </b> <p class="detailtext" id="homepage"></p></li><br>
+                  <li><b>홈페이지 : </b><br><br><p class="detailtext" id="homepage"></p></li><br>
                </ul>
             </p>
          </div>
    </script>
 
    <script type="text/javascript">
-   
       var items;
       var mapzoom;
       var title;
-      
-      $("#myModal").on('shown.bs.modal', function () {
+
+      $("#myModal").on('shown.bs.modal', function() {
          initMap(items.mapx, items.mapy);
-         
-         
       });
 
       //////////////////////////////////////////////////   Map
@@ -147,7 +247,7 @@
 
          var temp2 = $('#codeTemp').html();
          var template = Handlebars.compile(temp2);
-            
+
          var html = template(items);
 
          $('#result').html(html);
@@ -155,33 +255,32 @@
          $('#homepage').html(items.homepage);
 
       });
-      
    </script>
-   
-<script>
-	/* 스크롤 이벤트 */
-	$(document).ready(function(){
-        
-	    $(".return-top").hide(); // 탑 버튼 숨김
-	    $(function () {
-	                 
-	        $(window).scroll(function () {
-	            if ($(this).scrollTop() > 100) { // 스크롤 내릴 표시
-	                $('.return-top').fadeIn();
-	            } else {
-	                $('.return-top').fadeOut();
-	            }
-	        });
-	                
-	        $('.return-top').click(function () {
-	            $('body,html').animate({
-	                scrollTop: 0
-	            }, 600);  // 탑 이동 스크롤 속도
-	            return false;
-	        });
-	    });
-	});
-</script>
+
+   <script>
+      /* 스크롤 이벤트 */
+      $(document).ready(function() {
+
+         $(".return-top").hide(); // 탑 버튼 숨김
+         $(function() {
+
+            $(window).scroll(function() {
+               if ($(this).scrollTop() > 100) { // 스크롤 내릴 표시
+                  $('.return-top').fadeIn();
+               } else {
+                  $('.return-top').fadeOut();
+               }
+            });
+
+            $('.return-top').click(function() {
+               $('body,html').animate({
+                  scrollTop : 0
+               }, 600); // 탑 이동 스크롤 속도
+               return false;
+            });
+         });
+      });
+   </script>
 
 </body>
 </html>
