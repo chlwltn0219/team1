@@ -37,6 +37,9 @@
 	float: right;
 }
 
+.box {
+	margin-top: 3%;
+}
 
 .btn_detail{
 	background-color: red;
@@ -53,6 +56,10 @@
 	background-color: red;
 }
 
+#pagination {
+	margin-bottom: 100px;
+	
+}
 .info{
 	color: white;
 	position: absolute;
