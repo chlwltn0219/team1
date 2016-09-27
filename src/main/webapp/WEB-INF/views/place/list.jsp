@@ -214,7 +214,7 @@
    /* img url주소 null값 일때, 대체 이미지 */   
    function imgCheck(i) {
       if($('div.table_list img').eq(i).attr('src')==''){
-         $('div.table_list img').eq(i).attr('src','http://placehold.it/300x350?text=No_Image');
+         $('div.table_list img').eq(i).attr('src','/resources/img/noImage.png');
       }
    };
    /* image Hover Event */

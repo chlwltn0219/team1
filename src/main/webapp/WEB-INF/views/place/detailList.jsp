@@ -118,12 +118,6 @@
             </script>
             
             <script type="text/javascript">
-            $("#imgresult").load(function(){
-                alert("Image loaded.");
-            });
-            </script>
-            
-            <script type="text/javascript">
                
             
                   var slideIndex = 2;
