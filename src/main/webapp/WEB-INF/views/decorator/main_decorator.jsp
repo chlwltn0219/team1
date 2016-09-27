@@ -110,9 +110,11 @@ a:focus {
 	width: 100%;
 	height: 70px;
 }
-/* div.bottom { */
-/* 	height: 70px; */
-/* } */
+
+.bottom {
+	width: 100%;
+	height: 70px;
+} 
 
 </style>
 </head>
