@@ -12,7 +12,6 @@
 <link href="/resources/dist/css/AdminLTE.min.css" rel="stylesheet" type="text/css" />
 <!-- AdminLTE Skins. Choose a skin from the css/skins folder instead of downloading all of them to reduce the load. -->
 <link href="/resources/dist/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css" />
-
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
@@ -24,115 +23,29 @@
 <script src="/resources/plugins/jQuery/jQuery-2.1.4.min.js"></script>
 <head>
 <title>register.jsp</title>
-<style type="text/css">
-
-	.weather, .date, .temp {
-		position: absolute;
-		width: 100%;
-		text-align: center;
-	}
-	
-	.temp {
-		bottom: 5px;
-		right: 5px;
-		text-align: right;
-	}
-	
-	span.max {
-		color: red;
-	}
-	
-	span.min {
-		color: blue;
-	}
-	
-	div.sky {
-		clear: both;
-		text-align: center;
-		border-left: 1px solid #DDDDDD;
-		border-right: 1px solid #DDDDDD;
-	}
-	#forecast6days div.sky img{
-		float: left;
-	}
-	
-	#summary, #forecast6days, div.sky{
-		height: 60px;
-		text-align: center;
-	}
-	
-	@media ( min-width :768px){
-		#summary, #forecast6days, div.sky{
-			height: 80px;
-		}
-	}
-	
-	@media ( min-width :992px) {
-		#summary, #forecast6days, div.sky{
-			height: 100px;
-		}
-	}
-	
-	@media ( min-width :1200px) {
-		#summary, #forecast6days, div.sky{
-			height: 120px;
-		}
-	}
-	
-	@media ( min-width :1600px) {
-		#summary, #forecast6days, div.sky{
-			height: 140px;
-		}
-	}
-	
-	div.sky img{
-		height: 60px;
-	}
-	
-	@media ( min-width :768px){
-		div.sky img{
-			height: 80px;
-		}
-	}
-	
-	@media ( min-width :992px) {
-		div.sky img{
-			height: 100px;
-		}
-	}
-
-	@media ( min-width :1200px) {
-		div.sky img{
-			height: 120px;
-		}
-	}	
-	@media ( min-width :1600px) {
-		div.sky img{
-			height: 140px;
-		}
-	}	
-	
-</style>
+<link href="/resources/css/jboard/register.css" rel="stylesheet" type="text/css" />
+<link href="/resources/css/jboard/margin.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-	<!-- Weather -->
-	<div class="box box-success">
-		<div class="box-header">
-			<h3 class="box-title">Weather</h3>
-		</div>
-
-		<div class="box-body">
-			<div id="summary" class="row">
-				<h2> 3일 예보 </h2>
-			</div>
-			<hr>
-			<div id="forecast6days" class="row">
-				<h2> 중기 예보 (오전/오후) </h2>
-			</div>
-		</div>
-	</div>
 	
-	<div class="row">
+	<div class="row top_bottom">
+		<!-- Weather -->
+		<div class="box box-success">
+			<div class="box-header">
+				<h3 class="box-title">Weather</h3>
+			</div>
+	
+			<div class="box-body">
+				<div id="summary" class="row">
+					<h2> 3일 예보 </h2>
+				</div>
+				<hr>
+				<div id="forecast6days" class="row">
+					<h2> 중기 예보 (오전/오후) </h2>
+				</div>
+			</div>
+		</div>
+		
 		<!-- left column -->
 		<div class="col-md-6">
 			<!-- general form elements -->
