@@ -38,7 +38,7 @@
 <style type="text/css">
 
 div.container {
-	margin-top: 65px;
+	margin-top: 30px;
  	margin-bottom: 15px;
 }
 

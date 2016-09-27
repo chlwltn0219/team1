@@ -2,6 +2,10 @@
 
 /* Sinae */
 
+.box{
+	margin-top: 55px;
+}
+
 h2{
  margin-left:auto;
  margin-right:auto;
@@ -9,7 +13,7 @@ h2{
 }
 
 .img1{
- display: block;
+ 	display: block;
     margin: auto;
     width:80%;
     height:80%;
@@ -24,10 +28,19 @@ h2{
 .detail{
  margin-top: 3%;
  margin-left: 15%;
+ margin-bottom: 4%;
 }
 
 .btn_map{
         width: 30px;
         height: 30px;
         cursor: pointer;
+        margin-bottom: 0px;
+        margin-left: 5px;
+}
+
+.btn_list{
+	width: 25px;
+	float: right;
+	margin-right: 5px;
 }

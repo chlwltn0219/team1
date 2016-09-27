@@ -29,70 +29,70 @@ import org.zerock.openapi.tour.SingleResult;
 @RestController
 @RequestMapping("/place")
 public class PlaceProxyController {
-	
-	static Logger logger = LoggerFactory.getLogger(PlaceProxyController.class);
-	private static final String SERVICE_KEY = "oMYSCkfnU%2BrM%2F6ad8zAICkGBj0eUCOxJc9bR%2F8MHuzhfo62P6cGA1YVZ7iY5QnDedVyfk5tMhc0Wu42fjDJ%2BcA%3D%3D";
-			
-	@RequestMapping(value="/common", method = RequestMethod.GET )
-	public ResponseEntity<Body> test(@ModelAttribute("cri") SearchCriteria cri, @RequestParam Integer sigunguCode, @RequestParam Integer pageNo) {
-		
-		CheckResult checkResult = null;
-		SingleResult singleResult = null;
-		Result result = null;
-		
-		RestTemplate restTemplate = new RestTemplate();
-		String baseURI = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList"
-							+ "?ServiceKey=" + SERVICE_KEY
-							+ "&numOfRows=15"
-							+ "&areaCode=1"
-							+ "&sigunguCode=" + sigunguCode
-							+ "&pageNo=" + pageNo
-							+ "&contentTypeId=" + "12"
-							+ "&MobileOS=ETC"
-							+ "&MobileApp=AppTesting"
-							+ "&_type=json";
+   
+   static Logger logger = LoggerFactory.getLogger(PlaceProxyController.class);
+   private static final String SERVICE_KEY = "oMYSCkfnU%2BrM%2F6ad8zAICkGBj0eUCOxJc9bR%2F8MHuzhfo62P6cGA1YVZ7iY5QnDedVyfk5tMhc0Wu42fjDJ%2BcA%3D%3D";
+         
+   @RequestMapping(value="/common", method = RequestMethod.GET )
+   public ResponseEntity<Body> test(@ModelAttribute("cri") SearchCriteria cri, @RequestParam Integer sigunguCode, @RequestParam Integer pageNo, @RequestParam Integer contentTypeId) {
+      
+      CheckResult checkResult = null;
+      SingleResult singleResult = null;
+      Result result = null;
+      
+      RestTemplate restTemplate = new RestTemplate();
+      String baseURI = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList"
+                     + "?ServiceKey=" + SERVICE_KEY
+                     + "&numOfRows=12"
+                     + "&areaCode=1"
+                     + "&sigunguCode=" + sigunguCode
+                     + "&pageNo=" + pageNo
+                     + "&contentTypeId=" + contentTypeId
+                     + "&MobileOS=ETC"
+                     + "&MobileApp=AppTesting"
+                     + "&_type=json";
 
-		URI uri = URI.create(baseURI);
-		logger.info(uri.toString());
-		
-		checkResult = restTemplate.getForObject(uri, CheckResult.class);
-		CheckBody checkBody = checkResult.getResponse().getBody();
-		
-		if((checkBody.getTotalCount()%checkBody.getNumOfRows() < 2) && (pageNo == checkBody.getTotalCount()/checkBody.getNumOfRows() + 1)) {
-			logger.info("Single Result");
-			singleResult = restTemplate.getForObject(uri, SingleResult.class);
-			
-			result = new Result();
-			result.setResponse(new Response());
-			result.getResponse().setHeader(singleResult.getResponse().getHeader());
-			result.getResponse().setBody(new Body());
-			
-			List<Map<String, Object>> item = new ArrayList<>();
-			item.add(singleResult.getResponse().getBody().getItems().getItem());
-			result.getResponse().getBody().setItems(new Items());
-			result.getResponse().getBody().getItems().setItem(item);
-			
-			result.getResponse().getBody().setNumOfRows(singleResult.getResponse().getBody().getNumOfRows());
-			result.getResponse().getBody().setPageNo(singleResult.getResponse().getBody().getPageNo());
-			result.getResponse().getBody().setTotalCount(singleResult.getResponse().getBody().getTotalCount());
-		} else {
-			result = restTemplate.getForObject(uri, Result.class);
-			logger.info(result.toString());
-		}
-		//
-		Body body = result.getResponse().getBody();
-		
-		PageMaker pageMaker = new PageMaker();
-		pageMaker.setCri(new Criteria(body.getPageNo(), body.getNumOfRows()));
-		pageMaker.setDisplayPageNum(5);
-		pageMaker.setTotalCount(body.getTotalCount());
-		
-		body.setPageMaker(pageMaker);
+      URI uri = URI.create(baseURI);
+      logger.info(uri.toString());
+      
+      checkResult = restTemplate.getForObject(uri, CheckResult.class);
+      CheckBody checkBody = checkResult.getResponse().getBody();
+      
+      if((checkBody.getTotalCount()%checkBody.getNumOfRows() < 2) && (pageNo == checkBody.getTotalCount()/checkBody.getNumOfRows() + 1)) {
+         logger.info("Single Result");
+         singleResult = restTemplate.getForObject(uri, SingleResult.class);
+         
+         result = new Result();
+         result.setResponse(new Response());
+         result.getResponse().setHeader(singleResult.getResponse().getHeader());
+         result.getResponse().setBody(new Body());
+         
+         List<Map<String, Object>> item = new ArrayList<>();
+         item.add(singleResult.getResponse().getBody().getItems().getItem());
+         result.getResponse().getBody().setItems(new Items());
+         result.getResponse().getBody().getItems().setItem(item);
+         
+         result.getResponse().getBody().setNumOfRows(singleResult.getResponse().getBody().getNumOfRows());
+         result.getResponse().getBody().setPageNo(singleResult.getResponse().getBody().getPageNo());
+         result.getResponse().getBody().setTotalCount(singleResult.getResponse().getBody().getTotalCount());
+      } else {
+         result = restTemplate.getForObject(uri, Result.class);
+         logger.info(result.toString());
+      }
+      //
+      Body body = result.getResponse().getBody();
+      
+      PageMaker pageMaker = new PageMaker();
+      pageMaker.setCri(new Criteria(body.getPageNo(), body.getNumOfRows()));
+      pageMaker.setDisplayPageNum(5);
+      pageMaker.setTotalCount(body.getTotalCount());
+      
+      body.setPageMaker(pageMaker);
 
-		System.out.println(body.getPageNo());
-		System.out.println(pageMaker);
-		
-		return new ResponseEntity<Body>(body, HttpStatus.OK);
-		
-	}	
+      System.out.println(body.getPageNo());
+      System.out.println(pageMaker);
+      
+      return new ResponseEntity<Body>(body, HttpStatus.OK);
+      
+   }   
 }
