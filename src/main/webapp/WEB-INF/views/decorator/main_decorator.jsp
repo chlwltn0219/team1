@@ -42,6 +42,15 @@ div.container {
  	margin-bottom: 15px;
 }
 
+#viewUser {
+	   	display: none;
+}
+
+@media screen and (min-width: 768px) {
+	#viewUser {
+	   	display: inline;
+	}
+}
 /* Remove the navbar's default margin-bottom and rounded borders */
 .navbar {
 	margin-bottom: 0;
@@ -106,9 +115,15 @@ a:focus {
 }
 
 
-/* div.bottom { */
+/* .top { */
+/* 	width: 100%; */
 /* 	height: 70px; */
 /* } */
+
+/* .bottom { */
+/* 	width: 100%; */
+/* 	height: 70px; */
+/* }  */
 
 </style>
 </head>
@@ -149,9 +164,9 @@ a:focus {
 								<a href="/user/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a>
 							</li>
 						</ul>
-						<ul class="nav navbar-nav navbar-right">
+						<ul class="nav navbar-nav navbar-right" id="viewUser">
 							<li>
-								<a href="/user/logout"> ${login.uid }</a>
+								<a href=""> ${login.uid }</a>
 							</li>
 						</ul>
 						</c:if>
@@ -159,6 +174,7 @@ a:focus {
 				</div>
 			</nav>
 		</header>
+<!-- 		<div class="top"></div> -->
 		<!-- Content Wrapper. Contains page content -->
 		<!-- <div class="container well well-lg"> -->
 			<div class="marginsize">
@@ -175,7 +191,7 @@ a:focus {
 			</section>
 		<!-- </div> -->
 			</div>
-		<div class="bottom"></div>
+<!-- 		<div class="bottom"></div> -->
 		<footer class="container-fluid text-center footer">
 			<div class="pull-right hidden-xs">
 				<b>Version</b> 0.1

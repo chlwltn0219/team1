@@ -86,8 +86,9 @@
 	
 	
 	$('#btn1').eq(0).on('click', function() {
-		var ran = Math.floor((Math.random() * 10) + 1);
-		$.getJSON("http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList?ServiceKey=" + serviceKey + "&areaCode=1&numOfRows=3&pageNo=" + ran + "&MobileOS=ETC&MobileApp=TestApp&_type=json", function(areaCode) {
+		var ran1 = Math.floor((Math.random() * 5) + 1);
+		var ran2 = Math.floor((Math.random() * 5) + 1);
+		$.getJSON("http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList?ServiceKey=" + serviceKey + "&areaCode=1&numOfRows=" + ran1 + "&pageNo=" + ran2 + "&MobileOS=ETC&MobileApp=TestApp&_type=json", function(areaCode) {
 			console.dir(areaCode);
 			console.log(areaCode);
 			console.log(areaCode.response);

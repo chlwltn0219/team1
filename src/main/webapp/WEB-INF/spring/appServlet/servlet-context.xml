@@ -40,7 +40,6 @@
 		</beans:constructor-arg>
 	</beans:bean>
 
-	<beans:bean id="sampleInterceptor" class="org.zerock.interceptor.SampleInterceptor"></beans:bean>
 	<beans:bean id="authInterceptor" class="org.zerock.interceptor.AuthInterceptor"></beans:bean>
 	<beans:bean id="loginInterceptor" class="org.zerock.interceptor.LoginInterceptor"></beans:bean>
 
