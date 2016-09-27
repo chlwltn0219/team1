@@ -656,39 +656,39 @@
 
 
 <script>
-$(document).ready(function(){
-	
-	var formObj = $("form[role='form']");
-	console.log(formObj);
-	
-	$("#modifyBtn").on("click", function(){
-		var eventTitle = $('#infoTitle').html().replace(/ /gi, "_");
+	$(document).ready(function(){
 		
-		formObj.attr("action", "/jboard/modifyPage");
-		formObj.attr("method", "get");		
-		formObj.submit();
+		var formObj = $("form[role='form']");
+		console.log(formObj);
+		
+		$("#modifyBtn").on("click", function(){
+			var eventTitle = $('#infoTitle').html().replace(/ /gi, "_");
+			
+			formObj.attr("action", "/jboard/modifyPage");
+			formObj.attr("method", "get");		
+			formObj.submit();
+		});
+		
+		$("#removeBtn").on("click", function(){
+			var replyCnt =  $("#replycntSmall").html();
+			
+			if(replyCnt != "[ 0 ]" ){
+				alert("댓글이 달린 게시물을 삭제할 수 없습니다.");
+				return;
+			}	
+			
+			formObj.attr("action", "/jboard/removePage");
+			formObj.attr("method", "post");
+			formObj.submit();
+		});	
+		
+		$("#goListBtn ").on("click", function(){
+			formObj.attr("method", "get");
+			formObj.attr("action", "/jboard/list");
+			formObj.submit();
+		});
+		
 	});
-	
-	$("#removeBtn").on("click", function(){
-		var replyCnt =  $("#replycntSmall").html();
-		
-		if(replyCnt != "[ 0 ]" ){
-			alert("댓글이 달린 게시물을 삭제할 수 없습니다.");
-			return;
-		}	
-		
-		formObj.attr("action", "/jboard/removePage");
-		formObj.attr("method", "post");
-		formObj.submit();
-	});	
-	
-	$("#goListBtn ").on("click", function(){
-		formObj.attr("method", "get");
-		formObj.attr("action", "/jboard/list");
-		formObj.submit();
-	});
-	
-});
 </script>
 
 </body>
