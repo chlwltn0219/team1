@@ -77,7 +77,9 @@
     </div>
          
     <div class="w3-content" id="imgresult" style="max-width: 800px; position: relative">
-		<img class="w3-display-container mySlides" src="{{firstimage}}" style="width:100%; height=300px;">
+		<div>
+			<img class="w3-display-container mySlides firstimage" src="{{firstimage}}" style="width:100%; height=300px;">
+		</div>
                
         <a class="w3-btn-floating w3-hover-dark-grey" style="position: absolute; top: 250px; left: 0; background-color: rgb(14,201,190);" onclick="plusDivs(-1)">❮</a> 
         <a class="w3-btn-floating w3-hover-dark-grey" style="position: absolute; top: 250px; right: 0; background-color: rgb(14,201,190);" onclick="plusDivs(1)">❯</a>
@@ -131,19 +133,7 @@
 </script>
 
 <script>
-	$.getJSON("/detail/image?contentId=" + "${contentid}", function(data) {
-		// json 객체 내부 접근하기
-		var items = data.items.item;
-		//x,y값 items에서 가져와 적용 
-		var temp2 = $('#codeTemp2').html();
-		var template = Handlebars.compile(temp2);
-		var html = template(items);
-		$('#imgresult').append(html);
-		plusDivs(0);
-	});
-</script>
-
-<script type="text/javascript">
+	
 	var items;
 	var mapzoom;
 	var title;
@@ -171,7 +161,7 @@
             title : title
         });
 	}
-
+	
 	$.getJSON("/detail/common?contentId=" + "${contentid}", function(data) {
 
 	    // json 객체 내부 접근하기
@@ -188,6 +178,30 @@
 	    $('#result').html(html);
 	    $('#overview').html(items.overview);
 	    $('#homepage').html(items.homepage);
+	    
+		// no image check
+		if($('.firstimage').attr('src') == "")
+			$('.firstimage').attr('src', '/resources/img/noImage.png');
+	    
+		// if return index < 0 => NOT ENTER
+		$.getJSON("/detail/image?contentId=" + "${contentid}", function(data) {
+			// json 객체 내부 접근하기
+			var items = data.items.item;
+			var img = $('.firstimage').attr('src');
+			
+			if(img == '/resources/img/noImage.png'){
+				$('#imgresult>div').html("");
+			}
+			
+			//x,y값 items에서 가져와 적용 
+			var temp2 = $('#codeTemp2').html();
+			var template = Handlebars.compile(temp2);
+			var html = template(items);
+			$('#imgresult>div').append(html);
+			
+			plusDivs(0);
+		});
+		
  	});
 </script>
 
