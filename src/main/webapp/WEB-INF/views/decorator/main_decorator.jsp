@@ -106,15 +106,15 @@ a:focus {
 }
 
 
-.top {
-	width: 100%;
-	height: 70px;
-}
+/* .top { */
+/* 	width: 100%; */
+/* 	height: 70px; */
+/* } */
 
-.bottom {
-	width: 100%;
-	height: 70px;
-} 
+/* .bottom { */
+/* 	width: 100%; */
+/* 	height: 70px; */
+/* }  */
 
 </style>
 </head>
