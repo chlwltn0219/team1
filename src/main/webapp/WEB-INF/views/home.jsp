@@ -26,31 +26,38 @@
       <li data-target="#myCarousel" data-slide-to="1"></li>
       <li data-target="#myCarousel" data-slide-to="2"></li>
       <li data-target="#myCarousel" data-slide-to="3"></li>
+      <li data-target="#myCarousel" data-slide-to="4"></li>
     </ol>
 
     <!-- Wrapper for slides -->
     <div class="carousel-inner" role="listbox">
 
-      <div class="item active">
-        <img src="/resources/img/festival.jpg">
+       <div class="item active">
+        <img src="/resources/img/image.jpg">
         <div class="carousel-caption">
         </div>
       </div>
-
+      
       <div class="item">
-        <img src="/resources/img/kbk.jpg">
+        <img src="/resources/img/seoul2.jpg">
         <div class="carousel-caption">
         </div>
       </div>
-    
+      
       <div class="item">
-        <img src="/resources/img/seoul.jpg">
+        <img src="/resources/img/festival4.jpg">
         <div class="carousel-caption">
         </div>
       </div>
-
+      
+       <div class="item">
+        <img src="/resources/img/kbk2.jpg">
+        <div class="carousel-caption">
+        </div>
+      </div>
+      
       <div class="item">
-        <img src="/resources/img/supermoon.jpg">
+        <img src="/resources/img/festival3.jpg">
         <div class="carousel-caption">
         </div>
       </div>
