@@ -71,12 +71,10 @@
             </div>
          </div>
          
-<!--          <div class="table-responsive" style="width: 100%"> -->
-            <div class="fList table-hover">
-               <div id="result"></div>
-            </div>
-            <div id="pagination"></div>            
-<!--          </div> -->
+		 <div class="fList table-hover">
+         	<div id="result"></div>
+         </div>
+         <div id="pagination"></div>            
       </div>
    </div>
          
@@ -111,178 +109,173 @@
 
 <script type="text/javascript">
      var pageNo = 1;
-      getList(1, 1);
+     getList(1, 1);
       
-      
-      function getList(pageNo, sigunguCode, contentTypeId) {
+     function getList(pageNo, sigunguCode, contentTypeId) {
       /* default Page */
          
-         sigunguCode = $('#gu option:selected').val();
-         contentTypeId = $('#content option:selected').val();
+        sigunguCode = $('#gu option:selected').val();
+        contentTypeId = $('#content option:selected').val();
          
-      $.getJSON("/place/common?sigunguCode=" + sigunguCode +"&contentTypeId="+ contentTypeId + "&pageNo=" + pageNo, function(data) {
+     	$.getJSON("/place/common?sigunguCode=" + sigunguCode +"&contentTypeId="+ contentTypeId + "&pageNo=" + pageNo, function(data) {
          
-       var items = data.items.item;
-       var pageMaker = data.pageMaker;
-          
-       var temp2 = $('#codeTemp').html();
-       var template = Handlebars.compile(temp2);
-          
-         var page = $('#pageTemp').html();
-      var pageTemplate = Handlebars.compile(page);
-      var pagehtml = pageTemplate(pageMaker);
-      $('#pagination').html(pagehtml);
-   
-      setPaginationEvent(data);
-          
-       $('#result').html("");
-          
-       for(var i=0; i<items.length; i++) {
-         var html = template(items[i]);
-          $('#result').append(html);
-          imgCheck(i);
-          imgHover();
-          }
-       });
-   }
+	     	var items = data.items.item;
+	     	var pageMaker = data.pageMaker;
+	          
+	     	var temp2 = $('#codeTemp').html();
+	     	var template = Handlebars.compile(temp2);
+	          
+	       	var page = $('#pageTemp').html();
+	       	var pageTemplate = Handlebars.compile(page);
+			var pagehtml = pageTemplate(pageMaker);
+			$('#pagination').html(pagehtml);
+	   
+			setPaginationEvent(data);
+	          
+			$('#result').html("");
+	          
+			for(var i=0; i<items.length; i++) {
+	        	var html = template(items[i]);
+	          	$('#result').append(html);
+	          	imgCheck(i);
+	          	imgHover();
+			}
+		});
+	}
 
-        /* select 버튼 클릭시 */
-        $('#gu').on('change', function() {
+    /* select 버튼 클릭시 */
+    $('#gu').on('change', function() {
            
-           var sigunguCode = $('#gu option:selected').val();
-              var contentTypeId = $('#content option:selected').val();
+    	var sigunguCode = $('#gu option:selected').val();
+    	var contentTypeId = $('#content option:selected').val();
            
-           $.getJSON("/place/common?sigunguCode=" + sigunguCode + "&contentTypeId="+ contentTypeId + "&pageNo=" + pageNo, function(data) {
+    	$.getJSON("/place/common?sigunguCode=" + sigunguCode + "&contentTypeId="+ contentTypeId + "&pageNo=" + pageNo, function(data) {
                  
-                var items = data.items.item;
-                var pageMaker = data.pageMaker;
+        	var items = data.items.item;
+        	var pageMaker = data.pageMaker;
                  
-                var temp2 = $('#codeTemp').html();
-                var template = Handlebars.compile(temp2);
+       		var temp2 = $('#codeTemp').html();
+            var template = Handlebars.compile(temp2);
                  
-                var page = $('#pageTemp').html();
-               var pageTemplate = Handlebars.compile(page);
-               var pagehtml = pageTemplate(pageMaker);
-               $('#pagination').html(pagehtml);
+            var page = $('#pageTemp').html();
+            var pageTemplate = Handlebars.compile(page);
+            var pagehtml = pageTemplate(pageMaker);
+            $('#pagination').html(pagehtml);
             
-               setPaginationEvent(data);
+            setPaginationEvent(data);
                  
-                $('#result').html("");
+            $('#result').html("");
                  
-                for(var i=0; i<items.length; i++) {
-                  var html = template(items[i]);
-                   $('#result').append(html);
-                   imgCheck(i);
-                   imgHover();
-                }
-             });
-        });
+            for(var i=0; i<items.length; i++) {
+            	var html = template(items[i]);
+                $('#result').append(html);
+                imgCheck(i);
+                imgHover();
+            }
+		});
+	});
         
-        /* select 버튼 클릭시 */
-        $('#content').on('change', function() {
+    /* select 버튼 클릭시 */
+    $('#content').on('change', function() {
            
-           var sigunguCode = $('#gu option:selected').val();
-              var contentTypeId = $('#content option:selected').val();
+    	var sigunguCode = $('#gu option:selected').val();
+        var contentTypeId = $('#content option:selected').val();
            
-           $.getJSON("/place/common?sigunguCode=" + sigunguCode + "&contentTypeId="+ contentTypeId + "&pageNo=" + pageNo, function(data) {
+        $.getJSON("/place/common?sigunguCode=" + sigunguCode + "&contentTypeId="+ contentTypeId + "&pageNo=" + pageNo, function(data) {
                  
-                var items = data.items.item;
-                var pageMaker = data.pageMaker;
+        	var items = data.items.item;
+            var pageMaker = data.pageMaker;
                  
-                var temp2 = $('#codeTemp').html();
-                var template = Handlebars.compile(temp2);
+            var temp2 = $('#codeTemp').html();
+            var template = Handlebars.compile(temp2);
                  
-                var page = $('#pageTemp').html();
-               var pageTemplate = Handlebars.compile(page);
-               var pagehtml = pageTemplate(pageMaker);
-               $('#pagination').html(pagehtml);
+            var page = $('#pageTemp').html();
+            var pageTemplate = Handlebars.compile(page);
+            var pagehtml = pageTemplate(pageMaker);
+            $('#pagination').html(pagehtml);
             
-               setPaginationEvent(data);
+            setPaginationEvent(data);
                  
-                $('#result').html("");
+            $('#result').html("");
                  
-                for(var i=0; i<items.length; i++) {
-                  var html = template(items[i]);
-                   $('#result').append(html);
-                   imgCheck(i);
-                   imgHover();
-                }
-             });
-        });
-   
-   
-   /* img url주소 null값 일때, 대체 이미지 */   
-   function imgCheck(i) {
-      if($('div.table_list img').eq(i).attr('src')==''){
-         $('div.table_list img').eq(i).attr('src','/resources/img/noImage.png');
-      }
-   };
-   /* image Hover Event */
-   function imgHover() {
-      $(".imgbox_hover").on({
-           mouseenter: function(){
-              var index = getIndex(this);
-              if(!$(".table_imgbox").eq(index).is(':animated')){
-                 $(".table_imgbox").eq(index).fadeTo('slow', 0.2);
-              }
-               if(!$('.info').eq(index).is(':animated')) {
-               $('.info').eq(index).fadeIn();                  
-               }
-           },
-           mouseleave: function(){
-              var index = getIndex(this);   
-              $(".table_imgbox").eq(index).stop().fadeTo('slow',1);              
-               $('.info').fadeOut();
-           }
-       });
+            for(var i=0; i<items.length; i++) {
+            	var html = template(items[i]);
+                $('#result').append(html);
+                imgCheck(i);
+                imgHover();
+			}
+		});
+	});
       
-   }
-   /* 각각의 이미지 객체 리턴 값 */
-   function getIndex(obj) {
-      return $('.imgbox_hover').index(obj);
-   }
+	/* img url주소 null값 일때, 대체 이미지 */   
+	function imgCheck(i) {
+    	if($('div.table_list img').eq(i).attr('src')==''){
+        	$('div.table_list img').eq(i).attr('src','/resources/img/noImage.png');
+    	}
+   	};
+   	/* image Hover Event */
+   	function imgHover() {
+    	$(".imgbox_hover").on({
+        	mouseenter: function(){
+            	var index = getIndex(this);
+              	if(!$(".table_imgbox").eq(index).is(':animated')){
+                	$(".table_imgbox").eq(index).fadeTo('slow', 0.2);
+              	}
+               	if(!$('.info').eq(index).is(':animated')) {
+               		$('.info').eq(index).fadeIn();                  
+               	}
+           	},
+           	mouseleave: function(){
+            	var index = getIndex(this);   
+              	$(".table_imgbox").eq(index).stop().fadeTo('slow',1);              
+               	$('.info').fadeOut();
+           	}
+		});
+	}
+   	/* 각각의 이미지 객체 리턴 값 */
+  	 function getIndex(obj) {
+  	    return $('.imgbox_hover').index(obj);
+  	 }
 </script>
 
 <script type="text/javascript">
-   /* Paging Event */
-   function setPaginationEvent(data) {
-      $('button.page').on('click', function() {
-         getList(this.value)
-      });
-      $('#prev').on('click', function() {
-         getList(data.pageMaker.startPage-1);               
-      });
-      $('#next').on('click', function() {
-         getList(data.pageMaker.endPage+1);
-      });
-   }
+	/* Paging Event */
+	function setPaginationEvent(data) {
+    	$('button.page').on('click', function() {
+    		getList(this.value)
+      	});
+      	$('#prev').on('click', function() {
+         	getList(data.pageMaker.startPage-1);               
+      	});
+      	$('#next').on('click', function() {
+         	getList(data.pageMaker.endPage+1);
+      	});
+   	}
    
-   Handlebars.registerHelper('visiblility' , function(visible) {
-      if(visible)
-         return 'visible'; 
-      else 
-         return 'hidden';
-   });
+   	Handlebars.registerHelper('visiblility' , function(visible) {
+   		if(visible)
+         	return 'visible'; 
+      	else 
+        	return 'hidden';
+   	});
    
-   Handlebars.registerHelper('pageMaker', function(from, to, incr, block) {
-      
-       var accum = '';
-       var nowPage = block.data.root.cri.page;
-      var active = '';
+   	Handlebars.registerHelper('pageMaker', function(from, to, incr, block) {
+    	var accum = '';
+    	var nowPage = block.data.root.cri.page;
+    	var active = '';
        
-       for(var i = from; i <= to; i += incr){
-          if(nowPage==i)
-             active = 'active';
+    	for(var i = from; i <= to; i += incr){
+        	if(nowPage==i)
+            	active = 'active';
           
-          var custom = {
-             pageNo : i,
-             active : active
-          };
-           accum += block.fn(custom);
-           active = '';
-       }
-       
-       return accum;
+          	var custom = {
+            	pageNo : i,
+            	active : active
+          	};
+        	accum += block.fn(custom);
+        	active = '';
+       	}
+       	return accum;
    });
 </script>
 
