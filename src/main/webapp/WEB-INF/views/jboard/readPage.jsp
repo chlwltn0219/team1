@@ -586,7 +586,6 @@
 					alert("등록 되었습니다.");
 					replyPage = 1;
 					getPage("/replies/" + bno + "/" + replyPage);
-					replyerObj.val("");
 					replytextObj.val("");
 				}
 			}
@@ -670,9 +669,9 @@
 		});
 		
 		$("#removeBtn").on("click", function(){
-			var replyCnt =  $("#replycntSmall").html();
+			var replyCnt =  $("#replycntSmall").html().split(" ")[2];
 			
-			if(replyCnt != "[ 0 ]" ){
+			if(replyCnt != 0 ){
 				alert("댓글이 달린 게시물을 삭제할 수 없습니다.");
 				return;
 			}	
