@@ -1,8 +1,5 @@
 @CHARSET "UTF-8";
 
-img{
-}
-
  .jssorb05 {
             position: absolute;
         }
@@ -45,3 +42,9 @@ img{
         .jssora22r:hover { background-position: -190px -31px; }
         .jssora22l.jssora22ldn { background-position: -250px -31px; }
         .jssora22r.jssora22rdn { background-position: -310px -31px; }
+        
+        .main{
+			width: 100%;
+			height: 100%;	
+}
+        
