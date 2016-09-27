@@ -177,7 +177,7 @@
 	/* 이미지 없을 경우 대체 이미지 나타내기 */
 	function imgCheck(i) {
 		if($('div.abc img').eq(i).attr('src')=='')
-			$('div.abc img').eq(i).attr('src','/resources/img/NoImage.jpg');
+			$('div.abc img').eq(i).attr('src','/resources/img/noImage.png');
 	};
 	
 	/* 마우스 over시 이벤트 */
