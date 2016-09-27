@@ -106,6 +106,10 @@ a:focus {
 }
 
 
+.top {
+	width: 100%;
+	height: 70px;
+}
 /* div.bottom { */
 /* 	height: 70px; */
 /* } */
@@ -159,6 +163,7 @@ a:focus {
 				</div>
 			</nav>
 		</header>
+		<div class="top"></div>
 		<!-- Content Wrapper. Contains page content -->
 		<!-- <div class="container well well-lg"> -->
 			<div class="marginsize">
