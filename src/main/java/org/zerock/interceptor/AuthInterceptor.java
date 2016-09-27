@@ -72,28 +72,5 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
       req.getSession().setAttribute("dest", uri + query);
     }
   }
-
-//  @Override
-//  public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-//
-//    HttpSession session = request.getSession();
-//
-//    if (session.getAttribute("login") == null) {
-//
-//      logger.info("current user is not logined");
-//
-//      saveDest(request);
-//      
-//      response.sendRedirect("/user/login");
-//      return false;
-//    }
-//    return true;
-//  }
 }
 
-// if(session.getAttribute("login") == null){
-//
-// logger.info("current user is not logined");
-// response.sendRedirect("/user/login");
-// return false;
-// }
