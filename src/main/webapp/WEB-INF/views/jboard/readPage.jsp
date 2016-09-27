@@ -677,18 +677,8 @@ $(document).ready(function(){
 			return;
 		}	
 		
-		var arr = [];
-		$(".uploadedList li").each(function(index){
-			 arr.push($(this).attr("data-src"));
-		});
-		
-		if(arr.length > 0){
-			$.post("/deleteAllFiles",{files:arr}, function(){
-				
-			});
-		}
-		
 		formObj.attr("action", "/jboard/removePage");
+		formObj.attr("method", "post");
 		formObj.submit();
 	});	
 	
