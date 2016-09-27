@@ -177,7 +177,7 @@
 			for(var i=0; i<data.numOfRows; i++){
 				$('img').eq(i).attr("src", function(j, originValue) {
 					if(originValue=="")
-						return "/resources/img/NoImage.jpg";
+						return "/resources/img/noImage.png";
 				});
 			}
 			

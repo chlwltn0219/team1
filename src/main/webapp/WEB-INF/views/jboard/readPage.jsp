@@ -97,7 +97,7 @@
 							<button id="btnLeft" class="btn btn-warning" style="height: 150px; width: 100%"><h3><i class="fa fa-arrow-circle-o-left"></i></h3></button>
 						</div>
 						<div class="col-xs-8" style="text-align: center;" data-toggle="modal" data-target="#imageModal" id="infoImage">
-							<img alt="image" src="/resources/img/NoImage.jpg" style="height: 150px">
+							<img alt="image" src="/resources/img/noImage.png" style="height: 150px">
 						</div>
 						<div class="col-xs-2 btnImg">
 							<button id="btnRight" class="btn btn-warning" style="height: 150px; width: 100%"><h3><i class="fa fa-arrow-circle-o-right"></i></h3></button>
@@ -586,7 +586,6 @@
 					alert("등록 되었습니다.");
 					replyPage = 1;
 					getPage("/replies/" + bno + "/" + replyPage);
-					replyerObj.val("");
 					replytextObj.val("");
 				}
 			}
@@ -670,9 +669,9 @@
 		});
 		
 		$("#removeBtn").on("click", function(){
-			var replyCnt =  $("#replycntSmall").html();
+			var replyCnt =  $("#replycntSmall").html().split(" ")[2];
 			
-			if(replyCnt != "[ 0 ]" ){
+			if(replyCnt != 0 ){
 				alert("댓글이 달린 게시물을 삭제할 수 없습니다.");
 				return;
 			}	
