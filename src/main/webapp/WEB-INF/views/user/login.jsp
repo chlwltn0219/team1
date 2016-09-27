@@ -10,33 +10,19 @@
 	name='viewport'>
 <!-- Bootstrap 3.3.4 -->
 <link href="/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet"
-	type="text/css" />
+	  type="text/css" />
 <!-- Font Awesome Icons -->
-<link
-	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
-	rel="stylesheet" type="text/css" />
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
+	  rel="stylesheet" type="text/css" />
 <!-- Theme style -->
 <link href="/resources/dist/css/AdminLTE.min.css" rel="stylesheet"
-	type="text/css" />
-<!-- iCheck -->
-<link href="/resources/plugins/iCheck/square/blue.css" rel="stylesheet"
-	type="text/css" />
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
+	  type="text/css" />
+<!-- jQuery 2.1.4 -->
+<script src="/resources/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+<!-- HandleBars -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 
   </head>
-  <body class="login-page">
-    <div class="login-box">
-      <div class="login-logo">
-        <a href="/"><b>Team1 2nd</b>Project</a>
-      </div><!-- /.login-logo -->
-      <div class="login-box-body">
-        <p class="login-box-msg">Sign in to start your session</p>
 <style>
 
 #loginBox {
@@ -45,6 +31,7 @@
 
 </style>
 </head>
+
 <body class="login-page">
 	<div class="login-box" id="loginBox">
 		<div class="login-logo">
@@ -74,15 +61,58 @@
 				</div>
 			</form>
 
+			<button id="btn1" class="btn btn-info" style="width:100%">Preview</button>
+			<div class="table-responsive">
+			<table class="table table-hover">
+				<tbody id="result"></tbody>
+			</table>
+			</div>
+			
+			<script id="preview" type="text/xxx-mytemplate">
+			{{#each .}}
+				<tr>	
+					<td><img id="img1" onclick="myFunction()" class="img-responsive img-circle" style="width:100%" src="{{firstimage}}"/></td>
+				</tr>
+			{{/each}}
+			</script>
+			
 		</div>
 		<!-- /.login-box-body -->
 	</div>
 	<!-- /.login-box -->
+	<script type="text/javascript">
+	
+	var serviceKey = "msIAbKVe7I8wGXfBFqvMDC3oIM1g4Yqjub91VLdltRRso40CBt8HrC4tM8L4DXKKduY4aB6qOgtO4FCyOhPnMA%3D%3D";
+	
+	
+	$('#btn1').eq(0).on('click', function() {
+		var ran = Math.floor((Math.random() * 10) + 1);
+		$.getJSON("http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList?ServiceKey=" + serviceKey + "&areaCode=1&numOfRows=3&pageNo=" + ran + "&MobileOS=ETC&MobileApp=TestApp&_type=json", function(areaCode) {
+			console.dir(areaCode);
+			console.log(areaCode);
+			console.log(areaCode.response);
+			console.log(areaCode.response.body);
+			console.log(areaCode.response.body.items);
+			console.log(areaCode.response.body.items.item);
+			
+			var items = areaCode.response.body.items.item;
+			
+			var temps = $('#preview').html();
+			var template = Handlebars.compile(temps);
+			
+			var html = template(items);
+			console.log(html);
+			
+			$('#result').html(html);
+			
+		});
+	});
+	
+	function myFunction() {
+		$('#result').html("");
+	}
 
-	<!-- jQuery 2.1.4 -->
-	<script src="/resources/plugins/jQuery/jQuery-2.1.4.min.js"></script>
-	<!-- Bootstrap 3.3.2 JS -->
-	<script src="/resources/bootstrap/js/bootstrap.min.js"
-		type="text/javascript"></script>
+
+</script>
 </body>
 </html>
