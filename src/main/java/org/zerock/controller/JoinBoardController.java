@@ -90,7 +90,7 @@ public class JoinBoardController {
 
 		logger.info(rttr.toString());
 
-		return "redirect:/jboard/list";
+		return "redirect:/jboard/readPage?bno=" + board.getBno();
 	}
 
 	@RequestMapping(value = "/register", method = RequestMethod.GET)

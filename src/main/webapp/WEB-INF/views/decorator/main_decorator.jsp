@@ -165,7 +165,7 @@ a:focus {
 				</div>
 			</nav>
 		</header>
-		<div class="top"></div>
+<!-- 		<div class="top"></div> -->
 		<!-- Content Wrapper. Contains page content -->
 		<!-- <div class="container well well-lg"> -->
 			<div class="marginsize">
@@ -182,7 +182,7 @@ a:focus {
 			</section>
 		<!-- </div> -->
 			</div>
-		<div class="bottom"></div>
+<!-- 		<div class="bottom"></div> -->
 		<footer class="container-fluid text-center footer">
 			<div class="pull-right hidden-xs">
 				<b>Version</b> 0.1

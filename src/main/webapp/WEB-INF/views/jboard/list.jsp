@@ -12,44 +12,13 @@
 <title>jboard/list.jsp</title>
 <!-- HandleBars -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
-<style type="text/css">
-	.info-box {
-		position: relative;
-		width: 100%;
-		height: 200px;
-	}
-
-	div.info, div.image{
-		float: left;
-		position : absolute;
- 		top: 0; 
- 		left: 0;
-		width: 100%;
-		height: 200px;
-		text-align: center;
-		background-color: black;
-		color: white;
-	}
-
-	div.info {
-		display: none;
-		z-index: 50;
-	}
-	
-	div.image {
-		z-index: 100;
-	}
-	
-	.info .title, .info .date {
-		width: 100%;
-		height: 100px;
-	}
-	
-</style>
+<!-- Custom CSS -->
+<link href="/resources/css/jboard/list.css" rel="stylesheet" type="text/css">
+<link href="/resources/css/jboard/margin.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 
-	<div class="row">
+	<div class="row top_bottom">
 		<!-- left column -->
 
 		<div class="col-md-12">
@@ -169,6 +138,8 @@
 	</div>
 	<!-- /.row -->
 	
+	<div class="bottom"></div>
+	
 	<script id="temp" type="text/xxx-mytemplate">
 		{{#each .}}
 			<div class="col-lg-2 col-md-4 col-xs-6">
@@ -236,35 +207,34 @@
 			
 		});		
 	</script>
-
+	
 	<script>
-		var result = '${msg}';
 
-		if (result == 'SUCCESS') {
-			alert("처리가 완료되었습니다.");
-			location.replace(self.location);
-		}
-	</script>
+	var result = '${msg}';
 
-	<script>
-		$(document).ready( function() {
+	if (result == 'SUCCESS') {
+		alert("처리가 완료되었습니다.");
+		location.replace(self.location);
+	}
 
-			$('#searchBtn').on("click",	function(event) {
-				self.location = "list"
-						+ '${pageMaker.makeQuery(1)}'
-						+ "&searchType="
-						+ $("select option:selected").val()
-						+ "&keyword="
-						+ $('#keywordInput').val();
+	$(document).ready(
+			function() {
+
+				$('#searchBtn').on(
+						"click",
+						function(event) {
+							self.location = "list" + '${pageMaker.makeQuery(1)}'
+									+ "&searchType="
+									+ $("select option:selected").val()
+									+ "&keyword=" + $('#keywordInput').val();
+						});
+
+				$('#newBtn').on("click", function(evt) {
+					self.location = "register";
+					// location.replace("/user/login");
+				});
+
 			});
-
-			$('#newBtn').on("click", function(evt) {
-				self.location = "register";
-// 				location.replace("/user/login");
-			});
-			
-		});
-		
 	</script>
 
 </body>

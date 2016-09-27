@@ -4,19 +4,13 @@
 <html>
 <head>
 <title>modifyPage.jsp</title>
-<style>
-.fileDrop {
-	width: 80%;
-	height: 100px;
-	border: 1px dotted gray;
-	background-color: lightslategrey;
-	margin: auto;
-}
-</style>
+<script type="text/javascript" src="/resources/js/upload.js"></script>
+<script	src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+<link href="/resources/css/jboard/modifyPage.css" rel="stylesheet" type="text/css">
+<link href="/resources/css/jboard/margin.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-
-	<div class="row">
+	<div class="row top_bottom">
 		<!-- left column -->
 		<div class="col-md-6">
 			<!-- general form elements -->
@@ -96,11 +90,6 @@
 			</div>
 		</div>
 	</div>
-	<script type="text/javascript" src="/resources/js/upload.js"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
-
-	<script id="template" type="text/x-handlebars-template"></script>
 	
 	
 	<script id="eventTemplate" type="text/x-handlebars-template">
@@ -126,7 +115,7 @@
 		<button id="next" type="button" class="btn btn-default" style="visibility: {{visiblility next}}">Next</button>
 	</script>
 	
-<script type="text/javascript">
+	<script type="text/javascript">
 		
 		getList(1);
 	
@@ -188,9 +177,6 @@
 			    	$(this).css("background-color", "#F0F0F0");
 			        var index = $('li.list-group-item').index(this);
 			    	
-// 			        console.dir(item);
-// 			        alert(item[index].today);
-			        
 			    	
 					if(item[index].today > item[index].eventenddate){
 						 alert("*   이미 종료된 행사입니다.   *"+"\n"+"* 다른 행사를 선택해 주세요. *");
@@ -204,18 +190,6 @@
 					} 
 			    } 
 			});
-		}
-		
-		function submitCheck(event) {
-
-// 			var contentId = $('#contentId').val();
-// 			alert(contentId);
-			
-// 			if(contentId == "") {
-// 				alert("* 참여하는 행사를 선택해 주세요. *");
-// 				event.preventDefault();
-// 			}
-			
 		}
 		
 		
@@ -261,48 +235,37 @@
 		});
 		
 	</script>
+	
 	<script>
-	$(document).ready(	function() {
-		var formObj = $("form[role='form']");
-		formObj.submit(function(event) {
-			event.preventDefault();
-			var that = $(this);
-			var str = "";
-			that.append(str);
-			console.log(str);
-			that.get(0).submit();
-		});
-		$(".btn-warning").on("click",function() {
-// 				alert("clicked  cancel");
-// 				self.location = "/jboard/list?page=${cri.page}&perPageNum=${cri.perPageNum}"+ "&searchType=${cri.searchType}&keyword=${cri.keyword}";
-// 				self.location = "/jboard/list";
+		$(document).ready(function() {
+			
+			var formObj = $("form[role='form']");
+			
+			formObj.submit(function(event) {
+				event.preventDefault();
+				var that = $(this);
+				var str = "";
+				that.append(str);
+				console.log(str);
+				that.get(0).submit();
+			});
+			
+			$(".btn-warning").on("click", function() {
 				formObj.attr("method", "get");
 				formObj.attr("action", "/jboard/readPage?bno=${jBoardVO.bno}");
 				formObj.submit();
+	
+			});
+			
+			$(".btn-primary").on("click", function(event) {
+				var contentId = $('#contentId').val();
 				
+				if (contentId == "") {
+					alert("* 참여하는 행사를 선택해 주세요. *");
+					event.preventDefault();
+				}
 			});
 		});
-		$(".btn-primary").on("click" , function(event) {
-// 			alert("clicked");
-			var contentId = $('#contentId').val();
-// 			alert(contentId);
-			
-			if(contentId == "") {
-				alert("* 참여하는 행사를 선택해 주세요. *");
-				event.preventDefault();
-			}
-		});
-	
-		var template = Handlebars.compile($("#template").html());
-		
-		
-		//console.log(file);
-		</script>
-
-	<!-- /.box -->
-	<!--/.col (left) -->
-
-	<!-- /.row -->
-
+	</script>
 </body>
 </html>

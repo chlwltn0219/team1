@@ -12,151 +12,32 @@
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAA4WMo8DvHp--izPUaJTqHDV0wJotTBpc"></script>
 <script type="text/javascript" src="/resources/js/upload.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+<link href="/resources/css/jboard/readPage.css" rel="stylesheet" type="text/css" />
+<link href="/resources/css/jboard/margin.css" rel="stylesheet" type="text/css">
 <!-- Main content -->
-<style type="text/css">
-	.popup {
-		position: absolute;
-	}
-	
-	.back {
-		background-color: gray;
-		opacity: 0.5;
-		width: 100%;
-		height: 300%;
-		overflow: hidden;
-		z-index: 1101;
-	}
-	
-	.front {
-		z-index: 1110;
-		opacity: 1;
-		boarder: 1px;
-		margin: auto;
-	}
-	
-	.show {
-		position: relative;
-		max-width: 1200px;
-		max-height: 800px;
-		overflow: auto;
-	}
-	
-	button.btnImg{
-		width : 100%;
-		height: 100%;
-	}
-	
-	.weather, .date, .temp {
-		position: absolute;
-		width: 100%;
-		text-align: center;
-	}
-	
-	.temp {
-		bottom: 5px;
-		right: 5px;
-		text-align: right;
-	}
-	
-	span.max {
-		color: red;
-	}
-	
-	span.min {
-		color: blue;
-	}
-	
-	div.sky {
-		clear: both;
-		text-align: center;
-		border-left: 1px solid #DDDDDD;
-		border-right: 1px solid #DDDDDD;
-	}
-	#forecast6days div.sky img{
-		float: left;
-	}
-	
-	#summary, #forecast6days, div.sky{
-		height: 60px;
-		text-align: center;
-	}
-	
-	@media ( min-width :768px){
-		#summary, #forecast6days, div.sky{
-			height: 80px;
-		}
-	}
-	
-	@media ( min-width :992px) {
-		#summary, #forecast6days, div.sky{
-			height: 100px;
-		}
-	}
-	
-	@media ( min-width :1200px) {
-		#summary, #forecast6days, div.sky{
-			height: 120px;
-		}
-	}
-	
-	@media ( min-width :1600px) {
-		#summary, #forecast6days, div.sky{
-			height: 140px;
-		}
-	}
-	
-	div.sky img{
-		height: 60px;
-	}
-	
-	@media ( min-width :768px){
-		div.sky img{
-			height: 80px;
-		}
-	}
-	
-	@media ( min-width :992px) {
-		div.sky img{
-			height: 100px;
-		}
-	}
-
-	@media ( min-width :1200px) {
-		div.sky img{
-			height: 120px;
-		}
-	}	
-	@media ( min-width :1600px) {
-		div.sky img{
-			height: 140px;
-		}
-	}	
-</style>
 </head>
 <body>
-    <div class='popup back' style="display:none;"></div>
-    <div id="popup_front" class='popup front' style="display:none;">
-    	<img id="popup_img">
-    </div>
-    
-	<!-- Weather -->
-	<div class="box box-success">
-		<div class="box-header">
-			<h3 class="box-title">Weather</h3>
-		</div>
+	<div class="row top_bottom">
 
-		<div class="box-body">
-			<div id="summary" class="row">
-				<h2> 3일 예보 </h2>
-			</div>
-			<hr>
-			<div id="forecast6days" class="row">
-				<h2> 중기 예보 (오전/오후) </h2>
+		<!-- Weather -->
+		<div class="col-xs-12">
+			<div class="box box-success">
+				<div class="box-header">
+					<h3 class="box-title">Weather</h3>
+				</div>
+		
+				<div class="box-body">
+					<div id="summary" class="row">
+						<h2> 3일 예보 </h2>
+					</div>
+					<hr>
+					<div id="forecast6days" class="row">
+						<h2> 중기 예보 (오전/오후) </h2>
+					</div>
+				</div>
 			</div>
 		</div>
-	</div>
-
-	<div class="row">
+	
 		<!-- left column -->
 		<div class="col-md-6">
 			<!-- general form elements -->
@@ -286,10 +167,7 @@
 				</div>
 			</div>
 		</div>
-	</div>
-	<!-- /.row -->
-
-	<div class="row">
+		
 		<div class="col-md-12">
 
 			<div class="box box-success">
@@ -342,8 +220,10 @@
 
 		</div>
 		<!-- /.col -->
+		
 	</div>
 	<!-- /.row -->
+
 	
 	<!-- Map Modal -->
 	<div id="mapModal" class="modal fade" role="dialog">
@@ -797,7 +677,7 @@ $(document).ready(function(){
 	$("#removeBtn").on("click", function(){
 		var replyCnt =  $("#replycntSmall").html();
 		
-		if(replyCnt > 0 ){
+		if(replyCnt != "[ 0 ]" ){
 			alert("댓글이 달린 게시물을 삭제할 수 없습니다.");
 			return;
 		}	
