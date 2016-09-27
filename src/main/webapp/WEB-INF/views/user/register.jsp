@@ -104,13 +104,11 @@
 	</div>
 	<!-- /.row -->
 	<script>
-		
 		function validateForm() {
 				var a = document.getElementById("uid").value;
 			    var x = document.forms["myForm"]["niddc"].value;
 				var y = document.forms["myForm"]["upw"].value;
 				var z = document.forms["myForm"]["upwcheck"].value;
-	
 				if (x == "check" || y != z) {
 					alert("Please check ID or Password");
 					return false;

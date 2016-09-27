@@ -43,6 +43,12 @@ CREATE TABLE tbl_user
 
 INSERT INTO tbl_user(UID, upw, uname, sex, bir, conti)
      VALUES ('user00', 'user00', 'IRON@MAN', 'Female', '1988', 'ASIA');
+ INSERT INTO tbl_user(UID, upw, uname, sex, bir, conti)
+     VALUES ('user01', 'user01', 'SMITHN@WOW', 'Male', '1989', 'EUROPE');
+ INSERT INTO tbl_user(UID, upw, uname, sex, bir, conti)
+     VALUES ('user02', 'user02', 'SAGA@GO', 'Female', '1990', 'NORTH AMERICA');
+ INSERT INTO tbl_user(UID, upw, uname, sex, bir, conti)
+     VALUES ('user03', 'user03', 'JOHN@US', 'Male', '1991', 'SOUTH AMERICA');
 --
 -- tbl_board
 --
