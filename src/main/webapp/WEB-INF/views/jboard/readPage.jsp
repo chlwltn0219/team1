@@ -18,26 +18,23 @@
 </head>
 <body>
 	<div class="row top_bottom">
-
 		<!-- Weather -->
-		<div class="col-xs-12">
-			<div class="box box-success">
-				<div class="box-header">
-					<h3 class="box-title">Weather</h3>
+		<div class="box box-success">
+			<div class="box-header">
+				<h3 class="box-title">Weather</h3>
+			</div>
+	
+			<div class="box-body">
+				<div id="summary" class="row">
+					<h2> 3일 예보 </h2>
 				</div>
-		
-				<div class="box-body">
-					<div id="summary" class="row">
-						<h2> 3일 예보 </h2>
-					</div>
-					<hr>
-					<div id="forecast6days" class="row">
-						<h2> 중기 예보 (오전/오후) </h2>
-					</div>
+				<hr>
+				<div id="forecast6days" class="row">
+					<h2> 중기 예보 (오전/오후) </h2>
 				</div>
 			</div>
 		</div>
-	
+
 		<!-- left column -->
 		<div class="col-md-6">
 			<!-- general form elements -->
@@ -168,62 +165,60 @@
 			</div>
 		</div>
 		
-		<div class="col-md-12">
-
-			<div class="box box-success">
-				<div class="box-header">
-					<h3 class="box-title">ADD NEW REPLY</h3>
-				</div>
-				
-				<!-- 로그인 상태 -->
-				<c:if test="${not empty login}">
-					<div class="box-body">
-						<label>Writer</label> 
-							<input class="form-control" type="text" placeholder="USER ID"
-								   id="newReplyWriter" value="${login.uid }" readonly="readonly">
-						<label>Reply Text</label>
-							<input class="form-control" type="text" placeholder="REPLY TEXT" id="newReplyText">
+		<div class="row">
+			<div class="col-xs-12">
+	
+				<div class="box box-success">
+					<div class="box-header">
+						<h3 class="box-title">ADD NEW REPLY</h3>
 					</div>
-
-					<div class="box-footer">
-						<button type="submit" class="btn btn-primary" id="replyAddBtn">ADD REPLY</button>
-					</div>
-				</c:if>
-				
-				<!-- 로그아웃 상태 -->
-				<c:if test="${empty login}">
-					<div class="box-body">
-						<div>
-							<a href="/user/login">Login Please</a>
+					
+					<!-- 로그인 상태 -->
+					<c:if test="${not empty login}">
+						<div class="box-body">
+							<label>Writer</label> 
+								<input class="form-control" type="text" placeholder="USER ID"
+									   id="newReplyWriter" value="${login.uid }" readonly="readonly">
+							<label>Reply Text</label>
+								<input class="form-control" type="text" placeholder="REPLY TEXT" id="newReplyText">
 						</div>
-					</div>
-				</c:if>
-			</div>
-
-
-
-			<!-- The time line -->
-			<ul class="timeline">
-				<!-- timeline time label -->
-				<li class="time-label" id="repliesDiv">
-					<span class="bg-green">
-							Replies List <small id='replycntSmall'> [ ${jBoardVO.replycnt} ] </small>
-					</span>
-				</li>
-			</ul>
-
-			<div class='text-center'>
-				<ul id="pagination" class="pagination pagination-sm no-margin ">
-				
+	
+						<div class="box-footer">
+							<button type="submit" class="btn btn-primary" id="replyAddBtn">ADD REPLY</button>
+						</div>
+					</c:if>
+					
+					<!-- 로그아웃 상태 -->
+					<c:if test="${empty login}">
+						<div class="box-body">
+							<div>
+								<a href="/user/login">Login Please</a>
+							</div>
+						</div>
+					</c:if>
+				</div>
+	
+	
+	
+				<!-- The time line -->
+				<ul class="timeline">
+					<!-- timeline time label -->
+					<li class="time-label" id="repliesDiv">
+						<span class="bg-green">
+								Replies List <small id='replycntSmall'> [ ${jBoardVO.replycnt} ] </small>
+						</span>
+					</li>
 				</ul>
+	
+				<div class='text-center'>
+					<ul id="pagination" class="pagination pagination-sm no-margin ">
+					
+					</ul>
+				</div>
+	
 			</div>
-
 		</div>
-		<!-- /.col -->
-		
 	</div>
-	<!-- /.row -->
-
 	
 	<!-- Map Modal -->
 	<div id="mapModal" class="modal fade" role="dialog">

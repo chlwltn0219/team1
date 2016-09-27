@@ -30,20 +30,18 @@
 	
 	<div class="row top_bottom">
 		<!-- Weather -->
-		<div class="col-xs-12">
-			<div class="box box-success">
-				<div class="box-header">
-					<h3 class="box-title">Weather</h3>
+		<div class="box box-success">
+			<div class="box-header">
+				<h3 class="box-title">Weather</h3>
+			</div>
+	
+			<div class="box-body">
+				<div id="summary" class="row">
+					<h2> 3일 예보 </h2>
 				</div>
-		
-				<div class="box-body">
-					<div id="summary" class="row">
-						<h2> 3일 예보 </h2>
-					</div>
-					<hr>
-					<div id="forecast6days" class="row">
-						<h2> 중기 예보 (오전/오후) </h2>
-					</div>
+				<hr>
+				<div id="forecast6days" class="row">
+					<h2> 중기 예보 (오전/오후) </h2>
 				</div>
 			</div>
 		</div>
