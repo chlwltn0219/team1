@@ -39,34 +39,12 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
         loginCookie.setMaxAge(60 * 60 * 24 * 7);
         response.addCookie(loginCookie);
       }
-      // response.sendRedirect("/");
       Object dest = session.getAttribute("dest");
 
       response.sendRedirect(dest != null ? (String) dest : "/");
     }
   }
 
-  // @Override
-  // public void postHandle(HttpServletRequest request,
-  // HttpServletResponse response, Object handler,
-  // ModelAndView modelAndView) throws Exception {
-  //
-  // HttpSession session = request.getSession();
-  //
-  // ModelMap modelMap = modelAndView.getModelMap();
-  // Object userVO = modelMap.get("userVO");
-  //
-  // if(userVO != null){
-  //
-  // logger.info("new login success");
-  // session.setAttribute(LOGIN, userVO);
-  // //response.sendRedirect("/");
-  //
-  // Object dest = session.getAttribute("dest");
-  //
-  // response.sendRedirect(dest != null ? (String)dest:"/");
-  // }
-  // }
 
   @Override
   public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
