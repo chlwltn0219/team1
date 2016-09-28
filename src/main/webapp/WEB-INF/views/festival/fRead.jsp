@@ -160,7 +160,7 @@
 					.getElementById('map'), {
 				center : map_center,
 				scrollwheel : false,
-				zoom : mapzoom + 10
+				zoom : mapzoom * 1 + 10
 			});
 
 			// Create a marker and set its position.
