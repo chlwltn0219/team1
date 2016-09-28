@@ -118,10 +118,10 @@
 		$("#iddc").on("click", function() {
 			var uidl = $("#uid");
 			var uidll = uidl.val();
-
+			
 			$.getJSON("/check/dup?uid=" + uidll, function(data) {
 				var IDchecking = data.IDchecking;
-				if (IDchecking) {
+				if (IDchecking && uidll != "") {
 					alert("* Available ID *");
 					document.getElementById("iddc").value = "confirm";
 				} else {
