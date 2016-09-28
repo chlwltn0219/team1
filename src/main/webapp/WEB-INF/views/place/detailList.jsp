@@ -145,14 +145,14 @@
     //   Map
     function initMap(x, y) {
     	var map_center = {
-        	lat : y,
-            lng : x
+        	lat : y*1,
+            lng : x*1
     	};
        	// Create a map object and specify the DOM element for display.
         var map = new google.maps.Map(document.getElementById('map'), {
         	center : map_center,
             scrollwheel : false,
-            zoom : mapzoom + 10
+            zoom : mapzoom*1 + 10
         });
         // Create a marker and set its position.
         var marker = new google.maps.Marker({
@@ -186,8 +186,10 @@
 		// if return index < 0 => NOT ENTER
 		$.getJSON("/detail/image?contentId=" + "${contentid}", function(data) {
 			// json 객체 내부 접근하기
+			console.dir(data);
 			var items = data.items.item;
 			var img = $('.firstimage').attr('src');
+			
 			
 			if(img == '/resources/img/noImage.png'){
 				$('#imgresult>div').html("");

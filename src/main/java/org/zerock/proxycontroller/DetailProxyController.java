@@ -18,6 +18,7 @@ import org.springframework.web.client.RestTemplate;
 import org.zerock.openapi.tour.Body;
 import org.zerock.openapi.tour.CheckResult;
 import org.zerock.openapi.tour.Info;
+import org.zerock.openapi.tour.Items;
 import org.zerock.openapi.tour.Result;
 import org.zerock.openapi.tour.SingleBody;
 import org.zerock.openapi.tour.SingleResult;
@@ -145,9 +146,21 @@ public class DetailProxyController {
 		} else if (checkResult.getResponse().getBody().getTotalCount() == 1) {
 			singleResult = restTemplate.getForObject(uri, SingleResult.class);
 			
-			SingleBody body = singleResult.getResponse().getBody();
-			System.out.println("items = " + body.getItems().getItem());
-
+			SingleBody singleBody = singleResult.getResponse().getBody();
+			System.out.println("items = " + singleBody.getItems().getItem());
+			
+			
+			Body body = new Body();
+			
+			body.setNumOfRows(singleBody.getNumOfRows());
+			body.setPageNo(singleBody.getPageNo());
+			body.setTotalCount(singleBody.getTotalCount());
+			
+			List<Map<String, Object>> item = new ArrayList<>();
+			item.add(singleBody.getItems().getItem());
+			body.setItems(new Items());
+			body.getItems().setItem(item);
+			
 			return new ResponseEntity<Object>(body, HttpStatus.OK);
 		} else {
 			return null;
