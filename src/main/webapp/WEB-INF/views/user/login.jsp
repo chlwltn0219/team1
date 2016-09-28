@@ -67,15 +67,13 @@
 				<tbody id="result"></tbody>
 			</table>
 			</div>
-			
 			<script id="preview" type="text/xxx-mytemplate">
 			{{#each .}}
 				<tr>	
-					<td><img id="img1" onclick="myFunction()" class="img-responsive img-circle" style="width:100%" src="{{firstimage}}"/></td>
+					<td><img id="img1" onclick="disappearImg()" class="img-responsive img-circle" style="width:100%" src="{{firstimage}}"/></td>
 				</tr>
 			{{/each}}
 			</script>
-			
 		</div>
 		<!-- /.login-box-body -->
 	</div>
@@ -83,7 +81,6 @@
 	<script type="text/javascript">
 	
 	var serviceKey = "msIAbKVe7I8wGXfBFqvMDC3oIM1g4Yqjub91VLdltRRso40CBt8HrC4tM8L4DXKKduY4aB6qOgtO4FCyOhPnMA%3D%3D";
-	
 	
 	$('#btn1').eq(0).on('click', function() {
 		var ran1 = Math.floor((Math.random() * 5) + 1);
@@ -95,21 +92,15 @@
 			console.log(areaCode.response.body);
 			console.log(areaCode.response.body.items);
 			console.log(areaCode.response.body.items.item);
-			
 			var items = areaCode.response.body.items.item;
-			
 			var temps = $('#preview').html();
 			var template = Handlebars.compile(temps);
-			
 			var html = template(items);
 			console.log(html);
-			
 			$('#result').html(html);
-			
 		});
 	});
-	
-	function myFunction() {
+	function disappearImg() {
 		$('#result').html("");
 	}
 
