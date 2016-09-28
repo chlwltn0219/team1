@@ -151,8 +151,8 @@
 		/* Map */
 		function initMap(x, y) {
 			var map_center = {
-				lat : y,
-				lng : x
+				lat : y * 1,
+				lng : x * 1
 			};
 
 			// Create a map object and specify the DOM element for display.
