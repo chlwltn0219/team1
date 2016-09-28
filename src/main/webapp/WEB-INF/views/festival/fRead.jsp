@@ -36,24 +36,54 @@
 
 <!-- 지도 -->
 
+<!-- <div class="container"> -->
+<!--   <!-- Modal -->
+<!--   <div class="modal fade" id="myModal" role="dialog"> -->
+<!--     <div class="modal-dialog modal-lg"> -->
+<!--       <div class="modal-content"> -->
+<!--         <div class="modal-header"> -->
+<!--           <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+<!--           <h4 class="modal-title">행사위치</h4> -->
+<!--         </div> -->
+<!--         <div class="modal-body"> -->
+<!--           <div id="map" style="width: 100%; height: 400px"></div> -->
+<!--         </div> -->
+<!--         <div class="modal-footer"> -->
+<!--           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
+<!--         </div> -->
+<!--       </div> -->
+<!--     </div> -->
+<!--   </div> -->
+<!-- </div> -->
+
 <div class="container">
-  <!-- Modal -->
-  <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">행사위치</h4>
-        </div>
-        <div class="modal-body">
-          <div id="map" style="width: 100%; height: 400px"></div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
+	<!-- Trigger the modal with a button -->
+	<button id="btn" type="button" class="btn btn-info btn-lg"
+		data-toggle="modal" data-target="#myModal">Open Modal</button>
+
+	<!-- Modal -->
+	<div class="modal fade" id="myModal" role="dialog">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Modal Header</h4>
+				</div>
+				<div class="modal-body">
+						여기에 지도가 떠야해
+				<div id="map" style="width:100%; height: 400px"></div>								
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default"
+						data-dismiss="modal">Close</button>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
 </div>
 
 <!-- 행사 기간 -->
@@ -113,7 +143,6 @@
 
 		initMap(x, y);
 		imgCheck();
-		pageCheck();
 		
 		
 		$("#myModal").on('shown.bs.modal', function () {
@@ -126,14 +155,15 @@
 				lat : y,
 				lng : x
 			};
-	
+
 			// Create a map object and specify the DOM element for display.
-			var map = new google.maps.Map(document.getElementById('map'), {
+			var map = new google.maps.Map(document
+					.getElementById('map'), {
 				center : map_center,
 				scrollwheel : false,
 				zoom : mapzoom + 10
 			});
-	
+
 			// Create a marker and set its position.
 			var marker = new google.maps.Marker({
 				map : map,

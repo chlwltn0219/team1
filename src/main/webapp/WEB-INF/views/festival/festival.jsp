@@ -16,10 +16,6 @@
 
 </head>
 <body>
-<!-- <button id="json" class="btn btn-primary">getJSON form Open API</button> -->
-<!-- <label><input type="date" id="start"></label> -->
-<!-- <label><input type="date" id="stop"></label> -->
-<!-- <input type="text" id="find"> -->
 <div class="box">
 	<div class="row">
 		<div class="wldur">
@@ -29,12 +25,12 @@
 			    <option value="2">강동구</option>
 			    <option value="3">강북구</option>
 			    <option value="4">강서구</option>
-			    <option value="5">관악구</option>
+<!-- 			    <option value="5">관악구</option> -->
 			    <option value="6">광진구</option>
 			    <option value="7">구로구</option>
 			    <option value="8">금천구</option>
 			    <option value="9">노원구</option>
-			    <option value="10">도봉구</option>
+<!-- 			    <option value="10">도봉구</option> -->
 			    <option value="11">동대문구</option>
 			    <option value="12">동작구</option>
 			    <option value="13">마포구</option>
@@ -149,6 +145,7 @@
 				imgCheck(i);
 				imgHover2();
 			}
+			
 		});
 	}
 	
@@ -272,6 +269,8 @@
 	});
 	
 </script>
+
+<!-- pagination Template -->
 <script id="pageTemplate" type="text/x-handlebars-template">
 	<button id="prev" type="button" class="btn btn-default" style="visibility: {{visiblility prev}}">Prev</button>
 		<div class="btn-group">
