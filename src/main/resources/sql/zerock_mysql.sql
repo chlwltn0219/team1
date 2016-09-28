@@ -5,6 +5,7 @@
 --  DROP TABLE tbl_message;
 --
 DROP TABLE tbl_user;
+DROP TABLE tbl_message;
 DROP TABLE tbl_member;
 DROP TABLE tbl_attach;
 DROP TABLE tbl_reply;
