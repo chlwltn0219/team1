@@ -83,8 +83,8 @@
 	var serviceKey = "msIAbKVe7I8wGXfBFqvMDC3oIM1g4Yqjub91VLdltRRso40CBt8HrC4tM8L4DXKKduY4aB6qOgtO4FCyOhPnMA%3D%3D";
 	
 	$('#btn1').eq(0).on('click', function() {
-		var ran1 = Math.floor((Math.random() * 5) + 1);
-		var ran2 = Math.floor((Math.random() * 5) + 1);
+		var ran1 = Math.floor((Math.random() * 10) + 5);
+		var ran2 = Math.floor((Math.random() * 7) + 1);
 		$.getJSON("http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList?ServiceKey=" + serviceKey + "&areaCode=1&numOfRows=" + ran1 + "&pageNo=" + ran2 + "&MobileOS=ETC&MobileApp=TestApp&_type=json", function(areaCode) {
 			console.dir(areaCode);
 			console.log(areaCode);
