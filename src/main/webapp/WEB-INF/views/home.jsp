@@ -33,7 +33,7 @@
     <div class="carousel-inner" role="listbox">
 
        <div class="item active">
-        <img src="/resources/img/image.jpg">
+        <img src="/resources/img/seoul.png">
         <div class="carousel-caption">
         </div>
       </div>

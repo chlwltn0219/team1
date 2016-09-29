@@ -6,6 +6,9 @@
 
 .w {
 	text-align: left;	
+	margin-left: 15%;
+	font-size: 15px;
+	width: 65%;
 }
 
 hr{
@@ -13,7 +16,7 @@ hr{
 }
 
 p{
-	font-size: 20px;
+/* 	font-size: 20px; */
 	text-align: left;
 	margin-left: 10%;
 }
@@ -27,6 +30,7 @@ p{
 	text-align: left;
 	font-weight: bold;
 	font-size: 15px;
+	margin-left:20%;
 	font-family: 'Nanum Gothic Coding', monospace;
 }
 
