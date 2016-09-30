@@ -15,10 +15,19 @@
 <!-- Custom CSS -->
 <link href="/resources/css/jboard/list.css" rel="stylesheet" type="text/css">
 <link href="/resources/css/jboard/margin.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+ * {
+ 	border: 1px solid red;
+ }
+ 
+ .test {
+ 	border: 1px solid black;
+ }
+</style>
 </head>
 <body>
 
-	<div class="row top_bottom">
+	<div class="row top_bottom test">
 		<!-- left column -->
 
 		<div class="col-md-12">
