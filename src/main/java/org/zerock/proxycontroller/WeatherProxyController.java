@@ -84,7 +84,7 @@ public class WeatherProxyController {
 		
 		RestTemplate restTemplate = new RestTemplate();
 		
-		// Summary
+		// Summary API 호출
 		String baseURI = "http://apis.skplanetx.com/weather/summary"
 				+ "?version=" + "1"
 				+ "&appKey=" + SERVICE_KEY
@@ -99,7 +99,7 @@ public class WeatherProxyController {
 		
 		forecastAll = weatherResult;
 		
-		// Forecast6Days
+		// Forecast6Days API 호출
 		baseURI = "http://apis.skplanetx.com/weather/forecast/6days"
 							+ "?version=" + "1"
 							+ "&appKey=" + SERVICE_KEY
@@ -113,6 +113,7 @@ public class WeatherProxyController {
 		weatherResult = restTemplate.getForObject(uri, WeatherResult.class);
 		logger.info(weatherResult.toString());
 		
+		// 간편 예뵤 (당일~2일) + 중기예보 (3일~10일) 두 객체를 합하여 return
 		forecastAll.getWeather().setForecast6days(weatherResult.getWeather().getForecast6days());
 		Weather weatherAll = forecastAll.getWeather();
 		
@@ -127,6 +128,7 @@ public class WeatherProxyController {
 		List<Map<String,Object>> summary = weather.getSummary();
 		List<Map<String,Object>> forecast6days = weather.getForecast6days();
 		
+		// 기존 객체에 icon image URL 추가
 		logger.info("Add Icon Summary");
 		// Summary
 		if(summary!=null) {
@@ -157,6 +159,7 @@ public class WeatherProxyController {
 	
 	private Map<String, Map<String, String>> selectSummaryIcon(Map<String,Map<String, String>> day) {
 		
+		// 날씨 판별 후 icon 추가후 Map객체 return
 		String name = day.get("sky").get("name");
 		Date date = new Date();
 		
@@ -187,6 +190,7 @@ public class WeatherProxyController {
 			break;
 		}
 		
+		// 최대/최저기온을 정수 형태로 변환
 		day.get("temperature").put("tmax", Double.valueOf(day.get("temperature").get("tmax")).intValue()+"");
 		day.get("temperature").put("tmin", Double.valueOf(day.get("temperature").get("tmin")).intValue()+"");	
 		
