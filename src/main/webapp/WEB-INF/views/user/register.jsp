@@ -5,7 +5,7 @@
 
 <head>
 <title>register.jsp</title>
-<link href="/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet"
+<link rel="stylesheet"
 	type="text/css" />
 </head>
 <body>
