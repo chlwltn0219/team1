@@ -21,6 +21,7 @@
 		<div class="wldur">
 			<label>지역: &nbsp;</label>
 			<select id="sigungu">
+			    <option value="13">마포구</option>
 				<option value="1">강남구</option>
 			    <option value="2">강동구</option>
 			    <option value="3">강북구</option>
@@ -33,7 +34,6 @@
 <!-- 			    <option value="10">도봉구</option> -->
 			    <option value="11">동대문구</option>
 			    <option value="12">동작구</option>
-			    <option value="13">마포구</option>
 			    <option value="14">서대문구</option>
 			    <option value="15">서초구</option>
 			    <option value="16">성동구</option>
@@ -115,7 +115,7 @@
 	/* 기본 리스트 */
 	pageNo = 1;
 	areaCode = $('#sigungu option:selected').val();
-	getList(1, 1);
+	getList(1, 13);
 	function getList(pageNo, areaCode) {
 		areaCode = $('#sigungu option:selected').val();		
 		$.getJSON("/festival/list?sigunguCode=" + areaCode + "&pageNo=" + pageNo, function(data) {
