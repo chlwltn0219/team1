@@ -87,6 +87,12 @@
 								<div class="form-group">
 									<button type="submit" class="btn btn-success">Sign up</button>
 								</div>
+								<div class="form-group">
+									<br>
+									<br>
+									<br>
+									<br>
+								</div>
 							</div>
 						</div>
 					</div>
