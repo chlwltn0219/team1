@@ -39,6 +39,7 @@ public class JoinBoardController {
 
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
+		pageMaker.setDisplayPageNum(5);
 
 		// pageMaker.setTotalCount(service.listCountCriteria(cri));
 		pageMaker.setTotalCount(service.listSearchCount(cri));
