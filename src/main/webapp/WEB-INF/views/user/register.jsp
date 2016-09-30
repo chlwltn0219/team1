@@ -75,8 +75,8 @@
 									</select>
 								</div>
 								<div class="form-group">
-									<label for="cont">Continent</label> <select
-										class="form-control input-lg" id="cont" name="conti">
+									<label for="cont">Continent</label>
+									<select class="form-control input-lg" id="cont" name="conti">
 										<c:forTokens var="ii"
 											items="ASIA,EUROPE.AFRICA.NORTH AMERICA.SOUTH AMERICA.OCEANIA"
 											delims=",.">
@@ -84,15 +84,13 @@
 										</c:forTokens>
 									</select>
 								</div>
+								<div class="form-group">
+									<button type="submit" class="btn btn-success">Sign up</button>
+								</div>
 							</div>
 						</div>
 					</div>
-
 					<!-- /.box-body -->
-
-					<div class="box-footer">
-						<button type="submit" class="btn btn-success">Sign up</button>
-					</div>
 				</form>
 
 
